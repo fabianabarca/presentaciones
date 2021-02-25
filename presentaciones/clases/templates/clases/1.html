@@ -1,0 +1,122 @@
+{% load static %}
+
+<section>
+
+	<section>
+		<h2>Ejercicio</h2>
+		<blockquote>
+			Se generan 1000 números, de forma aleatoria (distribución uniforme) entre 0 y 1. Calcule la probabilidad de que un numero dado sea mayor a 0,7.
+		</blockquote>
+	</section>
+
+	<section>
+		<h3>Solución</h3>
+		Debido a que se tiene una distribución uniforme, se puede asumir que de los 1000 números, unos 300 son mayores a 0,7. Podemos entonces
+		calcular la probabilidad de este evento:
+		\[\begin{aligned}
+		P(A)  &amp; = \frac{300}{1000} = 30\% \\
+		\end{aligned} \]
+	</section>
+
+</section>
+
+<section>
+
+	<section>
+		<h2>Simulación</h2>
+		<ol>
+			<li>Generar una distribución uniforme de 1000 datos con valores entre 0 y 1</li>
+			<li>Obtener la cantidad de datos mayores a 0,7.</li>
+			<li>Calcular la probabilidad</li>
+			</ol>
+	</section>
+
+	<section>
+		<h3>Bibliotecas</h3>
+		<pre><code data-trim data-noescape>
+			import matplotlib.pyplot as plt
+			import numpy as np
+		</code></pre>
+	</section>
+
+	<section>
+		<h3>Distribución</h3>
+		<pre><code data-trim data-noescape>
+			n = 1000 #Cantidad de elementos
+			rand_var_uniform = np.random.rand(n,1) #Distribucion uniforme
+		</code></pre>
+	</section>
+
+	<section>
+		<h3>Función de solución</h3>
+		<pre><code data-trim data-noescape>
+			def get_probs (elements, x):
+				greater = 0
+				lesser = 0
+				# Recorremos los elementos y los clasificamos
+				for element in elements:
+					if element > x:
+						greater += 1
+					else:
+						lesser += 1
+				# Calculamos las probabilidades correspondientes
+				return greater/len(elements), lesser/len(elements)
+		</code></pre>
+	</section>
+
+</section>
+
+<!-- FIGURAS -->
+
+<section>
+	
+
+	<section>
+		<img data-src="{% static 'media/0_complemento.svg' %}">
+	</section>
+
+	<section>
+		<img data-src="{% static 'media/0_conjuntos_disjuntos.svg' %}">
+	</section>
+
+	<section>
+		<img data-src="{% static 'media/0_diferencia_conjuntos.svg' %}">
+	</section>
+	
+	<section>
+		<img data-src="{% static 'media/0_diferencia_simetrica.svg' %}">
+	</section>
+
+	<section>
+		<img data-src="{% static 'media/0_ej_dado_venn.svg' %}">
+	</section>
+
+	<section>
+		<img data-src="{% static 'media/0_interseccion_conjuntos.svg' %}">
+	</section>
+
+	<section>
+		<img data-src="{% static 'media/0_particion_conj_univ.svg' %}">
+	</section>
+
+	<section>
+		<img data-src="{% static 'media/0_union_conjuntos.svg' %}">
+	</section>
+
+	<section>
+		<img data-src="{% static 'media/0_venn_diagram.svg' %}">
+	</section>
+
+	<section>
+		<img data-src="{% static 'media/1_acumulado_covid.svg' %}">
+	</section>
+
+	<section>
+		<img data-src="{% static 'media/1_espacio_probabilidad.svg' %}">
+	</section>
+
+	<section>
+		<img data-src="{% static 'media/1_linea_tiempo.svg' %}">
+	</section>
+
+</section>

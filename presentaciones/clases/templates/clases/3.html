@@ -1,0 +1,63 @@
+{% load static %}
+
+<section>
+
+	<section>
+		<h2>Ejercicio</h2>
+		<blockquote>Se tienen tres cajas con 10 bolitas de colores en cada caja. En la primera caja hay 2 bolas rojas, en la segunda 4 rojas y en la última 9 rojas. Si se
+			extrae una bola aleatoriamente de cada caja, ¿cuál es la probabilidad de que las tres bolas sean rojas?</blockquote>
+	</section>
+
+	<section>
+		<h2>Análisis</h2>
+		Cada vez que se extrae una bola de cada caja se trata de un evento independiente, podemos calcular las probabilidades de cada evento independiente fácilmente.
+	</section>
+
+	<section>
+
+		<h2>Probabilidades independientes</h2>
+
+		<br>
+			
+			\[\begin{aligned}
+			P(A) = \frac{2}{10}\\
+			
+			P(B) = \frac{4}{10}\\
+			
+			P(C) = \frac{9}{10}
+			\end{aligned} \]
+		
+
+	</section>
+
+	<section>
+		<h3 >Finalmente</h3>
+		<br>
+		Podemos calcular la probabilidad conjunta de dichos eventos:
+		\[\begin{aligned}
+		P[A \cup B \cup C]  &amp; = P(A) \cdot P(B) \cdot P(C)
+		\\
+		P[A \cup B \cup C] &amp; = \frac{2 \cdot 4 \cdot 9}{1000} = 7.2\%
+		\end{aligned} \]
+	</section>
+
+</section>
+
+
+<section>
+	
+
+	<section>
+		<img data-src="{% static 'media/3_bloques_0.svg' %}">
+	</section>
+
+	<section>
+		<img data-src="{% static 'media/3_bloques_1.svg' %}">
+	</section>
+
+	<section>
+		<img data-src="{% static 'media/3_bloques_2.svg' %}">
+	</section>
+	
+
+</section>

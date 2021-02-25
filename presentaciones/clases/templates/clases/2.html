@@ -1,0 +1,110 @@
+{% load static %}
+
+<section>
+
+	<section>
+		<h2>Ejercicio</h2>
+		<blockquote>Una prueba genética es utilizada para determinar si el paciente tiene o no un raro defecto genético.</blockquote>
+	</section>
+	<section>
+	<blockquote>Este defecto es tan raro que sólo un 1% de la población lo desarrolla. La prueba tiene una efectividad del 90% al detectar la presencia de este defecto (verdaderos positivos)
+		Un 9.6% de las pruebas son falsos positivos (la persona en realidad no tenía el defecto). Si dicha prueba resulta positiva, ¿cuál es la probabilidad de que el paciente realmente tenga el defecto genético?</blockquote>
+	</section>
+
+	<section>
+		<h2>Análisis</h2>
+		Este problema se presta para ser resuelto haciendo uso del teorema de Bayes.
+		Se nos pide determinar que, si el diagnostico es positivo, ¿cual es la probabilidad de que sea correcto?
+	</section>
+
+	<section>
+
+		<h3>Diagrama</h3>
+		<img src="./imagenes/diagrama.svg' %}" class="filter-white">
+
+		<h4 align = "left" >Eventos</h4>
+
+		<uol align="left", style="font-size:27px">
+			<li>B = {El paciente tiene el defecto}</li>
+			<li>A = {El resultado de la prueba fue positivo}</li>
+		</uol>
+
+	</section>
+
+	<section>
+		<h3 >En resumen</h3>
+		<br>
+		<h5 align="left">Tenemos</h5>
+
+		<uol align="left", style="font-size:27px">
+			<li> $P(A|B)$ = Probabilidad de un verdadero positivo = 90%</li>
+			<li> $P(A| \overline{B})$ = Probabilidad de un falso positivo = 9.6%</li>
+		</uol>
+		<br>
+		<h5 align="left">Buscamos</h5>
+
+		<uol align="left", style="font-size:27px">
+			<li> $P(B|A)$ = Probabilidad de tener el defecto dado un resultado positivo</li>
+		</uol>
+
+	</section>
+
+	<section>
+		Aplicando el teorema de Bayes:
+		\[\begin{aligned}
+		P(B|A)  &amp; = \frac{P(A|B)P(B)}{P(A)} \\
+		\\
+		P(B|A)  &amp; = \frac{0.9 \cdot 0.01}{0.9 \cdot 0.01 + 0.96 \cdot 0.99} = 8.65\% \\
+		\end{aligned} \]
+	</section>
+
+</section>
+
+<section>
+	
+
+	<section>
+		<img data-src="{% static 'media/2_A_subset_B_venn.svg' %}">
+	</section>
+
+	<section>
+		<img data-src="{% static 'media/2_arbol_probabilidades.svg' %}">
+	</section>
+
+	<section>
+		<img data-src="{% static 'media/2_arbol_probs_ej_enfermedad.svg' %}">
+	</section>
+	
+	<section>
+		<img data-src="{% static 'media/2_B_subset_A_venn.svg' %}">
+	</section>
+
+	<section>
+		<img data-src="{% static 'media/2_caminos.svg' %}">
+	</section>
+
+	<section>
+		<img data-src="{% static 'media/2_ocurrencia_A_venn.svg' %}">
+	</section>
+
+	<section>
+		<img data-src="{% static 'media/2_ocurrencia_simultanea_venn.svg' %}">
+	</section>
+
+	<section>
+		<img data-src="{% static 'media/2_particion_conj_univ.svg' %}">
+	</section>
+
+	<section>
+		<img data-src="{% static 'media/2_prob_conjunta_venn.svg' %}">
+	</section>
+
+	<section>
+		<img data-src="{% static 'media/2_prob_conjunta_venn3sets.svg' %}">
+	</section>
+
+	<section>
+		<img data-src="{% static 'media/2_probabilidad_eventos.svg' %}">
+	</section>
+
+</section>

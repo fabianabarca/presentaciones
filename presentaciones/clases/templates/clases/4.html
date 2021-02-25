@@ -1,0 +1,196 @@
+{% load static %}
+
+<section>
+
+	<section>
+		<h2>Ejercicio</h2>
+		<blockquote>El tiempo de recuperación de los pacientes para una cirugía particular se distribuye normalmente con una media de 5.3 días y una desviación estándar de 
+			2.1 días. ¿Cuál es la probabilidad de que un paciente dure más de dos días recuperándose? Use la tabla de probabilidad acumulada.</blockquote>
+	</section>
+
+	<section>
+		<h2>Solución</h2>
+		Primero, calculamos el valor Z (variable normalizada):
+		\[\begin{aligned}
+		Z &amp;= \frac{X-\mu_x}{\sigma_x}\\
+		Z &amp;= \frac{2 - 5.3}{2.1} = -1.57
+		\end{aligned} \]
+	</section>
+
+	<section>
+
+		<h2>Interpretando</h2>
+		Nos piden la probabilidad de que el evento sea <b>mayor</b> al valor dado de 2 días. Por esta razón, calculamos de la siguiente manera:
+		<br>
+			
+			\[\begin{aligned}
+			P(A) &amp; = 1 - F_z(-1.57)\\
+			
+			P(A) &amp; = 1 - (1 - F_z(1.57))\\
+
+			P(A) &amp; = 94.2\%
+			
+			\end{aligned} \]
+		
+
+	</section>
+
+</section>
+
+<section>
+	
+
+	<section>
+		<img data-src="{% static 'media/4_acum_dado.svg' %}">
+	</section>
+
+	<section>
+		<img data-src="{% static 'media/4_acum_discreta.svg' %}">
+	</section>
+
+	<section>
+		<img data-src="{% static 'media/4_asoc_VA.svg' %}">
+	</section>
+	
+	<section>
+		<img data-src="{% static 'media/4_covid_acumulado.svg' %}">
+	</section>
+
+	<section>
+		<img data-src="{% static 'media/4_dist_gauss_intervalo.svg' %}">
+	</section>
+
+	<section>
+		<img data-src="{% static 'media/4_dist_gauss.svg' %}">
+	</section>
+
+	<section>
+		<img data-src="{% static 'media/4_dist_rayleigh.svg' %}">
+	</section>
+
+	<section>
+		<img data-src="{% static 'media/4_duncion_acum.svg' %}">
+	</section>
+
+	<section>
+		<img data-src="{% static 'media/4_eventos_dado.svg' %}">
+	</section>
+
+	<section>
+		<img data-src="{% static 'media/4_fun_acum_discreta.svg' %}">
+	</section>
+
+	<section>
+		<img data-src="{% static 'media/4_func_acum_mixta.svg' %}">
+	</section>
+
+	<section>
+		<img data-src="{% static 'media/4_funcion_de_prob_continua.svg' %}">
+	</section>
+
+	<section>
+		<img data-src="{% static 'media/4_funn_de_prob_discreta.svg' %}">
+	</section>
+
+	<section>
+		<img data-src="{% static 'media/4_mapeo_multivaluado.svg' %}">
+	</section>
+
+	<section>
+		<img data-src="{% static 'media/4_mapeo_VA_segmento_recta.svg' %}">
+	</section>
+
+	<section>
+		<img data-src="{% static 'media/4_mapeo_X_leq_x.svg' %}">
+	</section>
+
+	<section>
+		<img data-src="{% static 'media/4_pdf_binom.svg' %}">
+	</section>
+
+	<section>
+		<img data-src="{% static 'media/4_pdf_expon.svg' %}">
+	</section>
+
+	<section>
+		<img data-src="{% static 'media/4_pdf_mixta_2.svg' %}">
+	</section>
+
+	<section>
+		<img data-src="{% static 'media/4_pdf_mixta_3.svg' %}">
+	</section>
+
+	<section>
+		<img data-src="{% static 'media/4_pdf_mixta.svg' %}">
+	</section>
+
+	<section>
+		<img data-src="{% static 'media/4_pdf_poisson.svg' %}">
+	</section>
+
+	<section>
+		<img data-src="{% static 'media/4_pdf_rayleigh.svg' %}">
+	</section>
+
+	<section>
+		<img data-src="{% static 'media/4_pdf_uniforme.svg' %}">
+	</section>
+
+	<section>
+		<img data-src="{% static 'media/4_pdf.svg' %}">
+	</section>
+
+	<section>
+		<img data-src="{% static 'media/4_rayleigh_acum.svg' %}">
+	</section>
+
+	<section>
+		<img data-src="{% static 'media/4_VA_discreta.svg' %}">
+	</section>
+
+	<section>
+		<img data-src="{% static 'media/5_blanco_paracaidosmo.svg' %}">
+	</section>
+
+	<section>
+		<img data-src="{% static 'media/5_densidad_cond.svg' %}">
+	</section>
+
+	<section>
+		<img data-src="{% static 'media/5_espacio_eventos_moneda.svg' %}">
+	</section>
+
+	<section>
+		<img data-src="{% static 'media/5_evento_X_leq_b.svg' %}">
+	</section>
+
+	<section>
+		<img data-src="{% static 'media/5_evento_X_leq_x.svg' %}">
+	</section>
+
+	<section>
+		<img data-src="{% static 'media/5_func_acum_chips_2.svg' %}">
+	</section>
+
+	<section>
+		<img data-src="{% static 'media/5_func_acum_chips.svg' %}">
+	</section>
+
+	<section>
+		<img data-src="{% static 'media/5_func_acum_monedas.svg' %}">
+	</section>
+
+	<section>
+		<img data-src="{% static 'media/5_func_acum.svg' %}">
+	</section>
+
+	<section>
+		<img data-src="{% static 'media/5_funcs_acum_condicionales.svg' %}">
+	</section>
+
+	<section>
+		<img data-src="{% static 'media/5_mapeo_evento_conjunto.svg' %}">
+	</section>
+
+
+</section>
