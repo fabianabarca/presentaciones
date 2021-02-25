@@ -1,1 +1,240 @@
-<h1>Hola, de clase</h1>
+{% extends 'base.html' %}
+
+{% block content %}
+
+<section>
+    <h1>Contenido</h1>
+    <p>Descripción de contenidos posibles en una sesión virtual del curso Modelos Probabilísticos de Señales y Sistemas</p>
+</section>
+
+<section>
+    <h5>Antes de empezar...</h5>
+    <h3>Unos trucos de Reveal.js</h3>
+    <h4><i class="fas fa-magic"></i></h4>
+    <dl>
+        <dt>Navegación</dt>
+        <dd>Flechas de abajo a la derecha</dd>
+        <dt>Pantalla completa</dt>
+        <dd>Tecla <strong>F</strong></dd>
+        <dt>Mapa de las diapositivas</dt>
+        <dd>Tecla <strong>O</strong></dd>
+    </dl>
+</section>
+
+<section>
+    <h3>Secciones</h3>
+    <ul>
+        <li>Información estática</li>
+        <li>Gráficas estáticas</li>
+        <li>Gráficas interactivas</li>
+        <li>Animaciones</li>
+        <li>Multimedia</li>
+        <li>Navegación de páginas web</li>
+        <li>Código estático</li>
+        <li>Código interactivo</li>
+        <li>Participación</li>
+    </ul>
+</section>
+
+<section>
+    <section>
+        <h3>Información estática</h3>
+        <h4><i class="fas fa-file-alt"></i></h4>
+        <p>Distintos tipos de contenido: <br> ¡toda la variedad que ofrece HTML!</p>
+    </section>
+    <section>
+        <h3>Ecuaciones</h3>
+        \[
+            P(x_1 < X < x_2) = \int_{x_1}^{x_2} f_X(x) ~\mathrm{d}x
+        \]
+    </section>
+    <section>
+        <h3>Tablas</h3>
+        <table>
+            <thead>
+              <tr>
+                <th></th>
+                <th>Valores continuos</th>
+                <th>Valores discretos</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Tiempo continuo</td>
+                <td>Proceso aleatorio continuo</td>
+                <td>Proceso aleatorio discreto</td>
+              </tr>
+              <tr>
+                <td>Tiempo discreto</td>
+                <td>Secuencia aleatoria continua</td>
+                <td>Secuencia aleatoria discreta</td>
+              </tr>
+            </tbody>
+            </table>
+    </section>
+    <section>
+        <h3>Definiciones</h3>
+        <blockquote>
+            Sea $X$ una variable aleatoria con función de densidad dada por:
+            \begin{equation}
+                f_X(x) = \lambda e^{-\lambda x}
+            \end{equation}
+        </blockquote>
+    </section>
+    <section>
+        <h3>Otros elementos HTML</h3>
+        <dl>
+            <dt>Listas de descripciones</dt>
+            <dd>Como esta que está aquí</dd>
+            <dt><code>iframe</code> y similares</dt>
+            <dd>Para agregar contenido externo</dd>
+        </dl>
+    </section>
+    <section>
+        <h3>Ventajas</h3>
+        <ul>
+            <li>HTML + CSS + JavaScript es un entorno muy activo y versátil</li>
+        </ul>
+    </section>
+</section>
+
+<section>
+    <section>
+        <h3>Gráficas estáticas</h3>
+        <h4><i class="fas fa-images"></i></h4>
+        <p>Generadas en Python u otros e importadas aquí.</p>
+    </section>
+    <section>
+        <h3>SVG</h3>
+        {% load static %}
+        <img src="{% static 'PDF.svg' %}">
+    </section>
+    <section>
+        <h3>PNG</h3>
+    
+    </section>
+</section>
+
+<section>
+    <section>
+        <h3>Gráficas interactivas</h3>
+        <h4><i class="fas fa-images"></i></h4>
+        <p>Lorem ipsum dolor sit amet.</p>    
+    </section>
+    <section>
+        <h3>Matplotlib</h3>
+    
+    </section>
+    <section>
+        <h3>Bokeh</h3>
+    
+    </section>
+</section>
+
+<section>
+    <section>
+        <h3>Animaciones</h3>
+        <h4><i class="fas fa-exclamation"></i></h4>
+        <p>Lorem ipsum dolor sit amet.</p>
+    </section>
+    <section>
+        <h3>GIF</h3>
+    
+    </section>
+    <section>
+        <h3>Matplotlib</h3>
+    
+    </section>
+    <section>
+        <h3>Manim</h3>
+    
+    </section>
+</section>
+
+<section>
+    <section>
+        <h3>Multimedia</h3>
+        <h4><i class="fas fa-photo-video"></i></h4>
+        <p>Lorem ipsum dolor sit amet.</p>
+    </section>
+    <section>
+        <h3>Audio</h3>
+
+    </section>
+    <section>
+        <h3>Video</h3>
+
+    </section>
+</section>
+
+
+<section>
+    <h3>Navegación de páginas web</h3>
+    <h4><i class="fas fa-window-restore"></i></h4>
+    <p>Con <code>iframe</code> es posible mostrar fragmentos o páginas completas.</p>
+</section>
+
+<section>
+    <section>
+        <h3>Código estático</h3>
+        <h4><i class="fas fa-code"></i></h4>
+        <p>Visualización de código.</p>
+    </section>
+    <section>
+        <h3>Código con formato</h3>
+        <p>Fragmento dentro de Reveal.js</p>
+        <pre data-id="code-animation"><code class="python" data-trim data-line-numbers>
+            import numpy as np
+            from scipy import stats
+            import matplotlib.pyplot as plt
+
+            # Repeticiones
+            N = 500
+
+            # Distribución de X
+            X = stats.uniform(0, 1)
+        </code></pre>
+    </section>
+    <section data-background-iframe="https://view.datalore.jetbrains.com/notebook/8tuDM4WOzATFN9vLFLaUky?force_sso=true" data-background-interactive>
+        <h3>Datalore</h3>
+        <p>Visualización de <emph>notebooks</emph> Jupyter con Datalore en HTML estático.</p>
+    </section>
+</section>
+
+<section>
+    <section>
+        <h3>Código interactivo</h3>
+        <h4><i class="fas fa-laptop-code"></i></h4>
+        <p>Lorem ipsum dolor sit amet.</p>
+    </section>
+    <section>
+        <h3>Repl.it</h3>
+        <iframe height="400px" width="100%" src="https://repl.it/@fabianabarca/TransformacionRaizCuadrada?lite=true" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals"></iframe>
+    </section>
+    <section data-background-iframe="https://mybinder.org/v2/gh/fabianabarca/clases/master" data-background-interactive>
+        <h3>Binder</h3>
+        <p>Notebook de Jupyter ejecutable.</p>
+    </section>
+</section>
+
+<section>
+    <h3>Participación</h3>
+    <h4><i class="fas fa-tasks"></i></h4>
+    <p>Lorem ipsum dolor sit amet.</p>
+</section>
+
+<section>
+    <h3>Recomendaciones de trabajo futuro</h3>
+    <ul>
+        <li>Crear un tema CSS de EIE (colores, tipografías, etc.)</li>
+        <li>Incorporar la conferencia de audio en el sitio web</li>
+        <li>Explorar <a src="https://webrtc.org/">WebRTC</a> para la conferencia de audio y para aplicaciones de intercambio de datos en tiempo real, como chats, otro tipo de interacciones o juegos</li>
+    </ul>
+</section>
+
+<section>
+    <h3></h3>
+    
+</section>
+
+{% endblock %}
