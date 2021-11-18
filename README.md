@@ -7,22 +7,63 @@ Presentaciones sincrónicas del curso Modelos Probabilísticos de Señales y Sis
 
 ## Estructura de páginas dentro del sitio
 
-**index.html** (app "inicio")
+[![](https://mermaid.ink/img/eyJjb2RlIjoiZ3JhcGggVERcbiAgICBBW0luaWNpb10gLS0-IEIoUHJveWVjdG8pXG4gICAgQSAtLT4gQyhEZW1vKSBcbiAgICBBIC0tPiBEe1JlZ2lzdHJvfVxuICAgIEQgLS0-fFByb2Zlc29yZXN8IEUoUGFuZWwgYWRtaW4pXG4gICAgRCAtLT58RXN0dWRpYW50ZXN8IEYoQ3Vyc28pXG4gICAgRiAtLT4gRyhDbGFzZSBYKVxuICAiLCJtZXJtYWlkIjp7InRoZW1lIjoibmV1dHJhbCJ9LCJ1cGRhdGVFZGl0b3IiOmZhbHNlLCJhdXRvU3luYyI6dHJ1ZSwidXBkYXRlRGlhZ3JhbSI6ZmFsc2V9)](https://mermaid-js.github.io/mermaid-live-editor/edit#eyJjb2RlIjoiZ3JhcGggVERcbiAgICBBW0luaWNpb10gLS0-IEIoUHJveWVjdG8pXG4gICAgQSAtLT4gQyhEZW1vKSBcbiAgICBBIC0tPiBEe1JlZ2lzdHJvfVxuICAgIEQgLS0-fFByb2Zlc29yZXN8IEUoUGFuZWwgYWRtaW4pXG4gICAgRCAtLT58RXN0dWRpYW50ZXN8IEYoQ3Vyc28pXG4gICAgRiAtLT4gRyhDbGFzZSBYKVxuICAiLCJtZXJtYWlkIjoie1xuICBcInRoZW1lXCI6IFwibmV1dHJhbFwiXG59IiwidXBkYXRlRWRpdG9yIjpmYWxzZSwiYXV0b1N5bmMiOnRydWUsInVwZGF0ZURpYWdyYW0iOmZhbHNlfQ)
 
-* Página de bienvenida / información general
-* Inicio de sesión / registro de usuarios
-* Lista de presentaciones de clase disponibles
-* Modelo: usuarios
+### :house: &nbsp;&nbsp; Inicio 
 
-**claseX.html** (app "clases")
+*app "inicio"*
 
-* Documento HTML con la presentación en Reveal.js
-* Modelo: respuestas de los usuarios en cada clase
-* Modelo: estadísticas de cada clase (asistencia, duración, respuestas, etc.)
+Página `index.html` de bienvenida con:
+
+- Información general
+- Inicio de sesión / registro de usuarios
+- Lista de presentaciones de clase disponibles
+
+### :hammer_and_wrench: &nbsp;&nbsp; Proyecto
+
+*app "inicio"*
+
+Página(s) `proyecto.html` con el planteamiento y el reporte del proyecto de docencia, incluyendo:
+
+- Objetivos
+- Antecedentes
+- Justificación
+- Convenciones como las que están aquí mismo, etc.
+
+### :rocket: &nbsp;&nbsp; Demostración
+
+*app "inicio"*
+
+Presentación `demo.html` abierta al público mostrando todas las características del sistema:
+
+- Multimedia
+- Interactividad, etc.
+
+### :gear: &nbsp;&nbsp; Panel de administración
+
+*app "admin"*
+
+Página `profesores.html` con estadísticas y configuración de las presentaciones disponibles en el curso para los estudiantes.
+
+### :books: &nbsp;&nbsp; Curso
+
+*app "clases"*
+
+Página `IE0405.html` (o similar) con la información general del curso y la lista de clases disponibles.
+
+### :chart_with_upwards_trend: &nbsp;&nbsp; Clase X
+
+*app "clases"*
+
+Páginas `claseX.html` con la presentación de cada sesión.
+
+- Documento HTML con la presentación en Reveal.js
+- Modelo: respuestas de los usuarios en cada clase
+- Modelo: estadísticas de cada clase (asistencia, duración, respuestas, etc.)
 
 ## Convenciones sobre los formatos multimedia
 
-### :art: Gráficas
+### :art: &nbsp;&nbsp; Gráficas
 
 Deben ser vectoriales (con excepciones).
 
@@ -47,7 +88,7 @@ Deben ser vectoriales (con excepciones).
 - Matplotlib (exportadas desde Python)
 - JavaScript (nativas)
 
-### :abacus: Ecuaciones
+### :abacus: &nbsp;&nbsp; Ecuaciones
 
 #### *Ecuaciones estáticas*
 - LaTeX (directamente en Reveal.js con el plugin de MathJax)
@@ -56,7 +97,7 @@ Deben ser vectoriales (con excepciones).
 - (Opción más fuerte ahora) Creación en Manim y exportar en algún formato para que sea controlado por el usuario (por ejemplo GIF)
 - (Opcional) Crear una una solución duradera con transiciones controladas por usuario y de fácil edición en LaTeX
 
-### :computer: Código
+### :computer: &nbsp;&nbsp; Código
 
 #### *Código estático*
 - Directamente en Reveal.js
