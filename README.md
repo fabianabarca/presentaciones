@@ -55,3 +55,18 @@ Deben ser vectoriales (con excepciones)
 #### Ecuaciones animadas
 - (Opción más fuerte ahora) Creación en Manim y exportar en algún formato para que sea controlado por el usuario (por ejemplo GIF)
 - (Opcional) Crear una una solución duradera con transiciones controladas por usuario y de fácil edición en LaTeX
+
+### Código
+
+#### Código estático
+- Directamente en Reveal.js
+- Gist de GitHub o algún otro visualizador de código en `<iframe>` o similar
+
+#### Código "animado" o editado en tiempo real
+- (Opcional) Implementación de una solución con WebRTC o similar
+- Búsqueda de un visualizador
+
+#### Código ejecutable
+- (Opcional) Crear un REPL para el sitio
+- Repl.it, Codepen u otra opción similar para Python
+- 
