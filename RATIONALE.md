@@ -75,6 +75,51 @@ D --> S
 S --> D
 ```
 
-### Clasificación de sistemas existentes
+## Clasificación de sistemas existentes
 
-En este marco de clasificación de interacciones, es posible clasificar los sistemas más conocidos para hacer presentaciones web multimedia.
+Como criterio de evaluación de los sistemas existentes y del sistema a desarrollar, con base en la propuesta de este proyecto y en las necesidades del curso, el sistema deseado debe tener las siguientes características:
+
+1. Capacidad de mostrar diapositivas en un **navegador web**, adaptadas para ese medio y para distintas pantallas como monitores, laptops, tabletas o celulares.
+2. Capacidad de mostrar diapositivas con **contenido multimedia** como imágenes, audios, videos y animaciones.
+3. Capacidad de mostrar diapositivas con **cualquier contenido** usando tecnologías web (HTML, CSS y JavaScript) para expandir las posibilidades de presentación a la gran diversidad de desarrollos existentes en esa esfera.
+4. Capacidad de mostrar diapositivas con **interacción** en el que los participantes pueden ingresar datos en preguntas o formularios o cambiar la configuración de la reproducción de multimedia. 
+  a. Interacción **básica**: formulario de selección única o múltiple
+  b. Interacción **avanzada**: resto de tipos de formularios e interacciones
+5. Capacidad de mostrar **contenido matemático**, como fórmulas y otros símbolos, de forma nativa, es decir, con posibilidad de edición y renderización directa en el sistema.
+6. Capacidad de integrar herramientas de **visualización de datos**, como gráficas estáticas e interactivas de diversos tipos: gráficos de barras, de líneas, circulares, de puntos, etc.
+7. Capacidad de mostrar **código fuente** de forma nativa para discusiones sobre programación y, opcionalmente, la capacidad de editar y ejecutar el código en la misma plataforma (REPL).
+8. Capacidad de mostrar **resultados de simulaciones con software** de computación científica de forma nativa, es decir, con posibilidad de importación de datos como tablas, gráficas interactivas, modelos tridimensionales, animaciones, etc.
+9. Capacidad de hacer **sesiones remotas** sincrónicas o asincrónicas, con participación de personas desde cualquier dispositivo con un navegador web. En el caso sincrónico, una persona presentadora es capaz de controlar las diapositivas para todos los participantes.
+10. Capacidad de **registro de participantes** en una base de datos para almacenamiento de la información de su participación y estadísticas generales de uso.
+11. Capacidad de edición de diapositivas con el paradigma **WYSIWYG** (con interfaz de usuario, no con código).
+12. Disponible como **software libre**.
+
+El sistema propuesta cae dentro del segmento de plataformas en línea tipo Software-as-a-Service (SaaS), y dentro de dos subcategorías: 1) sistemas de presentaciones en línea y 2) plataformas de aprendizaje digital.
+
+Existe una gran cantidad de opciones disponibles, del orden de cientos, sin embargo, en esta comparación solamente serán analizados los más relevantes o similares por sus objetivos.
+
+Según la lista de características deseables para el sistema propuesto es posible hacer una calificación de estos sistemas analizados:
+
+|                   | 1 | 2 | 3 | 4a | 4b | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | T  |
+|-------------------|---|---|---|----|----|---|---|---|---|---|----|----|----|----|
+| Reveal.js         | 1 | 1 | 1 | 1  | 1  | 1 | 1 | 1 | 1 | 1 | 0  | 0  | 1  | 11 |
+| Slides            | 1 | 1 | 1 | 0  | 0  | 0 | 1 | 1 | 1 | 1 | 0  | 1  | 0  | 8  |
+| Nearpod           | 1 | 1 | 0 | 1  | 1  | 0 | 0 | 0 | 0 | 1 | 1  | 1  | 0  | 7  |
+| Kahoot!           | 1 | 1 | 0 | 1  | 1  | 0 | 0 | 0 | 0 | 1 | 1  | 1  | 0  | 7  |
+| Socrative         | 1 | 1 | 0 | 1  | 1  | 0 | 0 | 0 | 0 | 1 | 1  | 1  | 0  | 7  |
+| RELAYTO           | 1 | 1 | 0 | 1  | 1  | 0 | 0 | 0 | 0 | 1 | 1  | 1  | 0  | 7  |
+| Mentimeter        | 1 | 1 | 0 | 1  | 1  | 0 | 0 | 0 | 0 | 1 | 1  | 1  | 0  | 7  |
+| mmhmm             | 1 | 1 | 1 | 1  | 0  | 0 | 0 | 0 | 0 | 1 | 1  | 1  | 0  | 7  |
+| Synthesia         | 1 | 1 | 0 | 1  | 0  | 0 | 0 | 0 | 0 | 1 | 1  | 1  | 0  | 6  |
+| Vyond             | 1 | 1 | 0 | 1  | 0  | 0 | 0 | 0 | 0 | 1 | 1  | 1  | 0  | 6  |
+| Visme             | 1 | 1 | 0 | 1  | 0  | 0 | 0 | 0 | 0 | 1 | 1  | 1  | 0  | 6  |
+| Beautiful.ai      | 1 | 1 | 0 | 1  | 0  | 0 | 0 | 0 | 0 | 1 | 1  | 1  | 0  | 6  |
+| Powtoon           | 1 | 1 | 0 | 1  | 0  | 0 | 0 | 0 | 0 | 1 | 1  | 1  | 0  | 6  |
+| Colossyan Creator | 1 | 1 | 0 | 1  | 0  | 0 | 0 | 0 | 0 | 1 | 1  | 1  | 0  | 6  |
+| Genially          | 1 | 1 | 0 | 1  | 1  | 0 | 0 | 0 | 0 | 1 | 0  | 1  | 0  | 6  |
+| Zoom              | 1 | 1 | 0 | 1  | 0  | 0 | 0 | 0 | 0 | 1 | 1  | 0  | 0  | 5  |
+| PowerPoint        | 1 | 1 | 0 | 1  | 0  | 0 | 0 | 0 | 0 | 1 | 0  | 1  | 0  | 5  |
+| Beamer de LaTeX   | 0 | 0 | 0 | 0  | 0  | 1 | 1 | 1 | 1 | 0 | 0  | 0  | 1  | 5  |
+| Prezi             | 1 | 1 | 0 | 0  | 0  | 0 | 0 | 0 | 0 | 1 | 0  | 1  | 0  | 4  |
+| Slidebean         | 1 | 1 | 0 | 0  | 0  | 0 | 0 | 0 | 0 | 1 | 0  | 1  | 0  | 4  |
+| Canva             | 1 | 1 | 0 | 0  | 0  | 0 | 0 | 0 | 0 | 1 | 0  | 1  | 0  | 4  |
