@@ -56,6 +56,8 @@ La documentación del proyecto está presentada en este y los otros documentos d
 ```mermaid
 stateDiagram-v2
     por : Portada
+    mod : MPSS
+    pro : Proyecto
     eje : Ejemplo
     reg : Registro
     ing : Ingreso
@@ -71,6 +73,8 @@ stateDiagram-v2
 
     [*] --> por
     por --> eje
+    por --> mod
+    por --> pro
     por --> log
     log --> ini : Logueado
     log --> usu : No logueado
@@ -85,3 +89,13 @@ stateDiagram-v2
     men --> est
     men --> anu
 ```
+
+## Usuarios
+
+- Visitante: persona sin registro que puede visitar las páginas informativas y la presentación de ejemplo.
+- Docente: persona autorizada y registrada que puede comenzar y dirigir las presentaciones y crear nuevas presentaciones, entre otras acciones privilegiadas.
+- Estudiante: persona matriculada en el curso y registrada en el sistema que puede participar de las presentaciones del curso y tiene estadísticas de uso, etc.
+- Invitado: persona registrada que puede participar de las presentaciones del curso pero no es estudiante.
+- Administrador: persona registrada que tiene acceso a todos los privilegios administrativos.
+
+**Nota**: todas las personas registradas deben ser "pre-aprobadas" por la administración del sistema, posiblemente en una "white list" con los correos electrónicos autorizados para hacer el registro en el sistema.
