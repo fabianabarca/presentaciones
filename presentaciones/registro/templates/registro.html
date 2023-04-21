@@ -1,0 +1,42 @@
+{% extends 'plataforma.html' %}
+
+{% load static %}
+
+{% block content %}
+    
+<hr>
+<h2>Registro</h2>
+
+<p>Pagina para registrarse.</p>
+
+<!-- Secuencia de sesiones -->
+<ul class="step step-border-last-0">
+    
+  {% for sesion in sesiones %}
+  <li class="step-item">
+    <div class="step-content-wrapper">
+      <span class="step-icon step-icon-soft-primary">{{ sesion.numero }}</span>
+      <div class="step-content">
+        <h4>{{ sesion.nombre }} <span class="badge badge-pill badge-light">Tema {{ sesion.tema }}</span></h4>
+        <p class="step-text">{{ sesion.descripcion }}</p>
+        <p class="step-text"><a href="clases/semana{{ sesion.numero }}" target="_blank"><i class="fas fa-external-link-alt"></i> Sesión {{ sesion.numero }}</a></p>
+      </div>
+    </div>
+  </li>
+  {% endfor %}
+
+</ul>
+<!-- Final de secuencia de sesiones -->
+
+<!-- Programa del curso -->
+
+<hr>
+<h2>Programa del curso</h2>
+
+<div class="card card-bordered">
+  <div class="card-body">
+    Este curso constituye una introducción a los conceptos de la probabilidad que son utilizados en el análisis de señales y diseño de sistemas en diversas áreas de la ingeniería. Está enfocado a que el estudiante aprenda a usar tales conceptos en la práctica de la ingeniería eléctrica.
+  </div>
+</div>
+
+{% endblock %}
