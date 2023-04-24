@@ -93,6 +93,7 @@ Como criterio de evaluación de los sistemas existentes y del sistema a desarrol
 10. Capacidad de **registro de participantes** en una base de datos para almacenamiento de la información de su participación y estadísticas generales de uso.
 11. Capacidad de edición de diapositivas con el paradigma **WYSIWYG** (con interfaz de usuario, no con código).
 12. Disponible como **software libre**.
+13. (Opcional) Capacidad de integrar **videconferencia** dentro del sitio.
 
 El sistema propuesta cae dentro del segmento de plataformas en línea tipo Software-as-a-Service (SaaS), y dentro de dos subcategorías: 1) sistemas de presentaciones en línea y 2) plataformas de aprendizaje digital.
 
@@ -123,3 +124,24 @@ Según la lista de características deseables para el sistema propuesto es posib
 | Prezi             | 1 | 1 | 0 | 0  | 0  | 0 | 0 | 0 | 0 | 1 | 0  | 1  | 0  | 4  |
 | Slidebean         | 1 | 1 | 0 | 0  | 0  | 0 | 0 | 0 | 0 | 1 | 0  | 1  | 0  | 4  |
 | Canva             | 1 | 1 | 0 | 0  | 0  | 0 | 0 | 0 | 0 | 1 | 0  | 1  | 0  | 4  |
+
+### Sobre la videoconferencia
+
+Esta es una funcionalidad no prioritaria, ya que en principio puede coexistir con Zoom o plataformas similares para la videoconferencia. Sin embargo, existen algunas posibilidades con Jitsi y su [API](https://jitsi.org/api/) gratuito.
+
+> Looking to add video meetings to your site or app? Well, here’s what we believe is the easiest way in the world to do so:
+
+```html
+<script src='https://meet.jit.si/external_api.js'></script>
+...
+const domain = 'meet.jit.si';
+const options = {
+    roomName: 'PickAnAppropriateMeetingNameHere',
+    width: 700,
+    height: 700,
+    parentNode: document.querySelector('#meet')
+};
+const api = new JitsiMeetExternalAPI(domain, options);
+```
+
+> And that’s it! You can find the full [API](https://jitsi.org/api/) documentation here.
