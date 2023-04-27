@@ -1,6 +1,6 @@
 [
     {
-        "model": "inicio.sesion",
+        "model": "website.sesion",
         "pk": 1,
         "fields": {
             "nombre": "Introducción a la probabilidad",
@@ -9,7 +9,7 @@
         }
     },
     {
-        "model": "inicio.sesion",
+        "model": "website.sesion",
         "pk": 2,
         "fields": {
             "nombre": "Probabilidad conjunta, condicional y teorema de Bayes",
@@ -18,7 +18,7 @@
         }
     },
     {
-        "model": "inicio.sesion",
+        "model": "website.sesion",
         "pk": 3,
         "fields": {
             "nombre": "Eventos independientes",
@@ -27,7 +27,7 @@
         }
     },
     {
-        "model": "inicio.sesion",
+        "model": "website.sesion",
         "pk": 4,
         "fields": {
             "nombre": "Variables aleatorias",
@@ -36,7 +36,7 @@
         }
     },
     {
-        "model": "inicio.sesion",
+        "model": "website.sesion",
         "pk": 5,
         "fields": {
             "nombre": "Momentos de las variables aleatorias",
@@ -45,7 +45,7 @@
         }
     },
     {
-        "model": "inicio.sesion",
+        "model": "website.sesion",
         "pk": 6,
         "fields": {
             "nombre": "Transformaciones de las variables aleatorias",
@@ -54,7 +54,7 @@
         }
     },
     {
-        "model": "inicio.sesion",
+        "model": "website.sesion",
         "pk": 7,
         "fields": {
             "nombre": "Variables aleatorias múltiples",
@@ -63,7 +63,7 @@
         }
     },
     {
-        "model": "inicio.sesion",
+        "model": "website.sesion",
         "pk": 8,
         "fields": {
             "nombre": "Momentos de las variables aleatorias múltiples",
@@ -72,7 +72,7 @@
         }
     },
     {
-        "model": "inicio.sesion",
+        "model": "website.sesion",
         "pk": 9,
         "fields": {
             "nombre": "Transformaciones de las variables aleatorias múltiples",
@@ -81,7 +81,7 @@
         }
     },
     {
-        "model": "inicio.sesion",
+        "model": "website.sesion",
         "pk": 10,
         "fields": {
             "nombre": "Teorema del límite central y otros",
@@ -90,7 +90,7 @@
         }
     },
     {
-        "model": "inicio.sesion",
+        "model": "website.sesion",
         "pk": 11,
         "fields": {
             "nombre": "Procesos estocásticos",
@@ -99,7 +99,7 @@
         }
     },
     {
-        "model": "inicio.sesion",
+        "model": "website.sesion",
         "pk": 12,
         "fields": {
             "nombre": "Ergodicidad y funciones de correlación de procesos estocásticos",
@@ -108,7 +108,7 @@
         }
     },
     {
-        "model": "inicio.sesion",
+        "model": "website.sesion",
         "pk": 13,
         "fields": {
             "nombre": "Características espectrales de procesos estocásticos",
@@ -117,7 +117,7 @@
         }
     },
     {
-        "model": "inicio.sesion",
+        "model": "website.sesion",
         "pk": 14,
         "fields": {
             "nombre": "Cadenas de Markov de tiempo continuo",
@@ -126,7 +126,7 @@
         }
     },
     {
-        "model": "inicio.sesion",
+        "model": "website.sesion",
         "pk": 15,
         "fields": {
             "nombre": "Vector de estado estable de cadenas de Markov de tiempo continuo",
@@ -135,7 +135,7 @@
         }
     },
     {
-        "model": "inicio.sesion",
+        "model": "website.sesion",
         "pk": 16,
         "fields": {
             "nombre": "Cadenas de Markov de tiempo discreto",
