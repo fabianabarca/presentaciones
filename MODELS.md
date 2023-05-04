@@ -7,6 +7,56 @@
 - `website`: páginas misceláneas (inicio, acerca, contacto, etc.).
 - `users`: manejo de usuarios, incluyendo estadísticas.
 
+### Mapa del sitio
+
+- Portada: Bienvenida e información general del sitio (`website/templates/index.html`) (url: `''`)
+- Ejemplo: Presentación de ejemplo del sistema para usuarios no registrados (`website/templates/demo.html`) (url: `'ejemplo'`)
+- Registro: Para nuevos usuarios (`users/templates/signup.html`) (url: `'registro'`)
+- Ingreso: Para usuarios registrados (`users/templates/login.html`) (url: `'ingreso'`)
+- Inicio: Página de inicio del usuario registrado (`website/templates/home.html`) (url: `'inicio'`)
+- Curso: Material complementario del curso (`courses/templates/course.html`) (url: `'<str:sigla>'`)
+- Presentaciones: Lista de presentaciones asincrónicas disponibles e ingreso a la siguiente presentación sincrónica (`decks/templates/decks.html`) (url: `'presentaciones'`)
+  - Sesión: Presentación para las clases virtual del curso (`decks/templates/deck.html`) (url: `'<int:pres>'`)
+- Estadísticas: Resumen de estadísticas individuales y colectivas de uso, incluyendo las evaluaciones en las presentaciones (`users/templates/stats.html`) (url: `'estadisticas'`)
+- Anuncios: Información relevante sobre eventos próximos o recientes (`website/templates/news.html`) (url: `'anuncios'`)
+
+```mermaid
+stateDiagram-v2
+    por : Portada
+    mod : MPSS
+    pro : Proyecto
+    eje : Ejemplo
+    reg : Registro
+    ing : Ingreso
+    ini : Inicio
+    cur : Curso
+    pre : Presentaciones
+    ses : Sesión virtual
+    est : Estadísticas
+    anu : Anuncios
+    state log <<choice>>
+    state usu <<choice>>
+    state men <<fork>>
+
+    [*] --> por
+    por --> eje
+    por --> mod
+    por --> pro
+    por --> log
+    log --> ini : Logueado
+    log --> usu : No logueado
+    usu --> ing : Registrado
+    usu --> reg : No registrado
+    ing --> ini
+    reg --> ing
+    ini --> men
+    men --> cur
+    men --> pre
+    pre --> ses
+    men --> est
+    men --> anu
+```
+
 ## Modelos de la base de datos
 
 #### Nota sobre el almacenamiento de las presentaciones en Reveal.js
