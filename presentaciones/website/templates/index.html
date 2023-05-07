@@ -3,111 +3,21 @@
 {% load static %}
 
 {% block content %}
-    
+
+<div class="container my-4">
 <hr>
-<h2>Sesiones</h2>
+<h2>Inicio</h2>
 
 <p>Sesiones sincrónicas por cada una de las 16 semanas del ciclo lectivo.</p>
-
-<!-- Secuencia de sesiones -->
-<ul class="step step-border-last-0">
-    
-  {% for sesion in sesiones %}
-  <li class="step-item">
-    <div class="step-content-wrapper">
-      <span class="step-icon step-icon-soft-primary">{{ sesion.numero }}</span>
-      <div class="step-content">
-        <h4>{{ sesion.nombre }} <span class="badge badge-pill badge-light">Tema {{ sesion.tema }}</span></h4>
-        <p class="step-text">{{ sesion.descripcion }}</p>
-        <p class="step-text"><a href="clases/semana{{ sesion.numero }}" target="_blank"><i class="fas fa-external-link-alt"></i> Sesión {{ sesion.numero }}</a></p>
-      </div>
-    </div>
-  </li>
-  {% endfor %}
-
-</ul>
-<!-- Final de secuencia de sesiones -->
-
-<!-- Programa del curso -->
-
-<hr>
-<h2>Programa del curso</h2>
-
-<div class="card card-bordered">
-  <div class="card-body">
-    Este curso constituye una introducción a los conceptos de la probabilidad que son utilizados en el análisis de señales y diseño de sistemas en diversas áreas de la ingeniería. Está enfocado a que el estudiante aprenda a usar tales conceptos en la práctica de la ingeniería eléctrica.
-  </div>
+{% if request.user.is_authenticated %}
+<form class="form-inline">
+  <a href={% url 'logout_usuario' %} type="button" class="btn btn-m btn-outline-danger">Cerrar Sesión </a>
+</form>
+{% else %}
+<a href={% url 'registro' %} type="button" class="btn btn-m btn-outline-primary m-2">Crear cuenta</a>
+<a href={% url 'login_usuario' %} type="button" class="btn btn-m btn-outline-success">Iniciar Sesión</a>
+{% endif %}
 </div>
 
-Objetivos
 
-Contenidos
-
-<!-- FIXME -->
-
-<ol>
-  
-  <li class="lead">Teoría de la probabilidad</li>
-  <ol>
-    <li>1.1.	Definiciones</li>
-    <li>1.1.1.	Teoría de conjuntos y análisis combinatorio</li>
-    <li>1.1.2.	Significados de la probabilidad: definición axiomática de la probabilidad y definición estadística</li>
-    <li>1.2.	Más conceptos de probabilidad</li>
-    <li>1.2.1.	Probabilidad conjunta, probabilidad condicional, independencia estadística</li>
-    <li>1.2.2.	Relación entre la probabilidad conjunta y la probabilidad condicional (teorema de Bayes), pruebas repetidas (pruebas de Bernoulli)</li>
-  </ol>
-
-  <li class="lead">Variables aleatorias</li>
-  <ol>
-    <li>2.1.	Definición, propiedades y funciones</li>
-    <li>2.1.1.	Concepto de variable aleatoria (discreta y continua)</li>
-    <li>2.1.2.	Distribución de probabilidad y función de distribución de variables aleatorias discretas</li>
-    <li>2.1.3.	Densidad de probabilidad y función de distribución de variables aleatorias continuas</li>
-    <li>2.2.	Momentos y transformaciones de una variable aleatoria</li>
-    <li>2.2.1.	Valor esperado, momentos, función característica</li>
-    <li>2.2.2.	Transformaciones: funciones de una variable aleatoria y sus distribuciones</li>
-  </ol>
-  
-  <li class="lead">Variables aleatorias múltiples </li>
-  <ol>
-    <li>3.1.	Vectores de probabilidad</li>
-    <li>3.1.1.	Variables aleatorias vectoriales</li>
-    <li>3.1.2.	Densidad y distribución conjunta, densidad y distribución condicional</li>
-    <li>3.2.	Operaciones con variables aleatorias múltiples</li>
-    <li>3.2.1.	Densidad y distribución de una suma de variables aleatorias</li>
-    <li>3.2.2.	Teorema del límite central</li>
-    <li>3.2.3.	Desigualdad de Chebyshev y ley de los grandes números</li>
-    <li>3.2.4.	Valor esperado y momentos de variables aleatorias múltiples, funciones características conjuntas</li>
-    <li>3.2.5.	Funciones de variables aleatorias múltiples y sus distribuciones</li>
-  </ol>
-  
-  <li class="lead">Procesos estocásticos</li>
-  <ol>
-    <li>4.1.	Conceptos de un proceso estocástico</li>
-    <li>4.1.1.	Concepto de proceso estocástico, estacionaridad y ergodicidad</li>
-    <li>4.1.2.	Autocorrelación, correlación cruzada</li>
-    <li>4.2.	Características espectrales de procesos estocásticos</li>
-    <li>4.2.1.	Espectro de densidad de potencia y sus propiedades, relación entre el espectro de potencia y la autocorrelación</li>
-    <li>4.2.2.	Espectro de densidad de potencia cruzada y sus propiedades</li>
-  </ol>
-  
-  <li class="lead">Cadenas de Markov</li>
-  <ol>
-    <li>5.1.	Elementos para el análisis de las Cadenas de Markov</li>
-    <li>5.1.1.	Dos propiedades de la distribución exponencial</li>
-    <li>5.2.	Tipos de cadenas de Markov</li>
-    <li>5.2.1.	Cadenas de Markov de tiempo continuo (procesos de vida y muerte), teoría de colas, vector de estado estable en tiempo continuo</li>
-    <li>5.2.2.	Cadenas de Markov de tiempo discreto, vector de estado estable en tiempo discreto</li>
-  </ol>
-  
-  <li class="lead">Fundamentos de estadística (opcional*)</li>
-  <ol>
-    <li>6.1.	Detección de señales</li>
-    <li>6.1.1.	Detección de máxima verosimilitud, máximo a posteriori y bayesiana</li>
-    <li>6.1.2.	Sesgo, varianza de los valores estimados y los errores de estimación; consistencia</li>
-    <li>6.2.	Estimación de parámetros </li>
-    <li>6.2.1.	Estimación del valor esperado, valor cuadrático medio y varianza; estimación bayesiana, de máxima verosimilitud y de mínimos cuadrados; prueba de hipótesis; regresión lineal y ajuste de curvas</li>
-  </ol>
-  
-</ol>
 {% endblock %}
