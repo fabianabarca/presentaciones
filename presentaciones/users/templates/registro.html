@@ -1,0 +1,49 @@
+{% extends 'plataforma.html' %}
+
+{% load static %}
+
+{% block content %}
+  
+
+<h1 class="text-center text-dark mt-4 mb-4">Registro de usuario</h1>
+<div action="{% url "registro" %}" class="container-fluid px-5">
+    <form method="POST" class="row g-3">
+        {% csrf_token %}
+        <div class="col-md-6">
+          <label for="inputNombre" class="form-label">Nombre</label>
+          <input name="primer_nombre" type="text" class="form-control" id="inputNombre" placeholder="Ingrese su nombre completo">
+        </div>
+        <div class="col-md-6">
+          <label for="inputApellido" class="form-label">Apellidos</label>
+          <input name="primer_apellido" type="text" class="form-control" id="inputApellido" placeholder="Ingrese sus apellidos">
+        </div>
+        <div class="col-12">
+          <label for="inputUsuario" class="form-label">Nombre de usuario</label>
+          <input name="username" type="text" class="form-control" id="inputUsuario" placeholder="@ejemplo">
+          <small id="privacidadUsuario" class="form-text text-muted">El resto de usuario lo verán con este identificador</small>
+        </div>
+        <div class="col-12">
+          <label for="inputCorreo" class="form-label">Correo electrónico</label>
+          <input name="correo" type="email" class="form-control" id="inputCorreo" placeholder="Ingrese su correo electrónico">
+          <small id="privacidadCorreo" class="form-text text-muted">No se compartirá su correo con nadie</small>
+        </div>
+        <div class="col-md-6">
+          <label for="inputPassword" class="form-label">Contraseña</label>
+          <input name="password" type="password" class="form-control" id="inputPassword">
+          <small id="privacidadPassword" class="form-text text-muted">- Incluir diferentes tipos de caracteres (letras y números)</small>
+          <br>
+          <small id="privacidadPassword" class="form-text text-muted">- Incluir símbolos y caracteres especiales</small>
+          <br>
+          <small id="privacidadPassword" class="form-text text-muted">- 6 caracteres mínimo</small>
+        </div>
+        <div class="col-md-6">
+            <label for="inputPassword2" class="form-label">Confirmar Contraseña</label>
+            <input name="password2" type="password" class="form-control" id="inputPassword2">
+          </div>
+        <div class="col-12 text-center mt-5 mb-4">
+          <button type="submit" class="btn btn-success btn-lg">Registrar cuenta</button>
+        </div>
+      </form>
+
+      
+{% endblock %}
