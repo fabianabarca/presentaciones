@@ -35,7 +35,7 @@ def registro(request):
                 user.is_staff = False
                 user.save()
                 print("success")
-                return redirect('login')
+                return redirect(login)
     else:
         return render(request, 'signup.html')
     
@@ -54,7 +54,7 @@ def login(request):
         #Validación en caso de que no exista el usuario o credenciales incorrectas
         else:
             messages.info(request, 'Usuario o contraseña incorrectas')
-            return redirect('login')
+            return redirect(login)
     else:
         return render(request, 'login.html')
 
