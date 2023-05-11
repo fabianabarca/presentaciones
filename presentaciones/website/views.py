@@ -9,3 +9,6 @@ def index(request):
         'sesiones': sesiones,
     }
     return render(request, 'index.html', context)
+
+def demo(request):
+    return render(request, 'demo.html')
