@@ -5,16 +5,13 @@ from django.contrib.auth import authenticate
 
 # Create your views here.
 
-#Usuarios
-def usuarios(request):
-    return render(request, 'usuarios.html')
 
 #Perfil de cada usuario
-def perfil(request):
-    return render(request, 'perfil.html')
+def profile(request):
+    return render(request, 'profile.html')
 
 #Función para el registro de usuarios
-def registro(request):
+def signup(request):
     if request.method == 'POST':
         #Se realiza un request con toda la información necesaria para crear perfil
         primer_nombre = request.POST['primer_nombre']
@@ -27,7 +24,7 @@ def registro(request):
             #Validación en caso de que exista una cuenta con esas credenciales
             if User.objects.filter(username=username).exists():
                 messages.info(request, 'Una cuenta asociada a este correo ya existe')
-                return redirect(registro)
+                return redirect(signup)
             #Se crea el usuario
             else:
                 user = User.objects.create_user(username=username, password=password, email=correo)
@@ -59,6 +56,6 @@ def login(request):
         return render(request, 'login.html')
 
 #Función para cerrar sesión
-def logout_usuario(request):
+def logout(request):
     auth.logout(request)
     return redirect('index')
