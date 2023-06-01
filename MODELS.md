@@ -14,9 +14,11 @@
 - Registro: Para nuevos usuarios (`users/templates/signup.html`) (url: `'registro'`)
 - Ingreso: Para usuarios registrados (`users/templates/login.html`) (url: `'ingreso'`)
 - Inicio: Página de inicio del usuario registrado (`website/templates/home.html`) (url: `'inicio'`)
-- Curso: Material complementario del curso (`courses/templates/course.html`) (url: `'<str:sigla>'`)
+- Cursos: Lista de cursos disponibles (`courses/templates/courses.html`) (url: `'cursos'`)
+- Curso: Página principal del curso con material complementario e información (`courses/templates/course.html`) (url: `'<str:sigla>'`)
 - Presentaciones: Lista de presentaciones asincrónicas disponibles e ingreso a la siguiente presentación sincrónica (`decks/templates/decks.html`) (url: `'presentaciones'`)
   - Sesión: Presentación para las clases virtual del curso (`decks/templates/deck.html`) (url: `'<int:pres>'`)
+- Perfil: Información personal de la persona usuaria registrada (`users/templates/profile.html`) (url: `'perfil'`)
 - Estadísticas: Resumen de estadísticas individuales y colectivas de uso, incluyendo las evaluaciones en las presentaciones (`users/templates/stats.html`) (url: `'estadisticas'`)
 - Anuncios: Información relevante sobre eventos próximos o recientes (`website/templates/news.html`) (url: `'anuncios'`)
 
