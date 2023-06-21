@@ -2,13 +2,12 @@ from django.shortcuts import get_object_or_404, render
 
 # Create your views here.
 
-def lista(request):
-    return render(request, 'lista.html')
+def decks(request):
+    return render(request, 'decks.html')
 
-def clase(request, numero):
-    presentacion = 'clases/' + str(numero) + '.html'
+def deck(request, slug):
+    presentacion = 'clases/' + str(slug) + '.html'
     context = {
         'presentacion': presentacion,
-        'numero': numero
     }
-    return render(request, 'clase.html', context)
+    return render(request, 'deck.html', context)
