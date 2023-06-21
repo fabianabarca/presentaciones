@@ -2,22 +2,29 @@
 
 {% load static %}
 
-{% block content %}
+{% block page_title %} Inicio {% endblock %}
 
-<div class="container my-4">
-<hr>
-<h2>Inicio</h2>
+{% block main %}
+
+<h1>Inicio</h1>
 
 <p>Sesiones sincrónicas por cada una de las 16 semanas del ciclo lectivo.</p>
-{% if request.user.is_authenticated %}
-<form class="form-inline">
-  <a href={% url 'logout_usuario' %} type="button" class="btn btn-m btn-outline-danger">Cerrar Sesión </a>
-</form>
-{% else %}
-<a href={% url 'registro' %} type="button" class="btn btn-m btn-outline-primary m-2">Crear cuenta</a>
-<a href={% url 'ingreso' %} type="button" class="btn btn-m btn-outline-success">Iniciar Sesión</a>
-{% endif %}
-</div>
 
+{% if request.user.is_authenticated %}
+
+<form class="form-inline">
+  <a href="{% url 'logout_usuario' %}" type="button" class="btn btn-m btn-outline-danger">Cerrar sesión </a>
+</form>
+
+{% else %}
+
+<a href="{% url 'registro' %}" type="button" class="btn btn-m btn-outline-primary m-2">
+  Crear cuenta
+</a>
+<a href="{% url 'ingreso' %}" type="button" class="btn btn-m btn-outline-success">
+  Iniciar sesión
+</a>
+
+{% endif %}
 
 {% endblock %}

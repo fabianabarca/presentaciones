@@ -5,11 +5,7 @@ from .models import Sesion
 
 
 def index(request):
-    sesiones = Sesion.objects.all()
-    context = {
-        "sesiones": sesiones,
-    }
-    return render(request, "index.html", context)
+    return render(request, "index.html")
 
 
 def inicio(request):
