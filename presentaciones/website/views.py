@@ -12,10 +12,6 @@ def index(request):
     return render(request, "index.html", context)
 
 
-def demo(request):
-    return render(request, "demo.html")
-
-
 def inicio(request):
     return render(request, "home.html")
 

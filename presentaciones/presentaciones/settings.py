@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'decks.apps.DecksConfig',
     'website.apps.WebsiteConfig',
     'users.apps.UsersConfig',
+    'demo.apps.DemoConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
