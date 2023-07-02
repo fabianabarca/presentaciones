@@ -4,6 +4,7 @@
 
 {% block content %}
 
+
 <section>
     <h5>Proyecto de Docencia</h5>
     <h3>Estrategias docentes para sesiones virtuales interactivas con el desarrollo de un nuevo sistema web: una experiencia en el curso Modelos Probabilísticos de Señales y Sistemas</h3>
@@ -11,8 +12,38 @@
     <p>2023</p>
 </section>
 
+
 <section>
-    <h2>Pruebas de REPL con PyScript</h2>
+    <!doctype html>
+    <html lang="en">
+        <head>
+            <meta charset="utf-8" />
+            <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+            <title>REPL</title>
+        </head>
+
+        <body>
+            <nav class="navbar" style="background-color: #000000">
+                <div class="app-header">
+                    <h2>Demo PyScript REPL</h2>
+                </div>
+            </nav>
+            <section class="pyscript" style="margin-top: 10px;">
+                Escriba código en python que desea correr y
+                presione Shift-ENTER para evaluar la celda
+                <py-config>
+                    plugins = [
+                    "https://pyscript.net/latest/plugins/python/py_tutor.py"
+                    ]
+                </py-config>
+                <div style="margin-right: 30px; margin-left: 30px; padding: 10px; max-width: 700px; margin: 0 auto;">
+                    <py-repl id="my-repl" auto-generate="true" style="height: 300px;"></py-repl>
+                </div>
+            </section>
+            <script type="text/python" src="\presentaciones\static\python\runCode.py"></script>
+        </body>
+    </html>
 </section>
 
 {% endblock %}
