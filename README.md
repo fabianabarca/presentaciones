@@ -1,9 +1,30 @@
-# Presentaciones web sincrónicas virtuales
+# Presentaciones web interactivas
 
-Presentaciones sincrónicas del curso Modelos Probabilísticos de Señales y Sistemas. Parte del proyecto de docencia
+Presentaciones web del curso Modelos Probabilísticos de Señales y Sistemas. Parte del proyecto de docencia PD-IE-472-2022 "Estrategias docentes para sesiones virtuales interactivas con el desarrollo de un nuevo sistema web: una experiencia en el curso Modelos Probabilísticos de Señales y Sistemas" de la Escuela de Ingeniería Eléctrica de la Universidad de Costa Rica.
 
-* *Front-end*: **Reveal.js**
-* *Back-end*: **Django**
+### Plataformas
+
+**Django**: plataforma *backend* en Python ([djangoproject.com](https://www.djangoproject.com/))
+
+<img src="https://www.djangoproject.com/m/img/logos/django-logo-negative.png" width="100px">
+
+**Reveal.js**: plataforma *frontend* para presentaciones de diapositivas ([revealjs.com](https://revealjs.com/))
+
+<img src="https://hakim-static.s3.amazonaws.com/reveal-js/logo/v1/reveal-black-text-sticker.png" width="100px">
+
+**PyScript**: herramienta de integración de Python en HTML para ejecución de código ([pyscript.net](https://pyscript.net/))
+
+<img src="https://pyscript.net/assets/images/pyscript-sticker-black.svg" width="100px">
+
+### Herramientas
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/NumPy_logo_2020.svg/1280px-NumPy_logo_2020.svg.png" width="100px">
+
+<img src="https://www.fullstackpython.com/img/logos/scipy.png" width="100px">
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ed/Pandas_logo.svg/2560px-Pandas_logo.svg.png" width="100px">
+
+<img src="https://matplotlib.org/stable/_images/sphx_glr_logos2_003.png" width="100px">
 
 ## Estructura de páginas dentro del sitio
 
