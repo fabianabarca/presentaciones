@@ -5,6 +5,7 @@
 .vscode
 
 ### Django ###
+migrations/
 *.log
 *.pot
 *.pyc
