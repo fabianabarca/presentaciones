@@ -6,6 +6,10 @@
 
 {% block main %}
 
-<h1>Un curso</h1>
+<h1>{{ course.id }} - {{ course.name }}</h1>
+
+<p class="lead">
+    {{ course.description }}
+</p>
 
 {% endblock %}

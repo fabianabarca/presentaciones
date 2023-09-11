@@ -8,6 +8,14 @@
 
 <h1>Todos los cursos</h1>
 
+<h2>Aquí una lista de los cursos disponibles</h2>
+
+<ul>
+    {% for course in courses %}
+    <li>{{ course.id }} - {{ course.name }} ({{ course.career }}): {{ course.description }}</li>
+    {% endfor %}
+</ul>
+
 {% include "lipsum.html" %}
 
 {% endblock %}
