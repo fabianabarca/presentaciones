@@ -25,9 +25,9 @@
 ```mermaid
 stateDiagram-v2
     por : Portada
-    mod : MPSS
-    pro : Proyecto
-    eje : Ejemplo
+    pro : Sobre el proyecto
+    dem : Demo
+    den : Demo N
     reg : Registro
     ing : Ingreso
     ini : Inicio
@@ -41,8 +41,8 @@ stateDiagram-v2
     state men <<fork>>
 
     [*] --> por
-    por --> eje
-    por --> mod
+    por --> dem
+    dem --> den
     por --> pro
     por --> log
     log --> ini : Logueado
