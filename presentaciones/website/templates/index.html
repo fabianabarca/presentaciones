@@ -1,4 +1,4 @@
-{% extends 'plataforma.html' %}
+{% extends 'platform.html' %}
 
 {% load static %}
 
@@ -8,20 +8,22 @@
 
 <h1>Inicio</h1>
 
-<p>Sesiones sincrónicas por cada una de las 16 semanas del ciclo lectivo.</p>
+<p>Este es el proyecto de taca taca para hacer presentaciones.</p>
+
+<h3>(Portada)</h3>
 
 {% if request.user.is_authenticated %}
 
 <form class="form-inline">
-  <a href="{% url 'logout_usuario' %}" type="button" class="btn btn-m btn-outline-danger">Cerrar sesión </a>
+  <a href="{% url 'logout' %}" type="button" class="btn btn-m btn-outline-danger">Cerrar sesión </a>
 </form>
 
 {% else %}
 
-<a href="{% url 'registro' %}" type="button" class="btn btn-m btn-outline-primary m-2">
+<a href="{% url 'signup' %}" type="button" class="btn btn-m btn-outline-primary m-2">
   Crear cuenta
 </a>
-<a href="{% url 'ingreso' %}" type="button" class="btn btn-m btn-outline-success">
+<a href="{% url 'login' %}" type="button" class="btn btn-m btn-outline-success">
   Iniciar sesión
 </a>
 

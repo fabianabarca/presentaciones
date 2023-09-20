@@ -1,4 +1,4 @@
-{% extends 'plataforma.html' %}
+{% extends 'platform.html' %}
 
 {% load static %}
 
@@ -8,8 +8,16 @@
 
 <h1>Demostraciones y pruebas de funcionalidades</h1>
 
+<p>
+    Los siguientes enlaces abren una nueva pestaña con una demostración de las funcionalidades del sitio web.
+</p>
+
 <ul>
-    <li><a href="{% url 'pyscript' %}">PyScript</a></li>
+    <li><a href="{% url 'equations' %}" target="_blank">Ecuaciones y otras herramientas matemáticas</a></li>
+    <li><a href="{% url 'visualizations' %}" target="_blank">Visualizaciones estáticas y animadas de datos</a></li>
+    <li><a href="{% url 'programming' %}" target="_blank">Programación</a></li>
+    <li><a href="{% url 'interactivity' %}" target="_blank">Interactividad</a></li>
+    <li><a href="{% url 'example' %}" target="_blank">Ejemplo de probabilidad</a></li>
 </ul>
 
 {% endblock %}
