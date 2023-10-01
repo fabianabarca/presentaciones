@@ -21,25 +21,17 @@
         <p>PyScript es un lenguaje de programación que permite la ejecución de código Python en el navegador web.</p>
     </section>
     <section>
-        <py-script>
-            import micropip
-            import js
-            from pyodide.ffi import create_proxy
-
-            async def micropip_install():
-                await micropip.install(["numpy", "pandas", "matplotlib", "scipy"])
-
-            async def main():
-                await micropip_install()
-
-            js.setTimeout(create_proxy(main), 0)
-        </py-script>
-        <py-repl id="my-repl" output="replOutput"> </py-repl>
-        <div id="replOutput"></div>
-        <py-terminal id="terminal"></py-terminal>
-    </section>
-    <section>
-        
+        <py-config>
+            packages = ["matplotlib", "pandas", "numpy", "scipy"]
+            plugins = [
+                      "https://pyscript.net/latest/plugins/python/py_tutor.py"
+                    ]
+        </py-config>
+        <p>Presione Shift+Enter para correr el código:</p>
+        <div style="margin-right: 3rem">
+            <py-repl id="my-repl" auto-generate="true"></py-repl>
+            <div id="output" class="p-4"></div>
+        </div>
     </section>
 </section>
 
