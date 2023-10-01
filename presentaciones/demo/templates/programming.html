@@ -20,10 +20,29 @@
         <h2>¿Qué es PyScript?</h2>
         <p>PyScript es un lenguaje de programación que permite la ejecución de código Python en el navegador web.</p>
     </section>
-    
     <section>
-        <py-repl id="my-repl" auto-generate=true> </py-repl>
+        <py-script>
+            import micropip
+            import js
+            from pyodide.ffi import create_proxy
+
+            async def micropip_install():
+                await micropip.install(["numpy", "pandas", "matplotlib", "scipy"])
+
+            async def main():
+                await micropip_install()
+
+            js.setTimeout(create_proxy(main), 0)
+        </py-script>
+        <py-repl id="my-repl" output="replOutput"> </py-repl>
+        <div id="replOutput"></div>
+        <py-terminal id="terminal"></py-terminal>
+    </section>
+    <section>
+        
     </section>
 </section>
+
+
 
 {% endblock %}
