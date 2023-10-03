@@ -18,6 +18,12 @@
 		<!-- PyScript -->
 		<link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css" />
 		<script defer src="https://pyscript.net/latest/pyscript.js"></script>
+		<py-config>
+            packages = ["matplotlib", "pandas", "numpy", "scipy"]
+            plugins = [
+                      "https://pyscript.net/latest/plugins/python/py_tutor.py"
+                    ]
+        </py-config>
 	</head>
 	<body>
         
