@@ -4,6 +4,12 @@
 
 {% block content %}
 
+<style>
+    .repl {
+        background-color: #f5f5f5;
+    }
+</style>
+
 <section>
     <h5>Proyecto de Docencia</h5>
     <h3>Estrategias docentes para sesiones virtuales interactivas con el desarrollo de un nuevo sistema web: una experiencia en el curso Modelos Probabilísticos de Señales y Sistemas</h3>
@@ -16,25 +22,94 @@
 </section>
 
 <section>
+    <h2>¿Qué es PyScript?</h2>
+    <p>PyScript es un lenguaje de programación que permite la ejecución de código Python en el navegador web.</p>
+</section>
+
+<section>
+    <h2>Este es un REPL.</h2>
+    <p>Aquí podés escribir y modificar código.</p>
+    <div class="repl">
+        <py-repl output="replOutput1">2+2</py-repl>
+    </div>
+    <p>Y correrlo con <b>Shift+Enter</b>.</p>
+    <div id="replOutput1"></div>
+</section>
+
+<section>
+    <p>Podés hacer <b>operaciones</b>, <b>funciones</b>, <b>imprimir</b> en pantalla y usar <b>librerías</b>.</p>
+    <div class="repl">
+        <py-repl id="repl2" output="replOutput2">
+            def printText(myText):
+                print(myText)
+            printText("edit this")
+        </py-repl>
+    </div>
+    <div id="replOutput2"></div>
+</section>
+
+<section>
+    <h2>Librerías</h2>
+    <p>Podés usar librerías de ciencia de datos como numpy, scipy, matplotlib y pandas.</p>
+    <div class="repl">
+        <py-repl output="replOutput3">
+            import numpy as np
+            import scipy as sci
+            import pandas as pd
+            import matplotlib.pyplot as plt
+        </py-repl>
+    </div>
+</section>
+
+<section>
     <section>
-        <h2>¿Qué es PyScript?</h2>
-        <p>PyScript es un lenguaje de programación que permite la ejecución de código Python en el navegador web.</p>
-    </section>
-    <section>
-        <py-config>
-            packages = ["matplotlib", "pandas", "numpy", "scipy"]
-            plugins = [
-                      "https://pyscript.net/latest/plugins/python/py_tutor.py"
-                    ]
-        </py-config>
-        <p>Presione Shift+Enter para correr el código:</p>
-        <div style="margin-right: 3rem">
-            <py-repl id="my-repl" auto-generate="true"></py-repl>
-            <div id="output" class="p-4"></div>
+        <h2>Plots</h2>
+        <p>Podés generar plots de matplotlib.</p>
+        <div class="repl">
+            <py-repl output="replOutput4">
+                import matplotlib.pyplot as plt
+                import numpy as np
+    
+                t = np.arange(0.0, 2.0, 0.01)
+                s = 1 + np.sin(2*np.pi*t)
+                plt.plot(t, s)
+                plt.show()
+            </py-repl>
         </div>
+    </section>
+
+    <section>
+        <p>Y ver el resultado aquí.</p>
+        <div id="replOutput4"></div>
     </section>
 </section>
 
+<section>
+    <section>
+        <h2>Tablas</h2>
+        <p>También podés imprimir dataframes de pandas.</p>
+        <div class="repl">
+            <py-repl id="repl5" output="replOutput5">
+                import pandas as pd
+                df = pd.DataFrame({'num_legs': [2, 4, 8, 0],
+                    'num_wings': [2, 0, 0, 0],
+                    'num_specimen_seen': [10, 2, 1, 8]},
+                    index=['falcon', 'dog', 'spider', 'fish'])
+                print(df)
+            </py-repl>
+        </div>
+    </section>
+
+    <section>
+        <p>Y ver el resultado aquí.</p>
+        <div id="replOutput5"></div>
+    </section>
+
+    <section>
+        <p>O en la terminal.</p>
+        <py-terminal id="repl5"></py-terminal>
+    </section>
+</section>
 
 
 {% endblock %}
