@@ -1,0 +1,35 @@
+{% extends 'platform.html' %}
+
+{% load static %}
+
+{% block page_title %} Preguntas {% endblock %}
+
+{% block main %}
+
+{% load crispy_forms_tags %}
+
+<div class="container-sm w-75">
+    <h2>Crear Pregunta</h2>
+    
+    <form method="post" action="{% url 'create_question' %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        
+         {{ question_form | crispy }} 
+        
+        <h4 class='mt-3'>Opciones:</h4>
+        <div id="choices-container" class="my-3">
+        </div>
+        
+        <button type="button" onclick="addChoiceInput()" class="btn btn-primary my-2">Agregar Opción</button>
+        <br/>
+        <div class='d-flex justify-content-end'>         
+            <input type="submit" value="Guardar Pregunta" class="btn btn-success mx-1 my-1">
+            <a href="{% url 'demo' %}" class="btn btn-danger mx-1 my-1">Volver</a>
+        </div>
+    </form>
+    
+</div>
+
+<script src="{% static 'js/add_question.js' %}"></script>
+
+{% endblock %}

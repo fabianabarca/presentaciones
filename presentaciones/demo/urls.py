@@ -8,4 +8,5 @@ urlpatterns = [
     path("ecuaciones/", views.equations, name="equations"),
     path("interactividad/", views.interactivity, name="interactivity"),
     path("ejemplo/", views.example, name="example"),
+    path('crear_pregunta/', views.create_question, name='create_question'),
 ]

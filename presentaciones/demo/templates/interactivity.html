@@ -1,29 +1,74 @@
-{% extends 'decks.html' %}
-
-{% load static %}
-
-{% block content %}
+{% extends 'decks.html' %} {% load static %} {% block content %}
 
 <section>
-    <h5>Proyecto de Docencia</h5>
-    <h3>Estrategias docentes para sesiones virtuales interactivas con el desarrollo de un nuevo sistema web: una experiencia en el curso Modelos Probabilísticos de Señales y Sistemas</h3>
-    <h4>Presentación de pruebas</h4>
-    <p>2023</p>
+  <h5>Proyecto de Docencia</h5>
+  <h3>
+    Estrategias docentes para sesiones virtuales interactivas con el desarrollo
+    de un nuevo sistema web: una experiencia en el curso Modelos Probabilísticos
+    de Señales y Sistemas
+  </h3>
+  <h4>Presentación de pruebas</h4>
+  <p>2023</p>
 </section>
 
 <section>
-    <h2>Interactividad en el sitio</h2>
+  <h2>Interactividad en el sitio</h2>
 </section>
 
 <section>
-    <section>
-        <h1>Ola ke ase</h1>
-    </section>
+  <section>
+    <h1>Ola ke ase</h1>
+  </section>
 
-    <section>
-        <h2>¿Qué es PyScript?</h2>
-        <p>PyScript es un lenguaje de programación que permite la ejecución de código Python en el navegador web.</p>
-    </section>
+  <section>
+    <h2>¿Qué es PyScript?</h2>
+    <p>
+      PyScript es un lenguaje de programación que permite la ejecución de código
+      Python en el navegador web.
+    </p>
+  </section>
+</section>
+
+<section id="slide3" data-visibility="visible">
+    <h2>Pregunta de selección única</h2>
+    <p>¿Cuánto es 2 + 2?</p>
+    <div class="form-check d-flex">
+        <input class="form-check-input" name="opcion" type="radio" id="resp1">
+        <label class="form-check-label ms-3" for="resp1">3</label>
+    </div>
+    <div class="form-check d-flex">
+        <input class="form-check-input" name="opcion" type="radio" id="resp2">
+        <label class="form-check-label ms-3" for="resp2">4</label>
+    </div>
+    <div class="form-check d-flex">
+        <input class="form-check-input" name="opcion" type="radio" id="resp3">
+        <label class="form-check-label ms-3" for="resp3">5</label>
+    </div>
+    <div class="form-check d-flex">
+        <input class="form-check-input" name="opcion" type="radio" id="resp4">
+        <label class="form-check-label ms-3" for="resp4">6</label>
+    </div>
+
+    <button type="button" class="btn btn-primary mt-2" id="enviar" onClick="enviar()">Enviar respuesta</button>
+
+    <script>
+        function enviar() {
+            if (document.getElementById("resp2").checked) {
+                document.getElementById("resultado").innerHTML = "Correcto, 2 + 2 es 4.";
+            } else {
+                document.getElementById("resultado").innerHTML = "Incorrecto, la respuesta es 4.";
+            }
+            document.getElementById("slide3").setAttribute("data-visibility", "hidden"); // Cambiar el valor del atributo data-visibility
+            // Reveal.initialize();
+            Reveal.next();
+        }
+    </script>
+</section>
+
+
+<section>
+  <h2>Resultado de la pregunta:</h2>
+  <div id="resultado"></div>
 </section>
 
 {% endblock %}
