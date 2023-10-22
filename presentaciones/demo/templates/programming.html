@@ -4,13 +4,14 @@
 
 {% block content %}
 
-<style>
-    .repl {
-        background-color: #f5f5f5;
-    }
-</style>
+<py-config>
+    packages = ["matplotlib", "pandas", "numpy", "scipy"]
+    plugins = [
+                "https://pyscript.net/latest/plugins/python/py_tutor.py"
+            ]
+</py-config>
 
-<section>
+<section data-menu-title="Custom Menu Title">
     <h5>Proyecto de Docencia</h5>
     <h3>Estrategias docentes para sesiones virtuales interactivas con el desarrollo de un nuevo sistema web: una experiencia en el curso Modelos Probabilísticos de Señales y Sistemas</h3>
     <h4>Presentación de pruebas</h4>
@@ -24,6 +25,12 @@
 <section>
     <h2>¿Qué es PyScript?</h2>
     <p>PyScript es un lenguaje de programación que permite la ejecución de código Python en el navegador web.</p>
+    <p>incluir link de pyscript</p>
+</section>
+
+<section>
+    <h2>¿Qué es un REPL?</h2>
+    <p>Un REPL es ...</p>
 </section>
 
 <section>
@@ -33,7 +40,9 @@
         <py-repl output="replOutput1">2+2</py-repl>
     </div>
     <p>Y correrlo con <b>Shift+Enter</b>.</p>
-    <div id="replOutput1"></div>
+    <div class="r-stack">
+        <div id="replOutput1"></div>
+    </div>
 </section>
 
 <section>
@@ -111,5 +120,8 @@
     </section>
 </section>
 
+<footer class="footer">
+    <div><img src="../../static/media/firma-horizontal-dos-lineas-blanco.png" style="height: 100px;"></div>
+</footer>
 
 {% endblock %}

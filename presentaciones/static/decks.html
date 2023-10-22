@@ -10,7 +10,7 @@
 
 		<link rel="stylesheet" type="text/css" href="{% static 'reveal/dist/reset.css' %}">
 		<link rel="stylesheet" type="text/css" href="{% static 'reveal/dist/reveal.css' %}">
-		<link rel="stylesheet" type="text/css" href="{% static 'reveal/dist/theme/moon.css' %}" id="theme">
+		<link rel="stylesheet" type="text/css" href="{% static 'reveal/dist/theme/ucr.css' %}" id="theme">
 		<link rel="stylesheet" href="{% static 'reveal/plugin/highlight/monokai.css' %}" id="highlight-theme">
 
 		<script src="https://kit.fontawesome.com/1ae7c4e024.js" crossorigin="anonymous"></script>
@@ -18,12 +18,6 @@
 		<!-- PyScript -->
 		<link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css" />
 		<script defer src="https://pyscript.net/latest/pyscript.js"></script>
-		<py-config>
-            packages = ["matplotlib", "pandas", "numpy", "scipy"]
-            plugins = [
-                      "https://pyscript.net/latest/plugins/python/py_tutor.py"
-                    ]
-        </py-config>
 	</head>
 	<body>
         
@@ -40,6 +34,7 @@
 		<script src="{% static 'reveal/plugin/markdown/markdown.js' %}"></script>
         <script src="{% static 'reveal/plugin/highlight/highlight.js' %}"></script>
         <script src="{% static 'reveal/plugin/math/math.js' %}"></script>
+		<script src="{% static 'reveal/plugin/menu/menu.js' %}"></script>
 		<script>
 			// More info about initialization & config:
 			// - https://revealjs.com/initialization/
@@ -51,7 +46,7 @@
                     config: 'TeX-AMS_HTML-full',
                 },
 				// Learn about plugins: https://revealjs.com/plugins/
-				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes, RevealMath ]
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes, RevealMath, RevealMenu ]
 			});
 		</script>
 	</body>
