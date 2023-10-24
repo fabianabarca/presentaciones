@@ -11,7 +11,7 @@
             ]
 </py-config>
 
-<section data-menu-title="Custom Menu Title">
+<section>
     <h5>Proyecto de Docencia</h5>
     <h3>Estrategias docentes para sesiones virtuales interactivas con el desarrollo de un nuevo sistema web: una experiencia en el curso Modelos Probabilísticos de Señales y Sistemas</h3>
     <h4>Presentación de pruebas</h4>
@@ -30,43 +30,102 @@
 
 <section>
     <h2>¿Qué es un REPL?</h2>
-    <p>Un REPL es ...</p>
+    <p>Un Read-Eval-Print Loop (REPL) es un entorno interactivo que permite escribir, ejecutar y ver resultados de código de forma inmediata.</p>
 </section>
 
 <section>
-    <h2>Este es un REPL.</h2>
-    <p>Aquí podés escribir y modificar código.</p>
-    <div class="repl">
-        <py-repl output="replOutput1">2+2</py-repl>
-    </div>
-    <p>Y correrlo con <b>Shift+Enter</b>.</p>
-    <div class="r-stack">
-        <div id="replOutput1"></div>
+    <div class="d-flex justify-content-center">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="card overflow-auto" style="height: 50vh;">
+                        <div class="card-header">
+                            Código
+                        </div>
+                        <div class="card-body">
+                            <py-repl output="replOutput1">2+2</py-repl>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card overflow-auto" style="height: 50vh;">
+                        <div class="card-header">
+                            Consola
+                        </div>
+                        <div class="card-body" id="replOutput1">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </section>
 
 <section>
     <p>Podés hacer <b>operaciones</b>, <b>funciones</b>, <b>imprimir</b> en pantalla y usar <b>librerías</b>.</p>
-    <div class="repl">
-        <py-repl id="repl2" output="replOutput2">
-            def printText(myText):
-                print(myText)
-            printText("edit this")
-        </py-repl>
+    <div class="d-flex justify-content-center">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="card overflow-auto" style="height: 50vh;">
+                        <div class="card-header">
+                            Código
+                        </div>
+                        <div class="card-body">
+                            <py-repl output="replOutput2">
+                                def printText(myText):
+                                    print(myText)
+                                printText("edit this")
+                            </py-repl>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card overflow-auto" style="height: 50vh;">
+                        <div class="card-header">
+                            Consola
+                        </div>
+                        <div class="card-body" id="replOutput2">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div id="replOutput2"></div>
 </section>
 
 <section>
     <h2>Librerías</h2>
     <p>Podés usar librerías de ciencia de datos como numpy, scipy, matplotlib y pandas.</p>
-    <div class="repl">
-        <py-repl output="replOutput3">
-            import numpy as np
-            import scipy as sci
-            import pandas as pd
-            import matplotlib.pyplot as plt
-        </py-repl>
+    <div class="d-flex justify-content-center">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="card overflow-auto" style="height: 50vh;">
+                        <div class="card-header">
+                            Código
+                        </div>
+                        <div class="card-body">
+                            <py-repl output="replOutput3">
+                                import numpy as np
+                                import scipy as sci
+                                import pandas as pd
+                                import matplotlib.pyplot as plt
+                            </py-repl>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card overflow-auto" style="height: 50vh;">
+                        <div class="card-header">
+                            Consola
+                        </div>
+                        <div class="card-body" id="replOutput3">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </section>
 
@@ -74,22 +133,39 @@
     <section>
         <h2>Plots</h2>
         <p>Podés generar plots de matplotlib.</p>
-        <div class="repl">
-            <py-repl output="replOutput4">
-                import matplotlib.pyplot as plt
-                import numpy as np
-    
-                t = np.arange(0.0, 2.0, 0.01)
-                s = 1 + np.sin(2*np.pi*t)
-                plt.plot(t, s)
-                plt.show()
-            </py-repl>
+        <div class="d-flex justify-content-center">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <div class="card overflow-auto" style="height: 50vh;">
+                            <div class="card-header">
+                                Código
+                            </div>
+                            <div class="card-body">
+                                <py-repl output="replOutput4">
+                                    import matplotlib.pyplot as plt
+                                    import numpy as np
+                        
+                                    t = np.arange(0.0, 2.0, 0.01)
+                                    s = 1 + np.sin(2*np.pi*t)
+                                    plt.plot(t, s)
+                                    plt.show()
+                                </py-repl>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card overflow-auto" style="height: 50vh;">
+                            <div class="card-header">
+                                Consola
+                            </div>
+                            <div class="card-body" id="replOutput4">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    </section>
-
-    <section>
-        <p>Y ver el resultado aquí.</p>
-        <div id="replOutput4"></div>
     </section>
 </section>
 
@@ -97,31 +173,53 @@
     <section>
         <h2>Tablas</h2>
         <p>También podés imprimir dataframes de pandas.</p>
-        <div class="repl">
-            <py-repl id="repl5" output="replOutput5">
-                import pandas as pd
-                df = pd.DataFrame({'num_legs': [2, 4, 8, 0],
-                    'num_wings': [2, 0, 0, 0],
-                    'num_specimen_seen': [10, 2, 1, 8]},
-                    index=['falcon', 'dog', 'spider', 'fish'])
-                print(df)
-            </py-repl>
+        <div class="d-flex justify-content-center">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <div class="card overflow-auto" style="height: 50vh;">
+                            <div class="card-header">
+                                Código
+                            </div>
+                            <div class="card-body">
+                                <py-repl output="replOutput5">
+                                    import pandas as pd
+                                    df = pd.DataFrame({'num_legs': [2, 4, 8, 0],
+                                        'num_wings': [2, 0, 0, 0],
+                                        'num_specimen_seen': [10, 2, 1, 8]},
+                                        index=['falcon', 'dog', 'spider', 'fish'])
+                                    print(df)
+                                </py-repl>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card overflow-auto" style="height: 50vh;">
+                            <div class="card-header">
+                                Consola
+                            </div>
+                            <div class="card-body" id="replOutput5">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
     <section>
-        <p>Y ver el resultado aquí.</p>
-        <div id="replOutput5"></div>
-    </section>
-
-    <section>
-        <p>O en la terminal.</p>
+        <p>Y ver el resultado en la terminal.</p>
         <py-terminal id="repl5"></py-terminal>
     </section>
 </section>
 
-<footer class="footer">
+<!-- 
+   <footer class="footer">
     <div><img src="../../static/media/firma-horizontal-dos-lineas-blanco.png" style="height: 100px;"></div>
-</footer>
+</footer> 
+    
+    
+    comm -->
+
 
 {% endblock %}
