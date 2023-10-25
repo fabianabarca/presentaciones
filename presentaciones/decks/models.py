@@ -12,8 +12,8 @@ class Question(models.Model):
     question_id = models.AutoField(primary_key=True)
     title = models.CharField(max_length=255)
     description = models.TextField()
-    image = models.ImageField(upload_to='question_images/', null=True, blank=True)
-    data = models.FileField(null=True)
+    image = models.ImageField(upload_to='question_data/question_images/', null=True, blank=True)
+    data = models.FileField(upload_to='question_data/question_docs/', null=True)
     form_type = models.CharField(max_length=255)
     question_set = models.CharField(max_length=255) #?
     topic = models.ForeignKey(Topic, on_delete=models.CASCADE) # Foreing Key

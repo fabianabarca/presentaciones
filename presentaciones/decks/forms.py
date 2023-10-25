@@ -1,7 +1,7 @@
 from django import forms
 from .models import Question, Choice
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Layout, Field, Div, HTML
+from crispy_forms.layout import Layout, Field, Div, HTML, Submit
 
 class QuestionForm(forms.ModelForm):
     class Meta:
@@ -25,24 +25,17 @@ class QuestionForm(forms.ModelForm):
         help_texts = {}
 
         widgets = {
-            'data': forms.ClearableFileInput(attrs={'accept': '.pdf, .doc, .docx, .txt, .jpg, .png'}),
+            'title': forms.TextInput(attrs={'class': 'mb-3'}),
+            'description': forms.Textarea(attrs={'class': 'mb-3', 'rows': 4}),
+            'image': forms.ClearableFileInput(attrs={'class': 'mb-3'}),
+            'data': forms.ClearableFileInput(attrs={'class': 'mb-3', 'accept': '.pdf, .doc, .docx, .txt, .jpg, .png'}),
+            'form_type': forms.TextInput(attrs={'class': 'mb-3'}),
+            'question_set': forms.TextInput(attrs={'class': 'mb-3'}),
+            'topic': forms.Select(attrs={'class': 'mb-3'}),
         }
 
     def __init__(self, *args, **kwargs):
         super(QuestionForm, self).__init__(*args, **kwargs)
-        self.helper = FormHelper()
-        self.helper.layout = Layout(
-            Div(
-                Field('title', css_class='mb-3'),
-                Field('description', css_class='mb-3'),
-                Field('image', css_class='mb-3'),
-                Field('data', css_class='mb-3'),
-                Field('form_type', css_class='mb-3'),
-                Field('question_set', css_class='mb-3'),
-                Field('topic', css_class='mb-3'),
-                HTML('<hr class="mb-3">'),
-            ),
-        )
         self.fields['image'].required = False
         self.fields['data'].required = False
         self.fields['description'].widget.attrs['rows'] = 5
