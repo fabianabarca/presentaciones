@@ -24,7 +24,11 @@
 		<script defer src="https://pyscript.net/latest/pyscript.js"></script>
 	</head>
 	<body>
-        
+		<div class="navbar position-fixed">
+			<div class="navbar-brand">
+				<img src="{% static 'media/firma-horizontal-dos-lineas.svg' %}" style="height: 10vh;">
+			</div>
+		</div>
         <div class="reveal">
 			<div class="slides">
 				{% block content %}
