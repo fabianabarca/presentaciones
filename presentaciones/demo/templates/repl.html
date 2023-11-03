@@ -1,0 +1,32 @@
+{% load static %}
+
+{% block content %}
+
+<div class="d-flex justify-content-center">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="card" style="height: 50vh; width: 50vh;">
+                    <div class="card-header d-flex justify-content-start">
+                        <i class="fa-solid fa-terminal" style="color: #93a1a1; size: 50%;"></i>
+                    </div>
+                    <div class="card-body overflow-auto">
+                        <py-repl output="{{ output_id }}">{{ code }}</py-repl>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card" style="height: 50vh; width: 50vh;">
+                    <div class="card-header d-flex justify-content-start">
+                        <i class="fa-regular fa-file" style="color: #93a1a1; size: 50%;"></i>
+                    </div>
+                    <div class="card-body overflow-auto">
+                        <div id="{{ output_id }}"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
