@@ -29,46 +29,76 @@
   </section>
 </section>
 
-<section id="slide3" data-visibility="visible">
-    <h2>Pregunta de selección única</h2>
-    <p>¿Cuánto es 2 + 2?</p>
-    <div class="form-check d-flex">
-        <input class="form-check-input" name="opcion" type="radio" id="resp1">
-        <label class="form-check-label ms-3" for="resp1">3</label>
-    </div>
-    <div class="form-check d-flex">
-        <input class="form-check-input" name="opcion" type="radio" id="resp2">
-        <label class="form-check-label ms-3" for="resp2">4</label>
-    </div>
-    <div class="form-check d-flex">
-        <input class="form-check-input" name="opcion" type="radio" id="resp3">
-        <label class="form-check-label ms-3" for="resp3">5</label>
-    </div>
-    <div class="form-check d-flex">
-        <input class="form-check-input" name="opcion" type="radio" id="resp4">
-        <label class="form-check-label ms-3" for="resp4">6</label>
-    </div>
-
-    <button type="button" class="btn btn-primary mt-2" id="enviar" onClick="enviar()">Enviar respuesta</button>
-
-    <script>
-        function enviar() {
-            if (document.getElementById("resp2").checked) {
-                document.getElementById("resultado").innerHTML = "Correcto, 2 + 2 es 4.";
-            } else {
-                document.getElementById("resultado").innerHTML = "Incorrecto, la respuesta es 4.";
-            }
-            document.getElementById("slide3").setAttribute("data-visibility", "hidden"); // Cambiar el valor del atributo data-visibility
-            // Reveal.initialize();
-            Reveal.next();
-        }
-    </script>
-</section>
-
-
 <section>
-  <h2>Resultado de la pregunta:</h2>
-  <div id="resultado"></div>
+  <form method="post" action="{% url 'interactivity' %}">
+    {% csrf_token %}
+    <!-- Mostrar preguntas por conjunto -->
+    {% for question_set, question_data in question_sets.items %}
+    <h2>{{ question_set }}</h2>
+    {% for data in question_data %}
+    <h3>{{ data.question.title }}</h3>
+    <p>{{ data.question.description }}</p>
+    <!-- Iterar a través de las opciones de la pregunta -->
+    {% for choice in data.choices %}
+    <div class="form-check">
+      <input
+        class="form-check-input"
+        type="radio"
+        name="question_{{ data.question.question_id }}"
+        id="{{ choice.choice_id }}"
+        value="{{ choice.choice_id }}"
+      />
+      <label class="form-check-label" for="{{ choice.choice_id }}">
+        {{ choice.text }}
+      </label>
+    </div>
+    {% endfor %} {% endfor %} {% endfor %}
+    <button
+      type="button"
+      class="btn btn-primary mt-2"
+      id="enviarButton"
+      onClick="sendAnswer()"
+    >
+      Enviar respuesta
+    </button>
+  </form>
+
+  <div
+    id="message"
+    data-correct-choices="{% for key, value in correct_choices.items %}{{ key }}:{{ value }},{% endfor %}"
+  ></div>
 </section>
 
+<script>
+  function sendAnswer() {
+    var form = document.querySelector("form");
+    var formData = new FormData(form);
+
+    fetch("{% url 'interactivity' %}", {
+      method: "POST",
+      body: formData,
+      headers: {
+        "X-CSRFToken": "{{ csrf_token }}",
+      },
+    })
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error("Error al guardar las respuestas");
+        }
+      })
+      .then((data) => {
+        if (data.is_correct) {
+          document.getElementById("message").innerText = data.message;
+        } else {
+          document.getElementById("message").innerText = "Incorrecto";
+        }
+      })
+      .catch((error) => {
+        document.getElementById("message").innerText =
+          error.message || "Error en la solicitud";
+      });
+  }
+</script>
 {% endblock %}
