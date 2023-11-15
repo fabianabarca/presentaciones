@@ -9,42 +9,61 @@ def demo(request):
 
 def programming(request):
     context = {
-        "repl1": "a = 5" + 
-            "\nb = 6" +
-            "\nc = 7" +
-            "\ns = (a + b + c) / 2" +
-            "\narea = (s*(s-a)*(s-b)*(s-c)) ** 0.5" +
-            "\nprint('El area del triangulo es %0.2f' %area)",
-        "repl2": "import numpy as np" +
-            "\n\narray = np.array([" +
-            "\n\t[3, 7, 1]," +
-            "\n\t[10, 3, 2]," +
-            "\n\t[5, 6, 7]" +
-            "\n])" +
-            "\nprint(array)" +
-            "\nprint()" +
-            "\nprint(np.sort(array, axis=None))" +
-            "\nprint(np.sort(array, axis=1))" +
-            "\nprint(np.sort(array, axis=0))",
-        "repl3": "from scipy import linalg" +
-            "\nimport numpy as np" +
-            "\n\narr = np.array([[5,4],[6,3]])" +
-            "\neg_val, eg_vect = linalg.eig(arr)" +
-            "\nprint(eg_val)" +
-            "\nprint(eg_vect)",
-        "repl4": "import matplotlib.pyplot as plt" +
-            "\nimport numpy as np" +
-            "\n\nx = np.random.randn(1000)" +
-            "\ny = np.random.randn(1000)" +
-            "\nfig, ax = plt.subplots()" +
-            "\nax.scatter(x, y)" +
-            "\nfig",
-        "repl5": "import pandas as pd" +
-            "\n\ndf = pd.DataFrame({'num_legs': [2, 4, 8, 0]," +
-            "\n\t'num_wings': [2, 0, 0, 0]," +
-            "\n\t'num_specimen_seen': [10, 2, 1, 8]}," +
-            "\n\tindex=['falcon', 'dog', 'spider', 'fish'])" +
-            "\ndf"
+        "variable1": """
+        a = 5
+        b = 6
+        c = 7
+        s = (a + b + c) / 2
+        area = (s*(s-a)*(s-b)*(s-c)) ** 0.5
+
+        print('El área del triángulo es %0.2f.' %area)
+        print()
+        """,
+        "variable2": """
+        import numpy as np
+
+        array = np.array([
+            [3, 7, 1],
+            [10, 3, 2],
+            [5, 6, 7]
+        ])
+
+        print(array)
+        print()
+        print(np.sort(array, axis=None))
+        print(np.sort(array, axis=1))
+        print(np.sort(array, axis=0))
+        """,
+        "variable3": """
+        from scipy import linalg
+        import numpy as np
+
+        arr = np.array([[5,4],[6,3]])
+        eg_val, eg_vect = linalg.eig(arr)
+        print(eg_val)
+        print(eg_vect)
+        print()
+        """,
+        "variable4": """
+        import matplotlib.pyplot as plt
+        import numpy as np
+
+        x = np.random.randn(1000)
+        y = np.random.randn(1000)
+        fig, ax = plt.subplots()
+        ax.scatter(x, y)
+        fig
+        """,
+        "variable5": """
+        import pandas as pd
+
+        df = pd.DataFrame({
+            'num_legs': [2, 4, 8, 0],
+            'num_wings': [2, 0, 0, 0],
+            'num_specimen_seen': [10, 2, 1, 8]},
+            index=['falcon', 'dog', 'spider', 'fish'])
+        df
+        """
     }
     return render(request, "programming.html", context)
 

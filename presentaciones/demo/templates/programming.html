@@ -49,7 +49,7 @@
         Aquí hemos habilitado un REPL interactivo de prueba. 
         Podés modificar el código y correrlo presionando <b>Shift+Enter</b>.
     </p>
-    {% include "repl.html" with code=repl1 output_id="output1" %}
+    {% include "repl.html" with code=variable1 output_id="output1" %}
 </section>
 
 <section>
@@ -57,7 +57,7 @@
     <p>El REPL de PyScript permite interactuar con Python directamente desde el navegador web. 
         Esto significa que podés explorar, importar y utilizar las bibliotecas que necesités con facilidad.
     </p>
-    {% include "repl.html" with code=repl2 output_id="output2" %}
+    {% include "repl.html" with code=variable2 output_id="output2" %}
 </section>
 
 <section>
@@ -65,7 +65,7 @@
     <p>Podés utilizar bibliotecas destacadas como Numpy, SciPy, Pandas y Matplotlib para una variedad de aplicaciones,
         ya sea para realizar cálculos científicos, manipular datos o crear visualizaciones.
     </p>
-    {% include "repl.html" with code=repl3 output_id="output3" %}
+    {% include "repl.html" with code=variable3 output_id="output3" %}
 </section>
 
 <section>
@@ -73,7 +73,7 @@
     <p>Podés generar gráficos con Matplotlib sin la necesidad de salir de esta ventana. 
         PyScript permite crear los gráficos directamente desde el REPL y observarlos aquí mismo.
     </p>
-    {% include "repl.html" with code=repl4 output_id="output4" %}
+    {% include "repl.html" with code=variable4 output_id="output4" %}
 </section>
 
 <section>
@@ -81,7 +81,15 @@
     <p>También podés hacer operaciones con DataFrames directamente desde el REPL y ver los resultados aquí.
         Así trabajás más fácilmente con tus datos y visualizás los cambios en tiempo real, sin cambiar de entorno.
     </p>
-    {% include "repl.html" with code=repl5 output_id="output5" %}
+    {% include "repl.html" with code=variable5 output_id="output5" %}
+</section>
+
+<section>
+    <h2>Viendo la terminal</h2>
+    <p>Además de ver los resultados de cada REPL en su respectiva ventana, 
+        también podés verlos aquí en la terminal.
+    </p>
+    <py-terminal></py-terminal>
 </section>
 
 {% endblock %}
