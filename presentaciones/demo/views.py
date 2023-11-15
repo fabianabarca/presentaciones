@@ -9,7 +9,7 @@ def demo(request):
 
 def programming(request):
     context = {
-        "variable1": """
+        "repl1": """
         a = 5
         b = 6
         c = 7
@@ -19,7 +19,7 @@ def programming(request):
         print('El área del triángulo es %0.2f.' %area)
         print()
         """,
-        "variable2": """
+        "repl2": """
         import numpy as np
 
         array = np.array([
@@ -34,7 +34,7 @@ def programming(request):
         print(np.sort(array, axis=1))
         print(np.sort(array, axis=0))
         """,
-        "variable3": """
+        "repl3": """
         from scipy import linalg
         import numpy as np
 
@@ -44,7 +44,7 @@ def programming(request):
         print(eg_vect)
         print()
         """,
-        "variable4": """
+        "repl4": """
         import matplotlib.pyplot as plt
         import numpy as np
 
@@ -54,7 +54,7 @@ def programming(request):
         ax.scatter(x, y)
         fig
         """,
-        "variable5": """
+        "repl5": """
         import pandas as pd
 
         df = pd.DataFrame({
