@@ -1,62 +1,70 @@
 {% load static %}
 
 <!doctype html>
-<html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<html lang="es">
 
-		<title>Prueba de reveal.js</title>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<link rel="stylesheet" type="text/css" href="{% static 'reveal/dist/reset.css' %}">
-		<link rel="stylesheet" type="text/css" href="{% static 'reveal/dist/reveal.css' %}">
-		<link rel="stylesheet" type="text/css" href="{% static 'reveal/dist/theme/ucr.css' %}" id="theme">
-		<link rel="stylesheet" href="{% static 'reveal/plugin/highlight/monokai.css' %}" id="highlight-theme">
+	<title>Prueba de reveal.js</title>
 
-		<script src="https://kit.fontawesome.com/1ae7c4e024.js" crossorigin="anonymous"></script>
+	<link rel="stylesheet" type="text/css" href="{% static 'reveal/dist/reset.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'reveal/dist/reveal.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'reveal/dist/theme/ucr.css' %}" id="theme">
+	<link rel="stylesheet" href="{% static 'reveal/plugin/highlight/monokai.css' %}" id="highlight-theme">
 
-		<!-- Bootstrap y FontAwesome -->
-		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
-		<script src="https://kit.fontawesome.com/58d6fc6167.js" crossorigin="anonymous"></script>
+	<!-- Bootstrap core CSS -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+  	<!-- FontAwesome -->
+  	<script src="https://kit.fontawesome.com/1ae7c4e024.js" crossorigin="anonymous"></script>
 
-		<!-- PyScript -->
-		<link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css" />
-		<script defer src="https://pyscript.net/latest/pyscript.js"></script>
-	</head>
-	<body>
-		<div class="navbar position-fixed">
-			<div class="navbar-brand">
-				<img src="{% static 'media/firma-horizontal-dos-lineas.svg' %}" style="height: 10vh;">
-			</div>
+	<!-- PyScript -->
+	<link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css">
+	<script defer src="https://pyscript.net/latest/pyscript.js"></script>
+</head>
+
+<body>
+	<div class="navbar position-fixed">
+		<div class="navbar-brand">
+			<img src="{% static 'media/firma-horizontal-dos-lineas.svg' %}" style="height: 10vh;">
 		</div>
-        <div class="reveal">
-			<div class="slides">
-				{% block content %}
-                    <!-- Aquí el contenido de cada presentación -->
-                {% endblock %}
-			</div>
+	</div>
+	<div class="reveal">
+		<div class="slides">
+			{% block content %}
+				<!-- Aquí el contenido de cada presentación -->
+			{% endblock %}
 		</div>
+	</div>
 
-		<script src="{% static 'reveal/dist/reveal.js' %}"></script>
-		<script src="{% static 'reveal/plugin/notes/notes.js' %}"></script>
-		<script src="{% static 'reveal/plugin/markdown/markdown.js' %}"></script>
-        <script src="{% static 'reveal/plugin/highlight/highlight.js' %}"></script>
-        <script src="{% static 'reveal/plugin/math/math.js' %}"></script>
-		<script src="{% static 'reveal/plugin/menu/menu.js' %}"></script>
-		<script>
-			// More info about initialization & config:
-			// - https://revealjs.com/initialization/
-			// - https://revealjs.com/config/
-			Reveal.initialize({
-				hash: true,
-                math: {
-                    mathjax: 'https://cdn.jsdelivr.net/gh/mathjax/mathjax@2.7.8/MathJax.js',
-                    config: 'TeX-AMS_HTML-full',
-                },
-				// Learn about plugins: https://revealjs.com/plugins/
-				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes, RevealMath, RevealMenu ]
-			});
-		</script>
-	</body>
+	<script src="{% static 'reveal/dist/reveal.js' %}"></script>
+	<script src="{% static 'reveal/plugin/notes/notes.js' %}"></script>
+	<script src="{% static 'reveal/plugin/markdown/markdown.js' %}"></script>
+	<script src="{% static 'reveal/plugin/highlight/highlight.js' %}"></script>
+	<script src="{% static 'reveal/plugin/math/math.js' %}"></script>
+	<script src="{% static 'reveal/plugin/menu/menu.js' %}"></script>
+	<script>
+		// More info about initialization & config:
+		// - https://revealjs.com/initialization/
+		// - https://revealjs.com/config/
+		Reveal.initialize({
+			hash: true,
+			math: {
+				mathjax: 'https://cdn.jsdelivr.net/gh/mathjax/mathjax@2.7.8/MathJax.js',
+				config: 'TeX-AMS_HTML-full',
+			},
+			// Learn about plugins: https://revealjs.com/plugins/
+			plugins: [ RevealMarkdown, RevealHighlight, RevealNotes, RevealMath, RevealMenu ]
+		});
+	</script>
+
+	<!-- Bootstrap JS -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+    crossorigin="anonymous"></script>
+
+</body>
+
 </html>
