@@ -1,73 +1,125 @@
-// ----------------------------
-// Choices inputs
-// ----------------------------
-
-var choiceInputCount = 0;
-
-var forloopCounter = 0;
-var checkboxes = [];
+let choiceInputCount = 0;
+let checkboxes = [];
 
 function addChoiceInput() {
-    forloopCounter++;
+  choiceInputCount++;
 
-    var container = document.getElementById('choices-container');
+  let container = document.getElementById("choices-container");
 
-    var formGroup = document.createElement('div');
-    formGroup.classList.add('form-group');
+  let formGroup = document.createElement("div");
+  formGroup.classList.add("form-group");
 
-    var label = document.createElement('label');
-    label.setAttribute('for', 'choice_' + forloopCounter);
-    label.textContent = 'Opción ' + forloopCounter + ':';
+  let inputDeleteContainer = document.createElement("div");
+  inputDeleteContainer.style.display = "flex";
+  inputDeleteContainer.style.alignItems = "center";
 
-    var inputText = document.createElement('input');
-    inputText.setAttribute('type', 'text');
-    inputText.setAttribute('id', 'choice_' + forloopCounter);
-    inputText.setAttribute('name', 'choices__' + forloopCounter);
-    inputText.classList.add('form-control');
+  let label = document.createElement("label");
+  label.setAttribute("for", "choice_" + choiceInputCount);
+  label.textContent = "Opción " + choiceInputCount + ":";
+  label.classList.add("label-opcion");
 
-    var inputCheckbox = document.createElement('input');
-    inputCheckbox.setAttribute('type', 'checkbox');
-    inputCheckbox.setAttribute('id', 'is_correct_' + forloopCounter);
-    inputCheckbox.setAttribute('name', 'is_correct_' + forloopCounter);
-    inputCheckbox.classList.add('form-check-input', 'my-2');
+  let inputText = document.createElement("input");
+  inputText.setAttribute("type", "text");
+  inputText.setAttribute("id", "choice_" + choiceInputCount);
+  inputText.setAttribute("name", "choices__" + choiceInputCount);
+  inputText.classList.add("form-control");
+  inputText.style.marginRight = "10px";
 
-    // Agrega la casilla de verificación al array
-    checkboxes.push(inputCheckbox);
+  let inputCheckbox = document.createElement("input");
+  inputCheckbox.setAttribute("type", "checkbox");
+  inputCheckbox.setAttribute("id", "is_correct_" + choiceInputCount);
+  inputCheckbox.setAttribute("name", "is_correct_" + choiceInputCount);
+  inputCheckbox.classList.add("form-check-input", "my-2");
 
-    inputCheckbox.addEventListener('change', function () {
-        uncheckOtherCheckboxes(inputCheckbox);
-    });
+  checkboxes.push(inputCheckbox);
 
-    var labelCheckbox = document.createElement('label');
-    labelCheckbox.setAttribute('for', 'is_correct_' + forloopCounter);
-    labelCheckbox.classList.add('form-check-label', 'text-secondary', 'mx-1', 'my-1');
-    labelCheckbox.textContent = 'Correcta';
+  inputCheckbox.addEventListener("change", function () {
+    uncheckOtherCheckboxes(inputCheckbox);
+  });
 
-    formGroup.appendChild(label);
-    formGroup.appendChild(inputText);
-    formGroup.appendChild(inputCheckbox);
-    formGroup.appendChild(labelCheckbox);
+  let labelCheckbox = document.createElement("label");
+  labelCheckbox.setAttribute("for", "is_correct_" + choiceInputCount);
+  labelCheckbox.classList.add(
+    "form-check-label",
+    "text-secondary",
+    "mx-1",
+    "my-1"
+  );
+  labelCheckbox.textContent = "Correcta";
 
-    container.appendChild(formGroup);
+  let deleteButton = document.createElement("button");
+  deleteButton.classList.add("btn", "p-0");
+  deleteButton.addEventListener("click", function () {
+    container.removeChild(formGroup);
+    choiceInputCount--;
+    updateLabels();
+  });
 
-    inputText.focus();
-}
+  let deleteIcon = document.createElement("img");
+  deleteIcon.setAttribute(
+    "src",
+    "../../static/front/svg/icons/delete-choice.svg"
+  );
+  deleteIcon.setAttribute("alt", "Eliminar");
+  deleteIcon.style.width = "30px";
+  deleteIcon.style.height = "30px";
+  deleteIcon.style.margin = "0px";
 
+  deleteButton.appendChild(deleteIcon);
 
-function devareChoiceInput() {
-    if (choiceInputCount > 0) {
-        choiceInputCount--;
-        
-        var inputContainer = document.getElementById('choices');
+  formGroup.appendChild(label);
+  formGroup.appendChild(inputDeleteContainer);
+  inputDeleteContainer.appendChild(inputText);
+  inputDeleteContainer.appendChild(deleteButton);
+  formGroup.appendChild(inputCheckbox);
+  formGroup.appendChild(labelCheckbox);
 
-        inputContainer.removeChild(inputContainer.lastChild);
-    }
+  container.appendChild(formGroup);
+
+  inputText.focus();
 }
 
 function uncheckOtherCheckboxes(currentCheckbox) {
-    checkboxes.forEach(function (checkbox) {
-        if (checkbox !== currentCheckbox) {
-            checkbox.checked = false;
-        }
-    });
+  checkboxes.forEach(function (checkbox) {
+    if (checkbox !== currentCheckbox) {
+      checkbox.checked = false;
+    }
+  });
+}
+
+function updateLabels() {
+  let choiceLabels = document.querySelectorAll(".form-group .label-opcion");
+  choiceLabels.forEach(function (label, index) {
+    label.textContent = "Opción " + (index + 1) + ":";
+  });
+}
+
+function uncheckOtherCheckboxes(currentCheckbox) {
+  checkboxes.forEach(function (checkbox) {
+    if (checkbox !== currentCheckbox) {
+      checkbox.checked = false;
+    }
+  });
+}
+
+function updateLabels() {
+  let choiceLabels = document.querySelectorAll(".form-group .label-opcion");
+  let inputs = document.querySelectorAll(".form-group input[type='text']");
+  let checkboxes = document.querySelectorAll(
+    ".form-group input[type='checkbox']"
+  );
+
+  choiceLabels.forEach(function (label, index) {
+    label.textContent = "Opción " + (index + 1) + ":";
+  });
+
+  inputs.forEach(function (input, index) {
+    input.setAttribute("id", "choice_" + (index + 1));
+    input.setAttribute("name", "choices__" + (index + 1));
+  });
+
+  checkboxes.forEach(function (checkbox, index) {
+    checkbox.setAttribute("id", "is_correct_" + (index + 1));
+    checkbox.setAttribute("name", "is_correct_" + (index + 1));
+  });
 }
