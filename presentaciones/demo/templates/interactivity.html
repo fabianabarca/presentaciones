@@ -16,20 +16,92 @@
 </section>
 
 <section>
-  <section>
-    <h1>Ola ke ase</h1>
-  </section>
+  <script data-quiz>
+    const questionSets = JSON.parse('{{ question_sets_json | escapejs | safe }}');
+    console.log(questionSets);
+     quiz = {
+      info: {
+        "name":    "Quiz",
+        "main":    "Capitales",
+        "results": "Resultado del Quiz",
+        "level1":  "La clasificación más alta",
+        "level2":  "La clasificación casi más alta",
+        "level3":  "Clasificación intermedia",
+        "level4":  "La clasificación casi más baja",
+        "level5":  "La clasificación más baja"
+      },
+      questions: [],
+    };
 
-  <section>
-    <h2>¿Qué es PyScript?</h2>
-    <p>
-      PyScript es un lenguaje de programación que permite la ejecución de código
-      Python en el navegador web.
-    </p>
-  </section>
+    for (const questionSet in questionSets) {
+      questionSets[questionSet].forEach((questionData) => {
+        const question = {
+          q: questionData.title, 
+          a: [],
+          correct: "<p><span>¡Correcto!</span> La respuesta correcta.</p>",
+          incorrect: "<p><span>¡Oh no!</span> Esa no es la respuesta correcta.</p>",
+        };
+
+        questionData.choices.forEach((choice) => {
+          question.a.push({
+            option: choice.text,
+            correct: choice.is_correct,
+          });
+        });
+
+        quiz.questions.push(question);
+      });
+    }
+
+    console.log(quiz); // Muestra el objeto del cuestionario con preguntas y opciones
+  </script>
 </section>
 
 <section>
+  <h2>¿Qué es PyScript?</h2>
+  <p>
+    PyScript es un lenguaje de programación que permite la ejecución de código
+    Python en el navegador web.
+  </p>
+</section>
+</section>
+
+<section>
+  <script data-quiz>
+
+    quiz = {
+      "info": {
+              "name":    "¡Demuestra tu Cultura General!",
+              "main":    "¿Crees que tienes suficiente conocimiento para destacar en este desafío? Descúbrelo con este asombroso cuestionario de cultura general.",
+              "level1":  "Experto en Cultura",
+              "level2":  "Aspirante a Experto",
+              "level3":  "Aficionado Cultural",
+              "level4":  "Principiante Cultural",
+              "level5":  "Mejor sigue estudiando..." // sin coma aquí
+      },
+      "questions": [
+              { // Pregunta 1 - Opción Múltiple, Una Respuesta Verdadera
+                      "q": "¿En qué ciudad se encuentra la famosa Torre Eiffel?",
+                      "a": [
+                              {"option": "Londres",      "correct": false},
+                              {"option": "Barcelona",     "correct": false},
+                              {"option": "París",      "correct": true},
+                              {"option": "Roma",     "correct": false} // sin coma aquí
+                      ],
+                      "correct": "<p><span>¡Correcto!</span> La Torre Eiffel está en París.</p>",
+                      "incorrect": "<p><span>Uhh no.</span> La Torre Eiffel está en París. ¿Necesitas unas vacaciones?</p>" // sin coma aquí
+              },
+              // más preguntas aquí
+      ]
+}
+
+
+
+    console.log(quiz); // Muestra el objeto del cuestionario con preguntas y opciones
+  </script>
+</section>
+
+{% comment %} <section>
   <form method="post" action="{% url 'interactivity' %}">
     {% csrf_token %}
     <!-- Mostrar preguntas por conjunto -->
@@ -67,7 +139,7 @@
     id="message"
     data-correct-choices="{% for key, value in correct_choices.items %}{{ key }}:{{ value }},{% endfor %}"
   ></div>
-</section>
+</section> {% endcomment %}
 
 <script>
   function sendAnswer() {

@@ -1,3 +1,4 @@
+import json
 from django.shortcuts import redirect, render
 from decks.models import Question, Choice, Answer
 from django.http import JsonResponse
@@ -48,23 +49,37 @@ def interactivity(request):
 
 
     else:
-        question_sets = {}
+        # Fetch questions and choices
         questions = Question.objects.all()
-
+    
+        # Convert questions and their choices to dictionaries
+        question_sets = {}
         for question in questions:
             if question.question_set not in question_sets:
                 question_sets[question.question_set] = []
 
             choices = Choice.objects.filter(question_id=question)
-            question_sets[question.question_set].append({'question': question, 'choices': choices})
+            choices_data = [{'choice_id': choice.choice_id, 'text': choice.text, 'is_correct': choice.is_correct} for choice in choices]
+            question_data = {
+                'question_id': question.question_id,
+                'title': question.title,
+                'description': question.description,
+                'choices': choices_data
+            }
+            question_sets[question.question_set].append(question_data)
 
-        return render(request, "interactivity.html", {'question_sets': question_sets})
+        # Serialize the dictionary to JSON
+        question_sets_json = json.dumps(question_sets)
+
+        # Other parts of your view...
+
+        return render(request, "interactivity.html", {'question_sets_json': question_sets_json})
 
 
 def create_question(request):
     if request.method == 'POST':
         question_form = QuestionForm(request.POST, request.FILES)
-
+        print(request.POST)
         if question_form.is_valid():
             # Guarda la pregunta
             question = question_form.save()
