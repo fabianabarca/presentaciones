@@ -8,4 +8,9 @@
 
 <h1>Perfil</h1>
 
+Nombre: {{ student.user.first_name }} {{ student.user.last_name }}<br>
+Email: {{ student.user.email }}<br>
+Carrera(s): {{ student.careers.all|join:", " }}<br>
+Cursos(s): {{ student.courses.all|join:", " }}<br>
+
 {% endblock %}

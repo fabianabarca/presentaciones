@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from .models import Student
 
 
 # Create your views here.
@@ -10,4 +11,8 @@ def students(request):
 
 # Perfil de cada usuario
 def profile(request):
-    return render(request, "profile.html")
+    student = Student.objects.get(user=request.user)
+    context = {
+        "student": student
+    }
+    return render(request, "profile.html", context)
