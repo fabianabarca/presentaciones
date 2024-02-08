@@ -1,2 +1,8 @@
 django
 python-decouple
+django-serve-shiny
+shiny
+shinylive
+matplotlib
+numpy
+pandas
