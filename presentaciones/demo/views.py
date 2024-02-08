@@ -10,6 +10,10 @@ def demo(request):
     return render(request, "demo.html")
 
 
+def project(request):
+    return render(request, "project.html")
+
+
 def programming(request):
     return render(request, "programming.html")
 

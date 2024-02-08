@@ -8,6 +8,11 @@
 
 <h1>Página de estudiantes</h1>
 
-{% include "lipsum.html" %}
+
+<ul>
+    {% for student in students %}
+    <li>{{ student.user.first_name }} {{ student.user.last_name }}</li>
+    {% endfor %}
+</ul>
 
 {% endblock %}

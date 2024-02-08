@@ -8,7 +8,7 @@ from django.db import models
 class Course(models.Model):
     id = models.CharField(primary_key=True, max_length=31)
     name = models.CharField(max_length=255)
-    career = models.CharField(max_length=255)
+    career = models.ForeignKey("Career", on_delete=models.CASCADE)
     description = models.TextField()
     slug = models.SlugField(unique=True)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -22,6 +22,6 @@ class Career(models.Model):
     name = models.CharField(max_length=255)
     description = models.TextField()
     slug = models.SlugField(unique=True)
-    
+
     def __str__(self):
         return self.name
