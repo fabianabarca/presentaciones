@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from .models import Snippet
 
 # Create your views here.
 
@@ -8,7 +9,11 @@ def demo(request):
 
 
 def programming(request):
+    snippet1234 = Snippet.objects.get(id="1234")
+    snippet5678 = Snippet.objects.get(id="5678")
     context = {
+        "snippet1234": snippet1234,
+        "snippet5678": snippet5678,
         "repl1": """
         a = 5
         b = 6

@@ -6,7 +6,7 @@
     <div class="d-flex justify-content-between">
         <div class="card" style="height: 50vh; width: 47.5vh;">
             <div class="card-header d-flex justify-content-start">
-                <i class="fa-solid fa-terminal" style="color: #93a1a1; size: 50%;"></i>
+                <i class="fa-solid fa-terminal" style="color: #93a1a1; size: 50%;"></i> <span class="text-secondary ms-2">{{ title }}</span>
             </div>
             <div class="card-body overflow-auto">
                 <py-repl output="{{ output_id }}">{{ code }}</py-repl>
@@ -14,7 +14,7 @@
         </div>
         <div class="card" style="height: 50vh; width: 47.5vh;">
             <div class="card-header d-flex justify-content-start">
-                <i class="fa-regular fa-file" style="color: #93a1a1; size: 50%;"></i>
+                <i class="fa-regular fa-file" style="color: #93a1a1; size: 50%;"></i> <span class="text-secondary ms-2">Resultados</span>
             </div>
             <div class="card-body overflow-auto">
                 <div id="{{ output_id }}"></div>
