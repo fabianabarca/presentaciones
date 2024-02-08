@@ -4,6 +4,9 @@
 # Stuff
 .vscode
 
+# Node stuff
+static/reveal/node_modules/
+
 ### Django ###
 migrations/
 *.log
