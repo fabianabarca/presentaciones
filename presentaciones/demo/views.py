@@ -25,6 +25,12 @@ def equations(request):
 def example(request):
     return render(request, "example.html")
 
+def master(request):
+    return render(request, "maestra.html")
+
+def client(request):
+    return render(request, "cliente.html")
+
 
 def interactivity(request):
     if request.method == 'POST':

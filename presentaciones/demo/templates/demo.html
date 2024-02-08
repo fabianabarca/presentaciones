@@ -17,10 +17,12 @@
     <li><a href="{% url 'visualizations' %}" target="_blank">Visualizaciones estáticas y animadas de datos</a></li>
     <li><a href="{% url 'programming' %}" target="_blank">Programación</a></li>
     <li><a href="{% url 'interactivity' %}" target="_blank">Interactividad</a></li>
-    <li><a href="{% url 'example' %}" target="_blank">Ejemplo de adsaswdprobabilidad</a></li>
+    <li><a href="{% url 'example' %}" target="_blank">Ejemplo de probabilidad</a></li>
+    <li><a href="{% url 'master' %}" target="_blank">Presentacion maestra</a></li>
+    <li><a href="{% url 'client' %}" target="_blank">Presentacion cliente</a></li>
 </ul>
 
-<form action="{% url 'create_question' %}" method="get">
+<form class="mt-5" action="{% url 'create_question' %}" method="get">
     <button type="submit" class="btn btn-dark">Agregar preguntas</button>
 </form>
 
