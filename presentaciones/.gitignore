@@ -3,6 +3,7 @@
 
 # Stuff
 .vscode
+/question_data
 
 ### Django ###
 migrations/

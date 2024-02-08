@@ -8,6 +8,12 @@ Pregunta {% endblock %} {% block main %} {% load crispy_forms_tags %}
     action="{% url 'create_question' %}"
     enctype="multipart/form-data"
   >
+    <h5 class="mt-3">Tipo de pregunta:</h5>
+    <select id="selection-type" class="form-select mt-2 mb-3">
+      <option value="single">Selección única</option>
+      <option value="multiple">Selección múltiple</option>
+    </select>
+
     {% csrf_token %} {{ question_form|crispy }}
 
     <h5 class="">Opciones:</h5>
@@ -15,7 +21,7 @@ Pregunta {% endblock %} {% block main %} {% load crispy_forms_tags %}
 
     <button
       type="button"
-      onclick="addChoiceInput()"
+      onclick="addChoiceInput(false)"
       class="btn btn-outline-primary my-1"
     >
       Agregar Opción

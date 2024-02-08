@@ -6,13 +6,12 @@ from crispy_forms.layout import Layout, Field, Div, HTML, Submit
 class QuestionForm(forms.ModelForm):
     class Meta:
         model = Question
-        fields = ['title', 'description', 'image', 'data', 'form_type', 'question_set', 'topic']
+        fields = ['title', 'description', 'image', 'data', 'question_set', 'topic']
         labels = {
             'title': 'Título',
             'description': 'Descripción',
             'image': 'Imagen',
             'data': 'Datos',
-            'form_type': 'Tipo de formulario',
             'question_set': 'Conjunto de preguntas',
             'topic': 'Tema',
         }
@@ -29,7 +28,6 @@ class QuestionForm(forms.ModelForm):
             'description': forms.Textarea(attrs={'class': 'mb-3', 'rows': 4}),
             'image': forms.ClearableFileInput(attrs={'class': 'mb-3'}),
             'data': forms.ClearableFileInput(attrs={'class': 'mb-3', 'accept': '.pdf, .doc, .docx, .txt, .jpg, .png'}),
-            'form_type': forms.TextInput(attrs={'class': 'mb-3'}),
             'question_set': forms.TextInput(attrs={'class': 'mb-3'}),
             'topic': forms.Select(attrs={'class': 'mb-3'}),
         }
@@ -41,3 +39,5 @@ class QuestionForm(forms.ModelForm):
         self.fields['description'].widget.attrs['rows'] = 5
         for field_name, placeholder_text in self.Meta.placeholders.items():
             self.fields[field_name].widget.attrs['placeholder'] = placeholder_text
+
+

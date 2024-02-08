@@ -4,6 +4,10 @@ let checkboxes = [];
 function addChoiceInput() {
   choiceInputCount++;
 
+  let selectionType = document.getElementById("selection-type").value;
+
+  console.log(selectionType);
+
   let container = document.getElementById("choices-container");
 
   let formGroup = document.createElement("div");
@@ -34,7 +38,9 @@ function addChoiceInput() {
   checkboxes.push(inputCheckbox);
 
   inputCheckbox.addEventListener("change", function () {
-    uncheckOtherCheckboxes(inputCheckbox);
+    if (selectionType === "single") {
+      uncheckOtherCheckboxes(inputCheckbox);
+    }
   });
 
   let labelCheckbox = document.createElement("label");
