@@ -2,19 +2,25 @@
 
 {% block content %}
 
-<div class="container">
-    <div class="d-flex justify-content-between">
-        <div class="card" style="height: 50vh; width: 47.5vh;">
+<div class="w-auto container">
+    <div class="d-flex flex-wrap flex-md-nowrap align-content-around justify-content-between">
+        <div class="w-100 card m-2" style="height: 40vh;">
             <div class="card-header d-flex justify-content-start">
-                <i class="fa-solid fa-terminal" style="color: #93a1a1; size: 50%;"></i> <span class="text-secondary ms-2">{{ title }}</span>
+                <div class="card-header-pills">
+                    <i class="fa-solid fa-terminal"></i>
+                </div>
+                <div class="card-title my-0 ms-3">{{ title }}</div>
             </div>
             <div class="card-body overflow-auto">
                 <py-repl output="{{ output_id }}">{{ code }}</py-repl>
             </div>
         </div>
-        <div class="card" style="height: 50vh; width: 47.5vh;">
+        <div class="w-100 card m-2" style="height: 40vh;">
             <div class="card-header d-flex justify-content-start">
-                <i class="fa-regular fa-file" style="color: #93a1a1; size: 50%;"></i> <span class="text-secondary ms-2">Resultados</span>
+                <div class="card-header-pills">
+                    <i class="fa-regular fa-file"></i>
+                </div>
+                <div class="card-title my-0 ms-3">Resultados</div>
             </div>
             <div class="card-body overflow-auto">
                 <div id="{{ output_id }}"></div>
