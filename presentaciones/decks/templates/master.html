@@ -1,0 +1,135 @@
+{% load static %}
+
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>Prueba de reveal.js</title>
+
+		<link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+		<link rel="stylesheet" type="text/css" href="{% static 'reveal/dist/reset.css' %}">
+		<link rel="stylesheet" type="text/css" href="{% static 'reveal/dist/reveal.css' %}">
+		<link rel="stylesheet" type="text/css" href="{% static 'reveal/dist/theme/diapo.css' %}" id="theme">
+		<link rel="stylesheet" href="{% static 'reveal/plugin/highlight/monokai.css' %}" id="highlight-theme">
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+		<script src="https://kit.fontawesome.com/1ae7c4e024.js" crossorigin="anonymous"></script>
+
+		<!-- TikZJax -->
+		<link rel="stylesheet" type="text/css" href="https://tikzjax.com/v1/fonts.css">
+		<script src="https://tikzjax.com/v1/tikzjax.js"></script>
+
+	</head>
+	<body>
+        
+        <div class="reveal">
+			<div class="slides">
+
+<!-- SECCIÓN 0 -->
+<!-- Portada y descripción -->
+<section>
+    <h1>
+        <code>&lt;diapo&gt;</code>
+    </h1>
+</section>
+<section>
+    <p>Esta es una presentación de</p>
+    <p>
+        <span class="material-symbols-outlined">search</span>
+    </p>
+
+</section>
+
+<!-- SECCIÓN 1 -->
+<!-- Capacidades del sistema -->
+<section>
+    <section>
+        <h1>Características del sistema</h1>
+    </section>
+
+    <!-- 1. Navegador web -->
+    <section>
+        <h3><span class="badge bg-secondary">1</span> <br> Presentación en un navegador web</h3>
+        <p>
+            El sistema está diseñado para ser usado en un navegador web.
+        </p>
+        <div class="container text-center">
+            <div class="row">
+                <div class="col">
+                    <i class="bi bi-arrows-fullscreen"></i> <br>
+                    Visualización adaptada a diferentes tamaños de pantalla.
+                </div>
+                <div class="col">
+                    <i class="bi bi-cloud-arrow-down"></i> <br>
+                    Mejor calidad de imagen y mejor uso de datos que con <em>streaming</em>.
+                </div>
+                <div class="col">
+                    <i class="bi bi-ui-checks-grid"></i> <br>
+                    Navegador habilita posibilidad de interacción con participantes.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. Contenido multimedia -->
+    <section>
+        <h3><span class="badge bg-secondary">2</span> <br> Contenido multimedia</h3>
+        <p>
+            El sistema permite incluir contenido multimedia en las diapositivas.
+        </p>
+    </section>
+
+    <!-- 3. Contenido web -->
+    <section>
+        <h3><span class="badge bg-secondary">3</span> <br> Contenido web</h3>
+        <p>
+            El sistema permite incluir contenido web en las diapositivas.
+        </p>
+    </section>
+
+</section>
+
+</div>
+</div>
+
+<script src="{% static 'reveal/dist/reveal.js' %}"></script>
+<script src="{% static 'reveal/plugin/notes/notes.js' %}"></script>
+<script src="{% static 'reveal/plugin/markdown/markdown.js' %}"></script>
+<script src="{% static 'reveal/plugin/highlight/highlight.js' %}"></script>
+<script src="{% static 'reveal/plugin/math/math.js' %}"></script>
+<script>
+    // More info about initialization & config:
+    // - https://revealjs.com/initialization/
+    // - https://revealjs.com/config/
+    Reveal.initialize({
+        hash: true,
+        math: {
+            mathjax: 'https://cdn.jsdelivr.net/gh/mathjax/mathjax@2.7.8/MathJax.js',
+            config: 'TeX-AMS_HTML-full',
+        },
+        // Learn about plugins: https://revealjs.com/plugins/
+        plugins: [ RevealMarkdown, RevealHighlight, RevealNotes, RevealMath ]
+    });
+</script>
+<script>
+    const wsUrl = 'ws://127.0.0.1:8000/ws/decks/abc/'
+    const deckSocket = new WebSocket(wsUrl);
+
+    // Registrar la conexión abierta
+    deckSocket.onopen = function (event) {
+        console.log('presentaciones: Conexión abierta exitosamente: ' + wsUrl);
+    };
+
+    Reveal.on( 'slidechanged', event => {
+        deckSocket.send(JSON.stringify({
+            'slide': event.indexh,
+            'fragment': event.indexv
+        }));
+        console.log('presentaciones: Enviando actualización de diapositiva.' + event.indexh + ' ' + event.indexv);
+        // event.previousSlide, event.currentSlide, event.indexh, event.indexv
+    } );
+</script>
+</body>
+</html>

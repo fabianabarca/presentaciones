@@ -2,12 +2,35 @@ from django.shortcuts import get_object_or_404, render
 
 # Create your views here.
 
-def decks(request):
-    return render(request, 'decks.html')
 
-def deck(request, slug):
-    presentacion = 'clases/' + str(slug) + '.html'
+def decks(request):
+    return render(request, "decks.html")
+
+
+def deck(request, deck_id):
+    presentacion = "clases/" + str(deck_id) + ".html"
     context = {
-        'presentacion': presentacion,
+        "presentacion": presentacion,
     }
-    return render(request, 'deck.html', context)
+    return render(request, "deck.html", context)
+
+
+def websocket(request, deck_id):
+    context = {
+        "deck_id": deck_id,
+    }
+    return render(request, "websocket.html", context)
+
+
+def master(request):
+    context = {
+        "deck_id": "master",
+    }
+    return render(request, "master.html", context)
+
+
+def client(request):
+    context = {
+        "deck_id": "client",
+    }
+    return render(request, "client.html", context)

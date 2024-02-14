@@ -1,2 +1,6 @@
 django
+channels
+daphne
+redis
+channels-redis
 python-decouple
