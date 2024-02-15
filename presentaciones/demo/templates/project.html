@@ -22,12 +22,12 @@
 <section>
     <h2>Contenido</h2>
     <dl>
-        <dt>Características del sistema</dt>
-        <dd>Necesidades identificadas para el tipo de curso y en comparación con otros sistemas de presentaciones similares</dd>
+        <dt>Capacidades del sistema</dt>
+        <dd>Características deseadas para la plataforma, según comparación con otros sistemas similares de presentaciones</dd>
         <dt>Contenido web especializado</dt>
-        <dd>Categorías diferenciadas de contenido web que son útiles para la enseñanza de teoría matemática</dd>
+        <dd>Categorías diferenciadas de contenido web que son útiles para la enseñanza de teoría matemática y análisis de datos</dd>
         <dt>Actividades pedagógicas</dt>
-        <dd>Con las capacidades del sistema y los contenidos web descritos, es posible realizar diferentes tipos de actividades pedagógicas</dd>
+        <dd>Tipos de actividades pedagógicas propuestas con las capacidades del sistema y los contenidos web especializados</dd>
     </dl>
 </section>
 
@@ -35,7 +35,10 @@
 <!-- Capacidades del sistema -->
 <section>
     <section>
-        <h1>Características del sistema</h1>
+        <h1>Capacidades del sistema</h1>
+        <blockquote>
+            Características deseadas para la plataforma, según comparación con otros sistemas similares de presentaciones
+        </blockquote>
     </section>
 
     <!-- 1. Navegador web -->
@@ -60,6 +63,7 @@
                 </div>
             </div>
         </div>
+        <p class="small">¿Romper la cuarta pared?</p>
     </section>
 
     <!-- 2. Contenido multimedia -->
@@ -77,14 +81,23 @@
             </div>
             <div class="col">
                 Audio
+                <audio controls>
+                    <source src="{% static 'audio/perro.mp3' %}" type="audio/mpeg">
+                    Audio no soportado.
+                </audio>
             </div>
             <div class="col">
                 Video
+                <video controls>
+                    <source src="{% static 'video/nyan_cat.mp4' %}" type="video/mp4">
+                    Video no soportado.
+                </video>
             </div>
             <div class="col">
                 Animaciones
             </div>
         </div>
+        <p class="small">Común en cualquier plataforma de presentaciones. La diferencia: interacción directa con los contenidos.</p>
     </section>
 
     <!-- 3. Contenido web -->
@@ -232,10 +245,9 @@
 <section>
     <section>
         <h1>Contenido web especializado</h1>
-        <p>
-            Hay categorías diferenciadas de contenido web que son útiles para la enseñanza de teoría
-            matemática.
-        </p>
+        <blockquote>
+            Categorías diferenciadas de contenido web que son útiles para la enseñanza de teoría matemática y análisis de datos
+        </blockquote>
     </section>
 
     <!-- I. Ecuaciones y otras herramientas matemáticas -->
@@ -276,10 +288,9 @@
 <section>
     <section>
         <h1>Actividades pedagógicas</h1>
-        <p>
-            Con las capacidades del sistema y los contenidos web descritos, es posible realizar diferentes
-            tipos de actividades pedagógicas.
-        </p>
+        <blockquote>
+            Tipos de actividades pedagógicas propuestas con las capacidades del sistema y los contenidos web especializados
+        </blockquote>
     </section>
 
     <!-- A. Visualizaciones de la teoría -->
