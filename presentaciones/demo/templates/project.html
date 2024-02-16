@@ -23,11 +23,14 @@
     <h2>Contenido</h2>
     <dl>
         <dt>Capacidades del sistema</dt>
-        <dd>Características deseadas para la plataforma, según comparación con otros sistemas similares de presentaciones</dd>
+        <dd>Características deseadas para la plataforma, según comparación con otros sistemas similares de
+            presentaciones</dd>
         <dt>Contenido web especializado</dt>
-        <dd>Categorías diferenciadas de contenido web que son útiles para la enseñanza de teoría matemática y análisis de datos</dd>
+        <dd>Categorías diferenciadas de contenido web que son útiles para la enseñanza de teoría matemática y análisis
+            de datos</dd>
         <dt>Actividades pedagógicas</dt>
-        <dd>Tipos de actividades pedagógicas propuestas con las capacidades del sistema y los contenidos web especializados</dd>
+        <dd>Tipos de actividades pedagógicas propuestas con las capacidades del sistema y los contenidos web
+            especializados</dd>
     </dl>
 </section>
 
@@ -37,7 +40,8 @@
     <section>
         <h1>Capacidades del sistema</h1>
         <blockquote>
-            Características deseadas para la plataforma, según comparación con otros sistemas similares de presentaciones
+            Características deseadas para la plataforma, según comparación con otros sistemas similares de
+            presentaciones
         </blockquote>
     </section>
 
@@ -97,7 +101,8 @@
                 Animaciones
             </div>
         </div>
-        <p class="small">Común en cualquier plataforma de presentaciones. La diferencia: interacción directa con los contenidos.</p>
+        <p class="small">Común en cualquier plataforma de presentaciones. La diferencia: interacción directa con los
+            contenidos.</p>
     </section>
 
     <!-- 3. Contenido web -->
@@ -150,21 +155,7 @@
             </div>
             <div class="col">
                 <h4>Gráficos</h4>
-                <div class="mx-auto">
-                    <script type="text/tikz">
-                        \begin{tikzpicture}
-                            \def \n {5}
-                            \def \radius {3cm}
-                            \def \margin {8} % margin in angles, depends on the radius
-                            \foreach \s in {1,...,\n}
-                            {
-                                \node[draw, circle] at ({360/\n * (\s - 1)}:\radius) {$\s$};
-                                \draw[->, >=latex] ({360/\n * (\s - 1)+\margin}:\radius) 
-                                    arc ({360/\n * (\s - 1)+\margin}:{360/\n * (\s)-\margin}:\radius);
-                            }
-                        \end{tikzpicture}
-                    </script>
-                </div>
+                <canvas id="sinusoidal"></canvas>
             </div>
         </div>
     </section>
@@ -173,7 +164,7 @@
     <section>
         <h3><span class="badge bg-secondary">6</span> <br> Visualización de datos</h3>
         <p>
-            El sistema permite incluir visualizaciones de datos en las diapositivas.
+            El sistema permite incluir visualizaciones de datos en las diapositivas, incluyendo datos en tiempo real.
         </p>
         <img src="img/oscillator.gif" width="50%">
     </section>
@@ -237,6 +228,7 @@
         <p>
             El sistema es software libre.
         </p>
+        <p>Disponible en </p>
     </section>
 </section>
 
@@ -246,7 +238,8 @@
     <section>
         <h1>Contenido web especializado</h1>
         <blockquote>
-            Categorías diferenciadas de contenido web que son útiles para la enseñanza de teoría matemática y análisis de datos
+            Categorías diferenciadas de contenido web que son útiles para la enseñanza de teoría matemática y análisis
+            de datos
         </blockquote>
     </section>
 
@@ -256,6 +249,19 @@
         <p>
             El sistema permite incluir ecuaciones y otras herramientas matemáticas en las diapositivas.
         </p>
+        <script type="text/tikz">
+            \begin{tikzpicture}
+                \def \n {5}
+                \def \radius {3cm}
+                \def \margin {8} % margin in angles, depends on the radius
+                \foreach \s in {1,...,\n}
+                {
+                    \node[draw, circle] at ({360/\n * (\s - 1)}:\radius) {$\s$};
+                    \draw[->, >=latex] ({360/\n * (\s - 1)+\margin}:\radius) 
+                        arc ({360/\n * (\s - 1)+\margin}:{360/\n * (\s)-\margin}:\radius);
+                }
+            \end{tikzpicture}
+        </script>
     </section>
 
     <!-- II. Visualizaciones de datos -->
@@ -289,7 +295,8 @@
     <section>
         <h1>Actividades pedagógicas</h1>
         <blockquote>
-            Tipos de actividades pedagógicas propuestas con las capacidades del sistema y los contenidos web especializados
+            Tipos de actividades pedagógicas propuestas con las capacidades del sistema y los contenidos web
+            especializados
         </blockquote>
     </section>
 
@@ -352,5 +359,40 @@
         <code>&lt;/diapo&gt;</code>
     </h1>
 </section>
+
+<!-- Gráficos de ChartJS -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const xValues = [];
+    const yValues = [];
+    generateData("Math.sin(x)", 0, 10, 0.25);
+
+    new Chart("sinusoidal", {
+        type: "line",
+        data: {
+            labels: xValues,
+            datasets: [{
+                fill: false,
+                pointRadius: 1,
+                borderColor: "rgba(255,0,0,0.5)",
+                data: yValues
+            }]
+        },
+        options: {
+            plugins: {
+                legend: {
+                    display: false
+                }
+            }
+        }
+    });
+
+    function generateData(value, i1, i2, step = 1) {
+        for (let x = i1; x <= i2; x += step) {
+            yValues.push(eval(value));
+            xValues.push(x);
+        }
+    }
+</script>
 
 {% endblock %}
