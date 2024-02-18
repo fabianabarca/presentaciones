@@ -14,7 +14,7 @@ def home(request):
     return render(request, "home.html")
 
 
-def anuncios(request):
+def announcements(request):
     return render(request, "news.html")
 
 
@@ -22,7 +22,6 @@ def about(request):
     return render(request, "about.html")
 
 
-# Función para el registro de usuarios
 def signup(request):
     if request.method == "POST":
         # Se realiza un request con toda la información necesaria para crear perfil
@@ -55,16 +54,13 @@ def signup(request):
 
 def login(request):
     if request.method == "POST":
-        print(request.POST)
         username = request.POST["username"]
         password = request.POST["password"]
         user = auth.authenticate(username=username, password=password)
 
-        # Validación en caso de que exista el usuario
         if user is not None:
             auth.login(request, user)
             return redirect(home)
-        # Validación en caso de que no exista el usuario o credenciales incorrectas
         else:
             messages.info(request, "Usuario o contraseña incorrectas")
             return redirect(login)

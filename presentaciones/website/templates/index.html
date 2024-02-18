@@ -10,23 +10,4 @@
 
 <p>Este es el proyecto de taca taca para hacer presentaciones.</p>
 
-<h3>(Portada)</h3>
-
-{% if request.user.is_authenticated %}
-
-<form class="form-inline">
-  <a href="{% url 'logout' %}" type="button" class="btn btn-m btn-outline-danger">Cerrar sesión </a>
-</form>
-
-{% else %}
-
-<a href="{% url 'signup' %}" type="button" class="btn btn-m btn-outline-primary m-2">
-  Crear cuenta
-</a>
-<a href="{% url 'login' %}" type="button" class="btn btn-m btn-outline-success">
-  Iniciar sesión
-</a>
-
-{% endif %}
-
 {% endblock %}
