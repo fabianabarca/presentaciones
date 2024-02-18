@@ -8,7 +8,13 @@ def demo(request):
 
 
 def project(request):
-    return render(request, "project.html")
+    if request.user.is_staff:
+        role = "presenter"
+    else:
+        role = "viewer"
+    context = {"role": role}
+    return render(request, "project.html", context)
+
 
 
 def programming(request):

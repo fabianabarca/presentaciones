@@ -2,9 +2,8 @@
 
 {% load static %}
 
-{% block head %}
-
-{% endblock %}
+<!-- Configuraciones específicas del <head> -->
+{% block head %}{% endblock %}
 
 {% block content %}
 
@@ -180,7 +179,6 @@
         <p>
             El sistema permite incluir visualizaciones de datos en las diapositivas.
         </p>
-        <img src="img/oscillator.gif" width="50%">
     </section>
 
     <!-- 7. Contenido de programación -->
@@ -383,4 +381,40 @@
     </h1>
 </section>
 
+{% endblock %}
+
+{% block websocket %}
+{% if role == "presenter" %}
+<script>
+    const wsRouteTx = 'ws://' + window.location.host + '/ws/deck/slider/project/';
+    const deckSocket = new WebSocket(wsRouteTx);
+
+    // Registrar la conexión abierta
+    deckSocket.onopen = function (event) {
+        console.log('Conexión WebSocket abierta exitosamente como presentador en ' + wsRouteTx);
+    };
+
+    Reveal.on( 'slidechanged', event => {
+        deckSocket.send(JSON.stringify({
+            'indexh': event.indexh,
+            'indexv': event.indexv
+        }));
+    } );
+</script>
+{% else %}
+<script>
+    const wsRouteRx = 'ws://' + window.location.host + '/ws/deck/slider/project/';
+    const deckSocket = new WebSocket(wsRouteRx);
+
+    // Registrar la conexión abierta
+    deckSocket.onopen = function (event) {
+        console.log('Conexión WebSocket abierta exitosamente como cliente en ' + wsRouteRx);
+    };
+
+    deckSocket.onmessage = function (event) {
+        const data = JSON.parse(event.data);
+        Reveal.slide(data.message.indexh, data.message.indexv);
+    };
+</script>
+{% endif %}
 {% endblock %}
