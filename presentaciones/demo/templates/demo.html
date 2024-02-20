@@ -6,19 +6,84 @@
 
 {% block main %}
 
-<h1>Demostraciones y pruebas de funcionalidades</h1>
+<!-- Hero -->
+<div class="px-4 pt-3 pb-5 mb-5 text-center bg-body-tertiary">
+    <div class="card col-lg-8 mx-auto bg-transparent border-0">
+        <h1 class="display-3 my-5 fw-bold">Demostraciones</h1>
+        <p class="lead">Presentaciones con pruebas de las funcionalidades de la plataforma</p>
+    </div>
+</div>
 
-<p>
-    Los siguientes enlaces abren una nueva pestaña con una demostración de las funcionalidades del sitio web.
-</p>
+<!-- Contenido -->
+<div class="container-lg">
 
-<ul>
-    <li><a href="{% url 'project' %}" target="_blank">Sobre el proyecto</a></li>
-    <li><a href="{% url 'equations' %}" target="_blank">Ecuaciones y otras herramientas matemáticas</a></li>
-    <li><a href="{% url 'visualizations' %}" target="_blank">Visualizaciones estáticas y animadas de datos</a></li>
-    <li><a href="{% url 'programming' %}" target="_blank">Programación</a></li>
-    <li><a href="{% url 'interactivity' %}" target="_blank">Interactividad</a></li>
-    <li><a href="{% url 'example' %}" target="_blank">Ejemplo de probabilidad</a></li>
-</ul>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        <div class="col">
+            <a href="{% url 'project' %}" target="_blank" class="text-decoration-none link-dark">
+                <div class="card h-100">
+                    <div class="card-img-top text-center bg-body-tertiary py-4 display-5">
+                        <i class="bi bi-person-video3"></i>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Sobre el proyecto</h5>
+                        <p class="card-text">Información general sobre las capacidades del sistema de presentaciones, sus tipos de contenidos y sus actividades pedagógicas.</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col">
+            <a href="{% url 'equations' %}" target="_blank" class="text-decoration-none link-dark">
+                <div class="card h-100">
+                    <div class="card-img-top text-center bg-body-tertiary py-4 display-5">
+                        <i class="bi bi-calculator-fill"></i>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Matemáticas</h5>
+                        <p class="card-text">Ecuaciones, gráficos de funciones y otras visualizaciones en matemáticas, frecuentes en la enseñanza de cursos básicos de teoría.</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col">
+            <a href="{% url 'visualizations' %}" target="_blank" class="text-decoration-none link-dark">
+                <div class="card h-100">
+                    <div class="card-img-top text-center bg-body-tertiary py-4 display-5">
+                        <i class="bi bi-bar-chart-line-fill"></i>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Datos y visualizaciones</h5>
+                        <p class="card-text">Tablas de datos estáticos y en tiempo real e imágenes estáticas y dinámicas, útiles en la enseñanza del análisis de datos.</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col">
+            <a href="{% url 'programming' %}" target="_blank" class="text-decoration-none link-dark">
+                <div class="card h-100">
+                    <div class="card-img-top text-center bg-body-tertiary py-4 display-5">
+                        <i class="bi bi-file-earmark-code-fill"></i>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Programación</h5>
+                        <p class="card-text">Posibilidades de la plataforma para hacer ejercicios de programación, mostrar y ejecutar código y desplegar sus resultados.</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col">
+            <a href="{% url 'interactivity' %}" target="_blank" class="text-decoration-none link-dark">
+                <div class="card h-100">
+                    <div class="card-img-top text-center bg-body-tertiary py-4 display-5">
+                        <i class="bi bi-ui-checks-grid"></i>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Interactividad</h5>
+                        <p class="card-text">Posibilidades de la plataforma para hacer actividades interactivas entre estudiantes, docentes y el sistema.</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
 
+</div>
 {% endblock %}

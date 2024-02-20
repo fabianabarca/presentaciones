@@ -6,16 +6,25 @@
 
 {% block main %}
 
-<h1>Todos los cursos</h1>
+<!-- Hero -->
+<div class="px-4 pt-3 pb-5 mb-5 text-center bg-body-tertiary">
+    <div class="card col-lg-8 mx-auto bg-transparent border-0">
+        <h1 class="display-3 my-5 fw-bold">Cursos</h1>
+        <p class="lead">Aquí están los cursos disponibles en el sistema</p>
+    </div>
+</div>
 
-<h2>Aquí una lista de los cursos disponibles</h2>
+<!-- Contenido -->
+<div class="container-lg">
 
-<ul>
-    {% for course in courses %}
-    <li>{{ course.id }} - {{ course.name }} ({{ course.career }}): {{ course.description }}</li>
-    {% endfor %}
-</ul>
+    Hola 
 
-{% include "lipsum.html" %}
+    <ul>
+        {% for course in courses %}
+        <li>{{ course.id }} - {{ course.name }} ({{ course.career }}): {{ course.description }}</li>
+        {% endfor %}
+    </ul>
+
+</div>
 
 {% endblock %}

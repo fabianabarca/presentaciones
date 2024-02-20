@@ -6,6 +6,19 @@
 
 {% block main %}
 
-<h1>Página de inicio del usuario registrado y logueado</h1>
+<!-- Hero -->
+<div class="px-4 pt-3 pb-5 mb-5 text-center bg-body-tertiary">
+    <div class="card col-lg-8 mx-auto bg-transparent border-0">
+        <h1 class="display-3 my-5 fw-bold">¡Hola{% if request.user.first_name %} {{ request.user.first_name }}{% endif %}!</h1>
+        <p class="lead">Aquí están las presentaciones de su curso IE0405 - Modelos Probabilísticos de Señales y Sistemas</p>
+    </div>
+</div>
+
+<!-- Contenido -->
+<div class="container-lg">
+
+    Hola
+
+</div>
 
 {% endblock %}

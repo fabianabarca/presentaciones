@@ -6,8 +6,46 @@
 
 {% block main %}
 
-<h1>Inicio</h1>
+<!-- Hero -->
+<div class="px-4 pt-3 pb-5 mb-5 text-center bg-body-tertiary">
+    <div class="card col-lg-8 mx-auto bg-transparent border-0">
+        <h1 class="display-3 my-5 fw-bold">&lt;diapo&gt;</h1>
+        <p class="lead">Una plataforma web de presentaciones para la enseñanza de probabilidad y estadística en ingeniería</p>
+    </div>
+</div>
 
-<p>Este es el proyecto de taca taca para hacer presentaciones.</p>
+<!-- Contenido -->
+<div class="container-lg">
+
+    <div class="row">
+        <div class="col-md-8 mx-auto">
+            Este sitio es resultado del Proyecto de Docencia <strong>PD-IE-472-2022</strong> de la Escuela de Ingeniería Eléctrica, inscrito en la Vicerrectoría de Docencia de la Universidad de Costa Rica, denominado:
+
+            <blockquote class="lead my-3 fst-italic">
+                Estrategias docentes para sesiones virtuales interactivas con el desarrollo de un nuevo sistema web: una experiencia en el curso Modelos Probabilísticos de Señales y Sistemas
+            </blockquote>
+
+            <div class="card">
+                <div class="card-body">
+                    El proyecto desarrolla un sistema web de presentaciones para la enseñanza de probabilidad y estadística en ingeniería, con el objetivo de mejorar la experiencia de aprendizaje de los estudiantes del curso en la modalidad virtual, explotando la versatilidad del diseño web.
+                </div>
+            </div>
+            
+
+            <div class="row my-4">
+                <div class="col">
+                    <i class="bi bi-person-workspace lead"></i> <br>
+                    Para ingresar a presentaciones de ejemplo con las posibilidades del sistema, puede visitar la sección <a href="{% url 'demo' %}">Demostraciones</a>.
+                </div>
+                <div class="col">
+                    <i class="bi bi-info-square-fill lead"></i> <br>
+                    Para conocer más sobre sus objetivos, metodología y resultados, puede visitar la sección <a href="{% url 'about' %}">Sobre el proyecto</a>.
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
 
 {% endblock %}
