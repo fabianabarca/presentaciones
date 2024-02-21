@@ -77,11 +77,30 @@
     <section>
         <h3><span class="badge bg-secondary">2</span> <br> Contenido multimedia</h3>
         <p>
-            El sistema permite incluir contenido multimedia en las diapositivas. ¡Ejemplo: el texto!
+            El sistema permite incluir contenido multimedia en las diapositivas. <br> ¡Ejemplo: este texto o <a href="https://youtu.be/dQw4w9WgXcQ">este link</a>!
         </p>
         <div class="row row-cols-1 row-cols-md-2 g-4">
             <div class="col">
-                <h4>Imágenes</h4>
+                <h4>Animaciones</h4>
+                <p class="lead">Es posible animar <br><span id="animate"></span></p>
+                <script src="https://unpkg.com/typeit@8.7.1/dist/index.umd.js"></script>
+                <script>
+                    new TypeIt("#animate", {
+                        speed: 50,
+                        loop: true,
+                        startDelay: 900,
+                    })
+                        .type("textos (como este)", { delay: 1500 })
+                        .delete(18, { delay: 100 })
+                        .type("imágenes", { delay: 1500 })
+                        .delete(18, { delay: 100 })
+                        .type("ecuaciones (pendiente)", { delay: 1500 })
+                        .delete(22, { delay: 100 })
+                        .type("¡muchas cosas! La web evolucionó para esto", { delay: 1500 })
+                        .delete(58, { delay: 100 })
+                        .type("¿la clase?", { delay: 3000 })
+                        .go();
+                </script>
             </div>
             <div class="col">
                 <h4>Audio</h4>
@@ -91,17 +110,17 @@
                 </audio>
             </div>
             <div class="col">
+                <h4>Imágenes</h4>
+                <img src="{% static 'images/blob.gif' %}" height="200px">
+            </div>
+            <div class="col">
                 <h4>Video</h4>
-                <video controls>
+                <video controls height="200px">
                     <source src="{% static 'video/nyan_cat.mp4' %}" type="video/mp4">
                     Video no soportado.
                 </video>
             </div>
-            <div class="col">
-                <h4>Animaciones</h4>
-            </div>
         </div>
-        <p class="small">Común en cualquier plataforma de presentaciones. La diferencia: interacción directa con los contenidos.</p>
     </section>
 
     <!-- 3. Contenido web -->
@@ -114,15 +133,22 @@
         <div class="row">
             <div class="col">
                 <h4>Formularios</h4>
-                Ingrese su edad para conocer el número ganador de la lotería.
-                <div class="mb-3">
-                    <label for="age" class="form-label">Edad</label>
-                    <input type="number" class="form-control" id="age" name="age" required>
+                <label for="age" class="form-label small text-start">Ingrese su edad para conocer el número ganador de la lotería</label>
+                <input type="number" id="age" class="form-control" aria-describedby="age-help" placeholder="Edad">
+                <div id="age-help" class="form-text text-start">
+                    Nota: el resultado no especifica para cuál sorteo.
                 </div>
-                <button type="submit" class="btn btn-primary">Voy a tener suerte</button>
+                <button type="submit" class="btn btn-primary mt-3" onclick="getRandomNumber()">Voy a tener suerte</button>
+                <script>
+                    function getRandomNumber() {
+                        let age = document.getElementById('age').value;
+                        let luckyNumber = Math.floor(Math.random() * 100);
+                        alert(`Su número de la suerte es ${luckyNumber}.`);
+                    }
+                </script>
             </div>
             <div class="col">
-                <h4>Otra cosa aquí</h4>
+                <h4>Contenidos incrustados</h4>
             </div>
 
         </div>
@@ -143,16 +169,20 @@
             El sistema permite incluir contenido matemático en las diapositivas.
         </p>
         <div class="row">
+            <div class="col"><h4>Ecuaciones</h4></div>
+            <div class="col"><h4>Gráficos</h4></div>
+        </div>
+        <div class="row align-items-center">
             <div class="col">
-                <h4>Ecuaciones</h4>
+                
                 $$
                 f_X(x) = {\frac{1}{\sigma {\sqrt {2\pi }}}} e^{-{\frac{1}{2}} \left({\frac {x-\mu }{\sigma
                 }}\right)^{2}}
                 $$
             </div>
             <div class="col">
-                <h4>Gráficos</h4>
-
+                
+                <script src="{% static 'bokeh/simple_normal.js' %}" id="simple-normal"></script>
             </div>
         </div>
     </section>
@@ -241,7 +271,7 @@
     <section>
         <h3><span class="badge bg-secondary">12</span> <br> Software libre</h3>
         <p>
-            Todo el <em>stack</em> tecnológico tiene plataformas de software libre y el repositorio del proyecto es de acceso público.
+            Todo el <em>stack</em> tecnológico está hecho con plataformas de software libre y el repositorio del proyecto es de acceso público.
         </p>
         <div class="row row-cols-1 row-cols-md-3 g-4 small">
             <div class="col">
@@ -305,14 +335,7 @@
     </section>
     <section>
         <h3>Gráficos en Bokeh</h3>
-        <div class="row">
-            <div class="col">
-                Hola
-            </div>
-            <div class="col">
-                <span class="badge bg-secondary">Opcional</span>
-            </div>
-        </div>
+        <script src="{% static 'bokeh/simple_line.js' %}" id="b085a7a4-44c5-4bc4-bbb0-a2c5b3dc7f5c"></script>
     </section>
     <section>
         <h3>Gráficos en TikZ</h3>
