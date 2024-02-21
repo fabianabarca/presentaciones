@@ -3,6 +3,8 @@
         "matplotlib",
         "pandas",
         "numpy",
-        "scipy"
+        "scipy",
+        "bokeh==3.2.2",
+        "panel"
     ]
 }

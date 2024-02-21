@@ -4,7 +4,14 @@
 
 <!-- Configuraciones específicas del <head> -->
 {% block head %}{% endblock %}
+<!-- Panel (Python) -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@holoviz/panel@1.3.1/dist/css/widgets.css" type="text/css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@holoviz/panel@1.3.1/dist/css/markdown.css" type="text/css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@holoviz/panel@1.3.1/dist/bundled/bootstraptemplate/bootstrap.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@holoviz/panel@1.3.1/dist/bundled/theme/default.css" />
 
+<!-- Tabulator -->
+<script type="text/javascript" src="https://unpkg.com/tabulator-tables@5.5.0/dist/js/tabulator.min.js"></script>
 {% block content %}
 
 <!-- SECCIÓN 0 -->
@@ -160,6 +167,7 @@
         <p>
             La presentación vive en el navegador de cada participante, donde puede interactuar con algunos elementos.
         </p>
+        <p><span class="badge rounded-pill text-bg-warning">PENDIENTE</span></p>
     </section>
 
     <!-- 5. Contenido matemático -->
@@ -169,19 +177,23 @@
             El sistema permite incluir contenido matemático en las diapositivas.
         </p>
         <div class="row">
-            <div class="col"><h4>Ecuaciones</h4></div>
-            <div class="col"><h4>Gráficos</h4></div>
+            <div class="col">
+                <h4>Ecuaciones</h4>
+            </div>
+            <div class="col">
+                <h4>Gráficos</h4>
+            </div>
         </div>
         <div class="row align-items-center">
             <div class="col">
-                
+
                 $$
                 f_X(x) = {\frac{1}{\sigma {\sqrt {2\pi }}}} e^{-{\frac{1}{2}} \left({\frac {x-\mu }{\sigma
                 }}\right)^{2}}
                 $$
             </div>
             <div class="col">
-                
+
                 <script src="{% static 'bokeh/simple_normal.js' %}" id="simple-normal"></script>
             </div>
         </div>
@@ -193,6 +205,19 @@
         <p>
             El sistema permite incluir visualizaciones de datos en las diapositivas, como tablas o gráficas en tiempo real.
         </p>
+        <script defer src="https://cdn.jsdelivr.net/npm/@holoviz/panel@1.3.1/dist/panel.min.js"></script>
+        <div class="pyscript">
+            <div class="row overflow-hidden" id="content">
+                <div class="col mh-100 float-left" id="main">
+                    <div class="bk-root" id="controls"></div>
+                    <div class="row">
+                        <div class="bk-root" id="plot"></div>
+                    </div>
+                </div>
+            </div>
+
+            <script type="py" src="{% static 'pyscript/stream.py' %}" config="{% static 'pyscript.json' %}"></script>
+        </div>
     </section>
 
     <!-- 7. Contenido de programación -->
@@ -201,15 +226,43 @@
         <p>
             Es posible ver pero también editar y ejecutar (en el navegador) fragmentos de código de Python.
         </p>
-        <pre>
-            <code data-trim data-noescape data-line-numbers>
-                import numpy as np
-                from scipy import stats
-
-                # Generar números aleatorios
-                x = np.random.normal(size=1000)
-            </code>
-        </pre>
+        <div class="w-auto container">
+            <div class="d-flex flex-wrap flex-md-nowrap align-content-around justify-content-between">
+                <div class="w-100 card m-2" style="height: 40vh;">
+                    <div class="card-header d-flex justify-content-start">
+                        <div class="card-header-pills">
+                            <i class="bi bi-terminal-fill"></i>
+                        </div>
+                        <div class="card-title my-0 ms-3">Código</div>
+                    </div>
+                    <div class="card-body overflow-auto">
+                        <py-repl output="hola">
+                            <pre>
+                                <code data-trim data-noescape data-line-numbers>
+                                    import numpy as np
+                                    from scipy import stats
+                    
+                                    # Generar números aleatorios
+                                    x = np.random.normal(size=1000)
+                                </code>
+                            </pre>
+                        </py-repl>
+                    </div>
+                </div>
+                <div class="w-100 card m-2" style="height: 40vh;">
+                    <div class="card-header d-flex justify-content-start">
+                        <div class="card-header-pills">
+                            <i class="bi bi-chat-left-text-fill"></i>
+                        </div>
+                        <div class="card-title my-0 ms-3">Resultados</div>
+                    </div>
+                    <div class="card-body overflow-auto">
+                        <div id="hola"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <p><span class="badge rounded-pill text-bg-warning"><i class="bi bi-emoji-tear-fill"></i> PENDIENTE</span></p>
     </section>
 
     <!-- 8. Resultados de simulaciones -->
