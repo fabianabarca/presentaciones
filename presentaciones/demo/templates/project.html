@@ -156,6 +156,7 @@
             </div>
             <div class="col">
                 <h4>Contenidos incrustados</h4>
+                <iframe src="https://ourworldindata.org/explorers/global-food?facet=none&country=USA~DEU~FRA~GBR~BRA~ZAF%3BhideControls&Food=Maize+%28corn%29&Metric=Production&Per+Capita=false&hideControls=true" loading="lazy" style="width: 100%; height: 400px; border: 0px none;"></iframe>
             </div>
 
         </div>
@@ -165,9 +166,10 @@
     <section>
         <h3><span class="badge bg-secondary">4</span> <br> Contenido interactivo</h3>
         <p>
-            La presentación vive en el navegador de cada participante, donde puede interactuar con algunos elementos.
+            La presentación vive en el navegador de cada participante, donde puede interactuar con algunos elementos, y también entre participantes de la presentación.
         </p>
-        <p><span class="badge rounded-pill text-bg-warning">PENDIENTE</span></p>
+        <p><span class="badge rounded-pill text-bg-warning">Pendiente</span></p>
+        <p class="small">Ya tenemos la llave: WebSockets</p>
     </section>
 
     <!-- 5. Contenido matemático -->
@@ -206,8 +208,8 @@
             El sistema permite incluir visualizaciones de datos en las diapositivas, como tablas o gráficas en tiempo real.
         </p>
         <script defer src="https://cdn.jsdelivr.net/npm/@holoviz/panel@1.3.1/dist/panel.min.js"></script>
-        <div class="pyscript">
-            <div class="row overflow-hidden" id="content">
+        <div class="pyscript d-flex justify-content-center">
+            <div class="row" id="content">
                 <div class="col mh-100 float-left" id="main">
                     <div class="bk-root" id="controls"></div>
                     <div class="row">
@@ -262,7 +264,7 @@
                 </div>
             </div>
         </div>
-        <p><span class="badge rounded-pill text-bg-warning"><i class="bi bi-emoji-tear-fill"></i> PENDIENTE</span></p>
+        <p><span class="badge rounded-pill text-bg-warning"><i class="bi bi-emoji-tear-fill"></i> Pendiente</span></p>
     </section>
 
     <!-- 8. Resultados de simulaciones -->
@@ -271,6 +273,11 @@
         <p>
             El sistema permite incluir resultados de simulaciones en las diapositivas.
         </p>
+        <p>Esto es la combinación de capacidades descritas anteriormente:</p>
+        <ul>
+            <li>Despliegue de gráficos</li>
+            <li>Ejecución de Python en el navegador</li>
+        </ul>
     </section>
 
     <!-- 9. Sesiones remotas -->
@@ -318,6 +325,7 @@
         <p>
         <h1><i class="bi bi-code-slash"></i></h1>
         </p>
+        <p class="small">(No hay planes inmediatos de cambiar de paradigma)</p>
     </section>
 
     <!-- 12. Software libre -->
@@ -370,25 +378,36 @@
     <section>
         <h3><span class="badge bg-secondary">I</span> <br> Ecuaciones y otras herramientas matemáticas</h3>
         <p>
-            Es importante para un curso de teoría matemática básica poder mostrar <strong>de forma nativa</strong> ecuaciones y gráficos para ilustrar los conceptos.
+            Es importante para un curso de teoría matemática básica poder mostrar de forma nativa ecuaciones y gráficos para ilustrar los conceptos.
         </p>
     </section>
     <section>
         <h3>Ecuaciones en LaTeX</h3>
         <div class="row">
+            <div class="row">
+                <div class="col">
+                    <h4>Estáticas</h4>
+                </div>
+                <div class="col">
+                    <h4>Animadas</h4>
+                </div>
+            </div>
             <div class="col">
                 $$
                 x_{1,2} = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}
                 $$
             </div>
             <div class="col">
-                <span class="badge bg-secondary">Opcional</span>
+
+                <img src="{% static 'images/manim.gif' %}" alt="">
+                <p class="small"><a href="https://www.manim.community/" target="_blank">Manim</a> es un paquete de Python para generación de amimaciones con gráficos, geometrías y ecuaciones.</p>
+                <span class="small badge rounded-pill bg-secondary">Opcional</span> <span class="small badge rounded-pill text-bg-warning">Pendiente</span>
             </div>
         </div>
     </section>
     <section>
         <h3>Gráficos en Bokeh</h3>
-        <script src="{% static 'bokeh/simple_line.js' %}" id="b085a7a4-44c5-4bc4-bbb0-a2c5b3dc7f5c"></script>
+        <script src="{% static 'bokeh/simple_normal.js' %}" id="simple-normal"></script>
     </section>
     <section>
         <h3>Gráficos en TikZ</h3>
@@ -433,6 +452,7 @@
     </section>
     <section>
         <h3>Tablas interactivas incrustadas</h3>
+
     </section>
 
     <!-- III. Contenido de programación -->
@@ -466,47 +486,130 @@
     <section>
         <h3><span class="badge bg-secondary">A</span> <br> Visualizaciones de la teoría</h3>
         <p>
-            El sistema permite incluir visualizaciones de la teoría en las diapositivas.
+            Todos los elementos actualmente utilizados en las presentaciones del curso IE0405 - Modelos Probabilísticos de Señales y Sistemas son soportados por la plataforma, por lo que la migración es posible, aunque laboriosa.
         </p>
+        <blockquote class="small">
+            El teorema de Bayes, o regla de la probabilidad condicional inversa, establece que:
+            $$
+            P(A \mid B) = \frac{P(A)P(B \mid A)}{P(B)}
+            $$
+        </blockquote>
     </section>
 
     <!-- B. Ejemplos prácticos -->
     <section>
         <h3><span class="badge bg-secondary">B</span> <br> Ejemplos prácticos</h3>
         <p>
-            El sistema permite incluir ejemplos prácticos en las diapositivas.
+            Ejemplos prácticos explicados por el docente, con ecuaciones, tablas, gráficas, imágenes y otras visualizaciones son posibles.
         </p>
+        <blockquote class="small">
+            En investigación clínica, la "probabilidad de detección" es llamada <strong>sensitividad</strong> y la "tasa negativa verdadera" es llamada <strong>especificidad</strong>. Estos son ejemplos para exámenes de detección de enfermedades usuales:
+            <table class="table">
+                <thead>
+                    <tr>
+                        <td>Enfermedad</td>
+                        <td>Sensitividad</td>
+                        <td>Especificidad</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>COVID-19 BioMedomics</td>
+                        <td>89%</td>
+                        <td>91%</td>
+                    </tr>
+                    <tr>
+                        <td>Cáncer de próstata</td>
+                        <td>85%</td>
+                        <td>30%</td>
+                    </tr>
+                    <tr>
+                        <td>Cáncer de mama</td>
+                        <td>75%</td>
+                        <td>92%</td>
+                    </tr>
+                </tbody>
+            </table>
+        </blockquote>
     </section>
 
     <!-- C. Problemas resueltos de práctica -->
     <section>
         <h3><span class="badge bg-secondary">C</span> <br> Problemas resueltos de práctica</h3>
         <p>
-            El sistema permite incluir problemas resueltos de práctica en las diapositivas.
+            Como curso de teoría matemática, es importante demostrar la resolución numérica de problemas.
         </p>
+        <blockquote class="small">
+            Si la tasa de ocurrencia de COVID es de una en cien personas, y si una prueba sale positiva, ¿cuál es la probabilidad de tener realmente la enfermedad?
+            $$
+            P(A \mid B) = \frac{P(A)P(B \mid A)}{P(B)} = \frac{0.01 \times 0.89}{0.01 \times 0.89 + 0.99 \times 0.09} = 9\%
+            $$
+        </blockquote>
+        <p class="small">Una adición deseada es Manim, para animaciones de problemas resueltos.</p>
     </section>
 
     <!-- D. Evaluaciones teóricas y prácticas -->
     <section>
         <h3><span class="badge bg-secondary">D</span> <br> Evaluaciones teóricas y prácticas</h3>
         <p>
-            El sistema permite incluir evaluaciones teóricas y prácticas en las diapositivas.
+            Con la interactividad será posible hacer preguntas de revisión durante la presentación.
         </p>
+        <blockquote class="small">
+            Si la especificidad aumenta a un 99%, ¿cuál es la nueva probabilidad de tener la enfermedad dado un resultado positivo de la prueba?
+        </blockquote>
+        <div class="text-start">
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="flexRadioDefault" id="o1">
+                <label class="form-check-label" for="o1">
+                    47,3%
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="flexRadioDefault" id="o2">
+                <label class="form-check-label" for="o2">
+                    16,7%
+                </label>
+            </div>
+            <button type="submit" class="btn btn-primary mt-3" onclick="checkAnswer()">Verificar respuesta</button>
+            <script>
+                function checkAnswer() {
+                    let correct = document.getElementById('o1').checked;
+                    if (correct) {
+                        alert('¡Correcto!');
+                    } else {
+                        alert('Incorrecto. La respuesta correcta es 47,3%.');
+                    }
+                }
+            </script>
+        </div>
     </section>
 
     <!-- E. Ejercicios de programación -->
     <section>
         <h3><span class="badge bg-secondary">E</span> <br> Ejercicios de programación</h3>
         <p>
-            El sistema permite incluir ejercicios de programación en las diapositivas.
+            Tanto para demostración de los conceptos como para evaluación, el curso tiene ejercicios de computación científica con Python.
         </p>
+        <p>
+            Tpícamente consiste en:
+        </p>
+        <ul>
+            <li>Selección de un conjunto de datos de prueba (por ejemplo, en <a href="https://www.kaggle.com/datasets">Kaggle</a>)</li>
+            <li>Uso de Pandas de Numpy para manipulación y limpieza de datos</li>
+            <li>Uso de SciPy Stats para modelado probabilístico</li>
+            <li>Uso de Matplotlib para visualización (o Bokeh)</li>
+            <li>Análisis de resultados</li>
+        </ul>
     </section>
 
     <!-- F. Problema de diseño -->
     <section>
         <h3><span class="badge bg-secondary">F</span> <br> Problema de diseño</h3>
         <p>
-            El sistema permite incluir problemas de diseño en las diapositivas.
+            Es deseable aplicar las actividades anteriores en una situación más realista.
+        </p>
+        <p>
+            Por esta razón el curso tiene un proyecto de diseño como parte de su evaluación, y cada clase modelo tendrá un ejemplo a pequeña escala del tipo de problemas que será necesario resolver.
         </p>
     </section>
 </section>

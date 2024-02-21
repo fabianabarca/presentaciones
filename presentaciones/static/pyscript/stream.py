@@ -7,8 +7,8 @@ from bokeh.plotting import figure
 
 df = pd.DataFrame(np.random.randn(10, 4), columns=list('ABCD')).cumsum()
 
-rollover = pn.widgets.IntInput(name='Rollover', value=15)
-follow = pn.widgets.Checkbox(name='Follow', value=True, align='end')
+rollover = pn.widgets.IntInput(name='Acumulación', value=15)
+follow = pn.widgets.Checkbox(name='Seguir', value=True, align='end')
 
 tabulator = pn.widgets.Tabulator(df, height=450, width=400).servable(target='table')
 
@@ -23,7 +23,7 @@ def color_negative_red(val):
 
 tabulator.style.applymap(color_negative_red)
 
-p = figure(height=450, width=600)
+p = figure(height=250, width=600)
 
 cds = ColumnDataSource(data=ColumnDataSource.from_df(df))
 
