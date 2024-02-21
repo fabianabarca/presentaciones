@@ -8,22 +8,22 @@
 {% block content %}
 
 <!-- SECCIÓN 0 -->
-<!-- Portada y descripción -->
 <section>
     <h1>
         <code>&lt;diapo&gt;</code>
     </h1>
 </section>
 
+<!-- Portada y descripción -->
 <section>
     <h2><code>&lt;diapo&gt;</code></h2>
     <h4>Un sistema de presentaciones web para probabilidad y estadística en ingeniería eléctrica</h4>
-    <p class="small">Fabián Abarca Calderón</p>
-    <p>Esta es una presentación de</p>
+    <p>Esta es una presentación de ejemplo</p>
+    <p class="small">Proyecto <strong>PD-IE-472-2022</strong> <br> <em>Estrategias docentes para sesiones virtuales interactivas con el desarrollo de un nuevo sistema web: una experiencia en el curso Modelos Probabilísticos de Señales y Sistemas</em></p>
 </section>
 
 <section>
-    <h2>Contenido</h2>
+    <h2><i class="bi bi-list-nested"></i><br>Contenido</h2>
     <dl>
         <dt>Capacidades del sistema</dt>
         <dd>Características deseadas para la plataforma, según comparación con otros sistemas similares de
@@ -41,7 +41,7 @@
 <!-- Capacidades del sistema -->
 <section>
     <section>
-        <h1>Capacidades del sistema</h1>
+        <h1><i class="bi bi-person-video3"></i><br>Capacidades del sistema</h1>
         <blockquote>
             Características deseadas para la plataforma, según comparación con otros sistemas similares de
             presentaciones
@@ -57,11 +57,11 @@
         <div class="container text-center">
             <div class="row">
                 <div class="col">
-                    <i class="bi bi-arrows-fullscreen"></i> <br>
+                    <i class="bi bi-window-fullscreen"></i> <br>
                     Visualización adaptada a diferentes tamaños de pantalla.
                 </div>
                 <div class="col">
-                    <i class="bi bi-cloud-arrow-down"></i> <br>
+                    <i class="bi bi-cloud-arrow-down-fill"></i> <br>
                     Mejor calidad de imagen y mejor uso de datos que con <em>streaming</em>.
                 </div>
                 <div class="col">
@@ -77,69 +77,54 @@
     <section>
         <h3><span class="badge bg-secondary">2</span> <br> Contenido multimedia</h3>
         <p>
-            El sistema permite incluir contenido multimedia en las diapositivas.
+            El sistema permite incluir contenido multimedia en las diapositivas. ¡Ejemplo: el texto!
         </p>
-        <div class="row">
+        <div class="row row-cols-1 row-cols-md-2 g-4">
             <div class="col">
-                Texto
+                <h4>Imágenes</h4>
             </div>
             <div class="col">
-                Imágenes
-            </div>
-            <div class="col">
-                Audio
+                <h4>Audio</h4>
                 <audio controls>
                     <source src="{% static 'audio/perro.mp3' %}" type="audio/mpeg">
                     Audio no soportado.
                 </audio>
             </div>
             <div class="col">
-                Video
+                <h4>Video</h4>
                 <video controls>
                     <source src="{% static 'video/nyan_cat.mp4' %}" type="video/mp4">
                     Video no soportado.
                 </video>
             </div>
             <div class="col">
-                Animaciones
+                <h4>Animaciones</h4>
             </div>
         </div>
-        <p class="small">Común en cualquier plataforma de presentaciones. La diferencia: interacción directa con los
-            contenidos.</p>
+        <p class="small">Común en cualquier plataforma de presentaciones. La diferencia: interacción directa con los contenidos.</p>
     </section>
 
     <!-- 3. Contenido web -->
     <section>
         <h3><span class="badge bg-secondary">3</span> <br> Contenido web</h3>
         <p>
-            El sistema permite incluir contenido web en las diapositivas.
+            El sistema permite incluir <em>otros tipos</em> de contenido web en las diapositivas.
         </p>
         <p class="small">(Aparte de los contenidos multimedia de la sección anterior)</p>
         <div class="row">
             <div class="col">
-                Formularios
+                <h4>Formularios</h4>
                 Ingrese su edad para conocer el número ganador de la lotería.
-                <input type="text" name="age" id="age" placeholder="Edad"/>
-                <button id="my_button">Click me!</button>
-                <script type="py" config="{% static 'pyscript.json' %}" target="click_output">
-                    from pyscript import when, display
-
-
-                    @when("click", "#my_button")
-                    def click_handler(event):
-                        """
-                        Event handlers get an event object representing the activity that raised
-                        them.
-                        """
-                        display("I've been clicked!")
-                </script>
-                Algo aquí: <code id="click_output"></code>
+                <div class="mb-3">
+                    <label for="age" class="form-label">Edad</label>
+                    <input type="number" class="form-control" id="age" name="age" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Voy a tener suerte</button>
             </div>
             <div class="col">
-                Ejemplo de audio
-                <code>&lt;audio&gt;</code>
+                <h4>Otra cosa aquí</h4>
             </div>
-            
+
         </div>
     </section>
 
@@ -167,8 +152,7 @@
             </div>
             <div class="col">
                 <h4>Gráficos</h4>
-                <div id="normal"></div>
-                <script type="py" src="{% static 'snippets/normal.py' %}" config="{% static 'pyscript.json' %}" target="normal"></script>
+
             </div>
         </div>
     </section>
@@ -177,7 +161,7 @@
     <section>
         <h3><span class="badge bg-secondary">6</span> <br> Visualización de datos</h3>
         <p>
-            El sistema permite incluir visualizaciones de datos en las diapositivas.
+            El sistema permite incluir visualizaciones de datos en las diapositivas, como tablas o gráficas en tiempo real.
         </p>
     </section>
 
@@ -185,7 +169,7 @@
     <section>
         <h3><span class="badge bg-secondary">7</span> <br> Contenido de programación</h3>
         <p>
-            El sistema permite incluir contenido de programación en las diapositivas.
+            Es posible ver pero también editar y ejecutar (en el navegador) fragmentos de código de Python.
         </p>
         <pre>
             <code data-trim data-noescape data-line-numbers>
@@ -196,16 +180,6 @@
                 x = np.random.normal(size=1000)
             </code>
         </pre>
-        
-        <script type="py" config="{% static 'pyscript.json' %}" target="output">
-            import random
-            from pyscript import display
-
-            # Generar números aleatorios
-            x = random.randint(0, 101)
-            display(x)
-        </script>
-        <code id="output"></code>
     </section>
 
     <!-- 8. Resultados de simulaciones -->
@@ -220,27 +194,46 @@
     <section>
         <h3><span class="badge bg-secondary">9</span> <br> Sesiones remotas</h3>
         <p>
-            El sistema permite incluir sesiones remotas en las diapositivas.
+            Sincronización de la presentación del docente en el navegador de cada participante.
         </p>
-        Sincronización de presentación en navegador de cada participante
+        <div class="row align-items-center">
+            <div class="col">
+                <h4>Modo presentador</h4>
+                <i class="bi bi-person-video3"></i> <br>
+                Navega las diapositivas y...
+            </div>
+            <div class="col">
+                <i class="bi bi-arrow-right-circle-fill"></i> <br>
+                <span class="small">Django Channels WebSockets</span>
+            </div>
+            <div class="col">
+                <h4>Modo participante</h4>
+                <i class="bi bi-people-fill"></i> <br>
+                ...sigue la presentación.
+            </div>
+        </div>
     </section>
 
     <!-- 10. Registro de participantes -->
     <section>
         <h3><span class="badge bg-secondary">10</span> <br> Registro de participantes</h3>
         <p>
-            El sistema permite registrar la participación de los asistentes.
+            La plataforma tiene un registro de estudiantes matriculados en el o los cursos.
         </p>
-        Registro de estudiantes matriculados
-        Registro de participación en actividades
-        Notas de participantes en evaluaciones
+        <ul>
+            <li>Registro de participación en actividades</li>
+            <li>Notas de participantes en evaluaciones</li>
+        </ul>
     </section>
 
     <!-- 11. Edición de diapositivas por código -->
     <section>
         <h3><span class="badge bg-secondary">11</span> <br> Edición de diapositivas por código</h3>
         <p>
-            El sistema permite editar las diapositivas por código.
+            Para bien o para mal, la edición de las presentaciones es enteramente hecha en los archivos de código fuente.
+        </p>
+        <p>
+        <h1><i class="bi bi-code-slash"></i></h1>
         </p>
     </section>
 
@@ -248,8 +241,34 @@
     <section>
         <h3><span class="badge bg-secondary">12</span> <br> Software libre</h3>
         <p>
-            El sistema es software libre.
+            Todo el <em>stack</em> tecnológico tiene plataformas de software libre y el repositorio del proyecto es de acceso público.
         </p>
+        <div class="row row-cols-1 row-cols-md-3 g-4 small">
+            <div class="col">
+                <h5>Django</h5>
+                <p>Plataforma del servidor para gestión de usuarios, bases de datos, etc.</p>
+            </div>
+            <div class="col">
+                <h5>RevealJS</h5>
+                <p>Plataforma HTML/CSS/JavaScript de presentaciones en el navegador.</p>
+            </div>
+            <div class="col">
+                <h5>PyScript</h5>
+                <p>Python dentro del código HTML ejecutado directamente en el navegador.</p>
+            </div>
+            <div class="col">
+                <h5>Bootstrap</h5>
+                <p>Formato adicional dentro de la presentación para la diagramación de las diapositivas.</p>
+            </div>
+            <div class="col">
+                <h5>Bokeh</h5>
+                <p>Paquete de Python para creación de gráficas y exportación como contenido web.</p>
+            </div>
+            <div class="col">
+                <h5>Python</h5>
+                <p>Programación de uso general, incluyendo paquetes de análisis de datos.</p>
+            </div>
+        </div>
     </section>
 </section>
 
@@ -257,7 +276,7 @@
 <!-- Categorías de contenidos web -->
 <section>
     <section>
-        <h1>Contenido web especializado</h1>
+        <h1><i class="bi bi-code-square"></i><br>Contenido web especializado</h1>
         <blockquote>
             Categorías diferenciadas de contenido web que son útiles para la enseñanza de teoría matemática y análisis
             de datos
@@ -268,23 +287,83 @@
     <section>
         <h3><span class="badge bg-secondary">I</span> <br> Ecuaciones y otras herramientas matemáticas</h3>
         <p>
-            El sistema permite incluir ecuaciones y otras herramientas matemáticas en las diapositivas.
+            Es importante para un curso de teoría matemática básica poder mostrar <strong>de forma nativa</strong> ecuaciones y gráficos para ilustrar los conceptos.
         </p>
+    </section>
+    <section>
+        <h3>Ecuaciones en LaTeX</h3>
+        <div class="row">
+            <div class="col">
+                $$
+                x_{1,2} = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}
+                $$
+            </div>
+            <div class="col">
+                <span class="badge bg-secondary">Opcional</span>
+            </div>
+        </div>
+    </section>
+    <section>
+        <h3>Gráficos en Bokeh</h3>
+        <div class="row">
+            <div class="col">
+                Hola
+            </div>
+            <div class="col">
+                <span class="badge bg-secondary">Opcional</span>
+            </div>
+        </div>
+    </section>
+    <section>
+        <h3>Gráficos en TikZ</h3>
+        <pre>
+            <code>
+                \begin{tikzpicture}
+                    \def \n {5}
+                    \def \radius {3cm}
+                    \def \margin {8}
+                    \foreach \s in {1,...,\n}
+                    {
+                        \node[draw, circle] at ({360/\n * (\s - 1)}:\radius) {$\s$};
+                        \draw[->, >=latex] ({360/\n * (\s - 1)+\margin}:\radius) 
+                            arc ({360/\n * (\s - 1)+\margin}:{360/\n * (\s)-\margin}:\radius);
+                    }
+                \end{tikzpicture}
+            </code>
+        </pre>
+
+        <script type="text/tikz">
+            \begin{tikzpicture}
+                \def \n {5}
+                \def \radius {3cm}
+                \def \margin {8} % margin in angles, depends on the radius
+                \foreach \s in {1,...,\n}
+                {
+                    \node[draw, circle] at ({360/\n * (\s - 1)}:\radius) {$\s$};
+                    \draw[->, >=latex] ({360/\n * (\s - 1)+\margin}:\radius) 
+                        arc ({360/\n * (\s - 1)+\margin}:{360/\n * (\s)-\margin}:\radius);
+                }
+            \end{tikzpicture}
+        </script>
+
     </section>
 
     <!-- II. Visualizaciones de datos -->
     <section>
         <h3><span class="badge bg-secondary">II</span> <br> Visualizaciones de datos</h3>
         <p>
-            El sistema permite incluir visualizaciones de datos en las diapositivas.
+            Es importante para un curso basado en análisis de datos poder mostrar diferentes tipos de visualizaciones de datos, como tablas y otros gráficos, inclusive en tiempo real.
         </p>
+    </section>
+    <section>
+        <h3>Tablas interactivas incrustadas</h3>
     </section>
 
     <!-- III. Contenido de programación -->
     <section>
         <h3><span class="badge bg-secondary">III</span> <br> Contenido de programación</h3>
         <p>
-            El sistema permite incluir contenido de programación en las diapositivas.
+            Es importante para un curso que incluye computación científica y cálculo numérico para el análisis de datos, mostrar o ejecutar código como método de enseñanza y aprendizaje.
         </p>
     </section>
 
@@ -292,7 +371,7 @@
     <section>
         <h3><span class="badge bg-secondary">IV</span> <br> Interactividad</h3>
         <p>
-            El sistema permite incluir interactividad en las diapositivas.
+            Es importante para un curso virtual procurar la participación activa de los estudiantes, como método de motivación en clase y de evaluación de conocimientos.
         </p>
     </section>
 </section>
@@ -301,10 +380,9 @@
 <!-- Tipos de actividades pedagógicas -->
 <section>
     <section>
-        <h1>Actividades pedagógicas</h1>
+        <h1><i class="bi bi-pencil-square"></i><br>Actividades pedagógicas</h1>
         <blockquote>
-            Tipos de actividades pedagógicas propuestas con las capacidades del sistema y los contenidos web
-            especializados
+            Tipos de actividades pedagógicas propuestas con las capacidades del sistema y los contenidos web especializados
         </blockquote>
     </section>
 
@@ -361,19 +439,6 @@
 <!-- Aspectos finales -->
 <section>
     Y así terminamos este capítulo.
-    <script type="text/tikz">
-        \begin{tikzpicture}
-            \def \n {5}
-            \def \radius {3cm}
-            \def \margin {8} % margin in angles, depends on the radius
-            \foreach \s in {1,...,\n}
-            {
-                \node[draw, circle] at ({360/\n * (\s - 1)}:\radius) {$\s$};
-                \draw[->, >=latex] ({360/\n * (\s - 1)+\margin}:\radius) 
-                    arc ({360/\n * (\s - 1)+\margin}:{360/\n * (\s)-\margin}:\radius);
-            }
-        \end{tikzpicture}
-    </script>
 </section>
 <section>
     <h1>
@@ -394,12 +459,12 @@
         console.log('Conexión WebSocket abierta exitosamente como presentador en ' + wsRouteTx);
     };
 
-    Reveal.on( 'slidechanged', event => {
+    Reveal.on('slidechanged', event => {
         deckSocket.send(JSON.stringify({
             'indexh': event.indexh,
             'indexv': event.indexv
         }));
-    } );
+    });
 </script>
 {% else %}
 <script>
