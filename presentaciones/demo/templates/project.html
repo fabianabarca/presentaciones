@@ -472,6 +472,16 @@
             </div>
         </div>
     </section>
+    <!-- Terminal interactiva -->
+    <section>
+        <h3>Ejemplo de uso de una terminal interactiva de Python</h3>
+        (Aquí irá)
+    </section>
+    <!-- REPL -->
+    <section>
+        <h3>Ejemplo de un REPL</h3>
+        (Aquí irá)
+    </section>
 
     <!-- IV. Interactividad -->
     <section>
@@ -479,6 +489,36 @@
         <p>
             Es importante para un curso virtual procurar la participación activa de los estudiantes, como método de motivación en clase y de evaluación de conocimientos.
         </p>
+    </section>
+    <!-- Formulario tipo quiz -->
+    <section>
+        <h3>Formulario tipo quiz</h3>
+        <p>Es posible hacer preguntas de revisión durante la presentación.</p>
+        <div class="text-start">
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="flexRadioDefault" id="o1">
+                <label class="form-check-label" for="o1">
+                    Sí
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="flexRadioDefault" id="o2">
+                <label class="form-check-label" for="o2">
+                    No
+                </label>
+            </div>
+            <button type="submit" class="btn btn-primary mt-3" onclick="checkAnswer()">Verificar respuesta</button>
+            <script>
+                function checkAnswer() {
+                    let correct = document.getElementById('o1').checked;
+                    if (correct) {
+                        alert('¡Correcto!');
+                    } else {
+                        alert('Incorrecto. La respuesta correcta es 47,3%.');
+                    }
+                }
+            </script>
+        </div>
     </section>
 </section>
 
