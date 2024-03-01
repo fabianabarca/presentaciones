@@ -5,22 +5,28 @@
 <div class="w-auto container">
     <div class="d-flex flex-wrap flex-md-nowrap align-content-around justify-content-between">
         <div class="w-100 card m-2" style="height: 40vh;">
-            <div class="card-header d-flex justify-content-start">
-                <div class="card-header-pills">
-                    <i class="bi bi-terminal-fill"></i>
+            <div class="card-header d-flex justify-content-between pb-0 pe-2">
+                <div class="d-flex justify-content-start">
+                    <div class="bi bi-terminal-fill"></div>
+                    <div class="card-title ms-2">Código</div>
                 </div>
-                <div class="card-title my-0 ms-3">Código</div>
+                <div>
+                    <div class="bi bi-caret-right-fill link-success" onclick="execute_snippet()"></div>
+                </div>
             </div>
+            
             <div class="card-body px-0 pb-0">
-                <iframe class="ace rounded" width=100% height=100% data-onchange="console.log(editor.getValue())">{{ code }}</iframe>
+                <iframe class="ace rounded" width=100% height=100% data-onchange="console.log(editor.getValue())">
+                    Hello World!
+                </iframe>
             </div>
         </div>
         <div class="w-100 card m-2" style="height: 40vh;">
-            <div class="card-header d-flex justify-content-start">
-                <div class="card-header-pills">
-                    <i class="bi bi-chat-right-dots-fill"></i>
+            <div class="card-header d-flex justify-content-between pb-0">
+                <div class="d-flex justify-content-start">
+                    <div class="bi bi-chat-right-dots-fill"></div>
+                    <div class="card-title ms-2">Resultados</div>
                 </div>
-                <div class="card-title my-0 ms-3">Resultados</div>
             </div>
             <div class="card-body overflow-auto">
                 <div id="{{ output_id }}"></div>

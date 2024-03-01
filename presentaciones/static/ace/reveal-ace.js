@@ -1,10 +1,3 @@
-/*
- * ace.js
- * Copyright (C) 2015 tox <tox@rootkit>
- *
- * Distributed under terms of the MIT license.
- */
-
 var RevealAce = window.RevealAce || (function() {
 	if(!Reveal.ace) Reveal.ace = {};
 	function extend(o) {
@@ -15,20 +8,21 @@ var RevealAce = window.RevealAce || (function() {
 	};
 	function mkEditor(iframe) {
 		var w = iframe.contentWindow, d = w.document;
-		var mode = iframe.dataset.mode;
-		d.write("<!DOCTYPE html><html>"+
-			"<head>"+
-			"<script src='https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.7/ace.js' type='text/javascript' charset='utf-8'></script>")
-		if (mode) {
-			d.write("<script src='https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.7/mode-" + mode + ".js' type='text/javascript' charset='utf-8'></script>");
-		}
-		d.write("</head>"+
-			"<body>"+
+		var mode = "python";
+		var theme = "github_dark";
+		d.write("<!DOCTYPE html><html>" +
+			"<head>" +
+			"<script src='https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.6/ace.js' type='text/javascript' charset='utf-8'></script>" +
+			"<script src='https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.6/mode-"+ mode + ".js' type='text/javascript' charset='utf-8'></script>" +
+			"<script src='https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.6/theme-"+ theme + ".js' type='text/javascript' charset='utf-8'></script>");
+		d.write("</head>" +
+			"<body>" +
 			"<div id='editor' style='position:absolute; left:0; top:0; bottom:0; right:0;'>" +
-			iframe.innerHTML+ // innerHTML is already escaped
-			"</div>"+
-			"</body>"+
+				iframe.innerHTML +
+			"</div>" +
+			"</body>" +
 			"</html>");
+			
 		iframe.onload = function() {
 			function slidechanged(event) {
 				var e = iframe;
@@ -50,6 +44,7 @@ var RevealAce = window.RevealAce || (function() {
 			}
 
 			// Configuration
+			aceConf.theme = theme;
 			if(aceConf.theme)
 				editor.setTheme(aceConf.theme);
 			if(aceConf.mode)
@@ -92,7 +87,7 @@ var RevealAce = window.RevealAce || (function() {
 	var aces = document.getElementsByClassName(options.className);
 	for(var i = 0; i < aces.length; i++) {
 		if(!aces[i].contentWindow) {
-			console.warn("ACE Editors must be embedded in an IFrame");
+			console.warn("Ace editors must be embedded in an iframe");
 			continue;
 		}
 		mkEditor(aces[i]);
