@@ -20,6 +20,8 @@
 		<!-- PyScript -->
 		<link rel="stylesheet" href="https://pyscript.net/releases/2024.1.3/core.css">
 		<script type="module" src="https://pyscript.net/releases/2024.1.3/core.js"></script>
+		<!--Ace.js-->
+		<script type="module" src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.6/ace.js" integrity="sha512-gqjFRgajJiZM9GmvHEE7vpzPSL/moP+zxpl4F6lRNJDOI3pb2Tvu8k5vUjAzJKsl0ragzWL0/WasKhR430PkCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 		<!-- Bokeh -->
 		<script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-3.2.2.js"></script>
         <script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-widgets-3.2.2.min.js"></script>
@@ -58,7 +60,8 @@
                     config: 'TeX-AMS_HTML-full',
                 },
 				// Learn about plugins: https://revealjs.com/plugins/
-				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes, RevealMath ]
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes, RevealMath ],
+				dependencies: [ { src: "{% static 'reveal.js-ace/ace.js' %}" } ]
 			});
 		</script>
 		<!-- WebSocket: DeckSlider (control de diapositivas) -->
