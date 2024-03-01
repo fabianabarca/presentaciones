@@ -1,0 +1,32 @@
+{% load static %}
+
+{% block content %}
+
+<div class="w-auto container">
+    <div class="d-flex flex-wrap flex-md-nowrap align-content-around justify-content-between">
+        <div class="w-100 card m-2" style="height: 40vh;">
+            <div class="card-header d-flex justify-content-start">
+                <div class="card-header-pills">
+                    <i class="fa-solid fa-terminal"></i>
+                </div>
+                <div class="card-title my-0 ms-3">Código</div>
+            </div>
+            <div class="card-body p-0">
+                <iframe class="ace" width=100% height=100% data-onchange="console.log(editor.getValue())">{{ code }}</iframe>
+            </div>
+        </div>
+        <div class="w-100 card m-2" style="height: 40vh;">
+            <div class="card-header d-flex justify-content-start">
+                <div class="card-header-pills">
+                    <i class="fa-regular fa-file"></i>
+                </div>
+                <div class="card-title my-0 ms-3">Resultados</div>
+            </div>
+            <div class="card-body overflow-auto">
+                <div id="{{ output_id }}"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
