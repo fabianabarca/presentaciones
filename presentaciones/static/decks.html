@@ -49,6 +49,7 @@
 		<script src="{% static 'reveal/plugin/markdown/markdown.js' %}"></script>
         <script src="{% static 'reveal/plugin/highlight/highlight.js' %}"></script>
         <script src="{% static 'reveal/plugin/math/math.js' %}"></script>
+		<script src="{% static 'reveal/plugin/ace/ace.js' %}"></script>
 		<script>
 			// More info about initialization & config:
 			// - https://revealjs.com/initialization/
@@ -61,7 +62,7 @@
                 },
 				// Learn about plugins: https://revealjs.com/plugins/
 				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes, RevealMath ],
-				dependencies: [ { src: "{% static 'reveal.js-ace/ace.js' %}" } ]
+				dependencies: [ { src: "{% static 'reveal/plugin/ace/ace.js' %}" } ]
 			});
 		</script>
 		<!-- WebSocket: DeckSlider (control de diapositivas) -->
