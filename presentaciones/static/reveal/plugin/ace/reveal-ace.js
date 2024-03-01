@@ -9,12 +9,12 @@ var RevealAce = window.RevealAce || (function() {
 	function mkEditor(iframe) {
 		var w = iframe.contentWindow, d = w.document;
 		var mode = "python";
-		var theme = "github_dark";
+		var theme = "monokai";
 		d.write("<!DOCTYPE html><html>" +
 			"<head>" +
 			"<script src='https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.6/ace.js' type='text/javascript' charset='utf-8'></script>" +
-			"<script src='https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.6/mode-"+ mode + ".js' type='text/javascript' charset='utf-8'></script>" +
-			"<script src='https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.6/theme-"+ theme + ".js' type='text/javascript' charset='utf-8'></script>");
+			"<script src='https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.6/mode-" + mode + ".js' type='text/javascript' charset='utf-8'></script>" +
+			"<script src='https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.6/theme-" + theme + ".js' type='text/javascript' charset='utf-8'></script>");
 		d.write("</head>" +
 			"<body>" +
 			"<div id='editor' style='position:absolute; left:0; top:0; bottom:0; right:0;'>" +
@@ -35,7 +35,7 @@ var RevealAce = window.RevealAce || (function() {
 			var editor = w.ace.edit(d.getElementById('editor'));
 			var aceConf = extend({}, options, iframe.dataset);
 			editor.setOptions({
-				fontSize: "16pt"
+				fontSize: "12pt"
 			});
 
 			if (mode) {
@@ -44,9 +44,8 @@ var RevealAce = window.RevealAce || (function() {
 			}
 
 			// Configuration
-			aceConf.theme = theme;
 			if(aceConf.theme)
-				editor.setTheme(aceConf.theme);
+				editor.setTheme(theme);
 			if(aceConf.mode)
 				editor.getSession().setMode(aceConf.mode);
 			if(aceConf.autoFocus) {
@@ -87,7 +86,7 @@ var RevealAce = window.RevealAce || (function() {
 	var aces = document.getElementsByClassName(options.className);
 	for(var i = 0; i < aces.length; i++) {
 		if(!aces[i].contentWindow) {
-			console.warn("Ace editors must be embedded in an iframe");
+			console.warn("Ace editors must be embedded in an iframe.");
 			continue;
 		}
 		mkEditor(aces[i]);

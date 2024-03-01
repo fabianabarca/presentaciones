@@ -16,9 +16,7 @@
             </div>
             
             <div class="card-body px-0 pb-0">
-                <iframe class="ace rounded" width=100% height=100% data-onchange="console.log(editor.getValue())">
-                    Hello World!
-                </iframe>
+                <iframe id="iframe-{{ id }}" class="ace rounded" width=100% height=100% data-onchange="console.log(editor.getValue())">{{ code }}</iframe>
             </div>
         </div>
         <div class="w-100 card m-2" style="height: 40vh;">
@@ -29,10 +27,23 @@
                 </div>
             </div>
             <div class="card-body overflow-auto">
-                <div id="{{ output_id }}"></div>
+                <div id="output-{{ id }}">
+                    <py-script id="py-{{ id }}"></py-script>
+                </div>
             </div>
         </div>
     </div>
 </div>
+
+
+<script>
+    var iframe = document.getElementById("iframe-1");
+
+    function execute_snippet() {
+        var pyscript = document.getElementById("py-1");
+        pyscript.innerText = Reveal.ace[iframe.id].getValue();
+        console.log(pyscript.innerText);
+    }
+</script>
 
 {% endblock %}
