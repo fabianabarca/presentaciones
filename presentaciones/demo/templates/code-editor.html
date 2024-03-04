@@ -11,7 +11,7 @@
                     <div class="card-title ms-2">Código</div>
                 </div>
                 <div>
-                    <div class="bi bi-caret-right-fill link-success" py-click="start"></div>
+                    <div class="bi bi-caret-right-fill link-success" py-click="start" onclick="run_data()"></div>
                 </div>
             </div>
             
@@ -27,39 +27,42 @@
                 </div>
             </div>
             <div class="card-body overflow-auto">
-                <div id="output-{{ id }}">
-                    <py-script id="py-{{ id }}"></py-script>
-                </div>
+                <div id="output-{{ id }}"></div>
             </div>
         </div>
     </div>
 </div>
 
-<script type="py" target="output-{{ id }}" config="{% static 'pyscript.json' %}">
-from pyscript import document
+<!--config="{% static 'pyscript.json' %}"-->
+<script type="py" target="output-{{ id }}">
+from pyscript import document, display
 import pyodide
-from js import get_data
+from js import get_data, run_data
 
 def start(*args):
     data = get_data()
-    pyodide.code.eval_code(data)
+    display(data)
 </script>
 <script>
-    (function () {
-        var old = console.log;
-        var logger = document.getElementById('output-1');
-        console.log = function (message) {
-            if (typeof message == 'object') {
-                logger.innerHTML += (JSON && JSON.stringify ? JSON.stringify(message) : message) + '<br />';
-            } else {
-                logger.innerHTML += message + '<br />';
-            }
-        }
-    })();
-
     function get_data() {
         var iframe = document.getElementById("iframe-1");
         return Reveal.ace[iframe.id].getValue();
+    }
+
+    function run_data() {
+        pyodide.runPython(`
+            import sys
+            import io
+            sys.stdout = io.StringIO()
+        `);
+
+        const iframe = document.getElementById("iframe-1");
+        const output = document.getElementById("output-1");
+        var code = Reveal.ace[iframe.id].getValue();
+        pyodide.runPython(code)
+
+        var stdout = pyodide.runPython("sys.stdout.getvalue()");
+        output.innerHTML += '\n' + stdout;
     }
 </script>
 
