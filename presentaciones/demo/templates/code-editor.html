@@ -11,7 +11,7 @@
                     <div class="card-title ms-2">Código</div>
                 </div>
                 <div>
-                    <div class="bi bi-caret-right-fill link-success" py-click="start" onclick="run_data()"></div>
+                    <div class="bi bi-caret-right-fill link-success" py-click="start"></div>
                 </div>
             </div>
             
@@ -41,7 +41,8 @@ from js import get_data, run_data
 
 def start(*args):
     data = get_data()
-    display(data)
+    output = run_data(data)
+    display(output)
 </script>
 <script>
     function get_data() {
@@ -49,20 +50,17 @@ def start(*args):
         return Reveal.ace[iframe.id].getValue();
     }
 
-    function run_data() {
+    function run_data(data) {
         pyodide.runPython(`
             import sys
             import io
             sys.stdout = io.StringIO()
         `);
 
-        const iframe = document.getElementById("iframe-1");
-        const output = document.getElementById("output-1");
-        var code = Reveal.ace[iframe.id].getValue();
-        pyodide.runPython(code)
+        pyodide.runPython(data)
 
         var stdout = pyodide.runPython("sys.stdout.getvalue()");
-        output.innerHTML += '\n' + stdout;
+        return stdout;
     }
 </script>
 
