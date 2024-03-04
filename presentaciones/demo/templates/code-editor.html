@@ -1,7 +1,5 @@
 {% load static %}
 
-<script defer src="mini-coi.js"></script>
-
 {% block content %}
 
 <div class="w-auto container">
@@ -37,21 +35,16 @@
     </div>
 </div>
 
-<script type="py" target="output-{{ id }}">
-from pyscript import when, document, display, PyWorker
+<script type="py" target="output-{{ id }}" config="{% static 'pyscript.json' %}">
+from pyscript import document
 import pyodide
-from js import get_data, console
+from js import get_data
 
 def start(*args):
     data = get_data()
     pyodide.code.eval_code(data)
 </script>
 <script>
-    function get_data() {
-        var iframe = document.getElementById("iframe-1");
-        return Reveal.ace[iframe.id].getValue();
-    }
-
     (function () {
         var old = console.log;
         var logger = document.getElementById('output-1');
@@ -63,6 +56,11 @@ def start(*args):
             }
         }
     })();
+
+    function get_data() {
+        var iframe = document.getElementById("iframe-1");
+        return Reveal.ace[iframe.id].getValue();
+    }
 </script>
 
 {% endblock %}
