@@ -1,5 +1,7 @@
 {% load static %}
 
+<script defer src="mini-coi.js"></script>
+
 {% block content %}
 
 <div class="w-auto container">
@@ -33,16 +35,28 @@
     </div>
 </div>
 
-<script type="py" id="py-{{ id }}" target="output-{{ id }}">
+<script type="py" id="py-{{ id }}" target="output-{{ id }}" worker></script>
+<script type="py" target="output-{{ id }}">
 from pyscript import when, document, display, PyWorker
+import pyodide
 from js import get_data, console
+
+
 
 def start(*args):
     data = get_data()
     console.log(data)
     display(data)
+    worker = document.querySelector("#py-1")
+    worker.innerHTML = data
+
+    response = pyodide.code.eval_code(data);
+    display(pyodide.code.eval_code(data))
+
 </script>
 <script>
+    dom.postMessage.sharedArrayBuffer.bypassCOOP_COEP.insecure.enabled
+
     function get_data() {
         var iframe = document.getElementById("iframe-1");
         return Reveal.ace[iframe.id].getValue();
