@@ -11,7 +11,7 @@
                     <div class="card-title ms-2">Código</div>
                 </div>
                 <div>
-                    <div class="bi bi-caret-right-fill link-success" onclick="execute_snippet()"></div>
+                    <div class="bi bi-caret-right-fill link-success" py-click="start"></div>
                 </div>
             </div>
             
@@ -27,22 +27,25 @@
                 </div>
             </div>
             <div class="card-body overflow-auto">
-                <div id="output-{{ id }}">
-                    <py-script id="py-{{ id }}"></py-script>
-                </div>
+                <div id="output-{{ id }}"></div>
             </div>
         </div>
     </div>
 </div>
 
+<script type="py" id="py-{{ id }}" target="output-{{ id }}">
+from pyscript import when, document, display, PyWorker
+from js import get_data, console
 
+def start(*args):
+    data = get_data()
+    console.log(data)
+    display(data)
+</script>
 <script>
-    var iframe = document.getElementById("iframe-1");
-
-    function execute_snippet() {
-        var pyscript = document.getElementById("py-1");
-        pyscript.innerText = Reveal.ace[iframe.id].getValue();
-        console.log(pyscript.innerText);
+    function get_data() {
+        var iframe = document.getElementById("iframe-1");
+        return Reveal.ace[iframe.id].getValue();
     }
 </script>
 
