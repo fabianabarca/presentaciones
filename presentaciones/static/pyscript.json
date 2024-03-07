@@ -1,10 +1,6 @@
 {
     "packages": [
-        "matplotlib",
         "pandas",
-        "numpy",
-        "scipy",
-        "bokeh==3.2.2",
-        "panel"
+        "numpy"
     ]
 }
