@@ -1,7 +1,6 @@
 var pyDiv;
 
 function runCode(id) {
-    var outputDiv =  document.getElementById("output-" + id);
     var pyCode = readCode(id);
 
     if (pyDiv) {
@@ -17,6 +16,8 @@ ${pyCode}
     let div = document.createElement("div");
     div.innerHTML = htmlTag;
     pyDiv = div.firstElementChild;
+
+    var outputDiv =  document.getElementById("output-" + id);
     outputDiv.appendChild(pyDiv);
 
     let nextDiv = document.createElement("div");
