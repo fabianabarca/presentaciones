@@ -1,7 +1,7 @@
 var pyDiv;
 
 function runCode(id) {
-    var pyOutput =  document.getElementById("output-" + id);
+    var outputDiv =  document.getElementById("output-" + id);
     var pyCode = readCode(id);
 
     if (pyDiv) {
@@ -17,7 +17,10 @@ ${pyCode}
     let div = document.createElement("div");
     div.innerHTML = htmlTag;
     pyDiv = div.firstElementChild;
-    pyOutput.appendChild(pyDiv);
+    outputDiv.appendChild(pyDiv);
+
+    let nextDiv = document.createElement("div");
+    outputDiv.insertBefore(nextDiv, pyDiv.nextSibling);
 
     try {
         pyDiv.evaluate();
@@ -25,6 +28,9 @@ ${pyCode}
         console.error("Python error:");
         console.error(error);
     }
+
+    auxPyDiv = pyDiv;
+    pyDiv = nextDiv;
 }
 
 function readCode(id) {
