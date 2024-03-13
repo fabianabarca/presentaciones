@@ -23,7 +23,7 @@ def programming(request):
         "example1": 
 """from pyscript import display
 
-display('¡Hola Mundo!')""",
+display("¡Hola Mundo!")""",
 
         "example2": 
 """import numpy as np
