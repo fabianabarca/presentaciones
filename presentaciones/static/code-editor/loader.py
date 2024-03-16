@@ -1,7 +1,8 @@
 from pyscript import document
 
 def onready():
-    loader = document.querySelector(".loader")
-    loader.className = "bi bi-caret-right-fill link-success"
-    
+    loaders = document.querySelectorAll(".loader")
+    for loader in loaders:
+        loader.className = "bi bi-caret-right-fill link-success"
+
 onready()
