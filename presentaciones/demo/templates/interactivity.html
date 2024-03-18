@@ -15,15 +15,88 @@
     <h2>Interactividad en el sitio</h2>
 </section>
 
-<section>
+{% if user.is_authenticated %}
+    <!-- D. Evaluaciones teóricas y prácticas -->
     <section>
-        <h1>Ola ke ase</h1>
+        <h3><span class="badge bg-secondary">D</span> <br> Evaluaciones teóricas y prácticas</h3>
+        <p>
+            Con la interactividad será posible hacer preguntas de revisión durante la presentación.
+        </p>
+        <blockquote class="small">
+            Si la especificidad aumenta a un 99%, ¿cuál es la nueva probabilidad de tener la enfermedad dado un resultado positivo de la prueba?
+        </blockquote>
+        <div class="text-start">
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="flexRadioDefault" id="o1">
+                <label class="form-check-label" for="o1">
+                    47,3%
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="flexRadioDefault" id="o2">
+                <label class="form-check-label" for="o2">
+                    16,7%
+                </label>
+            </div>
+            <button type="submit" class="btn btn-primary mt-3" onclick="sendAnswer('1', '{{ session_id }}', '{{ user_id }}')">Verificar respuesta</button>
+        </div>
     </section>
+{% endif %}
 
-    <section>
-        <h2>¿Qué es PyScript?</h2>
-        <p>PyScript es un lenguaje de programación que permite la ejecución de código Python en el navegador web.</p>
-    </section>
-</section>
+{% endblock %}
 
+{% block websocket %}
+{% if role == "presenter" %}
+<script>
+    const wsRouteTx = 'ws://' + window.location.host + '/ws/deck/slider/project/';
+    const deckSocket = new WebSocket(wsRouteTx);
+
+    // Registrar la conexión abierta
+    deckSocket.onopen = function (event) {
+        console.log('Conexión WebSocket abierta exitosamente como presentador en ' + wsRouteTx);
+    };
+
+    Reveal.on('slidechanged', event => {
+        deckSocket.send(JSON.stringify({
+            'indexh': event.indexh,
+            'indexv': event.indexv
+        }));
+    });
+</script>
+{% else %}
+<script>
+    const wsRouteRx = 'ws://' + window.location.host + '/ws/deck/slider/project/';
+    const deckSocket = new WebSocket(wsRouteRx);
+
+    // Registrar la conexión abierta
+    deckSocket.onopen = function (event) {
+        console.log('Conexión WebSocket abierta exitosamente como cliente en ' + wsRouteRx);
+    };
+
+    deckSocket.onmessage = function (event) {
+        const data = JSON.parse(event.data);
+        Reveal.slide(data.message.indexh, data.message.indexv);
+    };
+
+    function sendAnswer(question_id, session_id, user_id) {
+        // Obtener el valor seleccionado del checkbox
+        const selectedOption = document.querySelector('input[name="flexRadioDefault"]:checked');
+
+        if (selectedOption) {
+            const answer = selectedOption.nextElementSibling.textContent.trim();
+            
+            // Enviar la respuesta a través del WebSocket
+            deckSocket.send(JSON.stringify({
+                'answer': answer,
+                'question_id': question_id,
+                'session_id': session_id,
+                'user_id': user_id,
+            }));
+            alert('Respuesta enviada.');
+        } else {
+            alert('Por favor, selecciona una opción antes de verificar la respuesta.');
+        }
+    }
+</script>
+{% endif %}
 {% endblock %}

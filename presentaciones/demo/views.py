@@ -1,4 +1,7 @@
+from django.utils import timezone
+import uuid
 from django.shortcuts import render
+from decks.models import Session
 
 # Create your views here.
 
@@ -14,7 +17,6 @@ def project(request):
         role = "viewer"
     context = {"role": role}
     return render(request, "project.html", context)
-
 
 
 def programming(request):
@@ -34,4 +36,23 @@ def example(request):
 
 
 def interactivity(request):
-    return render(request, "interactivity.html")
+    user_id = request.user.id
+    if request.user.is_staff:
+        role = "presenter"
+        deck_id = str(uuid.uuid4())
+        # Crear una nueva sesión
+        new_session = Session.objects.create(
+            presenter_id=user_id, deck_id=deck_id, begins_at=timezone.now()
+        )
+        print(new_session.session_id)
+        new_session.save()
+        context = {
+            "role": role,
+            "session_id": new_session.session_id,
+            "user_id": user_id,
+        }
+    else:
+        role = "viewer"
+        context = {"role": role, "user_id": user_id, "session_id": "8"}
+    # context = {"role": role}
+    return render(request, "interactivity.html", context)
