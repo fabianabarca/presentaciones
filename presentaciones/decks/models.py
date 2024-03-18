@@ -2,22 +2,26 @@ from django.db import models
 
 # Models
 
+
 class Topic(models.Model):
     topic_id = models.CharField(max_length=255, primary_key=True)
     name = models.CharField(max_length=255)
 
     def __str__(self):
         return f"{self.topic_id}. {self.name}"
-    
+
+
 class Question(models.Model):
     question_id = models.AutoField(primary_key=True)
     title = models.CharField(max_length=255)
     description = models.TextField()
-    image = models.ImageField(upload_to='question_data/question_images/', null=True, blank=True)
-    data = models.FileField(upload_to='question_data/question_docs/', null=True)
+    image = models.ImageField(
+        upload_to="question_data/question_images/", null=True, blank=True
+    )
+    data = models.FileField(upload_to="question_data/question_docs/", null=True)
     form_type = models.CharField(max_length=255)
-    question_set = models.CharField(max_length=255) #?
-    topic = models.ForeignKey(Topic, on_delete=models.CASCADE) # Foreing Key
+    question_set = models.CharField(max_length=255)  # ?
+    topic = models.ForeignKey(Topic, on_delete=models.CASCADE)  # Foreing Key
 
     def __str__(self):
         return self.title
@@ -46,11 +50,17 @@ class Session(models.Model):
 
 class Answer(models.Model):
     answer_id = models.AutoField(primary_key=True)
-    question_id = models.ForeignKey(Question, on_delete=models.CASCADE)
+    # question_id = models.ForeignKey(Question, on_delete=models.CASCADE)
+    question_id = models.IntegerField()
     user_id = models.IntegerField()
-    choice_id = models.ForeignKey(Choice, on_delete=models.CASCADE)
-    session_id = models.ForeignKey(Session, on_delete=models.SET_NULL, blank=True, null=True)
+    # choice_id = models.ForeignKey(Choice, on_delete=models.CASCADE)
+    answer_text = models.TextField()
+    session_id = models.ForeignKey(
+        Session, on_delete=models.SET_NULL, blank=True, null=True
+    )
     submitted_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"Respuesta a la pregunta {self.question_id} por el usuario {self.user_id}"
+        return (
+            f"Respuesta a la pregunta {self.question_id} por el usuario {self.user_id}"
+        )
