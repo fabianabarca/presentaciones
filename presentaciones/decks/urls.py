@@ -7,4 +7,5 @@ urlpatterns = [
     path("maestra/", views.master, name="master"),
     path("cliente/", views.client, name="client"),
     path("hola/<slug:deck_id>", views.deck, name="tema"),
+    path("caracteristicas-espectrales", views.p15, name="caracteristicas-espectrales"),
 ]

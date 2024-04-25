@@ -2,6 +2,9 @@ from django.shortcuts import get_object_or_404, render
 
 # Create your views here.
 
+def p15(request):
+    return render(request, "modelos/caracteristicas-espectrales.html")
+
 
 def decks(request):
     return render(request, "decks.html")
