@@ -1,0 +1,88 @@
+{% extends 'decks.html' %}
+
+{% load static %}
+
+<!-- Configuraciones específicas del <head> -->
+{% block head %}{% endblock %}
+<!-- Panel (Python) -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@holoviz/panel@1.3.1/dist/css/widgets.css" type="text/css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@holoviz/panel@1.3.1/dist/css/markdown.css" type="text/css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@holoviz/panel@1.3.1/dist/bundled/bootstraptemplate/bootstrap.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@holoviz/panel@1.3.1/dist/bundled/theme/default.css" />
+
+<!-- Tabulator -->
+<script type="text/javascript" src="https://unpkg.com/tabulator-tables@5.5.0/dist/js/tabulator.min.js"></script>
+{% block content %}
+
+<!-- SECCIÓN 0 -->
+<section>
+    <h1>
+        <h1 class="display-1">Cadenas de Markov en tiempo continuo</h1>
+    </h1>
+</section>
+
+<!-- Portada y descripción -->
+<section>
+    <h3>Cadenas de Markov en tiempo continuo</h3>
+    <p>
+        Muchos fenómenos del mundo real pueden ser modelados como una secuencia de transiciones de un estado a otro, donde cada transición tiene una incertidumbre asociada.Las cadenas de Markov proveen un modelo para información secuencial que permite que resultados futuros dependan de otros resultados previos.
+    </p>
+</section>
+
+<!-- Espectro de densidad de potencia y sus propiedades -->
+<section>
+    <section>
+        <h2>Espectro de densidad de potencia y sus propiedades</h2>
+    </section>
+
+    <section>
+        <h3>Espectro de densidad de potencia</h3>
+        <blockquote>
+            El espectro de densidad de potencia de una señal aleatoria describe cómo se distribuye su potencia en todas las frecuencias.
+        </blockquote>
+        <ul>
+            <li>Esta es una descripción de $X(t)$ en el <strong>dominio de la frecuencia</strong>.</li>
+            <li>Por otra parte, las propiedades estadísticas de los procesos estocásticos, como las funciones de la media, la varianza, la autocovarianza, la autocorrelación, etc. son descripciones de $X(t)$ en el <strong>dominio del tiempo</strong>.</li>
+        </ul>
+        
+        <p class="small">Conocida en inglés como PSD (<em>Power Spectral Density</em>)</p>
+    </section>
+</section>
+
+{% endblock %}
+
+{% block websocket %}
+{% if role == "presenter" %}
+<script>
+    const wsRouteTx = 'ws://' + window.location.host + '/ws/deck/slider/project/';
+    const deckSocket = new WebSocket(wsRouteTx);
+
+    // Registrar la conexión abierta
+    deckSocket.onopen = function (event) {
+        console.log('Conexión WebSocket abierta exitosamente como presentador en ' + wsRouteTx);
+    };
+
+    Reveal.on('slidechanged', event => {
+        deckSocket.send(JSON.stringify({
+            'indexh': event.indexh,
+            'indexv': event.indexv
+        }));
+    });
+</script>
+{% else %}
+<script>
+    const wsRouteRx = 'ws://' + window.location.host + '/ws/deck/slider/project/';
+    const deckSocket = new WebSocket(wsRouteRx);
+
+    // Registrar la conexión abierta
+    deckSocket.onopen = function (event) {
+        console.log('Conexión WebSocket abierta exitosamente como cliente en ' + wsRouteRx);
+    };
+
+    deckSocket.onmessage = function (event) {
+        const data = JSON.parse(event.data);
+        Reveal.slide(data.message.indexh, data.message.indexv);
+    };
+</script>
+{% endif %}
+{% endblock %}

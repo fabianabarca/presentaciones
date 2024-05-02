@@ -6,6 +6,10 @@ def p15(request):
     return render(request, "modelos/caracteristicas-espectrales.html")
 
 
+def p18(request):
+    return render(request, "modelos/markov-tiempo-continuo.html")
+
+
 def decks(request):
     return render(request, "decks.html")
 
