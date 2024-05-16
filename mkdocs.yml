@@ -1,0 +1,18 @@
+site_name: Kalouk
+
+nav:
+  - Inicio: index.md
+  - Desarrollo: development.md
+  - Modelos: models.md
+  - Proyectos: projects.md
+  - Lógica: rationale.md
+
+theme:
+  name: material
+  language: es
+  palette:
+    primary: blue
+    accent: red
+  font:
+    text: 'Roboto'
+    code: 'Roboto Mono'
