@@ -3,7 +3,7 @@
 {% load static %}
 
 <!-- Configuraciones específicas del <head> -->
-{% block head %}{% endblock %}
+{% block head %}
 <!-- Panel (Python) -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@holoviz/panel@1.3.1/dist/css/widgets.css" type="text/css" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@holoviz/panel@1.3.1/dist/css/markdown.css" type="text/css" />
@@ -12,45 +12,1359 @@
 
 <!-- Tabulator -->
 <script type="text/javascript" src="https://unpkg.com/tabulator-tables@5.5.0/dist/js/tabulator.min.js"></script>
-{% block content %}
 
-<!-- SECCIÓN 0 -->
-<section>
-    <h1>
-        <h1 class="display-1">Cadenas de Markov en tiempo continuo</h1>
-    </h1>
-</section>
-
-<!-- Portada y descripción -->
-<section>
-    <h3>Cadenas de Markov en tiempo continuo</h3>
-    <p>
-        Muchos fenómenos del mundo real pueden ser modelados como una secuencia de transiciones de un estado a otro, donde cada transición tiene una incertidumbre asociada.Las cadenas de Markov proveen un modelo para información secuencial que permite que resultados futuros dependan de otros resultados previos.
-    </p>
-</section>
-
-<!-- Espectro de densidad de potencia y sus propiedades -->
-<section>
-    <section>
-        <h2>Espectro de densidad de potencia y sus propiedades</h2>
-    </section>
-
-    <section>
-        <h3>Espectro de densidad de potencia</h3>
-        <blockquote>
-            El espectro de densidad de potencia de una señal aleatoria describe cómo se distribuye su potencia en todas las frecuencias.
-        </blockquote>
-        <ul>
-            <li>Esta es una descripción de $X(t)$ en el <strong>dominio de la frecuencia</strong>.</li>
-            <li>Por otra parte, las propiedades estadísticas de los procesos estocásticos, como las funciones de la media, la varianza, la autocovarianza, la autocorrelación, etc. son descripciones de $X(t)$ en el <strong>dominio del tiempo</strong>.</li>
-        </ul>
-        
-        <p class="small">Conocida en inglés como PSD (<em>Power Spectral Density</em>)</p>
-    </section>
-</section>
-
+<!-- Inicio de transcripcion de la presentacion markov en tiempo continuo-->
+<!-- Agregar KaTex de reveal Revealjs -->
+<script src="plugin/math/math.js"></script>
+<script>
+  Reveal.initialize({ plugins: [ RevealMath.KaTeX ] });
+</script>
 {% endblock %}
 
+
+
+{% block content %}  
+
+<!-- Inicio de la presentacion -->
+<section>
+    <div style="text-align: center;">
+        <!-- Título -->
+        <div style="background-color: #074d86; color: white; padding: 15px; margin-bottom: 20px;">
+            <h1 style="margin: 0; font-size: 1.5em; color: white;">Cadenas de Markov de tiempo continuo</h1>
+            <h2 style="margin: 0; font-size: 1em; color: white;">Introducción</h2>
+        </div>
+        
+        <!-- Autor -->
+        <h3 style="font-size: 1.8em;">Fabián Abarca Calderón</h3>
+        
+        <!-- Curso -->
+        <h4 style="font-size: 1.5em;">IE0405 – Modelos Probabilísticos de Señales y Sistemas</h4>
+        
+        <!-- Número de Tema -->
+        <div style="background-color: #074d86; color: white; display: inline-block; padding: 10px 20px; margin-bottom: 20px; font-size: 2em;">
+            <h5 style="margin: 0; font-size: 0.7em; color: white;">18</h5>
+        </div>
+        
+        <!-- Tema -->
+        <p style="font-size: 1.5em;">Tema V</p>
+        
+        <!-- Logos si van -->
+    </div>
+</section>
+
+<!-- Introduccion -->
+<section>
+    <div style="font-family: Arial, sans-serif; text-align: left; font-size: 1.4em; max-width: 8000px; margin: auto; line-height: 1.8em; padding: 20px; min-height: 300px;">
+        <p>Muchos fenómenos del mundo real pueden ser modelados como una secuencia de <strong>transiciones</strong> de un <strong>estado</strong> a otro, donde cada transición tiene una incertidumbre asociada.</p>
+        <p>Las cadenas de Markov proveen un modelo para información secuencial que permite que resultados futuros dependan de otros resultados previos.</p>
+    </div>
+</section>
+
+<!-- Seccion 1 definiciones de las cadenas de markov -->
+<section>
+    <!-- Primera diapositiva -->
+    <section>
+    <div style="font-family: Arial, sans-serif; text-align: center; background-color: #074d86; color: white; width: 100%; height: 100px; display: flex; align-items: center; justify-content: center;">
+        <h1 style="margin: 0; font-size: 1.5em; color: white;">El proceso de nacimiento y muerte en tiempo continuo</h1>
+    </div>
+    </section>
+    
+    <!-- Segunda diapositiva -->
+    <section>
+        <!-- Título con fondo celeste -->
+        <div style="text-align: center; background-color: #00BFFF; color: white; width: 100%; height: 30px; display: flex; align-items: center; justify-content: center;">
+            <h1 style="font-family: Arial, sans-serif; text-align: left; margin: 0; font-size: 1em; color: white;">Ejemplos de "cadenas de Markov" I</h1>
+        </div>
+
+        <div class="custom-list" style="text-align: center;">
+            <ul>
+                <li style="font-family: Arial, sans-serif; margin-bottom: 5px;">Un modelo simplista del tiempo atmosférico en un lugar está dado por la secuencia temporal $\{ X_1, X_2, X_3, \ldots \}$, donde $X_i$ tiene los dos únicos valores 0 (''seco'') y 1 (''lluvioso'')</li>
+                <h1 style="margin: 0; font-size: 1em;"> Figura </h1>
+                <li style="font-family: Arial, sans-serif;margin-bottom: 5px;">Los precios de las acciones de una empresa tienen una incertidumbre respecto a si el precio va a hacer una <span style="font-style: italic;">transición</span> hacia un valor mayor o menor.</li>
+
+            </ul>
+        </div>
+
+        <div style="border-left: 5px solid green; padding-left: 10px; font-family: 'Arial', sans-serif; font-size: 16px;">
+            <p>En ambos casos, las <strong>transiciones</strong> pueden modelarse de manera probabilística y es crucial el conocimiento del estado actual. Las cadenas o procesos de Markov son un modelo de <span style="font-style: italic;">dependecia</span>.</p>
+        </div>
+        
+        
+
+        
+
+        <style>
+            .custom-list ul {
+                list-style: none; /* Remueve el estilo de lista predeterminado */
+                padding: 0; /* Remueve el padding predeterminado */
+                display: inline-block; /* Centra la lista horizontalmente si dentro de un div con text-align: center */
+            }
+
+            .custom-list li::before {
+                content: "•"; /* Carácter para el punto de la lista */
+                color: #35b3d3; /* Asegura que el color del punto es azul, para coincidir con el fondo del título */
+                display: inline-block; /* Hace que el punto se sitúe al lado del texto */
+                width: 1em; /* Espacio antes del texto */
+                margin-left: -1em; /* Alinea el punto con el texto */
+            }
+        </style>
+    </section>
+
+    <!-- Tercera diapositiva -->
+    <section>
+        <!-- Título con fondo celeste -->
+        <div style="text-align: center; background-color: #00BFFF; color: white; width: 100%; height: 30px; display: flex; align-items: center; justify-content: center;">
+            <h1 style="font-family: Arial, sans-serif; text-align: left; margin: 0; font-size: 1em; color: white;">Ejemplos de "cadenas de Markov" II</h1>
+        </div>
+
+        <div style="text-align: left; margin-top: 20px; padding-left: 20px;">
+            <p style="color: #00BFFF;"><strong>Otros ejemplos de aplicaciones</strong></p>
+        </div>
+    
+        <!-- Lista de ejemplos con íconos -->
+        <div style="text-align: left; margin-top: 20px; padding-left: 20px;">
+            <ul style="list-style: none; padding: 0;">
+                <li style="margin-bottom: 5px; font-family: Arial, sans-serif;"><i class="bi bi-ev-front-fill" style="color: #00BFFF; margin-right: 5px;"></i> Predicción de cambios en la demanda de electricidad</li>
+                <li style="margin-bottom: 5px; font-family: Arial, sans-serif;"><i class="bi bi-bug-fill" style="color: #00BFFF; margin-right: 5px;"></i> Modelado del movimiento de insectos</li>
+                <li style="margin-bottom: 5px; font-family: Arial, sans-serif;"><i class="bi bi-hospital-fill" style="color: #00BFFF; margin-right: 5px;"></i> Monitoreo del uso de camillas en hospitales</li>
+                <li style="margin-bottom: 5px; font-family: Arial, sans-serif;"><i class="bi bi-bar-chart-fill" style="color: #00BFFF; margin-right: 5px;"></i> Personas que cambian de servicio celular</li>
+                <li style="margin-bottom: 5px; font-family: Arial, sans-serif;"><i class="bi bi-cart-check-fill" style="color: #00BFFF; margin-right: 5px;"></i> Monitoreo de patrones de navegación web para proveer anuncios personalizados</li>
+            </ul>
+        </div>
+    </section>
+    
+
+    <!-- Cuarta diapositiva -->
+    <section>
+        <!-- Título con fondo azul celeste -->
+        <div style="text-align: center; background-color: #074d86; color: white; width: 100%; height: 30px; display: flex; align-items: center; justify-content: center;">
+            <h1 style="font-family: Arial, sans-serif; text-align: left; margin: 0; font-size: 1em; color: white;">La propiedad de Markov</h1>
+        </div>
+    
+        <!-- Contenido principal con texto descriptivo -->
+        <div class="custom-list" style="text-align: center;">
+            <ul>
+                <li style="font-family: Arial, sans-serif; margin-bottom: 5px;">Las cadenas de Markov son <strong>procesos estocásticos</strong> que cumplen la <span style="font-style: italic;">propiedad de Markov</span>.</li>
+                <li style="font-family: Arial, sans-serif;margin-bottom: 5px;">Informalmente, esta propiedad establece que los estados futuros dependen únicamente del estado actual, y no de la secuencia de estados para llegar ahí. De algún modo, ''trunca la memoria''.</li>
+            </ul>
+        </div>
+    
+        <div style="border-left: 5px solid orange; padding-left: 10px; font-family: 'Arial', sans-serif; font-size: 16px; margin-top: 10px;">
+            <p>Formalmente, es una <span style="font-style: italic;">probabilidad condicional</span> de la forma:</p>
+            <p>\begin{equation}
+                P(X_n = x \mid X_0,\ldots, X_{n-1}) = P(X_n = x \mid X_{n-1}), \quad \forall n, \forall x
+                \end{equation}
+            </p>
+        </div>
+    
+        <style>
+            .custom-list ul {
+                list-style: none; /* Remueve el estilo de lista predeterminado */
+                padding: 0; /* Remueve el padding predeterminado */
+                display: inline-block; /* Centra la lista horizontalmente si dentro de un div con text-align: center */
+            }
+    
+            .custom-list li::before {
+                content: "•"; /* Carácter para el punto de la lista */
+                color: #35b3d3; /* Asegura que el color del punto es azul, para coincidir con el fondo del título */
+                display: inline-block; /* Hace que el punto se sitúe al lado del texto */
+                width: 1em; /* Espacio antes del texto */
+                margin-left: -1em; /* Alinea el punto con el texto */
+            }
+        </style>
+    </section>
+
+    <!-- Quinta diapositiva-->
+    <section>
+        <!-- Título con fondo celeste -->
+        <div style="text-align: center; background-color: #00BFFF; color: white; width: 100%; height: 30px; display: flex; align-items: center; justify-content: center;">
+            <h1 style="font-family: Arial, sans-serif; text-align: left; margin: 0; font-size: 1em; color: white;">Ejemplo de taxis en diferentes zonas de una ciudad I</h1>
+        </div>
+
+        <div style="font-family: Arial, sans-serif; text-align: left; font-size: 0.8em; max-width: 8000px; margin: auto; line-height: 1.8em; padding: 20px; min-height: 300px;"">
+            <p>Una ciudad tiene tres diferentes "zonas", numeradas 1, 2, y 3, y los taxis operan en todas las zonas.</p>
+            <p><strong>Figura</strong></p>
+            <p>La probabilidad de que el próximo pasajero vaya hacia una zona particular depende de dónde abordó el taxi.</p>
+        </div>
+    </section>
+</section>
+
+<!-- Seccion 2 Deduccion a partir de la distribucion exponencial -->
+<section>
+    <!-- Primera diapositiva -->
+    <section>
+    <div style="font-family: Arial, sans-serif; text-align: center; background-color: #074d86; color: white; width: 100%; height: 100px; display: flex; align-items: center; justify-content: center;">
+        <h1 style="margin: 0; font-size: 1.5em; color: white;">Deducción a partir de la distribución exponencial</h1>
+    </div>
+    </section>
+
+    <!-- Segunda diapositiva -->
+    <section>
+        <div style="font-family: Arial, sans-serif; text-align: left; font-size: 1.4em; max-width: 8000px; margin: auto; line-height: 1.8em; padding: 20px; min-height: 300px;">
+            <p>Un par de casos especiales de la distribución exponencial son útiles para determinar los parámetros de interés en las cadenas de Markov.</p>
+        </div>
+    </section>
+
+    <!-- Tercera diapositiva -->
+    <section>
+    <!-- Título con fondo azul celeste -->
+    <div style="text-align: center; background-color: #074d86; color: white; width: 100%; height: 30px; display: flex; align-items: center; justify-content: center;">
+        <h1 style="font-family: Arial, sans-serif; text-align: left; margin: 0; font-size: 1em; color: white;">La distribución exponencial como ''tiempo de vida''</h1>
+    </div>
+    <div style="border-left: 5px solid green; padding-left: 10px; font-family: 'Arial', sans-serif; font-size: 16px; margin-top: 10px;">
+        <p>La distribución exponencial es la típica caracterización de la probabilidad de los tiempos de espera (o ''de vida'').</p>
+    </div>
+    <div style="font-family: Arial, sans-serif; text-align: left; font-size: 0.8em; max-width: 8000px; margin: auto; line-height: 1.8em; padding: 20px; min-height: 300px;"">
+        <p>Si $T$ es el tiempo de vida de un componente que está exponencialmente distribuido con parámetro $\alpha$, entonces $T$ tiene densidad</p>
+        <p>
+            \begin{equation}
+                f_{T}(t) = 
+                \begin{cases}
+                0 					& t < 0 \\
+                \alpha e^{-\alpha t} 	& t > 0 
+                \end{cases}
+            \end{equation}
+        </p>
+        <p>
+            La media de $T$ es el recíproco del parámetro $\alpha$,  $E[T] = \frac{1}{\alpha}$. 
+        </p>
+    </div>
+
+    <div class="custom-list" style="text-align: left; font-size: 0.8em; max-width: 8000px; margin: auto; line-height: 1.8em; padding: 20px; ">
+        <ul>
+            <li style="font-family: Arial, sans-serif;margin-bottom: 5px;">La variable aleatoria $T$ tiene la <span style="font-style: italic;">propiedad de falta de memoria.</span></li>
+            <li style="font-family: Arial, sans-serif; margin-bottom: 5px;">''No importa la antigüedad del componente, este opera como si fuera nuevo''.</li>
+        </ul>
+    </div>
+
+    <style>
+        .custom-list ul {
+            list-style: none; /* Remueve el estilo de lista predeterminado */
+            padding: 0; /* Remueve el padding predeterminado */
+            display: inline-block; /* Centra la lista horizontalmente si dentro de un div con text-align: center */
+        }
+
+        .custom-list li::before {
+            content: "•"; /* Carácter para el punto de la lista */
+            color: #35b3d3; /* Asegura que el color del punto es azul, para coincidir con el fondo del título */
+            display: inline-block; /* Hace que el punto se sitúe al lado del texto */
+            width: 1em; /* Espacio antes del texto */
+            margin-left: -1em; /* Alinea el punto con el texto */
+        }
+    </style>
+    </section>
+
+    <!-- Cuarta diapositiva -->
+    <section>
+        <div style="text-align: center; background-color: #074d86; color: white; width: 100%; height: 30px; display: flex; align-items: center; justify-content: center;">
+            <h1 style="font-family: Arial, sans-serif; text-align: left; margin: 0; font-size: 1em; color: white;">Propiedad de falta de memoria de la distribución exponencial</h1>
+        </div>
+        
+        <div style="font-family: Arial, sans-serif; text-align: left; font-size: 0.8em; max-width: 8000px; margin: auto; line-height: 1.8em; padding: 20px; min-height: 300px;"">
+            <p>
+                La propiedad de falta de memoria, matemáticamente como    
+            </p>
+            <p>
+                \begin{equation}
+                    P(T > t + s \vert T > t) = P(T > s)
+                \end{equation}
+            </p>
+            <p>
+                para tiempos $t, s \geq 0$. También se tiene que    
+            </p>
+            <p>
+                \begin{equation}
+                    P(T > t) = e^{-\alpha t}
+                \end{equation}
+            </p>
+            <p>
+                para $t \geq 0$ (porque $F_T(t) = 1 - e^{-\alpha t}$).
+            </p>
+            <p>
+                A partir de estas definiciones, se determinan dos casos específicos.
+            </p>
+        </div>
+    </section>
+
+    <!-- Quinta diapositiva -->
+    <section>
+        <div style="text-align: center; background-color: #074d86; color: white; width: 100%; height: 30px; display: flex; align-items: center; justify-content: center;">
+            <h1 style="font-family: Arial, sans-serif; text-align: left; margin: 0; font-size: 0.7em; color: white;">Primer hecho I: Densidad de la variable mínima de un conjunto de variables aleatorias</h1>
+        </div>
+
+        <div class="custom-list" style="text-align: left; font-size: 0.8em; max-width: 8000px; margin: auto; line-height: 1.8em; padding: 20px; ">
+            <ul>
+                <li style="font-family: Arial, sans-serif;margin-bottom: 5px;">Supóngase que $T_{1}, T_{2}, \ldots, T_{N}$ son variables aleatorias independientes, cada una distribuida exponencialmente. Supóngase que $T_{i}$ tiene parámetro $\alpha_{i}$. </li>
+                <li style="font-family: Arial, sans-serif; margin-bottom: 5px;">Suponga $N$ componentes que se ''conectan'' (o ''inician su operación conjunta'') al tiempo $t = 0$.</li>
+                <li style="font-family: Arial, sans-serif; margin-bottom: 5px;">$T_{i}$ es el tiempo de vida del $i$-ésimo componente.</li>
+                <li style="font-family: Arial, sans-serif; margin-bottom: 5px;">Sea $M$ el mínimo de todos los tiempos $T_{i}$'s de los componentes. $M$ es el tiempo en que el primer componente falla. </li>
+                <li style="font-family: Arial, sans-serif; margin-bottom: 5px;">$M$ es una variable aleatoria.  </li>
+            </ul>
+            </ul>
+        </div>
+        <style>
+        .custom-list ul {
+            list-style: none; /* Remueve el estilo de lista predeterminado */
+            padding: 0; /* Remueve el padding predeterminado */
+            display: inline-block; /* Centra la lista horizontalmente si dentro de un div con text-align: center */
+        }
+
+        .custom-list li::before {
+            content: "•"; /* Carácter para el punto de la lista */
+            color: #35b3d3; /* Asegura que el color del punto es azul, para coincidir con el fondo del título */
+            display: inline-block; /* Hace que el punto se sitúe al lado del texto */
+            width: 1em; /* Espacio antes del texto */
+            margin-left: -1em; /* Alinea el punto con el texto */
+        }
+        </style>
+    </section>
+
+    <!-- Sexta diapositiva -->
+    <section>
+        <div style="text-align: center; background-color: #074d86; color: white; width: 100%; height: 30px; display: flex; align-items: center; justify-content: center;">
+            <h1 style="font-family: Arial, sans-serif; text-align: left; margin: 0; font-size: 0.7em; color: white;">Primer hecho II: Densidad de la variable mínima de un conjunto de variables aleatorias</h1>
+        </div>
+
+        <div class="custom-list" style="text-align: left; font-size: 0.8em; max-width: 8000px; margin: auto; line-height: 1.8em; padding: 20px; ">
+            <ul>
+                <li style="font-family: Arial, sans-serif;margin-bottom: 5px;">Sea $t \geq 0$. Entonces $M = \min\{T_{1}, \ldots, T_{N}\}$ es más grande que $t$ si y solo si <strong>todo</strong> $T_{i} > t$.</li>
+            </ul>
+            </ul>
+        </div>
+
+        <div style="font-family: Arial, sans-serif; text-align: left; font-size: 0.8em; max-width: 8000px; margin: auto; line-height: 1.8em; padding: 20px; min-height: 300px;"">
+            <p>
+                \begin{equation} 
+                    \begin{aligned}
+                    P(M > t) & = P(\min\{T_{1}, T_{2}, \ldots, T_{N}\} > t) \\
+                    & = P(T_{1} > t, T_{2} > t, \ldots, T_{N} > t) \\
+                    & = e^{-\alpha_{1}t}\cdot e^{-\alpha_{2}t} \cdots e^{-\alpha_{N}t} \\
+                    & = e^{-(\alpha_{1} +\alpha_{2} + \ldots +\alpha_{N})t}
+                    \end{aligned} 
+                \end{equation}
+            </p>
+        </div>
+
+        <div style="border-left: 5px solid green; padding-left: 10px; font-family: 'Arial', sans-serif; font-size: 16px;">
+            <p>$M$ está exponencialmente distribuida con parámetro $\alpha_{1} + \alpha_{2} + \ldots + \alpha_{N}$ y valor medio $1/(\alpha_{1} + \alpha_{2} + \ldots + \alpha_{N})$. </p>
+        </div>
+
+        <style>
+            .custom-list ul {
+                list-style: none; /* Remueve el estilo de lista predeterminado */
+                padding: 0; /* Remueve el padding predeterminado */
+                display: inline-block; /* Centra la lista horizontalmente si dentro de un div con text-align: center */
+            }
+    
+            .custom-list li::before {
+                content: "•"; /* Carácter para el punto de la lista */
+                color: #35b3d3; /* Asegura que el color del punto es azul, para coincidir con el fondo del título */
+                display: inline-block; /* Hace que el punto se sitúe al lado del texto */
+                width: 1em; /* Espacio antes del texto */
+                margin-left: -1em; /* Alinea el punto con el texto */
+            }
+            </style>
+    </section>
+
+    <!-- Septima diapositiva -->
+    <section>
+        <div style="text-align: center; background-color: #074d86; color: white; width: 100%; height: 30px; display: flex; align-items: center; justify-content: center;">
+            <h1 style="font-family: Arial, sans-serif; text-align: left; margin: 0; font-size: 0.7em; color: white;">Segundo hecho I: Probabilidad de que un componente dado sea el que falle</h1>
+        </div>
+
+        <div style="font-family: Arial, sans-serif; text-align: left; font-size: 0.8em; max-width: 800px; margin: auto; line-height: 1.8em; padding: 20px;">
+            <p>Ante la pregunta,</p>
+            <p style="margin-left: 20px;"><span style="font-style: italic;">¿Cuál es la probabilidad de que, cuando el primer fallo suceda, sea el componente $j$-ésimo?</span></p>
+        </div>
+
+        <div style="border-left: 5px solid green; padding-left: 10px; font-family: 'Arial', sans-serif; font-size: 16px; max-width: 800px; margin: auto;">
+            <p>La probabilidad de que entre las $N$ variables aleatorias $T_{i}$ el mínimo sea $T_{j}$ está dada por la expresión:</p>
+            <p>
+                \[
+                P(T_{j} = \min \{T_{1}, T_{2}, \ldots, T_{N}\}) = \frac{\alpha_{j}}{\alpha_{1} + \alpha_{2} + \cdots + \alpha_{N}}
+                \]
+            </p>
+        </div>
+    </section>
+
+    <!-- Octava dapositiva -->
+    <section>
+        <div style="text-align: center; background-color: #074d86; color: white; width: 100%; height: 30px; display: flex; align-items: center; justify-content: center;">
+            <h1 style="font-family: Arial, sans-serif; text-align: left; margin: 0; font-size: 0.7em; color: white;">Segundo hecho II: Probabilidad de que un componente dado sea el que falle</h1>
+        </div>
+
+        <div style="font-family: Arial, sans-serif; text-align: left; font-size: 0.8em; max-width: 800px; margin: auto; line-height: 1.8em; padding: 20px;">
+            <p style="color: #00BFFF;"><strong>Prueba para dos variables aleatorias</strong></p>
+            <p>Si $T_{1}$ y $T_{2}$ son independientes y distribuidos exponencialmente con parámetros respectivos $\alpha$ y $\beta$: $ f_{T_{1},T_{2}}(t_{1},t_{2}) = \alpha e^{-\alpha t_{1}}\beta e^{-\beta t_{2}} $, para $t_{1}, t_{2} > 0$. Con $t_{1}$ y $t_{2}$ correspondientes a $T_{1}$ y $T_{2}$:</p>
+            <p>
+                \begin{equation*} 
+                \begin{aligned}
+                P(T_{1} = \min\{T_{1}, T_{2}\}) = P(T_{1} < T_{2}) \\
+                = \iint_{T_1 < T_2} f_{T_{1}, T_{2}}(t_{1},t_{2}) \, dt_{1} \, dt_{2} \\
+                = \int_{0}^{\infty}\int_{0}^{t_{2}}\alpha e^{-\alpha t_{1}}\beta e^{-\beta t_{2}} \, dt_{1} \, dt_{2} \\
+                = \int_{0}^{\infty}(1 - e^{-\alpha t_{2}})\beta e^{-\beta t_{2}} \, dt_{2} \\
+                = 1 - \frac{\beta}{\alpha + \beta} = \frac{\alpha}{\alpha + \beta} 
+                \end{aligned} 
+                \end{equation*}
+            </p>
+        </div>
+    </section>
+</section>
+
+<!-- Seccion 3 -->
+<section>
+    <!-- Primera diapositiva -->
+    <section>
+        <div style="font-family: Arial, sans-serif; text-align: center; background-color: #074d86; color: white; width: 100%; height: 100px; display: flex; align-items: center; justify-content: center;">
+            <h1 style="margin: 0; font-size: 1.5em; color: white;">El proceso de nacimiento y muerte en tiempo continuo</h1>
+        </div>
+    </section>
+
+    <!-- Segunda -->
+    <section>
+        <div style="text-align: center; background-color: #074d86; color: white; width: 100%; height: 30px; display: flex; align-items: center; justify-content: center;">
+            <h1 style="font-family: Arial, sans-serif; text-align: left; margin: 0; font-size: 1em; color: white;">El proceso de nacimiento y muerte en tiempo continuo I</h1>
+        </div>
+        
+        <div style="font-family: Arial, sans-serif; text-align: left; font-size: 0.8em; max-width: 8000px; margin: auto; line-height: 1.8em; padding: 20px; min-height: 300px;"">
+            <p>
+                ''Nacimiento'' y ''muerte'' es una analogía tétrica que puede interpretarse también como ''aparición'' y ''desaparición'' o ''llegada'' y ''salida'' o ''unión'' y ''separación'' o ''haciendo fila'' y ''listo el trámite'' 
+            </p>
+            <p>
+                <strong> Figura </strong>
+            </p>
+        </div>
+    </section>
+
+    <!-- Tercera diapositiva -->
+    <section>
+    <div style="text-align: center; background-color: #074d86; color: white; width: 100%; height: 30px; display: flex; align-items: center; justify-content: center;">
+        <h1 style="font-family: Arial, sans-serif; text-align: left; margin: 0; font-size: 1em; color: white;">El proceso de nacimiento y muerte en tiempo continuo II</h1>
+    </div>
+
+    <div class="custom-list" style="text-align: left; font-size: 0.8em; max-width: 8000px; margin: auto; line-height: 1.8em; padding: 20px; ">
+        <ul>
+            <li style="font-family: Arial, sans-serif;margin-bottom: 5px;">Considérese una ''máquina'' que puede estar en cualquiera de varios estados en cada instante de tiempo $t \geq 0$.</span></li>
+            <li style="font-family: Arial, sans-serif; margin-bottom: 5px;">El conjunto de estados posibles, el espacio de estados $S$, será siempre discreto: </li>
+        </ul>
+    </div>
+
+    <div style="font-family: Arial, sans-serif; text-align: left; font-size: 0.8em; max-width: 8000px; margin: auto; line-height: 1.8em; padding: 20px;"">
+        <p>
+            \begin{equation*}
+                S = \{0, 1, 2, \ldots, N\} \qquad \text{ o } \qquad S = \{0, 1, 2, \ldots\}
+            \end{equation*}
+        </p>
+    </div>
+
+    <div class="custom-list" style="text-align: left; font-size: 0.8em; max-width: 8000px; margin: auto; line-height: 1.8em; padding: 20px; ">
+        <ul>
+            <li style="font-family: Arial, sans-serif;margin-bottom: 5px;">Al tiempo $t$, el estado de la máquina es denotado por $X_{t}$</li>
+            
+    </div>
+    
+
+    <div style="border-left: 5px solid green; padding-left: 10px; font-family: 'Arial', sans-serif; font-size: 16px;">
+        <p>Por ejemplo, $X_{t}$ podría denotar el número de animales en una poza para beber. El estado de la máquina es el número $X_{t}$ de animales al tiempo $t$.</p>
+    </div>
+    <style>
+        .custom-list ul {
+            list-style: none; /* Remueve el estilo de lista predeterminado */
+            padding: 0; /* Remueve el padding predeterminado */
+            display: inline-block; /* Centra la lista horizontalmente si dentro de un div con text-align: center */
+        }
+
+        .custom-list li::before {
+            content: "•"; /* Carácter para el punto de la lista */
+            color: #35b3d3; /* Asegura que el color del punto es azul, para coincidir con el fondo del título */
+            display: inline-block; /* Hace que el punto se sitúe al lado del texto */
+            width: 1em; /* Espacio antes del texto */
+            margin-left: -1em; /* Alinea el punto con el texto */
+        }
+    </style>
+    </section>
+
+    <!-- Cuarta diapositiva -->
+    <section>
+        <div style="text-align: center; background-color: #074d86; color: white; width: 100%; height: 30px; display: flex; align-items: center; justify-content: center;">
+            <h1 style="font-family: Arial, sans-serif; text-align: left; margin: 0; font-size: 1em; color: white;">Suposiciones básicas I : Proceso de nacimiento y muerte</h1>
+        </div>
+        <div style="text-align: left; margin-top: 20px; padding-left: 20px;">
+            <ul style="list-style: none; padding: 0;">
+                <li style="margin-bottom: 5px; font-family: Arial, sans-serif; font-size: 0.8em;"><i class="bi bi-1-circle-fill" style="color: #00BFFF; margin-right: 5px;"></i> Si al tiempo $t$ la máquina está en el estado $i$, permanece en ese estado por un tiempo aleatorio que es exponencialmente distribuido con parámetro $\Omega_{i}$.</li>
+        </div>
+
+        <div class="custom-list" style="text-align: left; font-size: 0.8em; max-width: 8000px; margin: auto; line-height: 1.8em; padding: 20px; ">
+            <ul>
+                <li style="font-family: Arial, sans-serif;margin-bottom: 5px;">El tiempo de espera promedio en el estado $i$ es el recíproco $1/\Omega_{i}$</li>
+                <li style="font-family: Arial, sans-serif; margin-bottom: 5px;">$\Omega_{i}$ depende del estado $i$, pero no depende de otros estados anteriores </li>
+                <li style="font-family: Arial, sans-serif; margin-bottom: 5px;">El estado $i$ pudiera ser \textbf{absorbente}: una vez que la máquina entra al estado $i$, permanecerá siempre ahí.  </li>
+                <li style="font-family: Arial, sans-serif; margin-bottom: 5px;">En este caso, $\Omega_{i} = 0$ y el tiempo de espera promedio es $1/\Omega_{i} \to \infty$.  </li>
+            </ul>
+        </div>
+        <style>
+            .custom-list ul {
+                list-style: none; /* Remueve el estilo de lista predeterminado */
+                padding: 0; /* Remueve el padding predeterminado */
+                display: inline-block; /* Centra la lista horizontalmente si dentro de un div con text-align: center */
+            }
+    
+            .custom-list li::before {
+                content: "•"; /* Carácter para el punto de la lista */
+                color: #35b3d3; /* Asegura que el color del punto es azul, para coincidir con el fondo del título */
+                display: inline-block; /* Hace que el punto se sitúe al lado del texto */
+                width: 1em; /* Espacio antes del texto */
+                margin-left: -1em; /* Alinea el punto con el texto */
+            }
+        </style>
+    </section>
+
+    <!-- Quinta diapositiva -->
+    <section>
+        <div style="text-align: center; background-color: #074d86; color: white; width: 100%; height: 30px; display: flex; align-items: center; justify-content: center;">
+            <h1 style="font-family: Arial, sans-serif; text-align: left; margin: 0; font-size: 1em; color: white;">Suposiciones básicas II : Proceso de nacimiento y muerte</h1>
+        </div>
+        <div style="text-align: left; margin-top: 20px; padding-left: 20px;">
+            <ul style="list-style: none; padding: 0;">
+                <li style="margin-bottom: 5px; font-family: Arial, sans-serif; font-size: 0.8em;"><i class="bi bi-2-circle-fill" style="color: #00BFFF; margin-right: 5px;"></i> Cuando la máquina sale del estado $i$, cambia al estado $i+1$ o al estado $i-1$ (habían 9 vacas, luego hay 8 si se va una, o 10 si llega otra). Sea </li>
+            </ul>
+        </div>
+        
+        <div style="font-family: Arial, sans-serif; text-align: left; font-size: 0.8em; max-width: 8000px; margin: auto; line-height: 1.8em; padding: 20px; min-height: 300px;"">
+            <p>
+                \begin{equation} \begin{aligned}
+                p_{i} & = P(\{\text{próximo estado es $i+1$} \mid \text{último estado es $i$}\}) \\
+                q_{i} & = 1 - p_{i} \\
+                \; & = P(\{\text{próximo estado es $i-1$} \mid \text{último estado es $i$}\})
+              \end{aligned} \end{equation}  
+            </p>
+            <p>
+                Entonces $p_{i}$ y $q_{i}$ dependen solamente del estado $i$ y no de otros detalles del proceso (tales como el tiempo $t$, la duración en $i$ o el estado antes de $i$).
+            </p>
+        </div>
+    </section>
+
+    <!-- Sexta diapositiva -->
+    <section>
+        <div style="text-align: center; background-color: #074d86; color: white; width: 100%; height: 30px; display: flex; align-items: center; justify-content: center;">
+            <h1 style="font-family: Arial, sans-serif; text-align: left; margin: 0; font-size: 1em; color: white;">Suposiciones básicas III : Proceso de nacimiento y muerte</h1>
+        </div>
+
+        <div style="font-family: Arial, sans-serif; text-align: left; font-size: 0.8em; max-width: 8000px; margin: auto; line-height: 1.8em; padding: 20px; min-height: 300px;"">
+            <p><strong>Figura</strong></p>
+            <p>
+                El proceso estocástico $\{X_{t}\}_{t = 0}^{\infty}$ es un récord completo de los estados ocupados por la máquina para todos los tiempos $t \geq 0$. 
+            </p>
+        </div>
+        
+    </section>
+
+    <!-- Septima diapositiva -->
+    <section>
+        <div style="text-align: center; background-color: #074d86; color: white; width: 100%; height: 30px; display: flex; align-items: center; justify-content: center;">
+            <h1 style="font-family: Arial, sans-serif; text-align: left; margin: 0; font-size: 1em; color: white;">Propiedad de la falta de memoria I: Proceso de nacimiento y muerte</h1>
+        </div>
+
+        <div style="font-family: Arial, sans-serif; text-align: left; font-size: 0.8em; max-width: 8000px; margin: auto; line-height: 1.8em; padding: 20px;"">
+            <p><strong>Figura</strong></p>
+            <p>
+                Dado el presente estado $X_{t}$ del sistema al tiempo $t$, los estados futuros de la máquina no dependen de los estados pasados. 
+            </p>
+        </div>
+        
+        <div class="custom-list" style="text-align: left; font-size: 0.8em; max-width: 8000px; margin: auto; line-height: 1.8em; padding: 20px; ">
+            <ul>
+                <li style="font-family: Arial, sans-serif;"> En particular, si el estado al tiempo $t$ es $X_{t} = i$, entonces es completamente irrelevante si ha estado en el estado $i$ por varios años o si acaba de cambiar al estado $i$, para predecir cuando se mudará del estado $i$. </li>
+            </ul>
+        </div>
+        <style>
+            .custom-list ul {
+                list-style: none; /* Remueve el estilo de lista predeterminado */
+                padding: 0; /* Remueve el padding predeterminado */
+                display: inline-block; /* Centra la lista horizontalmente si dentro de un div con text-align: center */
+            }
+    
+            .custom-list li::before {
+                content: "•"; /* Carácter para el punto de la lista */
+                color: #35b3d3; /* Asegura que el color del punto es azul, para coincidir con el fondo del título */
+                display: inline-block; /* Hace que el punto se sitúe al lado del texto */
+                width: 1em; /* Espacio antes del texto */
+                margin-left: -1em; /* Alinea el punto con el texto */
+            }
+        </style>
+    </section>
+
+    <!-- Octava diapositiva -->
+    <section>
+        <div style="text-align: center; background-color: #074d86; color: white; width: 100%; height: 30px; display: flex; align-items: center; justify-content: center;">
+            <h1 style="font-family: Arial, sans-serif; text-align: left; margin: 0; font-size: 1em; color: white;">Propiedad de la falta de memoria II: Proceso de nacimiento y muerte</h1>
+        </div>
+        
+        <div class="custom-list" style="text-align: left; font-size: 0.8em; max-width: 8000px; margin: auto; line-height: 1.8em; padding: 20px; ">
+            <ul>
+                <li style="font-family: Arial, sans-serif;"> Dado que la distribución exponencial sigue la propiedad de la falta de memoria, la máquina se comporta como si acabara de moverse al estado $i$ a pesar de qué tan largo hubiera realmente ocupado el estado $i$.  </li>
+                <li style="font-family: Arial, sans-serif;"> La distribución exponencial es la única distribución continua concentrada en $[0, \infty[$ para los tiempos de espera que tiene esta propiedad.   </li>
+            </ul>
+        </div>
+
+
+        <div style="font-family: Arial, sans-serif; text-align: left; font-size: 0.8em; max-width: 8000px; margin: auto; line-height: 1.8em; padding: 20px;"">
+            <p>
+                Nótese que si $\Omega_{i} = 0$ para el estado $i$, entonces los valores de $p_{i}$, $q_{i}$ son innecesarios de especificar dado que la máquina no puede cambiar del estado $i$ una vez en él.  
+            </p>
+        </div>
+        <style>
+            .custom-list ul {
+                list-style: none; /* Remueve el estilo de lista predeterminado */
+                padding: 0; /* Remueve el padding predeterminado */
+                display: inline-block; /* Centra la lista horizontalmente si dentro de un div con text-align: center */
+            }
+    
+            .custom-list li::before {
+                content: "•"; /* Carácter para el punto de la lista */
+                color: #35b3d3; /* Asegura que el color del punto es azul, para coincidir con el fondo del título */
+                display: inline-block; /* Hace que el punto se sitúe al lado del texto */
+                width: 1em; /* Espacio antes del texto */
+                margin-left: -1em; /* Alinea el punto con el texto */
+            }
+        </style>
+    </section>
+
+    <!-- Novena diapositiva -->
+    <section>
+        <div style="text-align: center; background-color: #074d86; color: white; width: 100%; height: 30px; display: flex; align-items: center; justify-content: center;">
+            <h1 style="font-family: Arial, sans-serif; text-align: left; margin: 0; font-size: 1em; color: white;">Proceso de nacimiento y muerte en tiempo continuo: Síntesis</h1>
+        </div>
+
+        <div style="font-family: Arial, sans-serif; text-align: left; font-size: 0.8em; max-width: 8000px; margin: auto; line-height: 1.8em; padding: 20px;"">
+            <p>
+                Consiste de una máquina que puede cambiar entre estados en un espacio de estados $S$.  
+            </p>
+        </div>
+        
+        <div class="custom-list" style="text-align: left; font-size: 0.8em; max-width: 8000px; margin: auto; line-height: 1.8em; padding: 20px; ">
+            <ul>
+                <li style="font-family: Arial, sans-serif;"> $X_{t}$ denota el estado ocupado al tiempo $t$ para $t \geq 0$. </li>
+                <li style="font-family: Arial, sans-serif;"> La máquina permanece en el estado $i$ por un periodo de tiempo indeterminado (llamado tiempo de espera o permanencia) que es exponencialmente distribuido con parámetro $\Omega_{i}$ (tiempo de espera promedio $1/\Omega_{i}$).</li>
+                <li style="font-family: Arial, sans-serif;"> Cuando la máquina cambia, cambia a los estados $i+1$, $i-1$ con probabilidades respectivas $p_{i}$, $q_{i} = 1 - p_{i}$.</li>
+            </ul>
+        </div>
+        <style>
+            .custom-list ul {
+                list-style: none; /* Remueve el estilo de lista predeterminado */
+                padding: 0; /* Remueve el padding predeterminado */
+                display: inline-block; /* Centra la lista horizontalmente si dentro de un div con text-align: center */
+            }
+    
+            .custom-list li::before {
+                content: "•"; /* Carácter para el punto de la lista */
+                color: #35b3d3; /* Asegura que el color del punto es azul, para coincidir con el fondo del título */
+                display: inline-block; /* Hace que el punto se sitúe al lado del texto */
+                width: 1em; /* Espacio antes del texto */
+                margin-left: -1em; /* Alinea el punto con el texto */
+            }
+        </style>
+    </section>
+</section>
+
+
+<!-- Seccion 4 -->
+<section>
+    <!-- Primera diapositiva -->
+    <section>
+        <div style="font-family: Arial, sans-serif; text-align: center; background-color: #074d86; color: white; width: 100%; height: 100px; display: flex; align-items: center; justify-content: center;">
+            <h1 style="margin: 0; font-size: 1.5em; color: white;">Teoría de colas</h1>
+        </div>
+    </section>
+
+    <!-- Segunda diapositiva -->
+    <section>
+        <div style="text-align: center; background-color: #074d86; color: white; width: 100%; height: 30px; display: flex; align-items: center; justify-content: center;">
+            <h1 style="font-family: Arial, sans-serif; text-align: left; margin: 0; font-size: 1em; color: white;">Teoría de colas I</h1>
+        </div>
+
+        <div style="font-family: Arial, sans-serif; text-align: left; font-size: 0.8em; max-width: 8000px; margin: auto; line-height: 1.8em; padding: 20px;"">
+            <p>
+                La teoría de colas (<span style="font-style: italic;">queueing theory</span> en inglés) es un estudio matemático de situaciones muy comunes, como carros que llegan a casetillas de peaje, clientes en una caja de supermercado, aviones que sobrevuelan un aeropuerto esperando aterrizar... 
+            </p>
+        </div>
+    </section>
+
+    <!-- Tercera diapositiva -->
+    <section>
+        <div style="text-align: center; background-color: #074d86; color: white; width: 100%; height: 30px; display: flex; align-items: center; justify-content: center;">
+            <h1 style="font-family: Arial, sans-serif; text-align: left; margin: 0; font-size: 1em; color: white;">Teoría de colas II</h1>
+        </div>
+
+        <div style="font-family: Arial, sans-serif; text-align: left; font-size: 0.8em; max-width: 8000px; margin: auto; line-height: 1.8em; padding: 20px;"">
+            <p>
+                En teoría de colas, la ''máquina'' consiste de clientes y servidores.
+            </p>
+        </div>
+
+        <div class="custom-list" style="text-align: left; font-size: 0.8em; max-width: 8000px; margin: auto; line-height: 1.8em; padding: 20px; ">
+            <ul>
+                <li style="font-family: Arial, sans-serif;"> Es similar a un tanque de agua con un flujo de entrada y un flujo de salida. La relación entre estos flujos determina qué tan lleno o vacío está el tanque. </li>
+                <li style="font-family: Arial, sans-serif;"> Se determinan dos flujos: </li>
+                <li class="custom-list" style="text-align: left; font-size: 0.8em; max-width: 8000px; margin: auto; line-height: 0.1em; padding: 10px; "> arribo de los ''clientes''. </li>
+                <li class="custom-list" style="text-align: left; font-size: 0.8em; max-width: 8000px; margin: auto; line-height: 0.1em; padding: 10px; "> tiempo de ''servicio''. </li>
+        </div>
+
+        <style>
+            .custom-list ul {
+                list-style: none; /* Remueve el estilo de lista predeterminado */
+                padding: 0; /* Remueve el padding predeterminado */
+                display: inline-block; /* Centra la lista horizontalmente si dentro de un div con text-align: center */
+            }
+    
+            .custom-list li::before {
+                content: "•"; /* Carácter para el punto de la lista */
+                color: #35b3d3; /* Asegura que el color del punto es azul, para coincidir con el fondo del título */
+                display: inline-block; /* Hace que el punto se sitúe al lado del texto */
+                width: 1em; /* Espacio antes del texto */
+                margin-left: -1em; /* Alinea el punto con el texto */
+            }
+        </style>
+    </section>
+
+
+    <!-- Cuarta diapositiva -->
+    <section>
+        <div style="text-align: center; background-color: #074d86; color: white; width: 100%; height: 30px; display: flex; align-items: center; justify-content: center;">
+            <h1 style="font-family: Arial, sans-serif; text-align: left; margin: 0; font-size: 1em; color: white;">Arribo de los clientes: Teoría de colas</h1>
+        </div>
+
+        <div class="custom-list" style="text-align: left; font-size: 0.8em; max-width: 8000px; margin: auto; line-height: 1.8em; padding: 20px; ">
+            <ul>
+                <li style="font-family: Arial, sans-serif;"> Los clientes arriban de acuerdo a una <span style="font-style: italic;">corriente Poisson</span> con parámetro $\lambda$.  </li>
+        </div>
+
+        <div style="font-family: Arial, sans-serif; text-align: left; font-size: 0.8em; max-width: 8000px; margin: auto; line-height: 1.8em; padding: 20px;"">
+            <p>
+                <strong>Figura</strong>
+            </p>
+        </div>
+
+        <div class="custom-list" style="text-align: left; font-size: 0.8em; max-width: 8000px; margin: auto; line-height: 1.8em; padding: 20px; ">
+            <ul>
+                <li style="font-family: Arial, sans-serif;"> En promedio, arriban $\lambda$ clientes por unidad de tiempo.</li>
+            </ul>
+        </div>
+
+        <div style="font-family: Arial, sans-serif; text-align: left; font-size: 0.8em; max-width: 8000px; margin: auto; line-height: 1.8em; padding: 20px;"">
+            <p>
+                <strong>Figura</strong>
+            </p>
+        </div>
+
+        <style>
+            .custom-list ul {
+                list-style: none; /* Remueve el estilo de lista predeterminado */
+                padding: 0; /* Remueve el padding predeterminado */
+                display: inline-block; /* Centra la lista horizontalmente si dentro de un div con text-align: center */
+            }
+    
+            .custom-list li::before {
+                content: "•"; /* Carácter para el punto de la lista */
+                color: #35b3d3; /* Asegura que el color del punto es azul, para coincidir con el fondo del título */
+                display: inline-block; /* Hace que el punto se sitúe al lado del texto */
+                width: 1em; /* Espacio antes del texto */
+                margin-left: -1em; /* Alinea el punto con el texto */
+            }
+        </style>
+    </section>
+
+
+    <!-- Quinta diapositiva -->
+    <section>
+        <div style="text-align: center; background-color: #074d86; color: white; width: 100%; height: 30px; display: flex; align-items: center; justify-content: center;">
+            <h1 style="font-family: Arial, sans-serif; text-align: left; margin: 0; font-size: 1em; color: white;">Tiempo de servicio: Teoría de colas</h1>
+        </div>
+
+        <div class="custom-list" style="text-align: left; font-size: 0.8em; max-width: 8000px; margin: auto; line-height: 1.8em; padding: 20px; ">
+            <ul>
+                <li style="font-family: Arial, sans-serif;"> Puede haber uno o más servidores.  </li>
+                <li style="font-family: Arial, sans-serif;"> Los tiempos de servicio son aleatorios, pero se supone que están exponencialmente distribuidos con parámetro $\nu$ (nu).  </li>
+        </div>
+
+        <div style="font-family: Arial, sans-serif; text-align: left; font-size: 0.8em; max-width: 8000px; margin: auto; line-height: 1.8em; padding: 20px;"">
+            <p>
+                \begin{equation*}
+                f_{T}(t) = 
+                \begin{cases}
+                0 				& t < 0 \\
+                \nu e^{-\nu t} 	& t > 0 
+                \end{cases}
+                \end{equation*}
+            </p>
+        </div>
+
+        <div class="custom-list" style="text-align: left; font-size: 0.8em; max-width: 8000px; margin: auto; line-height: 1.8em; padding: 20px; ">
+            <ul>
+                <li style="font-family: Arial, sans-serif;"> En promedio, el tiempo de servicio es $1/\nu$.</li>
+            </ul>
+        </div>
+
+        <style>
+            .custom-list ul {
+                list-style: none; /* Remueve el estilo de lista predeterminado */
+                padding: 0; /* Remueve el padding predeterminado */
+                display: inline-block; /* Centra la lista horizontalmente si dentro de un div con text-align: center */
+            }
+    
+            .custom-list li::before {
+                content: "•"; /* Carácter para el punto de la lista */
+                color: #35b3d3; /* Asegura que el color del punto es azul, para coincidir con el fondo del título */
+                display: inline-block; /* Hace que el punto se sitúe al lado del texto */
+                width: 1em; /* Espacio antes del texto */
+                margin-left: -1em; /* Alinea el punto con el texto */
+            }
+        </style>
+    </section>
+
+    <!-- Sexta diapositiva -->
+    <section>
+        <div style="text-align: center; background-color: #074d86; color: white; width: 100%; height: 30px; display: flex; align-items: center; justify-content: center;">
+            <h1 style="font-family: Arial, sans-serif; text-align: left; margin: 0; font-size: 1em; color: white;">Proceso de nacimiento y muerte I: Teoría de colas</h1>
+        </div>
+
+        <div class="custom-list" style="text-align: left; font-size: 0.8em; max-width: 8000px; margin: auto; line-height: 1.8em; padding: 20px; ">
+            <ul>
+                <li style="font-family: Arial, sans-serif;"> $X_{t}$ es la longitud de la cola en el tiempo $t$, el número de clientes incluyendo a aquel (o aquellos si hay más de un servidor) que son servidos en el tiempo $t$.   </li>
+                <li style="font-family: Arial, sans-serif;"> Entonces el proceso estocástico $\{X_{t}\}_{t= 0}^{\infty}$ es llamado ''proceso de nacimiento y muerte''.</li>
+        </div>
+
+        <style>
+            .custom-list ul {
+                list-style: none; /* Remueve el estilo de lista predeterminado */
+                padding: 0; /* Remueve el padding predeterminado */
+                display: inline-block; /* Centra la lista horizontalmente si dentro de un div con text-align: center */
+            }
+    
+            .custom-list li::before {
+                content: "•"; /* Carácter para el punto de la lista */
+                color: #35b3d3; /* Asegura que el color del punto es azul, para coincidir con el fondo del título */
+                display: inline-block; /* Hace que el punto se sitúe al lado del texto */
+                width: 1em; /* Espacio antes del texto */
+                margin-left: -1em; /* Alinea el punto con el texto */
+            }
+        </style>
+    </section>
+
+
+    <!-- Séptima diapositiva -->
+    <section>
+        <div style="text-align: center; background-color: #074d86; color: white; width: 100%; height: 30px; display: flex; align-items: center; justify-content: center;">
+            <h1 style="font-family: Arial, sans-serif; text-align: left; margin: 0; font-size: 1em; color: white;">Proceso de nacimiento y muerte II: Teoría de colas</h1>
+        </div>
+
+        <div style="text-align: left; margin-top: 20px; padding-left: 20px;">
+            <p style="color: #00BFFF;"><strong>Carencia de memoria</strong></p>
+        </div>
+
+        <div class="custom-list" style="text-align: left; font-size: 0.8em; max-width: 8000px; margin: auto; line-height: 1.8em; padding: 20px; ">
+            <ul>
+                <li style="font-family: Arial, sans-serif;"> Tanto la corriente de llegada de clientes así como la corriente de salida de clientes que han sido servidos obedecen la propiedad de la carencia de memoria.</li>
+                <li style="font-family: Arial, sans-serif;"> Si algún otro cliente se une a la cola, es un hecho que es independiente del número de clientes en fila u otros detalles pasados acerca de la cola.</li>
+                <li style="font-family: Arial, sans-serif;"> Dado que los tiempos de servicio son exponencialmente distribuidos, el hecho de que un cliente termine de ser servido en cierto periodo de tiempo es independiente de detalles de la historia de la cola, incluyendo lo largo que el cliente ha recibido servicio. </li>
+        </div>
+
+        <style>
+            .custom-list ul {
+                list-style: none; /* Remueve el estilo de lista predeterminado */
+                padding: 0; /* Remueve el padding predeterminado */
+                display: inline-block; /* Centra la lista horizontalmente si dentro de un div con text-align: center */
+            }
+    
+            .custom-list li::before {
+                content: "•"; /* Carácter para el punto de la lista */
+                color: #35b3d3; /* Asegura que el color del punto es azul, para coincidir con el fondo del título */
+                display: inline-block; /* Hace que el punto se sitúe al lado del texto */
+                width: 1em; /* Espacio antes del texto */
+                margin-left: -1em; /* Alinea el punto con el texto */
+            }
+        </style>
+    </section>
+
+    <!-- Octava diapositiva -->
+    <section>
+        <div style="text-align: center; background-color: #00BFFF; color: white; width: 100%; height: 30px; display: flex; align-items: center; justify-content: center;">
+            <h1 style="font-family: Arial, sans-serif; text-align: left; margin: 0; font-size: 1em; color: white;">La cola de un solo servidor I: Ejemplo 1</h1>
+        </div>
+
+        <div style="font-family: Arial, sans-serif; text-align: left; font-size: 0.8em; max-width: 8000px; margin: auto; line-height: 1.8em; padding: 20px;"">
+            <p>
+                Supóngase que hay un cajero en el supermercado y que los clientes que arriban forman una corriente de Poisson con parámetro $\lambda$ y el tiempo de servicio está exponencialmente distribuido con parámetro $\nu$. El estado $X_{t}$ en el tiempo $t$ es la longitud de la cola. Así, $S = \{0, 1, 2, \ldots\}$. 
+            </p>
+            <p>
+                Un movimiento de 0 a 1 cliente ocurre en un tiempo aleatorio exponencialmente distribuido con parámetro $\lambda$. De esta forma,
+            </p>
+            <p>
+                \begin{equation*}
+                \Omega_{0} = \lambda \qquad p_{0} = 1
+                \end{equation*}  
+            </p>
+            <p>
+                Si el estado al tiempo $t$ es $X_{t} = i \geq 1$, un movimiento a un estado $i-1$ o $i+1$ puede ocurrir. Sea $T$ el tiempo de arribo del próximo cliente y $S$ sea el tiempo de servicio del cliente que es servido en el instante presente. 
+            </p>
+        </div>
+    </section>
+
+    <!-- Novena diapositiva -->
+    <section>
+        <div style="text-align: center; background-color: #00BFFF; color: white; width: 100%; height: 30px; display: flex; align-items: center; justify-content: center;">
+            <h1 style="font-family: Arial, sans-serif; text-align: left; margin: 0; font-size: 1em; color: white;">La cola de un solo servidor II: Ejemplo 1</h1>
+        </div>
+
+        <div style="font-family: Arial, sans-serif; text-align: left; font-size: 0.8em; max-width: 8000px; margin: auto; line-height: 1.8em; padding: 20px;"">
+            <p>
+                $T$ y $S$ son independientes y cada uno está exponencialmente distribuido con los respectivos parámetros $\lambda$ y $\nu$. Un movimiento ocurre fuera del estado $i$ en un tiempo igual a $\min\{T, S\}$. 
+            </p>
+            <p>
+                <div class="custom-list" style="text-align: left; font-size: 0.8em; max-width: 8000px; margin: auto; line-height: 1.8em; padding: 20px; ">
+                    <ul>
+                        <li style="font-family: Arial, sans-serif;"> La variable aleatoria $\min\{T, S\}$ está exponencialmente distribuida con parámetro $\lambda + \nu$.  </li>
+                        <li style="font-family: Arial, sans-serif;"> Un movimiento ocurre al estado $i+1$ si $T = \min\{T, S\}$; esto ocurre con una probabilidad igual a $\lambda/(\lambda + \nu)$.  </li>
+                        <li style="font-family: Arial, sans-serif;"> Similarmente, el movimiento hacia ($i-1$) clientes ocurre si $S = \min\{T, S\}$, lo que se da con una probabilidad $\nu/(\lambda + \nu)$.  </li>
+                </div>
+            </p>
+            <p>
+                Para resumir, para la cola de un servidor y para $i \geq 1$,
+            </p>
+            <p>
+                \begin{equation*}
+                \begin{array}{lll}
+                \Omega_{0} = \lambda & \quad p_{0} = 1 \\
+                \Omega_{i} = \lambda + \nu  & \quad p_{i} = \frac{\lambda}{\lambda + \nu} & \quad q_{i} = \frac{\nu}{\lambda + \nu}
+                \end{array}
+                \end{equation*}
+            </p>
+        </div>
+        <style>
+            .custom-list ul {
+                list-style: none; /* Remueve el estilo de lista predeterminado */
+                padding: 0; /* Remueve el padding predeterminado */
+                display: inline-block; /* Centra la lista horizontalmente si dentro de un div con text-align: center */
+            }
+    
+            .custom-list li::before {
+                content: "•"; /* Carácter para el punto de la lista */
+                color: #35b3d3; /* Asegura que el color del punto es azul, para coincidir con el fondo del título */
+                display: inline-block; /* Hace que el punto se sitúe al lado del texto */
+                width: 1em; /* Espacio antes del texto */
+                margin-left: -1em; /* Alinea el punto con el texto */
+            }
+        </style>
+
+    </section>
+
+    <!-- Décima diapositiva -->
+    <section>
+        <div style="text-align: center; background-color: #00BFFF; color: white; width: 100%; height: 30px; display: flex; align-items: center; justify-content: center;">
+            <h1 style="font-family: Arial, sans-serif; text-align: left; margin: 0; font-size: 1em; color: white;">La cola con infinito número de servidores I: Ejemplo 2</h1>
+        </div>
+
+        <div class="custom-list" style="text-align: left; font-size: 0.8em; max-width: 8000px; margin: auto; line-height: 1.8em; padding: 20px; ">
+            <ul>
+                <li style="font-family: Arial, sans-serif;"> Supóngase ahora que los clientes llegan de acuerdo a una corriente de Poisson con parámetro $\lambda$.  </li>
+                <li style="font-family: Arial, sans-serif;"> Esta vez cada cliente recibe servicio instantáneo. </li>
+                <li style="font-family: Arial, sans-serif;"> El tiempo de servicio es aún exponencialmente distribuido con parámetro $\nu$. </li>
+                <li style="font-family: Arial, sans-serif;"> Hay un infinito número de cajeros en el supermercado. De forma más realista, los clientes se sirven solos. Mejor aún: estamos en La Sabana y todos quienes llegan reciben ''el servicio'' de estar en el parque. </li>
+                <li style="font-family: Arial, sans-serif;"> Como en la cola de un servidor, $\Omega_{0} = \lambda$. Si hay $i$ clientes en el tiempo $t$, cada uno está recibiendo servicio.  </li>
+                <li style="font-family: Arial, sans-serif;"> Sea sus respectivos tiempos de servicio $S_{1}, S_{2}, \ldots, S_{i}$. (Puede pensarse en esta también como ''permanencia''). </li>
+        </div>
+        <style>
+            .custom-list ul {
+                list-style: none; /* Remueve el estilo de lista predeterminado */
+                padding: 0; /* Remueve el padding predeterminado */
+                display: inline-block; /* Centra la lista horizontalmente si dentro de un div con text-align: center */
+            }
+    
+            .custom-list li::before {
+                content: "•"; /* Carácter para el punto de la lista */
+                color: #35b3d3; /* Asegura que el color del punto es azul, para coincidir con el fondo del título */
+                display: inline-block; /* Hace que el punto se sitúe al lado del texto */
+                width: 1em; /* Espacio antes del texto */
+                margin-left: -1em; /* Alinea el punto con el texto */
+            }
+        </style>
+
+    </section>
+
+    <!-- Undécima diapositiva -->
+    <section>
+        <div style="text-align: center; background-color: #00BFFF; color: white; width: 100%; height: 30px; display: flex; align-items: center; justify-content: center;">
+            <h1 style="font-family: Arial, sans-serif; text-align: left; margin: 0; font-size: 1em; color: white;">La cola con infinito número de servidores II: Ejemplo 2</h1>
+        </div>
+
+        <div class="custom-list" style="text-align: left; font-size: 0.8em; max-width: 8000px; margin: auto; line-height: 1.8em; padding: 20px; ">
+            <ul>
+                <li style="font-family: Arial, sans-serif;"> Sea $T$ el tiempo de arribo del próximo cliente. Entonces un movimiento fuera del estado $i$ ocurre en un tiempo igual al $\min\{S_{1}, S_{2}, \ldots, S_{i}, T\}$. Dado que cada $S_{j}$ está exponencialmente distribuido con parámetro $\nu$ y $T$ está exponencialmente distribuido con parámetro $\lambda$, el tiempo para moverse del estado $i$ está exponencialmente distribuido con parámetro igual a la suma $\nu + \cdots + \nu + \lambda = i\nu + \lambda$.   </li>
+                <li style="font-family: Arial, sans-serif;"> El movimiento será a $i+1$ clientes si $T = \min\{S_{1}, S_{2}, \ldots, S_{i}, T\}$. La probabilidad de esto es $\lambda/(i\nu + \lambda)$.  </li>
+                <li style="font-family: Arial, sans-serif;"> El movimiento será para $i-1$ clientes si cualquiera de los $i$ clientes termina de ser servido. La probabilidad de que el cliente $j$-ésimo termine antes de los otros y también antes de un arribo es $\nu/(i\nu + \lambda)$.  </li>
+        </div>
+        <style>
+            .custom-list ul {
+                list-style: none; /* Remueve el estilo de lista predeterminado */
+                padding: 0; /* Remueve el padding predeterminado */
+                display: inline-block; /* Centra la lista horizontalmente si dentro de un div con text-align: center */
+            }
+    
+            .custom-list li::before {
+                content: "•"; /* Carácter para el punto de la lista */
+                color: #35b3d3; /* Asegura que el color del punto es azul, para coincidir con el fondo del título */
+                display: inline-block; /* Hace que el punto se sitúe al lado del texto */
+                width: 1em; /* Espacio antes del texto */
+                margin-left: -1em; /* Alinea el punto con el texto */
+            }
+        </style>
+
+    </section>
+
+    <!-- Duodécima diapositiva -->
+    <section>
+        <div style="text-align: center; background-color: #00BFFF; color: white; width: 100%; height: 30px; display: flex; align-items: center; justify-content: center;">
+            <h1 style="font-family: Arial, sans-serif; text-align: left; margin: 0; font-size: 1em; color: white;">La cola con infinito número de servidores III: Ejemplo 2</h1>
+        </div>
+
+        <div class="custom-list" style="text-align: left; font-size: 0.8em; max-width: 8000px; margin: auto; line-height: 1.8em; padding: 20px; ">
+            <ul>
+                <li style="font-family: Arial, sans-serif;"> Cualquiera de los $i$-clientes podría finalizar para que el movimiento fuera hacia $(i-1)$ clientes. Así, la probabilidad de un movimiento a $(i-1)$ es $i\nu/(i\nu + \lambda)$ (esto último también puede obtenerse como $1 - \lambda/(i\nu + \lambda)$).</li>
+                <li style="font-family: Arial, sans-serif;"> Para la cola con infinito número de servidores y para $i \geq 1$</li>
+        </div>
+
+        <div style="font-family: Arial, sans-serif; text-align: left; font-size: 0.8em; max-width: 8000px; margin: auto; line-height: 1.8em; padding: 20px;"">
+            <p>
+                \begin{equation*}
+                \begin{array}{lll}
+                \Omega_{0} = \lambda        & p_{0} = 1                              & \; \\
+                \Omega_{i} = i\nu + \lambda & p_{i} = \frac{\lambda}{i\nu + \lambda} & q_{i} = \frac{i\nu}{i\nu + \lambda}
+                \end{array}
+                \end{equation*}
+            </p>
+        </div>
+        
+        <style>
+            .custom-list ul {
+                list-style: none; /* Remueve el estilo de lista predeterminado */
+                padding: 0; /* Remueve el padding predeterminado */
+                display: inline-block; /* Centra la lista horizontalmente si dentro de un div con text-align: center */
+            }
+    
+            .custom-list li::before {
+                content: "•"; /* Carácter para el punto de la lista */
+                color: #35b3d3; /* Asegura que el color del punto es azul, para coincidir con el fondo del título */
+                display: inline-block; /* Hace que el punto se sitúe al lado del texto */
+                width: 1em; /* Espacio antes del texto */
+                margin-left: -1em; /* Alinea el punto con el texto */
+            }
+        </style>
+
+    </section>
+
+
+    <!-- Decimotercera diapositiva -->
+    <section>
+        <div style="text-align: center; background-color: #00BFFF; color: white; width: 100%; height: 30px; display: flex; align-items: center; justify-content: center;">
+            <h1 style="font-family: Arial, sans-serif; text-align: left; margin: 0; font-size: 1em; color: white;">Teléfono de una oficina de negocios I: Ejemplo 3</h1>
+        </div>
+
+        <div style="font-family: Arial, sans-serif; text-align: left; font-size: 0.8em; max-width: 8000px; margin: auto; line-height: 1em; padding: 10px;"">
+            <p>
+                Una oficina de negocios tiene un teléfono con un botón de retención. 
+            </p>
+            <p>
+                <div class="custom-list" style="text-align: left; font-size: 1em; max-width: 8000px; margin: auto; line-height: 1.8em; padding: 20px; ">
+                    <ul>
+                        <li style="font-family: Arial, sans-serif;"> Suponga que las llamadas entrantes forman una corriente de Poisson con parámetro $\lambda$. </li>
+                        <li style="font-family: Arial, sans-serif;"> Cada llamada toma un tiempo exponencialmente distribuido con un promedio de $1/\nu$ minutos. </li>
+                        <li style="font-family: Arial, sans-serif;"> Si una llamada llega durante un tiempo en que el teléfono está ocupado, es colocada en retención. Si otra llamada llega, recibe un tono de ocupado y debe colgar. </li>
+                        <li style="font-family: Arial, sans-serif;"> Sea el estado del sistema el número de llamadas que reciben servicio o están retenidas.</li>
+                </div>
+            </p>
+            <p>
+                ¿Cuáles son los parámetros $\Omega_{i}$ y las probabilidades de transición $p_{i}, q_{i}$?
+            </p>
+        </div>
+        
+        <style>
+            .custom-list ul {
+                list-style: none; /* Remueve el estilo de lista predeterminado */
+                padding: 0; /* Remueve el padding predeterminado */
+                display: inline-block; /* Centra la lista horizontalmente si dentro de un div con text-align: center */
+            }
+    
+            .custom-list li::before {
+                content: "•"; /* Carácter para el punto de la lista */
+                color: #35b3d3; /* Asegura que el color del punto es azul, para coincidir con el fondo del título */
+                display: inline-block; /* Hace que el punto se sitúe al lado del texto */
+                width: 1em; /* Espacio antes del texto */
+                margin-left: -1em; /* Alinea el punto con el texto */
+            }
+        </style>
+
+    </section>
+
+    <!-- Decimocuarta diapositiva -->
+    <section>
+        <div style="text-align: center; background-color: #00BFFF; color: white; width: 100%; height: 30px; display: flex; align-items: center; justify-content: center;">
+            <h1 style="font-family: Arial, sans-serif; text-align: left; margin: 0; font-size: 1em; color: white;">Teléfono de una oficina de negocios II: Ejemplo 3</h1>
+        </div>
+
+        <div class="custom-list" style="text-align: left; font-size: 0.8em; max-width: 8000px; margin: auto; line-height: 1em; padding: 20px; ">
+            <ul>
+                <li style="font-family: Arial, sans-serif;"> El espacio de estados es $S = \{0, 1, 2\}$. Cambio del estado 0 al estado 1 ocurre con la llegada de una llamada. De esta forma,</li>
+        </div>
+        <div style="font-family: Arial, sans-serif; text-align: left; font-size: 0.8em; max-width: 8000px; margin: auto; line-height: 1.8em; padding: 20px;"">
+            <p>
+                \begin{equation*}
+                \Omega_{0} = \lambda \qquad p_{0} = 1
+                \end{equation*}
+            </p>
+        </div>
+        <div class="custom-list" style="text-align: left; font-size: 0.8em; max-width: 8000px; margin: auto; line-height: 1em; padding: 20px; ">
+            <ul>
+                <li style="font-family: Arial, sans-serif;"> Si el estado es 2, un movimiento ocurre al estado 1 tan pronto como la llamada que es servida termina. De esta forma, </li>
+        </div>
+        <div style="font-family: Arial, sans-serif; text-align: left; font-size: 0.8em; max-width: 8000px; margin: auto; line-height: 1.8em; padding: 20px;"">
+            <p>
+                \begin{equation*}
+                \Omega_{2} = \nu \qquad q_{2} = 1
+                \end{equation*}
+            </p>
+        </div>
+
+        <style>
+            .custom-list ul {
+                list-style: none; /* Remueve el estilo de lista predeterminado */
+                padding: 0; /* Remueve el padding predeterminado */
+                display: inline-block; /* Centra la lista horizontalmente si dentro de un div con text-align: center */
+            }
+    
+            .custom-list li::before {
+                content: "•"; /* Carácter para el punto de la lista */
+                color: #35b3d3; /* Asegura que el color del punto es azul, para coincidir con el fondo del título */
+                display: inline-block; /* Hace que el punto se sitúe al lado del texto */
+                width: 1em; /* Espacio antes del texto */
+                margin-left: -1em; /* Alinea el punto con el texto */
+            }
+        </style>
+
+    </section>
+
+    <!-- Decimoquinta diapositiva -->
+    <section>
+        <div style="text-align: center; background-color: #00BFFF; color: white; width: 100%; height: 30px; display: flex; align-items: center; justify-content: center;">
+            <h1 style="font-family: Arial, sans-serif; text-align: left; margin: 0; font-size: 1em; color: white;">Teléfono de una oficina de negocios III: Ejemplo 3</h1>
+        </div>
+        <div class="custom-list" style="text-align: left; font-size: 0.8em; max-width: 8000px; margin: auto; line-height: 1em; padding: 20px; ">
+            <ul>
+                <li style="font-family: Arial, sans-serif;"> Si el estado es 1, un movimiento ocurre si, ya sea una llamada llega (exponencialmente distribuida con parámetro $\lambda$, o si la llamada que es servida termina (exponencialmente distribuida con parámetro $\nu$). </li>
+        </div>
+        <div style="font-family: Arial, sans-serif; text-align: left; font-size: 0.8em; max-width: 8000px; margin: auto; line-height: 1.8em; padding: 20px;"">
+            <p>
+                \begin{equation*}
+                \Omega_{1} = \lambda + \nu \qquad p_{1} = \frac{\lambda}{\lambda + \nu} \qquad q_{1} = \frac{\nu}{\lambda + \nu}
+                \end{equation*}
+            </p>
+        </div>
+
+        <style>
+            .custom-list ul {
+                list-style: none; /* Remueve el estilo de lista predeterminado */
+                padding: 0; /* Remueve el padding predeterminado */
+                display: inline-block; /* Centra la lista horizontalmente si dentro de un div con text-align: center */
+            }
+    
+            .custom-list li::before {
+                content: "•"; /* Carácter para el punto de la lista */
+                color: #35b3d3; /* Asegura que el color del punto es azul, para coincidir con el fondo del título */
+                display: inline-block; /* Hace que el punto se sitúe al lado del texto */
+                width: 1em; /* Espacio antes del texto */
+                margin-left: -1em; /* Alinea el punto con el texto */
+            }
+        </style>
+
+    </section>
+
+
+    <!-- Decimosexta diapositiva -->
+    <section>
+        <!-- Título con fondo celeste -->
+        <div style="text-align: center; background-color: #074d86; color: white; width: 100%; height: 30px; display: flex; align-items: center; justify-content: center;">
+            <h1 style="font-family: Arial, sans-serif; text-align: left; margin: 0; font-size: 1em; color: white;">Procedimiento generalS</h1>
+        </div>
+
+        <div style="border-left: 5px solid green; padding-left: 10px; font-family: 'Arial', sans-serif; font-size: 16px;">
+            <p>Es posible definir un procedimiento general para los problemas de colas.</p>
+        </div>
+
+        <div style="font-family: Arial, sans-serif; text-align: left; font-size: 0.7em; max-width: 8000px; margin: auto; line-height: 1.8em; padding: 20px;"">
+            <p>
+                Primero, represéntese el tiempo de espera en el estado $i$ como $\min\{S, T, \ldots\}$ donde $S, T, U, \ldots$ son independientes, cada uno distribuido exponencialmente (tales variables son ya sea tiempos de arribo o tiempos de servicio). Entonces:
+            </p>
+        </div>
+        <div style="text-align: center; font-family: Arial, sans-serif; font-size: 16px;">
+            <div style="display: inline-block; margin-right: 50px; vertical-align: top;">
+              <div style="margin-bottom: 5px;">$$\Omega_{i}$$</div>
+              <div style="margin-top: 20px;">suma de todos<br>los parámetros</div>
+            </div>
+            <div style="display: inline-block; margin-right: 50px; vertical-align: top;">
+              <div style="margin-bottom: 5px;">$$p_{i}$$</div>
+              <div>suma de los parámetros<br>de <strong>tiempo de arribo</strong><br>divididos por $$\Omega_{i}$$</div>
+            </div>
+            <div style="display: inline-block; vertical-align: top;">
+              <div style="margin-bottom: 5px;">$$q_{i}$$</div>
+              <div>suma de los parámetros<br>de <strong>tiempo de servicio</strong><br>divididos por $$\Omega_{i}$$</div>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- Decimoséptima diapositiva -->
+    <section>
+        <div style="text-align: center; background-color: #00BFFF; color: white; width: 100%; height: 30px; display: flex; align-items: center; justify-content: center;">
+            <h1 style="font-family: Arial, sans-serif; text-align: left; margin: 0; font-size: 1em; color: white;">La cola de dos servidores I: Ejemplo 4</h1>
+        </div>
+        <div style="font-family: Arial, sans-serif; text-align: left; font-size: 0.8em; margin: 20px; line-height: 1.5em; background-color: #e0e0e0; padding: 20px;">
+            <p>Los arribos forman una corriente Poisson con parámetro $\lambda$. Hay una cola formada, pero dos servidores. Cada tiempo de servicio está exponencialmente distribuido con parámetro $\nu$. Cuando un cliente completa el servicio, un cliente de la fila empieza a ser servido y la cola decrece de tamaño por una unidad.</p>
+            <p>¿Cuáles son $S, \Omega_{i},p_{i}, q_{i}$?</p>
+        </div>
+        <div class="custom-list" style="text-align: left; font-size: 0.8em; max-width: 8000px; margin: auto; line-height: 1.8em; padding: 20px; ">
+            <ul>
+                <li style="font-family: Arial, sans-serif;"> $S$ es el número de clientes en fila o recibiendo servicio. De esta forma, $S = \{0, 1, 2, \ldots\}$. Sea $i \geq 2$. </li>
+                <li style="font-family: Arial, sans-serif;"> Ambos servidores están ocupados y el tiempo de espera en el estado $i$ es $\min\{S_{1}, S_{2}, T\}$, donde $S_{1}, S_{2}$ son los respectivos tiempos de servicio para los servidores 1, 2, y $T$ es el tiempo de arribo para un nuevo cliente. </li>
+        </div>
+        <style>
+            .custom-list ul {
+                list-style: none; /* Remueve el estilo de lista predeterminado */
+                padding: 0; /* Remueve el padding predeterminado */
+                display: inline-block; /* Centra la lista horizontalmente si dentro de un div con text-align: center */
+            }
+    
+            .custom-list li::before {
+                content: "•"; /* Carácter para el punto de la lista */
+                color: #35b3d3; /* Asegura que el color del punto es azul, para coincidir con el fondo del título */
+                display: inline-block; /* Hace que el punto se sitúe al lado del texto */
+                width: 1em; /* Espacio antes del texto */
+                margin-left: -1em; /* Alinea el punto con el texto */
+            }
+        </style>
+    </section>
+    
+
+    <!-- Decimoctava diapositiva -->
+    <section>
+        <div style="text-align: center; background-color: #00BFFF; color: white; width: 100%; height: 30px; display: flex; align-items: center; justify-content: center;">
+            <h1 style="font-family: Arial, sans-serif; text-align: left; margin: 0; font-size: 1em; color: white;">La cola de dos servidores II: Ejemplo 4</h1>
+        </div>
+
+        <div class="custom-list" style="text-align: left; font-size: 0.8em; max-width: 8000px; margin: auto; line-height: 1em; padding: 20px; ">
+            <ul>
+                <li style="font-family: Arial, sans-serif;"> $S_{1}, S_{2}, T$ están exponencialmente distribuidos con parámetros $\nu, \nu, \lambda$. Por el procedimiento mencionado arriba y para $i \geq 2$,</li>
+        </div>
+        <div style="font-family: Arial, sans-serif; text-align: left; font-size: 0.8em; max-width: 8000px; margin: auto; line-height: 1.8em; padding: 20px;"">
+            <p>
+                \begin{equation*}
+                \Omega_{i} = 2\nu + \lambda \qquad p_{i} = \frac{\lambda}{2\nu + \lambda} \qquad q_{i} = \frac{2\nu}{2\nu + \lambda}
+                \end{equation*}
+            </p>
+        </div>
+        <div class="custom-list" style="text-align: left; font-size: 0.8em; max-width: 8000px; margin: auto; line-height: 1em; padding: 20px; ">
+            <ul>
+                <li style="font-family: Arial, sans-serif;"> Si $i = 1$, el tiempo de espera en el estado $i = 1$ es $\min\{S, T\}$ donde $S$ es el tiempo de servicio del cliente que es servido. Así, </li>
+        </div>
+        <div style="font-family: Arial, sans-serif; text-align: left; font-size: 0.8em; max-width: 8000px; margin: auto; line-height: 1.8em; padding: 20px;"">
+            <p>
+                \begin{equation*}
+                \Omega_{1} = \nu + \lambda \qquad p_{1} = \frac{\lambda}{\nu + \lambda} \qquad q_{1} = \frac{\nu}{\nu + \lambda} 
+                \end{equation*}
+            </p>
+        </div>
+        <div class="custom-list" style="text-align: left; font-size: 0.8em; max-width: 8000px; margin: auto; line-height: 1em; padding: 20px; ">
+            <ul>
+                <li style="font-family: Arial, sans-serif;"> Finalmente, el tiempo de espera en el estado 0 es el tiempo $T$ de arribo; de esta forma, </li>
+        </div>
+        <div style="font-family: Arial, sans-serif; text-align: left; font-size: 0.8em; max-width: 8000px; margin: auto; line-height: 1.8em; padding: 20px;"">
+            <p>
+                \begin{equation*}
+                \Omega_{0} = \lambda \qquad p_{0} = 1
+                \end{equation*}
+            </p>
+        </div>
+        <style>
+            .custom-list ul {
+                list-style: none; /* Remueve el estilo de lista predeterminado */
+                padding: 0; /* Remueve el padding predeterminado */
+                display: inline-block; /* Centra la lista horizontalmente si dentro de un div con text-align: center */
+            }
+    
+            .custom-list li::before {
+                content: "•"; /* Carácter para el punto de la lista */
+                color: #35b3d3; /* Asegura que el color del punto es azul, para coincidir con el fondo del título */
+                display: inline-block; /* Hace que el punto se sitúe al lado del texto */
+                width: 1em; /* Espacio antes del texto */
+                margin-left: -1em; /* Alinea el punto con el texto */
+            }
+        </style>
+
+    </section>
+
+
+    <!-- Ultima diapositiva -->
+    <section>
+        <div style="text-align: center; background-color: #074d86; color: white; width: 100%; height: 30px; display: flex; align-items: center; justify-content: center;">
+            <h1 style="font-family: Arial, sans-serif; text-align: left; margin: 0; font-size: 1em; color: white;">Nota sobre los cambios de estado</h1>
+        </div>
+
+        <div class="custom-list" style="text-align: left; font-size: 0.8em; max-width: 8000px; margin: auto; line-height: 1.8em; padding: 20px; ">
+            <ul>
+                <li style="font-family: Arial, sans-serif;"> En una cola solamente un cambio ocurre a la vez. </li>
+                <li style="font-family: Arial, sans-serif;"> Por ejemplo, en la cola con infinito número de servidores, si hay 100 clientes al presente recibiendo servicio, un desplazamiento a 101 clientes o a 99 clientes solamente ocurre uno a la vez. </li>
+                <li style="font-family: Arial, sans-serif;"> Para visualizar esto, sea $S_{1}, \ldots, S_{100}$ los tiempos de servicio respectivos de los clientes y sea $T$ el tiempo de arribo del próximo cliente. Dado que cada $S_{j}$ y $T$ están exponencialmente distribuidos, ellos son variables aleatorias continuas. La probabilidad de que cualesquiera dos de ellas tengan el mismo valor es cero. </li>
+                <li style="font-family: Arial, sans-serif;"> Pero esto debería ser el caso para que ocurra más de un movimiento al mismo tiempo. <span style="font-style: italic;">En una cola, solamente un movimiento o cambio de estado ocurre a la vez.</span></li>
+            </ul>
+        </div>
+
+        <style>
+            .custom-list ul {
+                list-style: none; /* Remueve el estilo de lista predeterminado */
+                padding: 0; /* Remueve el padding predeterminado */
+                display: inline-block; /* Centra la lista horizontalmente si dentro de un div con text-align: center */
+            }
+    
+            .custom-list li::before {
+                content: "•"; /* Carácter para el punto de la lista */
+                color: #35b3d3; /* Asegura que el color del punto es azul, para coincidir con el fondo del título */
+                display: inline-block; /* Hace que el punto se sitúe al lado del texto */
+                width: 1em; /* Espacio antes del texto */
+                margin-left: -1em; /* Alinea el punto con el texto */
+            }
+        </style>
+    </section>
+
+</section>
+
+<!-- Link -->
+<section>
+    <!-- Título con fondo celeste -->
+    <div style="text-align: center; background-color: #074d86; color: white; width: 100%; height: 30px; display: flex; align-items: center; justify-content: center;">
+        <h1 style="font-family: Arial, sans-serif; text-align: left; margin: 0; font-size: 1em; color: white;">Videos y referencias en internet</h1>
+    </div>
+
+    <!-- Referencias con enlaces -->
+    <div style="text-align: left; margin-top: 20px; padding-left: 20px;">
+        <ul style="list-style: none; padding: 0;">
+            <li style="margin-bottom: 5px; font-family: Arial, sans-serif;"><a href="https://youtu.be/Trf9P7DnOHQ" target="_blank" style="color: black; text-decoration: none;"><i class="bi bi-youtube" style="color: #00BFFF; margin-right: 5px;"></i><strong>¿Qué es una cadena de Markov?</strong> - Luis Rincón</a></li>
+            <li style="margin-bottom: 5px; font-family: Arial, sans-serif;"><a href="https://youtu.be/Ws63I3F7Moc" target="_blank" style="color: black; text-decoration: none;"><i class="bi bi-youtube" style="color: #00BFFF; margin-right: 5px;"></i><strong>Origin of Markov chains | Journey into information theory | Computer Science</strong> - Khan Academy Labs</a></li>
+        </ul>
+    </div>
+</section>
+
+
+
+
+{% endblock %}
 {% block websocket %}
 {% if role == "presenter" %}
 <script>
