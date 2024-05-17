@@ -4,3 +4,4 @@ daphne
 redis
 channels-redis
 python-decouple
+gunicorn
