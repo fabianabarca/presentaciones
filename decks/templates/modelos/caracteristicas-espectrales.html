@@ -655,7 +655,7 @@
 </script>
 {% else %}
 <script>
-    const wsRouteRx = 'ws://' + window.location.host + '/ws/deck/slider/project/';
+    const wsRouteRx = 'wss://' + window.location.host + '/ws/deck/slider/project/';
     const deckSocket = new WebSocket(wsRouteRx);
 
     // Registrar la conexión abierta
