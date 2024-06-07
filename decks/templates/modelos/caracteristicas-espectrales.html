@@ -638,7 +638,7 @@
 {% block websocket %}
 {% if role == "presenter" %}
 <script>
-    const wsRouteTx = 'wss://' + window.location.host + '/ws/deck/slider/caracteristicas-espectrales/';
+    const wsRouteTx = 'wss://' + window.location.host + '/ws/deck/slider/p15/';
     const deckSocket = new WebSocket(wsRouteTx);
 
     // Registrar la conexión abierta
@@ -655,7 +655,7 @@
 </script>
 {% else %}
 <script>
-    const wsRouteRx = 'wss://' + window.location.host + '/ws/deck/slider/caracteristicas-espectrales/';
+    const wsRouteRx = 'wss://' + window.location.host + '/ws/deck/slider/p15/';
     const deckSocket = new WebSocket(wsRouteRx);
 
     // Registrar la conexión abierta
