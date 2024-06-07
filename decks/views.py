@@ -3,7 +3,12 @@ from django.shortcuts import get_object_or_404, render
 # Create your views here.
 
 def p15(request):
-    return render(request, "modelos/caracteristicas-espectrales.html")
+    if request.user.is_staff:
+        role = "presenter"
+    else:
+        role = "viewer"
+    context = {"role": role}
+    return render(request, "modelos/caracteristicas-espectrales.html", context)
 
 
 def p18(request):
