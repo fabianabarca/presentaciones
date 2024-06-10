@@ -27,7 +27,7 @@ section.has-dark-background, section.has-dark-background h1, section.has-dark-ba
   --r-heading-text-shadow: none;
   --r-heading-font-weight: 600;
   --r-heading1-text-shadow: none;
-  --r-heading1-size: 2.5em;
+  --r-heading1-size: 2.8em;
   --r-heading2-size: 1.6em;
   --r-heading3-size: 1.3em;
   --r-heading4-size: 1em;
@@ -39,6 +39,12 @@ section.has-dark-background, section.has-dark-background h1, section.has-dark-ba
   --r-selection-color: #fff;
   --r-overlay-element-bg-color: 0, 0, 0;
   --r-overlay-element-fg-color: 240, 240, 240;
+  --k-azul: #005DA4;
+  --k-celeste: #00C0F3;
+  --k-verde: #6DC067;
+  --k-amarillo: #FFE06A;
+  --k-naranja: #F37021;
+  --k-verde-oscuro: #008641;
 }
 
 .reveal [hidden] {
@@ -98,6 +104,7 @@ section.has-dark-background, section.has-dark-background h1, section.has-dark-ba
 .reveal h1 {
   font-size: var(--r-heading1-size);
   text-align: center;
+  color: var(--k-azul);
 }
 
 .reveal h2 {

@@ -59,10 +59,11 @@
 	<script src="{% static 'reveal/plugin/math/math.js' %}"></script>
 	<script>
 		Reveal.initialize({
-			controls: true,
-			progress: true,
-			center: true,
+			width: 1080,
+			height: 700,
+			margin: 0.04,
 			hash: true,
+			controlsTutorial: true,
 			plugins: [RevealMarkdown, RevealHighlight, RevealNotes, RevealMath],
 		});
 	</script>
