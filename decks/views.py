@@ -2,6 +2,25 @@ from django.shortcuts import get_object_or_404, render
 
 # Create your views here.
 
+
+def p2(request):
+    if request.user.is_staff:
+        role = "presenter"
+    else:
+        role = "viewer"
+    context = {"role": role}
+    return render(request, "modelos/teorema-bayes.html", context)
+
+
+def p4(request):
+    if request.user.is_staff:
+        role = "presenter"
+    else:
+        role = "viewer"
+    context = {"role": role}
+    return render(request, "modelos/variables-aleatorias.html", context)
+
+
 def p15(request):
     if request.user.is_staff:
         role = "presenter"

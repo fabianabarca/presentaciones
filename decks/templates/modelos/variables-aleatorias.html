@@ -1,0 +1,118 @@
+{% extends 'decks.html' %}
+
+{% load static %}
+
+<!-- Título -->
+{% block title %}Variables aleatorias{% endblock %}
+
+<!-- Referencia: https://www.overleaf.com/read/tqgnrvbdpdvr#f90d57 -->
+
+<!-- Configuraciones específicas del <head> -->
+{% block head %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+{% endblock %}
+
+{% block content %}
+
+<!-- SECCIÓN 0 -->
+<section>
+    <h1 class="display-1">
+        Variables aleatorias
+    </h1>
+</section>
+
+<!-- Portada y descripción -->
+<section>
+    <h3>Características espectrales de los procesos aleatorios</h3>
+    <p>
+        Cuando los procesos estocásticos describen señales (funciones unidimensionales en el tiempo), es posible analizarlos según sus características espectrales, es decir, relativas a la frecuencia.
+    </p>
+    <p>
+        Esto es útil en aplicaciones de procesamiento de señales de todo tipo en la ingeniería eléctrica:
+    <div class="row text-center fw-bold">
+        <div class="col"><i class="bi bi-mic"></i><br>Sensores</div>
+        <div class="col"><i class="bi bi-volume-up"></i><br>Audio</div>
+        <div class="col"><i class="bi bi-node-plus"></i><br>Control</div>
+        <div class="col"><i class="bi bi-broadcast-pin"></i><br>Comunicaciones</div>
+        <div class="col"><i class="bi bi-lightning-charge"></i><br>Potencia</div>
+    </div>
+    </p>
+</section>
+
+<!-- Densidad espectral de potencia y sus propiedades -->
+<section>
+    <section>
+        <h2>Densidad espectral de potencia y sus propiedades</h2>
+    </section>
+
+    <section>
+        <h3>Densidad espectral de potencia</h3>
+        <blockquote>
+            La densidad espectral de potencia de una señal aleatoria describe cómo está distribuida su potencia en todas las frecuencias.
+        </blockquote>
+        <ul>
+            <li>Esta es una descripción de $X(t)$ en el <strong>dominio de la frecuencia</strong>.</li>
+            <li>Las propiedades estadísticas de los procesos estocásticos, como las funciones temporales de la media, la varianza, la autocovarianza o la autocorrelación son descripciones de $X(t)$ en el <strong>dominio del tiempo</strong>.</li>
+        </ul>
+
+        <p class="small">La densidad espectral de potencia es conocida en inglés como PSD (<em>Power Spectral Density</em>)</p>
+    </section>
+
+    <!-- Diapositiva 5 -->
+    <section>
+        <h5>Deducción de la densidad espectral de potencia | Definiciones preliminares</h5>
+        <h3>El cuadrado de $X(t)$ como la potencia instantánea</h3>
+        <blockquote>
+            Es posible interpretar $X^2(t)$ como la "potencia instantánea" en $t$ contenida en el proceso aleatorio $X(t)$, que es una familia de funciones del tiempo.
+        </blockquote>
+        <p>
+            En teoría de circuitos, la potencia disipada en un resistor es
+
+            \begin{equation}
+            p_R(t) = i^2(t) R = v^2(t)/R
+            \end{equation}
+        </p>
+    </section>
+</section>
+
+<!-- Gráficos de Chart.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+<script src="{% static 'js/p15.js' %}"></script>
+
+{% endblock %}
+
+{% block websocket %}
+{% if role == "presenter" %}
+<script>
+    const wsRouteTx = 'wss://' + window.location.host + '/ws/deck/slider/p4/';
+    const deckSocket = new WebSocket(wsRouteTx);
+
+    // Registrar la conexión abierta
+    deckSocket.onopen = function (event) {
+        console.log('Conexión WebSocket abierta exitosamente como presentador en ' + wsRouteTx);
+    };
+
+    Reveal.on('slidechanged', event => {
+        deckSocket.send(JSON.stringify({
+            'indexh': event.indexh,
+            'indexv': event.indexv
+        }));
+    });
+</script>
+{% else %}
+<script>
+    const wsRouteRx = 'wss://' + window.location.host + '/ws/deck/slider/p4/';
+    const deckSocket = new WebSocket(wsRouteRx);
+
+    // Registrar la conexión abierta
+    deckSocket.onopen = function (event) {
+        console.log('Conexión WebSocket abierta exitosamente como cliente en ' + wsRouteRx);
+    };
+
+    deckSocket.onmessage = function (event) {
+        const data = JSON.parse(event.data);
+        Reveal.slide(data.message.indexh, data.message.indexv);
+    };
+</script>
+{% endif %}
+{% endblock %}
