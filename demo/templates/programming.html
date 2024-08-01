@@ -6,23 +6,55 @@
 
 <section>
     <h5>Proyecto de Docencia</h5>
-    <h3>Estrategias docentes para sesiones virtuales interactivas con el desarrollo de un nuevo sistema web: una experiencia en el curso Modelos Probabilísticos de Señales y Sistemas</h3>
+    <h3>Estrategias docentes para sesiones virtuales interactivas con el desarrollo de un nuevo sistema web: una
+        experiencia en el curso Modelos Probabilísticos de Señales y Sistemas</h3>
     <h4>Presentación de pruebas</h4>
     <p>2023</p>
 </section>
 
 <section>
-    <h2>Pruebas de REPL con PyScript</h2>
+    <h2>Pruebas de Ace.js con PyScript</h2>
+</section>
+
+<section>
+    <h2>¿Qué es PyScript?</h2>
+    <p>PyScript es un lenguaje de programación que permite la ejecución de código Python en el navegador web a partir
+        del uso de tecnologías web modernas como Pyodide y WASM (Web Assembly). Está diseñado para ser accesible a
+        usuarios de todos los niveles, con muchísimas aplicaciones por su relación con Python.</p>
+    <p>Más información sobre PyScript <a href="https://pyscript.net/">aquí</a>.
+    </p>
+</section>
+
+<section>
+    <h2>¿Qué es Ace.js?</h2>
+    <p>Ace es un editor de código que se puede integrar en páginas web mediante JavaScript. Cuenta con características
+        como resaltado de sintaxis y señalación de errores para más de 120 lenguajes de programación. Se utiliza en
+        Cloud9 IDE y es el sucesor del proyecto Skywriter (Bespin) de Mozilla.</p>
+    <p>Más información sobre Ace.js <a href="https://ace.c9.io/">aquí</a>.</p>
+</section>
+
+<section>
+    <h2>¿Qué es un REPL?</h2>
+    <p>Un REPL (Read-Eval-Print Loop) es un entorno interactivo que permite escribir código,
+        evaluarlo y ver los resultados inmediatamente en el mismo entorno.
+    </p>
+    <p>Con Ace.js y Pyscript podemos simular un REPL. Lo que hacemos es esperar a que se presione el botón de correr
+        para ejecutar el código en el editor como si fuera un script de PyScript.
+    </p>
 </section>
 
 <section>
     <section>
-        <h1>Ola ke ase</h1>
+        <h2>PyScript + Ace.js</h2>
+        <p>¡Importante! Sólo con el comando "display()" se muestran los resultados en pantalla. Ésta es una diferencia
+            entre PyScript y Python.</p>
+        {% include "py-editor.html" with code=example1 id="id1" %}
     </section>
 
     <section>
-        <h2>¿Qué es PyScript?</h2>
-        <p>PyScript es un lenguaje de programación que permite la ejecución de código Python en el navegador web.</p>
+        <h2>PyScript + Ace.js</h2>
+        <p>Podemos usar las librerías Matplotlib, Pandas, Numpy y Scipy, por el momento. </p>
+        {% include "py-editor.html" with code=example2 id="id2" %}
     </section>
 </section>
 

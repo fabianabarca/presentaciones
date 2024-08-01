@@ -1,0 +1,8 @@
+{
+    "packages": [
+        "matplotlib",
+        "pandas",
+        "numpy",
+        "scipy"
+    ]
+}
