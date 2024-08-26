@@ -9,7 +9,7 @@ def p2(request):
     else:
         role = "viewer"
     context = {"role": role}
-    return render(request, "modelos/teorema-bayes.html", context)
+    return render(request, "modelos/2-conjunta-condicional-bayes.html", context)
 
 
 def p4(request):
@@ -18,7 +18,7 @@ def p4(request):
     else:
         role = "viewer"
     context = {"role": role}
-    return render(request, "modelos/variables-aleatorias.html", context)
+    return render(request, "modelos/4-variables-aleatorias.html", context)
 
 
 def p15(request):
@@ -27,11 +27,11 @@ def p15(request):
     else:
         role = "viewer"
     context = {"role": role}
-    return render(request, "modelos/caracteristicas-espectrales.html", context)
+    return render(request, "modelos/15-caracteristicas-espectrales-procesos-estocasticos.html", context)
 
 
 def p18(request):
-    return render(request, "modelos/markov-tiempo-continuo.html")
+    return render(request, "modelos/18-markov-tiempo-continuo.html")
 
 
 def decks(request):
