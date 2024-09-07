@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     "website.apps.WebsiteConfig",
     "users.apps.UsersConfig",
     "demo.apps.DemoConfig",
+    "api.apps.ApiConfig",
+    "rest_framework",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
