@@ -3,13 +3,14 @@ from django.shortcuts import get_object_or_404, render
 # Create your views here.
 
 
-def p2(request):
+def p2(request, deck_id):
     if request.user.is_staff:
         role = "presenter"
     else:
         role = "viewer"
     context = {"role": role}
-    return render(request, "modelos/2-conjunta-condicional-bayes.html", context)
+    template = f"modelos/{deck_id}.html"
+    return render(request, template, context)
 
 
 def p4(request):
