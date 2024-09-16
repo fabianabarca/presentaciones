@@ -117,7 +117,8 @@ class DataView(APIView):
                 dist_class = getattr(stats, dist_name)
                 X = dist_class(*params[dist_name])
                 sample_size = 100
-                variable_1 = X.rvs(size=sample_size, random_state=group)
+                random_state = group + int(timestamp.timestamp())
+                variable_1 = X.rvs(size=sample_size, random_state=random_state)
                 variable_2 = transform(variable_1)
 
                 return Response(
