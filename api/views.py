@@ -140,4 +140,4 @@ class DataView(APIView):
 
 
 def transform(x):
-    return np.log(x) + 1
+    return np.power(x, 2) + 1
