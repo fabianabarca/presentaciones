@@ -6,5 +6,6 @@ from . import views
 # Additionally, we include login URLs for the browsable API.
 urlpatterns = [
     path("datos/", views.DataView.as_view(), name="datos"),
+    path("proceso/", views.ProcessView.as_view(), name="proceso"),
     path("api-auth/", include("rest_framework.urls", namespace="rest_framework")),
 ]
