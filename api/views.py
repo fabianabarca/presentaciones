@@ -156,39 +156,8 @@ class ProcessView(APIView):
                     status=status.HTTP_400_BAD_REQUEST,
                 )
 
-            # Datos del proyecto
             timestamp = datetime.now()
-            today = datetime.today()
-            sunrise = time(6, 0, 0)
-            sunset = time(18, 0, 0)
-            sunrise_datetime = datetime.combine(today, sunrise)
-            sunset_datetime = datetime.combine(today, sunset)
-            # Determinación de la ecuación de la parábola
-            # min_total = (sunset_datetime - sunrise_datetime).total_seconds() / 60
-            # offset = min_total / 2
-            # z1 = -offset
-            # z2 = offset
-            # Valor máximo
-            # c = 2
-            # Fórmula general
-            # a1, b1, c1 = 4 * z1**2, 4 * z1, -4 * c
-            # a2, b2, c2 = 4 * z2**2, 4 * z2, -4 * c
-            # A = np.array([[a1, b1], [a2, b2]])
-            # B = np.array([c1, c2])
-            # solution = np.linalg.solve(A, B)
-            # Coeficientes de la parábola
-            # a, b = solution
-            a, b, c = -1.54320987654321e-05, 0, 2
-            offset = 360
-            # Parámetro de la distribución
-            if sunrise <= timestamp.time() <= sunset:
-                min = (
-                    timestamp - datetime.combine(timestamp.date(), sunrise)
-                ).seconds / 60
-                param = a * (min - offset) ** 2 + b * (min - offset) + c
-            else:
-                param = 0
-            print(f"Parámetro para grupo {group}: {param}")
+            param, sunlight = time_variation(timestamp, group)
 
             distributions = [
                 "expon",
@@ -202,8 +171,8 @@ class ProcessView(APIView):
                 "expon": (0, 1 + param),
                 "gompertz": (1, 0, 1 + param),
                 "levy": (0, 1 + param),
-                "logistic": (2*param, 1 + param),
-                "norm": (3*param, 1 + param),
+                "logistic": (2 * param, 1 + param),
+                "norm": (3 * param, 1 + param),
                 "rayleigh": (0, 1 + param),
             }
 
@@ -221,6 +190,7 @@ class ProcessView(APIView):
                     "group": group,
                     "timestamp": timestamp.strftime("%Y-%m-%d %H:%M:%S"),
                     "sample_size": sample_size,
+                    "sunlight": sunlight,
                     "data": data,
                 }
             )
@@ -235,3 +205,40 @@ class ProcessView(APIView):
 
 def transform(x):
     return np.power(x, 2) + 1
+
+
+def time_variation(timestamp, group):
+    sunrise = time(6, 0, 0)
+    sunset = time(18, 0, 0)
+    today = datetime.today()
+    # sunrise_datetime = datetime.combine(today, sunrise)
+    # sunset_datetime = datetime.combine(today, sunset)
+    # Determinación de la ecuación de la parábola
+    # min_total = (sunset_datetime - sunrise_datetime).total_seconds() / 60
+    # offset = min_total / 2
+    # z1 = -offset
+    # z2 = offset
+    # Valor máximo
+    # c = 2
+    # Fórmula general
+    # a1, b1, c1 = 4 * z1**2, 4 * z1, -4 * c
+    # a2, b2, c2 = 4 * z2**2, 4 * z2, -4 * c
+    # A = np.array([[a1, b1], [a2, b2]])
+    # B = np.array([c1, c2])
+    # solution = np.linalg.solve(A, B)
+    # Coeficientes de la parábola
+    # a, b = solution
+    a, b, c = -1.54320987654321e-05, 0, 2
+    offset = 360
+    # Parámetro de la distribución
+    if sunrise <= timestamp.time() <= sunset:
+        min = (timestamp - datetime.combine(timestamp.date(), sunrise)).seconds / 60
+        param = a * (min - offset) ** 2 + b * (min - offset) + c
+        sunlight = True
+    else:
+        param = 0
+        sunlight = False
+
+    print(f"Valor del parámetro para el grupo {group}: {param}")
+
+    return param, sunlight
