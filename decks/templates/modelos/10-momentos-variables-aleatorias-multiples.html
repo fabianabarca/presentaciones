@@ -1,0 +1,566 @@
+{% extends 'decks.html' %}
+
+{% load static %}
+
+<!-- Título -->
+{% block title %}10-momentos-variables-aleatorias-multiples{% endblock %}
+
+<!-- Referencia: https://www.overleaf.com/project/5c376b573d7cdc5c9060a235  -->
+
+<!-- Configuraciones específicas del <head> -->
+{% block head %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<!-- Agregar KaTex de reveal Revealjs -->
+<script src="plugin/math/math.js"></script>
+<script>
+  Reveal.initialize({ plugins: [ RevealMath.KaTeX ] });
+</script>
+{% endblock %}
+{% block content %}
+
+<!-- SECCIÓN 0 -->
+<section>
+    <h1 class="display-1">
+        Momentos de las variables aleatorias múltiples
+    </h1>
+</section>
+
+<!-- Portada y descripción -->
+<section>
+    <p>
+        Es posible determinar momentos asociados con dos o más variables aleatorias. La información que proveen, al igual que con las variables aleatorias individuales, son útiles como descriptores generales.
+    </p>
+</section>
+
+<!-- Portada y descripción 2-->
+<section>
+    <p>
+        Las dos métricas más importantes para momentos conjuntos son la <strong>correlación</strong> y la <strong>covarianza</strong>, que cuantifican el grado de interrelación lineal entre una variable aleatoria y otra.
+    </p>
+</section>
+
+<!-- Valor esperado de una función de variables aleatorias -->
+<section>
+    <section>
+        <h2>Valor esperado de una función de variables aleatorias</h2>
+     </section>
+
+    <!-- Diapositiva 1 -->
+    <section>
+        <h3>Valor esperado de una función de variables aleatorias</h3>
+    
+        <blockquote>
+        <strong>Valor esperado de una función de variables aleatorias</strong>
+        <p>
+            Si \( g(X, Y) \) es alguna función de dos variables aleatorias \( X \) y \( Y \), el valor esperado de \( g(X,Y) \) está dado por:
+        </p>
+    
+        <p>
+            \[
+            \overline{g} = E[g(X,Y)] = \int_{-\infty}^{\infty}\int_{-\infty}^{\infty}g(x,y)f_{X,Y}(x,y) \, \mathsf{d}x \, \mathsf{d}y
+            \]
+        </p>
+        </blockquote>
+    
+        <p><strong>Observación</strong></p>
+    
+        <p>
+        Aunque \( g(X,Y) \) define una nueva variable aleatoria, no es necesario conocer la densidad probabilística de esta para calcular su valor esperado. En cambio, es una suma ponderada de la densidad conjunta de \( X \) y \( Y \).
+        </p>
+    </section>
+        
+
+    <!-- Diapositiva 2 -->
+    <section>
+        <h3>Ejemplo del tarro de nueces I Valor esperado de una función de variables aleatorias</h3>
+    
+        <blockquote>
+        <p>
+            El PDF conjunto de la cantidad \( X \) de almendras y la cantidad \( Y \) de semillas de marañón (y la cantidad \( Z \) de maní) en un tarro de 1 kg es:
+        </p>
+    
+        <p>
+            \[
+            f_{X,Y}(x,y) =
+            \begin{cases}
+            24xy  & 0 \leq x \leq 1, 0 \leq y \leq 1, x + y \leq 1  \\
+            0     & \text{de otra manera}
+            \end{cases}
+            \]
+        </p>
+    
+        <p>
+            Si 1 kg de almendras le cuesta a la compañía ¢6000, un kilogramo de semillas de marañón son ¢10.000 y 1 kg de maní cuesta ¢3.500. ¿Cuál es el costo esperado total del contenido del tarro?
+        </p>
+        </blockquote>
+    </section>
+  
+
+    <!-- Diapositiva 3 -->
+    <section>
+        <h3>Ejemplo del tarro de nueces II Valor esperado de una función de variables aleatorias</h3>
+    
+        <p>Sea la función del costo:</p>
+    
+        <p>
+            \[
+            h(X,Y) = 6000 X + 10000 Y + 3500 (1 - X - Y)
+            \]
+        </p>
+    
+        <p>Entonces,</p>
+    
+        <p>
+            \[
+            \begin{aligned}
+            E[h(X,Y)] 	& = \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} h(x,y) f_{X,Y}(x,y) \, \mathsf{d}x \, \mathsf{d}y \\
+                        & = \int_{0}^{1} \int_{0}^{1-x} [6000 x + 10000 y + 3500 (1 - x - y)] 24xy \, \mathsf{d}y \, \mathsf{d}x \\
+                        & =  7100
+            \end{aligned}
+            \]
+        </p>
+    
+        <p>que representa los costos esperados del contenido de la caja.</p>
+    </section>  
+</section>
+
+ <!-- Momentos conjuntos alrededor del origen -->
+<section>
+    <section>
+        <h2>Momentos conjuntos alrededor del origen</h2>    
+    </section>
+
+    <!-- Diapositiva 1 -->
+    <section>
+        <h3>Momentos conjuntos alrededor del origen</h3>
+        <p>
+            Los momentos conjuntos para dos variables aleatorias <span class="katex">\( X \)</span> y 
+            <span class="katex">\( Y \)</span> se denotan por <span class="katex">\( m_{nk} \)</span> y se definen por:
+        </p>
+        
+        <div class="katex">
+            \[
+            \begin{aligned}
+            m_{nk} 	& = E\left[ X^{n} Y^{k} \right] \\
+                      & = \int_{-\infty}^{\infty}\int_{-\infty}^{\infty}x^{n}y^{k} ~ f_{X,Y}(x,y) \, dx \, dy
+            \end{aligned}
+            \]
+        </div>
+        
+        <h4>Casos especiales</h4>
+        <ul>
+            <li><span class="katex">\( m_{n0} = E[X^n] \)</span> son los momentos <span class="katex">\( m_n \)</span> de <span class="katex">\( X \)</span></li>
+            <li><span class="katex">\( m_{0k} = E[Y^k] \)</span> son los momentos de <span class="katex">\( Y \)</span></li>
+            <li><span class="katex">\( n+k \)</span> es el orden de los momentos. Ejemplo: <span class="katex">\( m_{02}, m_{20}, m_{11} \)</span> son los momentos de segundo orden de <span class="katex">\( X \)</span> y <span class="katex">\( Y \)</span></li>
+            <li><span class="katex">\( m_{01} = E[Y] = \overline{Y} \)</span> y <span class="katex">\( m_{10} = E[X] = \overline{X} \)</span> son los valores esperados de <span class="katex">\( Y \)</span> y <span class="katex">\( X \)</span>, y son las coordenadas del centro de gravedad de la función <span class="katex">\( f_{X,Y}(x,y) \)</span></li>
+        </ul>    
+    </section>
+
+    <!-- Diapositiva 2 -->
+    <section>
+        <p>Figura (Falta)</p>
+    </section>
+</section>
+
+ <!-- Correlación, independencia y ortogonalidad -->
+ <section>
+    <section>
+        <h2>Correlación, independencia y ortogonalidad</h2>    
+    </section>
+
+    <!-- Diapositiva 1 -->
+    <section>
+        <h3>Correlación de dos variables aleator</h3>
+        <p>
+            El momento de segundo orden <span class="katex">\( m_{11} = E[XY] \)</span> es denominado la 
+            <strong>correlación</strong> de <span class="katex">\( X \)</span> y <span class="katex">\( Y \)</span>. 
+            Recibe el símbolo especial <span class="katex">\( R_{XY} \)</span> por su importancia.
+        </p>
+        
+        <div class="katex">
+            \[
+            \begin{aligned}
+              R_{XY} = m_{11} & = E[XY] \\ 
+              & = \int_{-\infty}^{\infty}\int_{-\infty}^{\infty}xy ~ f_{X,Y}(x,y) \, dx \, dy
+            \end{aligned}
+            \]
+        </div>
+        
+        <h4>Interpretaciones posibles</h4>
+        <ul>
+            <li>"La correlación es el grado en el cual dos o más cantidades están linealmente asociadas".</li>
+            <li>Pero (fundamental) "<strong>correlación no implica causalidad</strong>".</li>
+        </ul>        
+    </section>
+
+    <!-- Diapositiva 2 -->
+    <section>
+        <h3>Ejemplo de correlación del tarro de nueces I</h3>
+    
+        <blockquote>
+        <p>
+            El PDF conjunto de la cantidad \( X \) de almendras y la cantidad \( Y \) de semillas de marañón (y la cantidad \( Z \) de maní) en un tarro de 1 kg es:
+        </p>
+    
+        <p>
+            \[
+            f_{X,Y}(x,y) = 24xy \qquad 0 \leq x \leq 1, 0 \leq y \leq 1, x + y \leq 1
+            \]
+        </p>
+    
+        <p>¿Cuál es la correlación entre \( X \) y \( Y \)?</p>
+        </blockquote>
+    </section>
+    
+
+    <!-- Diapositiva 3 -->
+    <section>
+        <h3>Ejemplo de correlación del tarro de nueces II</h3>
+    
+        <p>
+        \[
+        \begin{aligned}
+            R_{XY} = m_{11} & = E[XY] = \int_{-\infty}^{\infty}\int_{-\infty}^{\infty}xy \, f_{X,Y}(x,y) \, \mathsf{d}x \, \mathsf{d}y \\
+                            & = \int_{0}^{1}\int_{0}^{1-y}xy \cdot 24xy \, \mathsf{d}x \, \mathsf{d}y = 24 \int_{0}^{1} y^2 \int_{0}^{1-y} x^2 \, \mathsf{d}x \, \mathsf{d}y \\
+                            & = \frac{24}{3} \int_0^1 y^2(1-y)^3 \, \mathsf{d}y \\
+                            & = \frac{24}{3} \left[ - \frac{y^6}{6} + 3 \frac{y^5}{5}  - 3 \frac{y^4}{4} + \frac{y^3}{3} \right]_0^1 = \frac{2}{15} \approx 0.13
+        \end{aligned}
+        \]
+        </p>
+    </section>
+  
+
+    <!-- Diapositiva 4 -->
+    <section>
+        <h3>La <strong>no</strong> correlación</h3>
+        <blockquote>
+            <h4>No correlación</h4>
+            <p>
+                Si la correlación puede escribirse en la forma:
+            </p>
+        
+            <div class="katex">
+                \[
+                R_{XY} = E[X]E[Y]
+                \]
+            </div>
+        
+            <p>
+                entonces <span class="katex">\( X \)</span> y <span class="katex">\( Y \)</span> se dice que <strong>no</strong> están correlacionadas.
+            </p>
+        </blockquote>
+    </section>
+
+    <!-- Diapositiva 5 -->
+    <section>
+        <h3>Independencia y ortogonalidad I</h3>
+    
+        <blockquote>
+        <strong>Independencia y correlación</strong>
+        <p>La independencia estadística de \( X \) y \( Y \) es suficiente para garantizar que <strong>no</strong> están correlacionadas.</p>
+        </blockquote>
+    
+        <p><small>El recíproco de esta última frase, que \( X \) y \( Y \) son independientes si \( X \) y \( Y \) no están correlacionadas, no es necesariamente cierto en general, con la sola excepción de las variables aleatorias gaussianas no correlacionadas, que son también independientes.</small></p>
+    </section>
+    
+    <!-- Diapositiva 6-->
+    <section>
+        <h3>Independencia y ortogonalidad II</h3>
+    
+        <blockquote>
+        <strong>Ortogonalidad</strong>
+        <p>Si \(R_{XY} = 0\) para dos variables aleatorias \(X\) y \(Y\), estas se denominan ortogonales.</p>
+        </blockquote>
+    
+        <p><strong>En síntesis</strong></p>
+        
+        <ul>
+        <li>Si \(R_{XY} = E[XY] = E[X]E[Y]\), no están correlacionadas.</li>
+        <li>La independencia (\(f_{XY}(x,y) = f_X(x) \cdot f_Y(y)\)) garantiza que no están correlacionadas, pero no a la inversa.</li>
+        <li>Si \(R_{XY} = 0\), son ortogonales.</li>
+        </ul>
+    </section>
+
+    <!-- Diapositiva 7-->
+    <section>
+        <h3>Ejemplo de correlación y ortogonalidad I Dos variables aleatorias</h3>
+    
+        <blockquote>
+        <p>Sea \(X\) una variable aleatoria que tiene un valor medio \(\overline{X} = E[X] = 3\) y varianza \(\sigma_{X}^2 = 2\), y sea \(Y = -6X + 22\). Determinar correlación y ortogonalidad entre \(X\) y \(Y\).</p>
+        </blockquote>
+    
+        <p>El segundo momento de $X$ alrededor del origen se calcula de:</p>
+    
+        <p>
+        \[
+        \begin{aligned}
+        \sigma_{X}^2    & = E[X^2] - \left( E[X] \right)^2 \\
+        E[X^2]          & = \sigma_{X}^2 + \left( E[X]\right)^2 \\
+                        & = 11
+        \end{aligned}
+        \]
+    
+        <p>Con \(Y = -6X + 22\):</p>
+    
+        \[
+        \begin{aligned}
+        E[Y] & = -6E[X] + 22 \\
+            & = -6(3) + 22 \\
+            & = 4
+        \end{aligned}
+        \]
+        </p>
+    </section>
+  
+    <!-- Diapositiva 8 -->
+    <section>
+        <h3>Ejemplo de correlación y ortogonalidad II Dos variables aleatorias</h3>
+
+        <p>
+            \[
+            \begin{aligned}
+            R_{XY} 	& = E[XY] \\
+                      & = E[X(-6X + 22)] \\
+                      & = E[-6X^2 + 22X] \\
+                      & = -6E[X^2] + 22E[X] \\
+                      & = -6(11) + 22(3) \\
+                       & = 0
+            \end{aligned}
+            \]
+            </p>
+          
+            <p>De donde \(X\) y \(Y\) son ortogonales. Por otro lado, \(R_{XY} \neq E[X]E[Y] = 12\).</p>
+          
+            <blockquote>
+              <p>Dos variables aleatorias pueden ser ortogonales aun cuando una de ellas, \(Y\), está relacionada con la otra, \(X\), por una función lineal \(Y = aX + b\).</p>
+            </blockquote>
+    </section>
+
+    <!-- Diapositiva 9 -->
+    <section>
+        <p>Figura (Falta)</p>
+    </section>
+
+    <!-- Diapositiva 10 -->
+    <section>
+        <p>Figura (Falta)</p>
+    </section>
+ </section>
+
+ <!--Momentos centrales conjuntos-->
+ <section>
+    <section>
+        <h2>Momentos centrales conjuntos</h2>
+    </section>
+
+    <!-- Diapositiva 1 -->
+    <section>
+        <h3>Momentos centrales conjuntos</h3>
+        
+        <blockquote>
+            <strong>Momentos centrales conjuntos</strong>
+        
+            <p>Para dos variables aleatorias \(X\) y \(Y\), estos momentos están dados por:</p>
+        
+            <p>
+            \[
+            \begin{aligned}
+            \mu_{nk} 	& = E\left[ (X-\overline{X})^{n}(Y-\overline{Y})^k \right] \\
+                    & = \int_{-\infty}^{\infty}\int_{-\infty}^{\infty}(x- \overline{X})^{n}(y-\overline{Y})^{k}f_{X,Y}(x,y) \, \mathsf{d}x \, \mathsf{d}y
+            \end{aligned}
+            \]
+            </p>
+        </blockquote>
+
+        <p>Los momentos centrales de segundo orden:</p>
+    
+        <p>
+        \[
+        \mu_{20} = E[(X-\overline{X})^2] = \sigma_{X}^2
+        \]
+        </p>
+    
+        <p>
+        \[
+        \mu_{02} = E[(Y-\overline{Y})^2] = \sigma_{Y}^2
+        \]
+        </p>
+    
+        <p>Son las varianzas de \(X\) y \(Y\), respectivamente.</p>
+    </section>
+    
+    <!-- Diapositiva 2 -->
+    <section>
+        <h3>La covarianza de dos variables aleatorias I</h3>
+        
+        <blockquote>
+            <strong>La covarianza de dos variables aleatorias</strong>
+        
+            <p>El momento conjunto de segundo orden \(\mu_{11}\) es la covarianza de \(X\) y \(Y\), y se le da el símbolo \(C_{XY}\). Satisface que:</p>
+        
+            <p>
+            \[
+            \begin{aligned}
+            C_{XY} 	& = E[(X-\overline{X})(Y-\overline{Y})] \\
+                    & = \int_{-\infty}^{\infty}\int_{-\infty}^{\infty}(x-\overline{X})(y-\overline{Y})f_{X,Y}(x,y) \, \mathsf{d}x \, \mathsf{d}y \\
+                    & = E[XY - X\overline{Y} - \overline{X}Y + \overline{X}\cdot\overline{Y}] \\
+                    & = E[XY] - E[X]E[Y] \\
+            C_{XY} 	& = R_{XY} - E[X]E[Y]
+            \end{aligned}
+            \]
+            </p>
+        </blockquote>
+    </section>
+
+    <!-- Diapositiva 3 -->
+    <section>
+        <h3>La covarianza de dos variables aleatorias II</h3>
+    
+        <ul>
+        <li>Si \(X\), \(Y\) son independientes o no están correlacionadas, entonces \(C_{XY} = 0\), como puede corroborarse.</li>
+    
+        <li>Si \(X\), \(Y\) son ortogonales, \(C_{XY} = -E[X]E[Y]\). En este último caso, si \(X\) o \(Y\) (o ambas) tienen valor medio cero, entonces \(C_{XY} = 0\).</li>
+        </ul>
+    </section>
+  
+
+    <!-- Diapositiva 4-->
+    <section>
+        <h3>El coeficiente de correlación de dos variables aleatorias Correlación de Pearson</h3>
+    
+        <p>El momento conjunto de segundo orden normalizado:</p>
+    
+        <p>
+        \[
+        \rho = \frac{\mu_{11}}{\sqrt{\mu_{20} \mu_{02}}} = \frac{C_{XY}}{\sigma_X \sigma_Y} = \frac{\mathsf{cov}(X, Y)}{\sigma_X \sigma_Y}
+        \]
+        </p>
+    
+        <p>dado por:</p>
+    
+        <p>
+        \[
+        \begin{aligned}
+        \rho 	& = \frac{E[(X-\overline{X})(Y-\overline{Y})]}{\sigma_X \sigma_Y} \\
+                & = E\left[ \frac{(X-\overline{X})}{\sigma_X}\frac{(Y-\overline{Y})}{\sigma_Y} \right]
+        \end{aligned}
+        \]
+        </p>
+    
+        <p>Se conoce como el <strong>coeficiente de correlación</strong> de \(X\) y \(Y\), con \( -1 \leq \rho \leq 1 \).</p>
+    </section>
+    
+    <!-- Diapositiva 5 -->
+    <section>
+        <p>Figura (Falta)</p>
+    </section>
+ </section>
+
+<!-- Funciones características conjuntas -->
+ <section>
+    <section>
+        <h2>Funciones características conjuntas</h2>
+    </section>
+
+    <!-- Diapositiva 1-->
+    <section>
+        <h3>Funciones características conjuntas</h3>
+    
+        <p>La función característica conjunta de dos variables aleatorias \(X\) y \(Y\) está definida por:</p>
+    
+        <p>
+        \[
+        \Phi_{X,Y}(\omega_1, \omega_2) = E\left[ e^{j\omega_1 X + j\omega_2 Y} \right]
+        \]
+        </p>
+    
+        <p>donde \(\omega_1, \omega_2\) son números reales. Una forma equivalente es:</p>
+    
+        <p>
+        \[
+        \Phi_{X,Y}(\omega_1, \omega_2) = \int_{-\infty}^{\infty}\int_{-\infty}^{\infty}f_{X,Y}(x,y)e^{j\omega_1 x + j\omega_2 y} \, \mathsf{d}x \, \mathsf{d}y
+        \]
+        </p>
+    
+        <p>Lo anterior es la transformada bidimensional de Fourier (con signos cambiados para \(\omega_1, \omega_2\)) de la función de densidad conjunta. De la transformada inversa de Fourier se tiene:</p>
+    
+        <p>
+        \[
+        f_{X,Y}(x,y) = \frac{1}{(2\pi)^2}\int_{-\infty}^{\infty}\int_{-\infty}^{\infty}\Phi_{X,Y}(\omega_1, \omega_2)e^{-j\omega_1 x - j\omega_2 y} \, \mathsf{d}\omega_1 \, \mathsf{d}\omega_2
+        \]
+        </p>
+    </section>
+    
+
+    <!-- Diapositiva 2-->
+    <section>
+        <h3>Funciones características conjuntas II</h3>
+    
+        <p>Con poner \(\omega_2 = 0\) u \(\omega_1 = 0\), se obtienen las funciones características de \(X\) o \(Y\) a partir de \(\Phi_{X,Y}(\omega_1, \omega_2)\). Estas se llaman funciones características marginales:</p>
+    
+        <p>
+        \[
+        \Phi_{X}(\omega_1) = \Phi_{X,Y}(\omega_1, 0)
+        \]
+        </p>
+    
+        <p>
+        \[
+        \Phi_{Y}(\omega_2) = \Phi_{X,Y}(0, \omega_2)
+        \]
+        </p>
+    
+        <p>Los momentos conjuntos \(m_{nk}\) pueden hallarse de la función característica conjunta como sigue:</p>
+    
+        <p>
+        \[
+        m_{nk} = \left. (-j)^{n+k}\frac{\partial^{n+k}\Phi_{X,Y}(\omega_1, \omega_2)}{\partial \omega_{1}^n \partial \omega_{2}^k}\right\vert_{\omega_1 = 0, \omega_2 = 0}
+        \]
+        </p>
+    
+    </section>
+    
+ </section>
+
+<!-- Gráficos de Chart.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+<script src="{% static 'js/p15.js' %}"></script>
+
+{% endblock %}
+
+{% block websocket %}
+{% if role == "presenter" %}
+<script>
+    const wsRouteTx = 'wss://' + window.location.host + '/ws/deck/slider/p4/';
+    const deckSocket = new WebSocket(wsRouteTx);
+
+    // Registrar la conexión abierta
+    deckSocket.onopen = function (event) {
+        console.log('Conexión WebSocket abierta exitosamente como presentador en ' + wsRouteTx);
+    };
+
+    Reveal.on('slidechanged', event => {
+        deckSocket.send(JSON.stringify({
+            'indexh': event.indexh,
+            'indexv': event.indexv
+        }));
+    });
+</script>
+{% else %}
+<script>
+    const wsRouteRx = 'wss://' + window.location.host + '/ws/deck/slider/p4/';
+    const deckSocket = new WebSocket(wsRouteRx);
+
+    // Registrar la conexión abierta
+    deckSocket.onopen = function (event) {
+        console.log('Conexión WebSocket abierta exitosamente como cliente en ' + wsRouteRx);
+    };
+
+    deckSocket.onmessage = function (event) {
+        const data = JSON.parse(event.data);
+        Reveal.slide(data.message.indexh, data.message.indexv);
+    };
+</script>
+{% endif %}
+{% endblock %}
