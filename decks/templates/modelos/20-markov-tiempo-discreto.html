@@ -1,0 +1,785 @@
+{% extends 'decks.html' %}
+
+{% load static %}
+
+<!-- Título -->
+{% block title %}20-markov-tiempo-discreto{% endblock %}
+
+<!-- Referencia: https://www.overleaf.com/project/5c376bb23d7cdc5c9060a293  -->
+
+<!-- Configuraciones específicas del <head> -->
+{% block head %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<!-- Agregar KaTex de reveal Revealjs -->
+<script src="plugin/math/math.js"></script>
+<script>
+  Reveal.initialize({ plugins: [ RevealMath.KaTeX ] });
+</script>
+{% endblock %}
+{% block content %}
+
+<!-- SECCIÓN 0 -->
+<section>
+    <h1 class="display-1">
+        Cadenas de Markov de tiempo discreto
+    </h1>
+</section>
+
+<!-- Portada y descripción -->
+<section>
+    <p>
+        Cuando existe una cantidad definida de estados, es
+        posible modelar las transiciones entre todos estos
+        estados.
+    </p>
+</section>
+
+<!-- Cadenas de Markov de tiempo discreto -->
+<section>
+    <section>
+        <h2>Cadenas de Markov de tiempo discreto</h2>
+    </section>
+
+    <!-- Diapositiva 1 -->
+    <section>
+        <h3>Condiciones: Cadenas de Markov de tiempo discreto</h3>
+        <ul>
+            <li>Considérese un sistema que puede estar en cualquiera de varios estados.</li>
+            <li>El conjunto de estados es denominado el espacio de estados \( S \) y se supondrá en general que \( S = \{0, 1, 2, \ldots, N\} \).</li>
+            <li>Supóngase ahora que una \emph{partícula} es libre de saltar entre los estados del espacio de estados \( S \). Su localización al tiempo \( t \) es \( X_{t} \).</li>
+            <li>De esta forma se tiene un proceso estocástico \( \{X_{t}\}_{t=0}^{\infty} \).</li>
+            <li>La localización \( X_{t} \) se mide solamente en los <strong>tiempos discretos</strong> \( t = 0, 1, 2, \ldots \).</li>
+            <li>\( X_{0} \) es la localización en el tiempo \( 0 \).</li>
+        </ul>
+    </section>
+
+    <!-- Diapositiva 2 -->
+    <section>
+        <h3>Suposiciones I: Cadenas de Markov de tiempo discreto</h3>
+        <ol>
+            <i class="bi bi-1-circle-fill"></i>
+                Suponga que la partícula está en el estado \( i \) en el tiempo \( t \). La probabilidad de que brinque a otro estado \( j \) depende solamente de \( i \). Matemáticamente, sea \( i, j, i_{t-1}, \ldots, i_{0} \in S \). Entonces, para cualquier tiempo \( t \):
+                <p>
+                \[
+                \begin{aligned}
+                & P(X_{t+1} = j \mid X_{t} = i, X_{t-1} = i_{t-1}, \ldots, X_{0} = i_{0}) \\
+                & \qquad = P(X_{t+1} = j \mid X_{t} = i)
+                \end{aligned}
+                \]
+                </p>
+                <p>
+                Es decir, el futuro (tiempo \( t+1 \)), dado el presente (tiempo \( t \)), es independiente del pasado (tiempos \( t-1, \ldots, 0 \)). La probabilidad anterior es la probabilidad de transición o de salto del estado \( i \) al estado \( j \).
+                </p>
+                <blockquote>
+                    <strong>Esta es la <em>propiedad de Markov</em></strong>
+                </blockquote>
+        </ol>
+    </section>
+
+    <!-- Diapositiva 3 -->
+    <section>
+        <h3>Suposiciones II: Cadenas de Markov de tiempo discreto </h3>
+        <ol start="2">
+            <i class="bi bi-2-circle-fill"></i>
+                Las probabilidades de transición descritas son:
+                <ul>
+                    <li><strong>Independientes de los estados pasados:</strong> una vez que se conoce donde la partícula está ahora.</li>
+                    <li><strong>Independientes de \( t \):</strong> el momento en que hace la transición.</li>
+                </ul>
+                <p>
+                    \[
+                    P(X_{t+1} = j \mid X_{t} = i) = \Pi_{i,j}
+                    \]
+                </p>
+                <blockquote>
+                    <strong>Esta última suposición se denomina homogeneidad en el tiempo.</strong>
+                </blockquote>
+                <p class="text-center">
+                    \( \Pi_{i,j} \) es la probabilidad de transición del estado \( i \) al estado \( j \).
+                </p>
+        </ol>
+    </section>
+
+    <!-- Diapositiva 4 -->
+    <section>
+        <h3>Cadena de Markov de tiempo discreto homogénea: Definición</h3>
+        <blockquote>
+            <strong>Cadena de Markov de tiempo discreto (homogénea)</strong>
+            <p>
+                Consiste de una partícula que salta en cada unidad de tiempo entre estados en un espacio de estados \( S \). \( X_{t} \) denota el estado ocupado en el tiempo \( t \) para \( t = 0, 1, 2, \ldots \).
+            </p>
+        </blockquote>
+        <p>
+            Si la partícula está en el estado \( i \) al tiempo \( t \), estará en el estado \( j \) en el tiempo \( t+1 \) (sin importar los estados ocupados antes del tiempo \( t \)) con probabilidad:
+        </p>
+        <p>
+            \[
+            \Pi_{i,j} = P(X_{t+1} = j \mid X_{t} = i)
+            \]
+        </p>
+    </section>
+
+    <!-- Diapositiva 5 -->
+    <section>
+        <h3>Cadena de Markov de tiempo discreto I: Ejemplo 1</h3>
+        <p>
+            Sea \( S = \{0, 1\} \) con probabilidades de transición dadas por:
+        </p>
+        <p>
+            \[
+            \Pi_{0,0} = \frac{1}{3} \quad \Pi_{0,1} = \frac{2}{3} \quad \Pi_{1,0} = \frac{1}{4} \quad \Pi_{1,1} = \frac{3}{4}
+            \]
+        </p>
+        <p>
+            Su representación gráfica es:
+        </p>
+        <p><strong>Figura (Falta)</strong></p>
+    </section>
+
+    <!-- Diapositiva 6 -->
+    <section>
+        <h3>Cadena de Markov de tiempo discreto II: Ejemplo 1</h3>
+        <p>
+            También se suele representar la misma información dada en la ecuación:
+        </p>
+        <p>
+            \[
+            \Pi_{0,0} = \frac{1}{3} \quad \Pi_{0,1} = \frac{2}{3} \quad \Pi_{1,0} = \frac{1}{4} \quad \Pi_{1,1} = \frac{3}{4}
+            \]
+        </p>
+        <p>
+            Pero de forma matricial:
+        </p>
+        <p>
+            \[
+            \Pi = \begin{bmatrix}
+            1/3 & 2/3 \\
+            1/4 & 3/4
+            \end{bmatrix}
+            \]
+        </p>
+    </section>
+
+    <!-- Diapositiva 7 -->
+    <section>
+        <h3>Matriz de transición \( \Pi \) I</h3>
+        <p>
+            Hay una manera estándar de escribir las probabilidades de salto \( \Pi_{i,j} \) como una matriz, a la que se le llama la matriz de transición \( \Pi \). El elemento en su \( i \)-ésima fila y \( j \)-ésima columna es \( \Pi_{i,j} \), la probabilidad que la partícula salte de \( i \) a \( j \).
+        </p>
+        <p>
+            \[
+            \Pi = \begin{bmatrix}
+            \Pi_{0,0} & \Pi_{0,1} & \Pi_{0,2} & \cdots & \Pi_{0,N} \\
+            \Pi_{1,0} & \Pi_{1,1} & \Pi_{1,2} & \cdots & \Pi_{1,N} \\
+            \vdots    & \vdots    & \vdots    & \ddots & \vdots    \\
+            \Pi_{N,0} & \Pi_{N,1} & \Pi_{N,2} & \cdots & \Pi_{N,N}
+            \end{bmatrix}
+            \]
+        </p>
+        <p>
+            Nótese que la \( i \)-ésima fila de la matriz \( \Pi \) muestra las probabilidades de salto <strong>del</strong> estado \( i \), mientras que la \( j \)-ésima columna muestra las probabilidades de salto <strong>al</strong> estado \( j \).
+        </p>
+    </section>
+
+    <!-- Diapositiva 8 -->
+    <section>
+        <h3>Cadena de Markov de tres estados I: Ejemplo 2</h3>
+        <blockquote>
+            <p>
+                En una cadena de Markov hay tres estados: \( S = \{0, 1, 2\} \). Del estado 0, la partícula salta a los estados 1 o 2 con una idéntica probabilidad de \( \frac{1}{2} \). Del estado 2, la partícula debe saltar al estado 1. El estado 1 es absorbente: una vez que la partícula entre al estado 1, no puede salirse. Dibuje el diagrama y escriba la matriz de transición.
+            </p>
+        </blockquote>
+    </section>
+
+    <!-- Diapositiva 9 -->
+    <section>
+        <h3>Cadena de Markov de tres estados II: Ejemplo 2</h3>
+        <p>
+            \[
+            \Pi = \begin{bmatrix}
+            0 & 1/2 & 1/2 \\
+            0 & 1 & 0 \\
+            0 & 1 & 0
+            \end{bmatrix}
+            \]
+        </p>
+        <p><strong>Figura (Falta)</strong></p>
+    </section>
+
+    <!-- Diapositiva 10 -->
+    <section>
+        <h3>Estado absorbente: Definición</h3>
+        <blockquote>
+            <strong>Estado absorbente</strong>: 
+            <p>El estado \( i \) es absorbente si \( \Pi_{i,i} = 1 \).</p>
+        </blockquote>
+        <p>
+            Interpretado como: "La probabilidad de pasar del estado \( i \) al mismo estado \( i \) es del 100 %".
+        </p>
+    </section>
+
+    <!-- Diapositiva 11 -->
+    <section>
+        <h3>Un paseo aleatorio sobre \( S = \{0, 1, 2, \ldots, N\} \) I: Ejemplo 3</h3>
+        <blockquote>
+            <p>
+                De cualquiera de los estados <strong>interiores</strong> \( 1, 2, \ldots, N-1 \), la partícula salta a la derecha al estado \( i+1 \) con probabilidad \( p \) y hacia la izquierda al estado \( i-1 \) con probabilidad \( q = 1 - p \). Es decir, para \( 1 \leq i \leq N-1 \),
+            </p>
+            <p>
+                \[
+                \Pi_{i,i+1} = p, \qquad \Pi_{i,i-1} = q, \qquad \Pi_{i,j} = 0 \text{ para \( j \neq i\pm 1 \)}
+                \]
+            </p>
+            <p>
+                ¿Cuál es la matriz de transición y el diagrama de saltos?
+            </p>
+        </blockquote>
+        <p>
+            Esto corresponde al siguiente juego: tire una moneda; si sale escudo, entonces gana un colón; si sale corona, entonces pierde un colón. En cada tiro se salta al estado \( i+1 \) con probabilidad \( p \) o al estado \( i-1 \) con probabilidad \( q \), con \( i \) colones al presente.
+        </p>
+        <p>
+            <strong>A este "juego" se le conoce como <em>la ruina del apostador</em>.</strong>
+        </p>
+    </section>
+
+    <!-- Diapositiva 12 -->
+    <section>
+        <h3>Un paseo aleatorio sobre \( S = \{0, 1, 2, \ldots, N\} \) II: Ejemplo 3</h3>
+        
+        <blockquote>
+            <p>Pueden considerarse tres casos diferentes acerca de la conducta de la partícula en los estados frontera 0 y \( N \).</p>
+        </blockquote>
+        
+        <p>
+            <strong>Caso 1</strong>  Ambos estados frontera podrían ser <strong>absorbentes</strong>, en cuyo caso se tendría:
+        </p>
+        <p>
+            \[
+            \Pi_{0,0} = 1 \qquad \Pi_{N,N} = 1
+            \]
+        </p>
+        
+        <div class="row">
+            <div class="col-md-6">
+                <p>Esto corresponde a las situaciones en que el juego acabó dado que se quedó sin dinero o si se ha ganado el dinero de los oponentes.</p>
+            </div>
+            <div class="col-md-6">
+                <p>
+                \[
+                \Pi = \left[ \begin{array}{cccccccc}
+                1 & 0 & 0 & 0 & \cdot & \cdot & \cdot & 0 \\
+                q & 0 & p & 0 & \cdot & \cdot & \cdot & 0 \\
+                0 & q & 0 & p & \cdot & \cdot & \cdot & 0 \\
+                \cdot & \cdot & \cdot & \cdot & \cdot & \cdot & \cdot & \cdot \\
+                0 & 0 & 0 & 0 & \cdot & q     & 0     & p \\
+                0 & 0 & 0 & 0 & \cdot & \cdot & \cdot & 1
+                \end{array} \right]
+                \]
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Diapositiva 13 -->
+    <section>
+        <h3>Un paseo aleatorio sobre \( S = \{0, 1, 2, \ldots, N\} \) III: Ejemplo 3</h3>
+        
+        <p>
+            <strong>Caso 2</strong>  Ambos estados frontera podrían ser <strong>reflectores</strong>, en cuyo caso:
+        </p>
+        <p>
+            \[
+            \Pi_{0,1} = 1 \qquad \Pi_{N,N-1} = 1
+            \]
+        </p>
+        <p>
+            Esto corresponde al caso cuando mi oponente me da uno de sus colones cuando quedo con los bolsillos vacíos, o inversamente. Y que siga el juego.
+        </p>
+
+        <p>
+            <strong>Caso 3</strong>  Los estados frontera podrían ser <strong>parcialmente reflectores</strong>, en cuyo caso:
+        </p>
+        <p>
+            \[
+            \Pi_{0,0} = r, \quad \Pi_{0,1} = 1 - r, \quad \Pi_{N,N} = s, \quad \Pi_{N,N-1} = 1 - s
+            \]
+        </p>
+    </section>
+
+    <!-- Diapositiva 14 -->
+    <section>
+        <h3>Un paseo aleatorio sobre \( S = \{0, 1, 2, \ldots, N\} \) IV: Ejemplo 3</h3>
+        
+        <p>
+            La correspondiente matriz de transición estaría dada por:
+        </p>
+        <p>
+            \[
+            \Pi = \left[ \begin{array}{ccccccccc}
+            r & 1- r & 0 & 0 & 0 & \cdot & \cdot & \cdot & 0 \\
+            q & 0    & p & 0 & 0 & \cdot & \cdot & \cdot & 0 \\
+            0 & q    & 0 & p & 0 & \cdot & \cdot & \cdot & \cdot \\
+            \cdot & \cdot & \cdot & \cdot & \cdot & \cdot & \cdot & \cdot & \cdot \\
+            0 & 0    & 0 & 0 & 0 & \cdot & q     & 0     & p \\
+            0 & 0    & 0 & 0 & 0 & \cdot & \cdot & 1 - s & s
+            \end{array}
+            \right]
+            \]
+        </p>
+        <p>
+            El caso 3 incluye los dos casos anteriores para valores particulares de \( r \) y \( s \).
+        </p>
+    </section>
+
+    <!-- Diapositiva 15 -->
+    <section>
+        <p>Figura (Falta)</p>
+    </section>
+</section>
+
+<!-- La matriz de transición de orden t -->
+<section>
+    <section>
+        <h2>La matriz de transición de orden t</h2>
+    </section>
+
+    <!-- Diapositiva 1 -->
+    <section>
+        <h3>La matriz de transición de orden \( t \) I</h3>
+        <p>La matriz de transición \(\Pi\) muestra las probabilidades de transición \(\Pi_{i,j}\). Supóngase que se necesita encontrar probabilidades tales como:</p>
+        <p>
+            \[
+            P(X_{t+3} = j \mid X_{t} = i)
+            \]
+        </p>
+        <p>De que la partícula estará en estado \( j \) tres saltos desde el estado actual \( i \).</p>
+        <blockquote>
+            <p>
+                Si probabilidades de transición de un paso \(\Pi_{i,j}\) son las entradas de la matriz \(\Pi\), ¿cómo puede encontrarse las probabilidades de tres pasos, y más generalmente, las probabilidades de \( t \) pasos?
+            </p>
+        </blockquote>
+    </section>
+
+    <!-- Diapositiva 2 -->
+    <section>
+        <h3>Matriz de transición de orden \( t \) II</h3>
+        <blockquote>
+            <strong>Matriz de transición de orden \( t \)</strong>
+            <p>La matriz de transición de orden \( t \) es \(\Pi^{t}\), cuya entrada \((i, j)\) es:</p>
+            \[
+            \Pi_{i,j}^t = P(X_{t} = j \mid X_{0} = i)
+            \]
+            <p>Esto representa la probabilidad de saltar de \( i \) a \( j \) en \( t \) pasos.</p>
+        </blockquote>
+        <p>La homogeneidad en el tiempo (el hecho de que las probabilidades de transición no dependan de \( t \)) implica que, no obstante el tiempo \( \mu \geq 0 \):</p>
+        \[
+        P(X_{t+\mu} = j \mid X_{\mu} = i) = \Pi_{i,j}^{t}
+        \]
+        <p>O sea, las probabilidades de transición de \( t \) pasos dependen solamente de la diferencia de tiempo.</p>
+    </section>
+
+    <!-- Diapositiva 3 -->
+    <section>
+        <h3>Visualización de la transición de estados I</h3>
+        <p>Un algoritmo general se necesita para hallar la matriz de transición \(\Pi^{t}\) de orden \(t\) para cualquier matriz \(\Pi\) de una cadena de Markov dada.</p>
+        <p><em>Figura (Falta)</em></p>
+    </section>
+
+    <!-- Diapositiva 4 -->
+    <section>
+        <h3>Visualización de la transición de estados II</h3>
+        <p>Para hallar la matriz de transición de orden \( t+1 \) a partir de la de orden \( t \), se usan las suposiciones de Markov básicas.</p>
+        <ul>
+            <li>Supóngase que la partícula empieza en estado \( i \) en el tiempo 0, es decir, \( X_0 = i \).</li>
+            <li>Para que la partícula esté en el estado \( j \) en el tiempo \( t+1 \), debe haber atravesado algún estado \( k \) en el tiempo intermedio \( t \), es decir, \( X_0 = i \longrightarrow X_t = k \longrightarrow X_{t+1} = j \).</li>
+        </ul>
+        <p>El objetivo es encontrar una expresión para \( \Pi_{i,j}^{t+1} \).</p>
+    </section>
+
+    <!-- Diapositiva 5 -->
+    <section>
+        <h3>Visualización de la transición de estados III</h3>
+        <p>
+            \[
+            \begin{aligned}
+            \Pi_{i,j}^{t+1} & = P(X_{t+1} = j \mid X_{0} = i) \\
+                            & = \sum_{k=0}^{N} P(X_{t+1} = j \text{ y } X_{t} = k \mid X_{0} = i) \\
+                            & = \sum_{k=0}^{N} P(X_{t+1} = j \mid X_{t} = k \text{ y } X_{0} = i)P(X_{t} = k \mid X_{0} = i) \\
+                            & = \sum_{k=0}^{N} P(X_{t+1} = j \mid X_{t} = k)P(X_{t} = k \mid X_{0} = i) \\
+                            & = \sum_{k=0}^{N} \Pi_{i,k}^{t} \Pi_{k,j} 
+            \end{aligned}
+            \]
+        </p>
+    </section>
+
+    <!-- Diapositiva 6 -->
+    <section>
+        <h3>Visualización de la transición de estados IV</h3>
+        <ul>
+            <li>La primera igualdad es por definición de la matriz de transición de orden \( t \).</li>
+            <li>La segunda igualdad viene de particionar donde la partícula estaba en el tiempo \( t \).</li>
+            <li>La tercera igualdad viene de:
+                \[
+                P(A \cap B \mid C) = P(A \mid B \cap C)P(B \mid C)
+                \]
+                que se sigue de la definición de probabilidad condicional.
+            </li>
+            <li>La cuarta igualdad usa la propiedad de Markov, es decir, la suposición de que la probabilidad de que la partícula esté en \( j \) en \( t+1 \) dado que estaba en \( k \) en el tiempo \( t \), es independiente del hecho de que estaba en \( i \) en el tiempo 0.</li>
+            <li>La quinta igualdad es por definición de las matrices de transición y por la propiedad de homogeneidad.</li>
+        </ul>
+    </section>
+</section>
+
+<!-- Ecuaciones de Chapman -- Kolmogorov -->
+<section>
+    <section>
+        <h2>Ecuaciones de Chapman -- Kolmogorov</h2>
+    </section>
+
+    <!-- Diapositiva 1 -->
+    <section>
+        <h3>Ecuaciones de Chapman–Kolmogorov I</h3>
+        <p>Sea los tiempos \( t, s \geq 0 \). Entonces para todos los estados \( i, j \):</p>
+        <blockquote>
+            \[
+            \Pi_{i,j}^{t+s} = \sum_{k=0}^{N} \Pi_{i,k}^{t} \Pi_{k,j}^{s}
+            \]
+            <p>con \( \Pi^{t+s} = \Pi^{t}\Pi^{s} \).</p>
+        </blockquote>
+        <p>
+            Para que la partícula que comienza en \( i \) en el tiempo 0 esté en \( j \) en el tiempo \( t+s \),
+            debe estar en algún estado \( k \) en el tiempo intermedio \( t \).
+        </p>
+    </section>
+
+    <!-- Diapositiva 2 -->
+    <section>
+        <h3>Diagrama de salto de probabilidades I: Ejemplo 5</h3>
+        <blockquote>
+            <p>
+                Convierta el diagrama de salto de probabilidades de la Figura en la correspondiente cadena
+                de Markov y encuentre la probabilidad de que la partícula estará en el estado 1 después de tres saltos
+                dado que empezara en el estado 1.
+            </p>
+        </blockquote>
+        <p>Figura (Falta)</p>
+    </section>
+
+    <!-- Diapositiva 3 -->
+    <section>
+        <h3>Diagrama de salto de probabilidades II: Ejemplo 5</h3>
+        <p>Si se pasa la información dada por el diagrama de saltos a la correspondiente matriz de transición, se encuentra que:</p>
+        <p>
+            \[
+            \Pi = \left[ 
+            \begin{array}{ccc}
+            0   & 0.1 & 0.9 \\
+            0.8 & 0   & 0.2 \\
+            0.7 & 0.3 & 0
+            \end{array}
+            \right]
+            \]
+        </p>
+        <p>
+            Con la ayuda de la matriz anterior, se encuentra que:
+        </p>
+        <p>
+            \[
+            \Pi^{2} = \Pi^{1} \Pi^{1} = \left[ 
+            \begin{array}{ccc}
+            0.71 & 0.27 & 0.02 \\
+            0.14 & 0.14 & 0.72 \\
+            0.24 & 0.07 & 0.69
+            \end{array}
+            \right]
+            \]
+        </p>
+    </section>
+
+    <!-- Diapositiva 4 -->
+    <section>
+        <h3>Diagrama de salto de probabilidades III: Ejemplo 5</h3>
+        <p>
+            \[
+            \Pi^{3} = \Pi^{2} \Pi = \left[ 
+            \begin{array}{ccc}
+            0.230 & 0.077 & 0.693 \\
+            0.616 & 0.230 & 0.154 \\
+            0.539 & 0.231 & 0.230
+            \end{array}
+            \right]
+            \]
+        </p>
+        <p>
+            Para responder a la pregunta hecha:
+        </p>
+        <p>
+            \[
+            P(X_{3} = 1 \mid X_{0} = 1) = \Pi_{1,1}^{3} = 0.230
+            \]
+        </p>
+        <p>Un 23 %.</p>
+    </section>
+</section>
+
+<!-- El vector de probabilidad ρt -->
+<section>
+    <section>
+        <h2>El vector de probabilidad $\rho^{t}$</h2>
+    </section>
+
+    <!-- Diapositiva 1 -->
+    <section>
+        <h3>Un vector de probabilidad para todos los estados</h3>
+        <p>
+            Se ha aprendido a calcular probabilidades condicionales de la forma \( P(X_{t} = j \mid X_{0} = i) \).
+            Pero supóngase que la partícula comenzó en el estado \( i_{0} \) en el tiempo 0. Entonces, ¿cuál sería
+            \( P(X_{t} = j) \)? Más en general, suponga que la partícula empieza en el estado \( i \) con probabilidad
+            \( p_{i} \) en el tiempo \( t = 0 \). Se desea responder la pregunta: con las probabilidades iniciales
+            \( \rho_{0}, \rho_{1}, \ldots, \rho_{N} \), ¿cuál sería \( P(X_{t} = j) \) para cualquier estado \( j \)?
+        </p>
+        <p>
+            Sea el vector de <strong>probabilidad inicial</strong> definido por:
+        </p>
+        <blockquote>
+            \[
+            \rho = (\rho_{0}, \rho_{1}, \rho_{2}, \ldots, \rho_{N})
+            \]
+        </blockquote>
+        <p>
+            Nótese que \( 0 \leq \rho_{i} \leq 1 \) para todos los estados \( i \) en el espacio de estados \( S \) y
+            \( \rho_{0} + \rho_{1} + \cdots + \rho_{N} = 1 \), dado que la partícula debe comenzar en alguna parte
+            en el tiempo 0. Además, \( \rho^{0} = \rho \).
+        </p>
+    </section>
+
+    <!-- Diapositiva 2 -->
+    <section>
+        <h3>Definición del vector de probabilidad \( \rho^t \)</h3>
+        <p>
+            El vector de probabilidad en el tiempo \( t \) se define como:
+        </p>
+        <p>
+            \[
+            \rho^{t} = (\rho_{0}^{t}, \rho_{1}^{t}, \rho_{2}^{t}, \ldots, \rho_{N}^{t})
+            \]
+        </p>
+        <p>
+            donde:
+        </p>
+        <p>
+            \[
+            \rho_{j}^{t} = P(X_{t} = j \mid \text{vector de probabilidad inicial sea } \rho)
+            \]
+        </p>
+        <p>
+            Es decir, \( \rho_{j}^{t} \) es la probabilidad de que la partícula se encontrará en el estado \( j \)
+            dado que comenzó en el estado \( i \) con probabilidad \( \rho_{i} \) para \( i = 0, 1, \ldots, N \).
+            Además:
+        </p>
+        <p>
+            \[
+            \sum_{j=0}^{N}\rho_{j}^{t} = \sum_{j=0}^{N}P(X_{t} = j) = 1
+            \]
+        </p>
+        <p>
+            Es decir, para cada \( t \), \( \rho^{t} \) es un vector de probabilidad.
+        </p>
+    </section>
+
+    <!-- Diapositiva 3 -->
+    <section>
+        <h3>El vector de probabilidad \( \rho^{t} \) I</h3>
+        <blockquote>
+            <strong>Vector de probabilidad \( \rho \)</strong>
+            <p>Un vector de probabilidad \( \rho = (\rho_{0}, \rho_{1}, \ldots, \rho_{N}) \) satisface:</p>
+            <ol>
+                <li>\( 0 \leq \rho_{i} \leq 1 \) para cada \( i = 0, 1, 2, \ldots, N \).</li>
+                <li>\( \rho_{0} + \rho_{1} + \ldots + \rho_{N} = 1 \).</li>
+            </ol>
+        </blockquote>
+        <p>
+            Hay un método directo para obtener el vector de probabilidad \( \rho^{t} \) en el tiempo \( t \) dado
+            el vector de probabilidad inicial \( \rho^{0} \) en el tiempo 0 y la matriz de transición \( \Pi^{t} \)
+            de orden \( t \):
+        </p>
+        <p>
+            \[
+            \rho_{j}^{t} = \sum_{i=0}^{N} \rho_{i}\Pi_{i,j}^{t}
+            \]
+        </p>
+    </section>
+
+    <!-- Diapositiva 4 -->
+    <section>
+        <h3>El vector de probabilidad \( \rho^{t} \) II</h3>
+        <p>
+            El vector de probabilidad en el tiempo $t$ es
+        </p>
+        <p>
+            \[
+            \rho^{t} = \rho \Pi^{t} = \rho^{0} \Pi^{t}
+            \]
+        </p>
+        <p>
+            Para probar el resultado, se calcula lo siguiente:
+        </p>
+        <p>
+            \[
+            \rho_{j}^{t} = P(X_{t} = j) = \sum_{i=0}^{N} P(X_{t} = j \mid X_{0} = i)P(X_{0} = i) = \sum_{i=0}^{N} \Pi_{i,j}^{t}\rho_{i}
+            \]
+        </p>
+        <p>
+            donde la primera y segunda igualdades son las definiciones de \( \rho^{t}, \Pi^{t} \) y \( \rho \). La
+            segunda igualdad constituye una aplicación de la ley de probabilidad total.
+        </p>
+    </section>
+
+    <!-- Diapositiva 5 -->
+    <section>
+        <h3>Probabilidad del estado de la partícula I</h3>
+        <blockquote>
+            <p>
+                Para la cadena de Markov de la Figura, encuentre la probabilidad de que la partícula
+                estará en el estado 0 en el tiempo 3 si comenzó en el estado 0 con probabilidad 1/3 y en el estado 1
+                con probabilidad 2/3 en el tiempo 0.
+            </p>
+        </blockquote>
+        <p>Figura (Falta)</p>
+    </section>
+
+    <!-- Diapositiva 6 -->
+    <section>
+        <h3>Probabilidad del estado de la partícula II: Ejemplo 6</h3>
+        <p>
+            Primero, se encuentra la matriz de transición a partir del diagrama de salto y el vector de probabilidad en el tiempo 0 a partir de la información dada en el enunciado:
+        </p>
+        <p>
+            \[
+            \Pi = \left[ 
+            \begin{array}{cc}
+            1/4 & 3/4 \\
+            1 & 0
+            \end{array}
+            \right]
+            \]
+            \[
+            \rho = (1/3, 2/3)
+            \]
+        </p>
+        <p>
+            Toca a continuación calcular las matrices de transición de orden 2 y de orden 3, para finalmente calcular el vector de probabilidad de orden 3:
+        </p>
+        <p>
+            \[
+            \Pi^{2} = \Pi \cdot \Pi = \left[ 
+            \begin{array}{cc}
+            13/16 & 3/16 \\
+            1/4 & 3/4
+            \end{array}
+            \right]
+            \]
+        </p>
+    </section>
+
+    <!-- Diapositiva 7 -->
+    <section>
+        <h3>Probabilidad del estado de la partícula III: Ejemplo 6</h3>
+        <p>
+            \[
+            \Pi^{3} = \Pi \cdot \Pi^{2} = \left[ 
+            \begin{array}{cc}
+            25/64 & 39/64 \\
+            13/16 & 3/16
+            \end{array}
+            \right]
+            \]
+            \[
+            \rho^{3} = \rho \cdot \Pi^{3} = (1/3, 2/3) \cdot \Pi^{3} = (129/192, 63/192)
+            \]
+        </p>
+        <p>
+            De esto último se concluye que \( P(X_{3} = 0) = \rho_{0}^{3} = 129/192 \approx 0.7 \).
+        </p>
+    </section>
+
+    <!-- Diapositiva 8 -->
+    <section>
+        <h3>Estado \( i \) inicial I</h3>
+        <p>
+            Supóngase que la partícula empieza en el tiempo \( t=0 \) en el estado \( i \). En la terminología de los vectores de probabilidad, esto significa que:
+        </p>
+        <p>
+            \[
+            \rho^{0} = (0, \ldots, 0, 1, 0, \ldots, 0)
+            \]
+        </p>
+        <p>
+            El número 1 en el anterior vector está en la \( i \)-ésima entrada.
+        </p>
+    </section>
+
+    <!-- Diapositiva 9 -->
+    <section>
+        <h3>Estado \( i \) inicial II</h3>
+        <p>
+            \[
+            \rho^{t} = (0, \ldots, 0, 1, 0, \ldots, 0) \cdot \Pi^{t} = (\Pi_{i,0}^{t}, \Pi_{i,1}^{t}, \Pi_{i,2}^{t}, \ldots, \Pi_{i,N}^{t})
+            \]
+        </p>
+        <p>
+            Lo que implica que dado que la partícula comenzó en el estado \( i \),
+        </p>
+        <p>
+            \[
+            P(X_{t} = j) = \rho_{j}^{t} = \Pi_{i,j}^{t}
+            \]
+        </p>
+        <p>
+            Esto confirma lo que ya se sabe: la entrada \( (i, j) \) de la matriz \( \Pi^{t} \) es la probabilidad de estar en el estado \( j \) en el tiempo \( t \) dado que estaba en el estado \( i \) en el tiempo 0.
+        </p>
+    </section>
+</section>
+
+<!-- Gráficos de Chart.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+<script src="{% static 'js/p15.js' %}"></script>
+
+{% endblock %}
+
+{% block websocket %}
+{% if role == "presenter" %}
+<script>
+    const wsRouteTx = 'wss://' + window.location.host + '/ws/deck/slider/p4/';
+    const deckSocket = new WebSocket(wsRouteTx);
+
+    // Registrar la conexión abierta
+    deckSocket.onopen = function (event) {
+        console.log('Conexión WebSocket abierta exitosamente como presentador en ' + wsRouteTx);
+    };
+
+    Reveal.on('slidechanged', event => {
+        deckSocket.send(JSON.stringify({
+            'indexh': event.indexh,
+            'indexv': event.indexv
+        }));
+    });
+</script>
+{% else %}
+<script>
+    const wsRouteRx = 'wss://' + window.location.host + '/ws/deck/slider/p4/';
+    const deckSocket = new WebSocket(wsRouteRx);
+
+    // Registrar la conexión abierta
+    deckSocket.onopen = function (event) {
+        console.log('Conexión WebSocket abierta exitosamente como cliente en ' + wsRouteRx);
+    };
+
+    deckSocket.onmessage = function (event) {
+        const data = JSON.parse(event.data);
+        Reveal.slide(data.message.indexh, data.message.indexv);
+    };
+</script>
+{% endif %}
+{% endblock %}
