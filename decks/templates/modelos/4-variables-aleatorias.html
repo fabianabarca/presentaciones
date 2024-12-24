@@ -10,11 +10,16 @@
 <!-- Configuraciones específicas del <head> -->
 {% block head %}
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-{% endblock %}
 
+<!-- Agregar KaTex de reveal Revealjs -->
+<script src="plugin/math/math.js"></script>
+<script>
+  Reveal.initialize({ plugins: [ RevealMath.KaTeX ] });
+</script>
+{% endblock %}
 {% block content %}
 
-<!-- SECCIÓN 0 -->
+<!-- SECCIÓN 0 -->-
 <section>
     <h1 class="display-1">
         Variables aleatorias
@@ -23,56 +28,980 @@
 
 <!-- Portada y descripción -->
 <section>
-    <h3>Características espectrales de los procesos aleatorios</h3>
     <p>
-        Cuando los procesos estocásticos describen señales (funciones unidimensionales en el tiempo), es posible analizarlos según sus características espectrales, es decir, relativas a la frecuencia.
-    </p>
-    <p>
-        Esto es útil en aplicaciones de procesamiento de señales de todo tipo en la ingeniería eléctrica:
-    <div class="row text-center fw-bold">
-        <div class="col"><i class="bi bi-mic"></i><br>Sensores</div>
-        <div class="col"><i class="bi bi-volume-up"></i><br>Audio</div>
-        <div class="col"><i class="bi bi-node-plus"></i><br>Control</div>
-        <div class="col"><i class="bi bi-broadcast-pin"></i><br>Comunicaciones</div>
-        <div class="col"><i class="bi bi-lightning-charge"></i><br>Potencia</div>
-    </div>
+        Las variables aleatorias facilitan una manipulación numérica más robusta de los fenómenos aleatorios, y permiten extender el análisis a muchos más casos que los vistos hasta ahora. Herramientas como las funciones de densidad y de distribución acumulativa de probabilidad proveen descripciones completas de los modelos probabilísticos.
     </p>
 </section>
 
-<!-- Densidad espectral de potencia y sus propiedades -->
+<!-- Variables aleatorias -->
 <section>
     <section>
-        <h2>Densidad espectral de potencia y sus propiedades</h2>
+        <h2>Variables aleatorias</h2>
     </section>
 
+    <!-- Diapositiva 1 -->
     <section>
-        <h3>Densidad espectral de potencia</h3>
-        <blockquote>
-            La densidad espectral de potencia de una señal aleatoria describe cómo está distribuida su potencia en todas las frecuencias.
-        </blockquote>
+        <h3>El problema inicial - Variable aleatoria</h3>
+        <p>
+            Los conjuntos $S_1 = \{$ todos los equipos del campeonato nacional $\}$ o $S_2 = \{$ los colores favoritos de los estudiantes de 
+            esta clase $\}$ son útiles en la descripción de ciertos eventos, pero no permiten la <em>manipulación numérica</em>.  
+        </p>
         <ul>
-            <li>Esta es una descripción de $X(t)$ en el <strong>dominio de la frecuencia</strong>.</li>
-            <li>Las propiedades estadísticas de los procesos estocásticos, como las funciones temporales de la media, la varianza, la autocovarianza o la autocorrelación son descripciones de $X(t)$ en el <strong>dominio del tiempo</strong>.</li>
+            <li>Este espacio de eventos contiene conjuntos <strong>abstractos</strong>.</li>
+            <li>Necesitamos <strong>números</strong> para sumar, restar, multiplicar, dividir&hellip;</li>
+            <li>Necesitamos <strong>funciones</strong> para diferenciar, integrar&hellip;</li>
         </ul>
+        <blockquote>
+            Aquí es útil, entonces, la variable aleatoria&hellip;
+        </blockquote>
+    </section>    
 
-        <p class="small">La densidad espectral de potencia es conocida en inglés como PSD (<em>Power Spectral Density</em>)</p>
+    <!-- Diapositiva 2 -->
+    <section>
+        <h3>Variable aleatoria</h3>
+        <h5>Definición</h5>
+        <blockquote>
+            Para un espacio de eventos $S$, una <strong>variable aleatoria</strong> es cualquier regla que asocia cada resultado elemental de 
+            $S$ con <strong>un número</strong>. Es decir, es una <strong>función</strong> cuyo dominio es el espacio (quizá abstracto) de eventos o 
+            muestras, y cuyo rango es algún subconjunto de los números reales.
+        </blockquote>
+        <p>Figura (Falta)</p>
+        <p>
+            La notación $X(s) = x$ significa que $x$ es el valor asociado por $X$ con el evento elemental $s$.
+        </p>
+    </section>
+
+    <!-- Diapositiva 3 -->
+    <section>
+        <h3>Pero... <i class="bi bi-emoji-frown-fill"></i> Una observación necesaria</h3>
+        <p>Las variables aleatorias <em>ni son variables, ni son aleatorias.</em></p>
+        <blockquote>
+            $X(s)$ es una <strong>función</strong> y es <strong>determinística</strong>, pero describe el comportamiento de un fenómeno 
+            aleatorio subyacente.
+        </blockquote>
+    </section>
+
+    <!-- Diapositiva 3 -->
+    <section>
+        <h3>Requisitos para la construcción de variables aleatorias I</h3>
+        <p><strong>Un espacio de probabilidades</strong> ($S$, $P$) para un experimento, que contiene todos los eventos elementales $S$ y sus probabilidades asociadas $P$.</p>
+        <p><strong>Una función de mapeo</strong> $X$ que mapea cada $s \in S$ a un único punto $x \in \mathbb{R}$ (la recta real).</p>
+        <p><strong>Una relación de dualidad</strong> de la probabilidad, esto es, que si $B$ es un subconjunto de $\mathbb{R}$, la probabilidad del evento $X(s) = B$ es equivalente a la del conjunto $A = X^{-1}(B) \in S$, que contiene todos los $s \in S$ que se mapean a $B$ bajo la función $X$.</p>
+    </section>
+
+    <!-- Diapositiva 4 -->
+    <section>
+        <h3>Requisitos para la construcción de variables aleatorias II</h3>
+        <p>Figura (Falta)</p>
+        <p>
+            $$X(s \in A) = B \qquad A = X^{-1}(B) \in S \qquad P(B) = P(A)$$
+        </p>
+    </section>
+
+    <!-- Diapositiva 4 -->
+    <section>
+        <h3>Condiciones para que una función sea variable aleatoria I</h3>
+        <blockquote> 
+            <strong>Nota</strong>: VA será la abreviación de “variable aleatoria”, de aquí en adelante. En inglés se utiliza <strong>rv</strong>, 
+            de random variable. 
+        </blockquote>
+        <p>Algunas condiciones debe cumplir X(s) para ser una VA.</p>
+        <p>
+            <i class="bi bi-1-circle-fill"></i> Una variable aleatoria es una función <strong>no multivaluada</strong>. Es decir, todo punto 
+            en S corresponde a solo un valor de la VA
+        </p>
+        <p>Figura (Falta)</p>
     </section>
 
     <!-- Diapositiva 5 -->
     <section>
-        <h5>Deducción de la densidad espectral de potencia | Definiciones preliminares</h5>
-        <h3>El cuadrado de $X(t)$ como la potencia instantánea</h3>
-        <blockquote>
-            Es posible interpretar $X^2(t)$ como la "potencia instantánea" en $t$ contenida en el proceso aleatorio $X(t)$, que es una familia de funciones del tiempo.
-        </blockquote>
+        <h3>Condiciones para que una función sea variable aleatoria II</h3>
         <p>
-            En teoría de circuitos, la potencia disipada en un resistor es
+            <i class="bi bi-2-circle-fill"></i> El conjunto $\{X \leq x\}$ existe y es un evento para cualquier número real $x$. 
+            Corresponde a los puntos $s$ en el espacio de muestras $S$ para los que la VA ${X}(s)$ no excede el número $x$.
+        </p>
+        <p>Figura (Falta)</p>
+        <blockquote>
+            La probabilidad $P\{{X} \leq x\}$ es igual a la suma de las probabilidades de todos los eventos elementales $s$ 
+            correspondientes a $\{{X} \leq x\}$.
+        </blockquote>
+    </section>
+
+    <!-- Diapositiva 6 -->
+    <section>
+        <h3>Condiciones para que una función sea variable aleatoria III </h3>
+        <p>
+            <i class="bi bi-3-circle-fill"></i> Las probabilidades de los eventos $\{{X} = \infty\}$ y $\{{X} = -\infty\}$ son cero, es decir:
+        </p>
+        <p>
+            $$P\{{X} = -\infty\} = 0 \qquad P\{{X} = \infty\} = 0$$
+        </p>
+        <p>
+            $X(s)$ puede ser ya sea $-\infty$ o $\infty$ para algunos valores de $s$, pero su probabilidad será cero.
+        </p>
+        <blockquote>
+            <em>Como se especifica más adelante, esto es necesario para que su "función de densidad" tenga un área total finita.</em>
+        </blockquote>
+    </section>
+
+    <!-- Diapositiva 7 -->
+    <section>
+        <h3> Variables aleatorias discretas I Definición</h3>
+        <p> Una variable aleatoria discreta es una va cuyos valores posibles constituyen o un conjunto <strong>finito</strong> o un conjunto infinito <strong>enumerable</strong>.</p>
+        <p> <strong>Ejemplos</strong> </p>
+        <ul>
+            <li> Las caras de un dado </li>
+            <li> La población mundial </li>
+            <li> Otros ejemplos que se mapean en $\mathbb{N}$ </li>
+        </ul>
+    </section>
+
+    <!-- Diapositiva 8 -->
+    <section>
+        <p>Figura (Falta)</p>
+    </section>
+
+    <!-- Diapositiva 8 -->
+    <section>
+        <h3>Variables aleatorias continuas I Definición</h3>
+        <p>Una VA es continua si las siguientes condiciones aplican:</p>
+        <ul>
+            <p> 
+                <i class="bi bi-1-circle-fill"></i> Su conjunto de valores posibles consiste en todos los números en un solo intervalo en 
+                la recta real (por ejemplo, de $0$ a $+\infty$) o todos los números en la unión disjunta de intervalos.
+            </p>
+            <p> 
+                <i class="bi bi-2-circle-fill"></i> Ningún valor posible de la variable aleatoria continua tiene probabilidad positiva, es 
+                decir, $P(X = c) = 0$ para cualquier valor de $c$.
+            </p>
+        </ul>
+        <p> <strong>Ejemplo</strong> </p>
+        <p>
+            La estatura de los habitantes de un país es una VA continua. Pero, ¿cuál es la probabilidad de que alguien mida <strong>exactamente</strong> 
+            $52\pi$ cm? 
+        </p>
+    </section>
+
+    <!-- Diapositiva 9 -->
+    <section>
+        <p>Figura (Falta)</p>
+    </section>
+</section>
+
+<!-- Las funciones de distribución de una \va-->
+<section>
+    <section>
+        <h2>Las funciones de distribución de una VA</h2>
+    </section>
+
+    <!-- Diapositiva 1 -->
+    <section>
+        <h3> Importancia de las funciones de distribución de una variable aleatoria </h3>
+        <ul>
+            <li>Las funciones de distribución y de densidad de una variable aleatoria son <strong>descripciones completas</strong> de su <em>modelo probabilístico</em>.</li>
+            <li>Es la generalización de la <strong>asignación de probabilidades</strong> a todos los posibles resultados del experimento, que ahora están mapeados en la recta real y por eso podemos crear una <strong>función</strong> sobre ellos.</li>
+        </ul>
+        <blockquote>
+            La más famosa de las funciones de probabilidad es <em>normal</em> (o <em>gaussiana</em>), que describe la noción de que las probabilidades de ocurrencia de un evento están concentradas alrededor de un valor central.
+        </blockquote>
+
+    </section>
+</section>
+
+<!-- La función de probabilidad acumulativa, FX (x) -->
+<section>
+    <section>
+        <h2>
+            La función de probabilidad acumulativa, FX (x)
+        </h2>
+    </section>
+
+    <!-- Diapositiva 1 -->
+    <section>
+        <p>
+            La premisa de la función de probabilidad acumulativa es que, por definición, $F_X(x)$ representa "la probabilidad de que el resultado del experimento sea un valor menor a $x$". Conforme $x$ aumenta se "acumula" toda la probabilidad anterior (pues está contenida dentro del nuevo intervalo), y de ahí su nombre.
+        </p>
+    </section>
+
+    <!-- Diapositiva 2 -->
+    <section>
+        <p>Figura (Falta) </p>
+    </section>
+
+    <!-- Diapositiva 3 -->
+    <section>
+        <h3> La función de probabilidad acumulativa, $F_X(x)$ Definición </h3>
+        <p>
+            Si la probabilidad $P\{ {X} \leq x\}$ es la probabilidad del evento $\{ {X} \leq x\}$, entonces a la función de $x$ 
+        </p>
+        <p>
+            $$\boxed{F_{X}(x) = P(X \leq x)}$$
+        </p>
+        <p>
+            se le llama <em>función de distribución de probabilidad acumulativa</em> de la variable aleatoria ${X}$. El argumento $x$ es cualquier número real entre $-\infty$ y $\infty$.
+        </p>
+        <p>Figura (Falta)</p>
+    </section>
+
+    <!-- Diapositiva 4 -->
+    <section>
+        <p>Figura (Falta) </p>
+    </section>
+
+    <!-- Dipositiva 5 -->
+    <section>
+        <h3> Propiedades de la función acumulativa, FX (x) I </h3>
+        <p>
+            La función de distribución de probabilidad acumulativa presenta las siguientes propiedades.
+        </p>
+
+        <p>
+            <i class="bi bi-1-circle-fill"></i> La probabilidad de que $X$ tenga un valor menor a $-\infty$ es cero $$\boxed{F_{X}(-\infty) = 0}$$ Esto tiene relación con el hecho conocido de que \( P(\overline{S}) = 0 \).
+        </p>
+        <p>
+            <i class="bi bi-2-circle-fill"></i> La probabilidad de que $X$ tenga un valor menor a $+\infty$ (dentro de la recta real) es uno $$\boxed{F_{X}(\infty) = 1}$$ Esto tiene relación con el hecho conocido de que $P(S) = 1$
+        </p>
+    </section>
+
+    <!-- Diapositiva 6 -->
+    <section>
+        <h3>Propiedades de la función acumulativa, FX (x) II</h3>
+        <p>
+            <i class="bi bi-3-circle-fill"></i> $F_{X}(x) = P(X < x)$ es una probabilidad por sí misma, con valores acotados según el primer y segundo axioma de la probabilidad $$\boxed{0 \leq F_{X}(x) \leq 1}$$ Esto tiene relación directa con las dos propiedades anteriores.
+        </p>
+        <p>
+            <i class="bi bi-4-circle-fill"></i> $F_{X}(x)$ es una función no-decreciente de $x$ $$\boxed{F_{X}(x_1) \leq F_{X}(x_2) \quad \text{si} \quad x_1 < x_2}$$ Esto es claro por el hecho de que la función es "acumulativa".
+        </p>
+    </section>
+
+    <!-- Diapositiva 7 -->
+    <section>
+        <h3> Propiedades de la función acumulativa, FX (x) III </h3>
+        <p>
+            <i class="bi bi-5-circle-fill"></i> La probabilidad de que $X$ tenga valores más grandes que algún número $x_1$ pero que no exceda otro número $x_2$, es igual a la diferencia en $F_{X}(x)$ evaluada en tales puntos. $$\boxed{P(x_1 < {X} \leq x_2) = F_{X}(x_2) - F_{X}(x_1)}$$ Esta propiedad permite hacer cálculos numéricos de probabilidades a partir de la CDF.
+        </p>
+        <p>
+            <i class="bi bi-6-circle-fill"></i> $F_{X}(x)$ tiene continuidad por la derecha $$\boxed{F_{X}(x^{+}) = F_{X}(x)}$$ donde $x^{+}$ significa $x + \epsilon$, y $\epsilon > 0$ es infinitesimalmente pequeño; es decir, $\epsilon \rightarrow 0$. Esto es útil con VA discretas.
+        </p>
+    </section>
+
+    <!-- Diapositiva 8 -->
+    <section>
+        <h3>Función de distribución acumulativa discreta I Definición</h3>
+        <p>
+            Si $X$ es una variable aleatoria discreta, $F_{X}(x)$ debe tener una forma escalonada. La amplitud de un escalón igualará la probabilidad de ocurrencia del valor de ${X}$ donde el escalón ocurre. 
+        </p>
+        <p>Figura (Falta)</p>
+    </section>
+
+    <!-- Diapositiva 9 -->
+    <section>
+        <h3>Función de distribución acumulativa discreta II</h3>
+        <p>
+            Si los valores de ${X}$ se denotan $x_i$, $F_{X}(x)$ se escribe como: 
 
             \begin{equation}
-            p_R(t) = i^2(t) R = v^2(t)/R
+            \boxed{F_{X}(x) = \sum_{i = 1}^{N}P\{ X = x_i\}u(x - x_i)}
+            \end{equation}
+
+            donde $u(\cdot)$ es la función escalón unitario. Si se introduce la notación abreviada $P(x_i) = P\{{X} = x_i\}$, se puede reescribir como
+
+            \begin{equation}
+            \boxed{F_{X}(x) = \sum_{i=1}^{N}P(x_i)u(x - x_i)}
             \end{equation}
         </p>
     </section>
+
+    <!-- Diapositiva 10 -->
+    <section>
+        <h3>Ejemplo con un dado I Función acumulativa discreta</h3>
+        <p>
+            Un experimento consiste en lanzar un dado. Hay seis resultados posibles: las caras del dado, identificadas 
+            como $S$ = { <i class="bi bi-dice-1"></i>, <i class="bi bi-dice-2"></i>, <i class="bi bi-dice-3"></i>, <i class="bi bi-dice-4"></i>, 
+            <i class="bi bi-dice-5"></i>, <i class="bi bi-dice-6"></i> }. Todas tienen igual probabilidad de ocurrencia. 
+            Se define una variable aleatoria $Y(s)$ que mapea cada cara a un número en la recta real igual a la cantidad de puntos en la cara del dado.
+        </p>
+        <p> Figura (Falta) </p>
+    </section>
+
+    <!-- Diapositiva 11 -->
+    <section>
+        <h3>Ejemplo con un dado II Función acumulativa discreta</h3>
+        <p>
+            Dado que son igualmente probables, las probabilidades son
+        </p>
+        <p>
+            \begin{equation*}
+            P(x_i) = P ( X = x_i ) = \frac{1}{6}
+            \end{equation*}
+        </p>
+        <p>
+            Tabla (Falta)
+        </p>
+        <p>
+            Y así su función de distribución es
+
+            \begin{equation*}
+            F_{X}(x) = \sum_{i=1}^{N}P(x_i)u(x - x_i) = \sum_{i=1}^{6}\frac{1}{6}u(x - x_i)
+            \end{equation*}
+        </p>
+    </section>
+
+    <!-- Diapositiva 12 -->
+    <section>
+        <h3>Ejemplo con un dado III Función acumulativa discreta</h3>
+        <p>
+            Figura (Falta)
+        </p>
+        <p>
+            ¿Cuál es la probabilidad $P(1 < x \leq 5)$? Utilizando directamente la propiedad 5:
+            \begin{equation*}
+            \begin{aligned}
+            P\{ x_1 < {X} \leq x_2\} & = F_{X}(x_2) - F_{X}(x_1) \\
+            & = F_{X}(5) - F_{X}(1) = \frac{5}{6} - \frac{1}{6} = \frac{4}{6}
+            \end{aligned}    
+            \end{equation*}
+
+        </p>
+    </section>
+</section>
+
+<!-- La función de densidad de probabilidad, fX (x) -->
+<section>
+    <section>
+        <h2>
+            La función de densidad de probabilidad, $f_X (x)$
+        </h2>
+    </section>
+
+    <!-- Diapositiva 1 -->
+    <section>
+        <p>
+            La función de densidad de probabilidad es un
+            descripción directa de la <em>distribución</em> de la probabilidad
+            en la recta real. Matemáticamente, es la base para una
+            multitud de cálculos numéricos útiles en el análisis del
+            fenómeno aleatorio.
+        </p>
+    </section>
+
+    <!-- Diapositiva 2 -->
+    <section> 
+        <h3>La función de densidad de probabilidad continua, $f_X(x)$ Definición</h3>
+        <p>
+            La función de densidad probabilística de la VA $X$, denotada por $f_{X}(x)$, está dada por la derivada de la función acumulativa: 
+
+            \begin{equation}
+            \boxed{f_{X}(x) = \frac{\mathsf{d}F_{X}(x)}{\mathsf{d}x}}
+            \end{equation}
+
+            A $f_{X}(x)$ a menudo se le llama simplemente <em>función de densidad o función de distribución</em>. 
+        </p>
+    </section>
+
+    <!-- Diapositiva 3 -->
+    <section>
+        <p> Figura (Falta) </p>
+    </section>
+
+    <!-- Diapositiva 4 -->
+    <section>
+        <h3>La función de densidad de probabilidad discreta, $f_X(x)$ Definición</h3>
+        <p>
+            Para una variable aleatoria discreta, la función de densidad discreta se obtiene después de derivar la \( F_X(x) \) discreta: 
+
+            \[
+            \begin{aligned}
+            f_X(x) & = \frac{d}{dx}\left(\sum_{i=1}^{N}P(x_i)u(x - x_i)\right) \\
+            \end{aligned}
+            \]
+            
+            \begin{equation}
+            \boxed{f_{X}(x) = \sum_{i=1}^{N}P(x_i)\delta(x- x_i)}
+            \end{equation}
+            En algunos textos, la PMF utiliza la notación \( P_X(k) \) donde \( P_X \) es la función de la variable aleatoria \( X \) y \( k = \{ 1, 2, 3\ldots \} \).
+            
+        </p>
+    </section>
+
+    <!-- Diapositiva 4 -->
+    <section>
+        <p> Figura (Falta) </p>
+    </section>
+
+    <!-- Diapositiva 5 -->
+    <section>
+        <h3>Función de densidad de probabilidad, $f_X(x)$ I Propiedades</h3>
+        <p>Las funciones de densidad presentan las siguientes propiedades:</p>
+        <ul>
+            <p>
+                <i class="bi bi-1-circle-fill"></i> <strong>La función $f_X(x)$ es siempre positiva</strong>
+            </p>
+            <p> $$f_{X}(x) \geq 0 \text{ para todo } x$$ Esto a partir del primer axioma de la probabilidad. Por analogía con la densidad de masa: no existe masa negativa. </p>
+            <p> 
+                <i class="bi bi-2-circle-fill"></i> <strong>El área bajo la curva es unitaria</strong> 
+            </p>
+            <p> $$\displaystyle\int_{-\infty}^{\infty}f_{X}(x)~\mathsf{d}x = 1$$ A partir del segundo axioma de la probabilidad. Esta es una "normalización" necesaria para que una función sea una PDF.</p>
+        </ul>
+    </section>
+
+    <!-- Diapositiva 6 -->
+    <section>
+        <h3>Función de densidad de probabilidad, $f_X(x)$ II Propiedades</h3>
+        <p>
+            <i class="bi bi-3-circle-fill"></i> <strong>La probabilidad de la VA en un intervalo es el área bajo la curva en ese intervalo</strong> $$\displaystyle P(x_1 < {X} \leq x_2) = \int_{x_1}^{x_2} f_{X}(x)~\mathsf{d}x$$ Esto permite hacer cálculos numéricos de probabilidad, y es lo que da origen a su nombre. Más adelante, con VA múltiples (en $N$ dimensiones), será "el volumen bajo la superficie", etc. 
+        </p>
+        <p>
+            <i class="bi bi-4-circle-fill"></i> <strong>La función acumulativa se obtiene de la de densidad</strong> $$\displaystyle F_{X}(x) = \int_{-\infty}^{x}f_{X}(\xi)~\mathsf{d}\xi$$ Esto a partir de la definición de la función de distribución acumulativa, $F_X(x) = P(X < x)$, y de la propiedad anterior. 
+        </p>
+    </section>
+
+    <!-- Diapositiva 7 -->
+    <section>
+        <h3>Función de densidad de probabilidad, $f_X(x)$ III Propiedades</h3>
+        <p>Figura (Falta)</p>
+        <table>
+            <tr>
+                <td>
+                    <ul>
+                        <p><i class="bi bi-1-circle-fill"></i> \( f_{X}(x) \geq 0 \)</p>
+                        <p><i class="bi bi-2-circle-fill"></i> \( \int_{-\infty}^{\infty} f_{X}(x) \, \mathrm{d}x = 1 \)</p>
+                    </ul>
+                </td>
+                <td>
+                    <ul>
+                        <p><i class="bi bi-3-circle-fill"></i> \( P(x_b < X \leq x_c) = \int_{x_b}^{x_c} f_{X}(x) \, \mathrm{d}x \)</p>
+                        <p><i class="bi bi-4-circle-fill"></i> \( F_{X}(x_a) = \int_{-\infty}^{x_a} f_{X}(x) \, \mathrm{d}x \)</p>
+                    </ul>
+                </td>
+            </tr>
+        </table>
+    </section>
+
+    <!-- Diapositiva 8 -->
+    <section>
+        <h3>Ejemplo de la VA mixta I</h3>
+        <p>Figura (Falta)</p>
+        <blockquote>
+            Determine lo que se solicita a continuación a partir de la VA anterior.
+        </blockquote>
+    </section>
+
+    <!-- Diapositiva 9 -->
+    <section>
+        <h3>Ejemplo de la VA mixta II</h3>
+        <p><strong>Parte 1</strong>: Calcule el valor de $A$ para que sea una función de densidad válida</p>
+        <p>Figura (Falta)</p>
+    </section>
+
+    <!-- Diapositiva 10 -->
+    <section>
+        <h3>Ejemplo de la VA mixta III</h3>
+        <p><strong>Parte 1</strong>: Calcule el valor de $A$ para que sea una función de densidad válida</p>
+        <p>Para calcular $A$, se corrobora $\int_{-\infty}^{+\infty} f_x(x) \mathrm{d}x = 1$:
+
+            \[
+            \int_{1}^{4} A e^{-x} \mathrm{d}x + 0.25 + 0.25 = 1
+            \]
+            
+            donde $0.25$ y $0.25$ son las probabilidades de los valores discretos $2$ y $3$. Esta interpretación viene del hecho de que el "área bajo la curva" de estos dos impulsos (cuyo ancho es técnicamente cero) es igual a su amplitud, la que representa la probabilidad de ocurrencia de esos valores puntuales. Luego:
+            
+            \[
+            \begin{array}{rl}
+            1 &= \int_{1}^{4} A e^{-x} \, \mathrm{d}x + 0.25 + 0.25 \\
+            0.5 &= A \cdot\left. - e^{-x} \right|_{1}^{4} = -A \cdot\left( e^{-4} - e^{-1} \right) \\
+            &= -A \cdot\left( -0.3469563 \right) \\
+            A &= 1.430354
+            \end{array}
+            \]
+            
+        </p>
+    </section>
+
+    <!-- Diapositiva 11 -->
+    <section>
+        <h3>Ejemplo de la VA mixta IV</h3>
+        <p><strong>Parte 2</strong>: Encuentre y esboce la función acumulativa</p>
+        <p>Figura (Falta)</p>
+    </section>
+
+    <!-- Diapositiva 12 -->
+    <section>
+        <h3>Ejemplo de la VA mixta V</h3>
+        <p><strong>Parte 2</strong>: Encuentre y esboce la función acumulativa</p>
+        <p>
+
+            Para esbozar la función de distribución, hay que considerar detenidamente lo siguiente:
+
+            <ul>
+                <li>Una función de distribución satisface que \( F_X(-\infty) = 0 \).</li>
+                <li>En la función de densidad \( f_X(x) \) de la figura se aprecia que \( P(X < 1) = 0 \) (porque no hay un "área bajo la curva" ahí).</li>
+                <li>Como la misma definición de la función de densidad es \( F_X(x) = P(X < x) \), entonces \( F_X(1) = 0 \) y esto será determinante para esbozar la función.</li>
+                <li>Se determina que:
+                \[
+                \begin{aligned}
+                F_X(x) &= \int f_X(x) \, \mathrm{d}x \\
+                    &= \int \left[ A e^{-x} + 0.25\delta(x-2) + 0.25\delta(x-3) \right] \, \mathrm{d}x \\
+                    &= -A e^{-x} + C + 0.25u(x-2) + 0.25u(x-3)
+                \end{aligned}
+                \]
+                </li>
+            </ul>
+        </p>
+    </section>
+
+    <!-- Diapositiva 13 -->
+    <section>
+        <h3>Ejemplo de la VA mixta VI</h3>
+        <p>
+            <ul>
+                <li> La constante anterior se calcula sabiendo que $F_X(1) = 0 \Rightarrow -1.430354 e^{-1} + C = 0 \Rightarrow \boxed{C = 0.526197}$</li>
+                <li> En la figura a continuación se observa la función $-1.430354 e^{-x} + 0.526197$ con dos saltos (funciones escalón) de $0.25$ en 2 y en 3, tal como especifica la función de densidad mixta.</li>
+            </ul>
+        </p>
+    </section>
+
+    <!-- Diapositiva 14 -->
+    <section>
+        <p> Figura (Falta) </p>
+    </section>
+
+    <!-- Diapositiva 15 -->
+    <section>
+        <h3>Ejemplo de la VA mixta VIII</h3>
+        <p><strong>Parte 3</strong>: Determine $P(2 \leq x \leq 3)$ con la función de densidad y la función acumulativa</p>
+        <p> Figura (Falta) </p>
+    </section>
+
+    <!-- Diapositiva 16 -->
+    <section>
+        <h3>Ejemplo de la VA mixta IX</h3>
+        <p><strong>Parte 3</strong>: Determine $P(2 \leq x \leq 3)$ con la función de densidad y la función acumulativa</p>
+        <p>
+            Para determinar $P(2 \leq x \leq 3)$ se hace $F_X(3^-) - F_X(2^-) = 0.70 - 0.33 = 0.37$. El $F_X(2^-)$ es necesario para incluir la probabilidad del 2 (por sí misma $0.25$) dentro del rango, y $F_X(3^-)$ de hecho excluye al 3 (por la continuidad por la derecha). 
+
+            También es posible utilizar la función de densidad para hacer este cálculo:
+            
+            \begin{equation*}
+            \begin{aligned}
+            P(2 \leq x \leq 3) & = \int_2^3 0.25\delta(x-2) + A e^{-x} \mathrm{d}x = 0.25 + \left. (-A) e^{-x} \right\vert_2^3 \\ & = 0.25 + (-A) (e^{-3} - e^{-2}) \\ & = 0.37
+            \end{aligned}
+            \end{equation*}
+        </p>
+    </section>
+</section>
+
+<!-- Algunas funciones de distribución probabilística de aplicación común -->
+<section>
+    <section>
+        <h2>
+            Algunas funciones de distribución probabilística de aplicación común
+        </h2>
+    </section>
+
+    <!-- Diapositiva 1 -->
+    <section>
+        <h3>Función de densidad gaussiana o normal Definición</h3>
+        <p>
+            La función gaussiana tiene la <em>forma</em> general de la función
+            \[
+            f(x) = e^{-x^2}
+            \]
+            En particular, una VA \(X\) es normal si su función de densidad es
+            \[
+            f_{X}(x) = \frac{1}{\sqrt{2\pi \sigma_{X}^2}}\exp\left[{\frac{-(x - \mu_{X})^2}{2\sigma_{X}^2}}\right]
+            \]
+            donde \(\sigma_X > 0\) y \(-\infty < \mu_X < \infty\) son constantes reales, conocidas como desviación estándar y media, respectivamente. La diferencia entre las ecuaciones anteriores es que la segunda aplica la normalización (el área bajo la curva es 1) y el desplazamiento en el eje real (¡y por eso se ve tan complicada, pero la forma es la misma!).    
+        </p>    
+    </section>
+
+    <!-- Diapositiva 2 -->
+    <section>
+        <p>Figura (Falta)</p>    
+    </section>
+
+    <!-- Diapositiva 3 -->
+    <section>
+        <h3>Función de densidad normal II Gráfica (la “campana” gaussiana)</h3>
+        <ul>
+            <li>Cumple con las propiedades \(f_{X}(x) \geq 0\) para todo \(x\), y \(\displaystyle\int_{-\infty}^{\infty}f_{X}(x)~\mathsf{d}x = 1\).</li>
+            <li>Su valor máximo \(1/\sqrt{2 \pi \sigma_{X}^2}\) ocurre en \(x = \mu_X\).</li>
+            <li>Su dispersión (es decir, la forma particular en que se distribuyen los valores de la función) alrededor de \(x = \mu_X\) está relacionado con \(\sigma_X\).</li>
+            <li>La función disminuye a \(0.607\) veces su máximo en \(x = \mu_X + \sigma_X\) y en \(x = \mu_X - \sigma_X\).</li>
+        </ul>        
+        <p>Figura (Falta)</p>    
+    </section>
+
+    <!-- Diapositiva 4 -->
+    <section>
+        <h3>Función de densidad gaussiana Ejemplos de aplicación</h3>
+        <p>
+            Como la variable gaussiana es tan común tiene una notación especial. Al decir:
+
+            \[
+            X : \mathcal{N}(\mu,\sigma^2) \quad \text{o} \quad X \sim \mathcal{N}(\mu,\sigma^2)
+            \]
+
+            significa que la variable aleatoria \(X\) tiene una distribución gaussiana o "normal" con media \(\mu\) y varianza \(\sigma_X^2\) (la desviación estándar es \(\sigma_X\)).
+        </p>
+        <p>
+            <strong>¿Dónde aparece?</strong>
+        </p>
+        <p>
+            En el ruido térmico que afecta a la electrónica y en cierto tipo de interferencia que posa un canal inalámbrico sobre las comunicaciones. Además de innumerables otros fenómenos físicos, económicos y sociales, algo que quizá se explicará con el <em>teorema del límite central</em>, más adelante.
+        </p>
+    </section>
+
+    <!-- Diapositiva 5 -->
+    <section>
+        <h3> Función de densidad uniforme Definición</h3>
+        <p>
+            Las funciones de densidad probabilística y acumulativa uniforme están definidas por:
+
+            \[
+            f_{X}(x) = 
+            \begin{cases}
+            \displaystyle\frac{1}{b-a} & \text{si } a \leq x \leq b \\
+            0 & \text{para otros valores de } x
+            \end{cases}
+            \]
+
+            \[
+            F_{X}(x) = 
+            \begin{cases}
+            0 & x < a \\
+            \displaystyle\frac{x - a}{b - a} & a \leq x < b \\
+            1 & b \leq x
+            \end{cases}
+            \]
+
+            para constantes reales \(a\) y \(b\) con \(-\infty < a < \infty\) y \(b > a\).
+
+        </p>
+    </section>
+    
+
+    <!-- Diapositiva 6 -->
+    <section>
+        <h3>Función de densidad uniforme Gráfica y ejemplos de aplicación</h3>
+        <p>Figura (Falta)</p>
+        <p><strong>¿Dónde aparece?</strong> </p>
+        <p>
+            Cuando no se tiene mayor información sobre el comportamiento de la VA puede asumirse un comportamiento uniforme. <strong>Ejemplo</strong> (un mal ejemplo): una llamada de oficina sucederá entre las 8:00 am y las 5:00 pm con igual probabilidad.
+        </p>
+    </section>
+
+    <!-- Diapositiva 7 -->
+    <section>
+        <h3>Función de densidad exponencial Definición</h3>
+        <p>
+            Las funciones de distribución y de densidad exponencial son: 
+
+            \begin{equation}
+            f_{X}(x) = 
+            \begin{cases}
+            \frac{1}{b}\exp\left[ -\left( \frac{x-a}{b} \right) \right] & x > a \\
+            0 & x < a
+            \end{cases}
+            \end{equation}
+
+            \begin{equation}
+            F_{X}(x) = \left\{ \begin{array}{ll}
+            1 - \exp\left[ -\left( \frac{x-a}{b} \right)\right] & \; \; x > a \\
+            0 & \; \; x < a
+            \end{array} \right.
+            \end{equation}
+
+            para números reales $-\infty < a < \infty$ y $b > 0$. 
+        </p>
+        <p>
+            También es usual la notación
+
+            $$
+            f_{X}(x) = 
+            \begin{cases}
+            \lambda e^{-\lambda x} & x > 0 \\
+            0 & x < 0
+            \end{cases}
+            $$
+        </p>
+    </section>
+
+    <!-- Diapositiva 7 -->
+    <section>
+        <h3>Función de densidad exponencial Gráfica y ejemplos de aplicación</h3>
+        <p>Figura (Falta)</p>
+        <p><strong>¿Dónde aparece?</strong> </p>
+        <p>
+            Ocurre en problemas de tiempo de espera o en el cálculo de la vida útil de dispositivos.
+        </p>
+    </section>
+
+    <!-- Diapositiva 8 -->
+    <section>
+        <h3>Función de densidad de Rayleigh Definición</h3>
+        <p>
+            Las funciones de distribución y de densidad Rayleigh son: 
+
+            \begin{equation}
+            f_{X}(x) = 
+            \begin{cases}
+            \frac{2}{b}(x - a)\exp\left[ -\left( \frac{(x-a)^2}{b} \right) \right] & x \geq  a \\
+            0 & x < a
+            \end{cases}
+            \end{equation}
+
+            \begin{equation}
+            F_{X}(x) = 
+            \begin{cases}
+            1 - \exp\left[ -\left( \frac{(x-a)^2}{b} \right)\right] & x \geq  a \\
+            0 & x < a
+            \end{cases}
+            \end{equation}
+
+            para constantes reales $-\infty < a < \infty$ y $b > 0$. 
+        </p>
+    </section>
+
+    <!-- Diapositiva 9 -->
+    <section>
+        <h3>Función de densidad de Rayleigh Gráfica y ejemplos de aplicación</h3>
+        <p>Figura (Falta)</p>
+        <h><strong>¿Dónde aparece?</strong></p>
+        <p>
+            Aparece en errores de aterrizaje de cohetes, fluctuaciones aleatorias de la envolvente de ciertas formas de onda, la distribución radial de los errores en un tablero de dardos, o los tiempos de llegada de las señales de múltiples trayectorias en transmisión inalámbrica.
+        </p>
+    </section>
+
+    <!-- Diapositiva 10 -->
+    <section>
+        <h3>Función de densidad binomial Definición</h3>
+        <p>
+            Sea $0 < p < 1$ y $N = 1, 2, \ldots$, entonces la función 
+
+            \begin{equation}
+            f_{X}(x)= \sum_{k = 0}^{N} \binom{N}{k}p^{k}(1 - p)^{N - k}\delta(x - k)
+            \end{equation}
+
+            se llama la función de densidad binomial. La cantidad $\binom{N}{k}$ es el coeficiente binomial
+
+            \begin{equation}
+            \binom{N}{k} = \frac{N!}{k!(N - k)!} 
+            \end{equation}
+
+        </p>
+    </section>
+
+    <!-- Diapositiva 11 -->
+    <section>
+        <h3>Función de densidad binomial Gráfica y ejemplos de aplicación</h3>
+        <p>Figura (Falta)</p>
+        <p><strong>¿Dónde aparece?</strong></p>
+        <p>
+            Modela la posibilidad de superar un umbral aceptable dada una tasa de "errores" (u ocurrencias de un evento). Se usa en análisis de riesgo, estimación de personal necesario según demanda de servicios, o número de defectos en un lote de producción.      
+        </p>
+    </section>
+
+    <!-- Diapositiva 12 -->
+    <section>
+        <h3>Función de densidad Poisson Definición</h3>
+        <p>
+            La variable aleatoria de Poisson $X$ tiene una densidad y distribución dadas por 
+
+            \begin{eqnarray}
+              f_{X}(x) & = & e^{-b}\sum_{k = 0}^{\infty}\frac{b^k}{k!}\delta(x - k) \\
+              F_{X}(x) & = & e^{-b}\sum_{k = 0}^{\infty}\frac{b^k}{k!}u(x - k)
+            \end{eqnarray}
+            
+            donde $b > 0$ es una constante real. Cuando son graficadas, estas funciones parecen similares a la variable aleatoria binomial. De hecho, si $N \rightarrow \infty$ y $p \rightarrow 0$ para el caso binomial de tal manera que $Np = b$, una constante, entonces resulta la función de densidad de Poisson. 
+
+        </p>
+    </section>
+
+    <!-- Diapositiva 12 -->
+    <section>
+        <h3>Función de densidad Poisson Gráfica y ejemplos de aplicación</h3>
+        <p>Figura (Falta)</p>
+        <p><strong>¿Dónde aparece?</strong></p>
+        <p>
+            Se utiliza para describir eventos esporádicos en una población grande, como la mutación de una célula, o los errores de bits en una transmisión de datos.
+        </p>
+    </section>
+
+    <!-- Diapositiva 13 -->
+    <section>
+        <h3>¡Y hay muchas (muchas) distribuciones más!</h3>
+        <table>
+            <tr>
+                <td>
+                    <ul>
+                        <li>Bernoulli</li>
+                        <li>Rademacher</li>
+                        <li>Beta-binomial</li>
+                        <li>Degenerada en $x_0$</li>
+                        <li>Hipergeométrica</li>
+                        <li>Benford</li>
+                        <li>Binomial negativa</li>
+                        <li>Geométrica</li>
+                        <li>Boltzmann</li>
+                        <li>Gibbs</li>
+                    </ul>
+                </td>
+                <td>
+                    <ul>
+                        <li>Elíptica asimétrica</li>
+                        <li>Fractal parabólica</li>
+                        <li>Polya-Eggenberger</li>
+                        <li>Skellam</li>
+                        <li>Yule–Simon</li>
+                        <li>Zeta</li>
+                        <li>Zipf–Mandelbrot</li>
+                        <li>Arcoseno</li>
+                        <li>Beta</li>
+                        <li>Coseno elevado</li>
+                    </ul>
+                </td>
+                <td>
+                    <ul>
+                        <li>Irwin-Hall</li>
+                        <li>Kent</li>
+                        <li>Kumaraswamy</li>
+                        <li>Logit-normal</li>
+                        <li>Normal truncada</li>
+                        <li>Triangular</li>
+                        <li>U-cuadrática</li>
+                        <li>Von Mises-Fisher</li>
+                        <li>Wigner</li>
+                        <li>Beta prima</li>
+                    </ul>
+                </td>
+                <td>
+                    <ul>
+                        <li>Birnbaum</li>
+                        <li>Chi, $\chi$</li>
+                        <li>$\chi^2$</li>
+                        <li>Dagum</li>
+                        <li>F (mi favorita)</li>
+                        <li>Fréchet</li>
+                        <li>Gamma</li>
+                        <li>Erlang</li>
+                        <li>Gamma-Gompertz</li>
+                        <li>Gumbel tipo-2</li>
+                    </ul>
+                </td>
+            </tr>
+        </table>
+    </section>
+
+    <!-- Diapositiva 14 -->
+    <section>
+        <h3>¡Y hay muchas (muchas) distribuciones más!</h3>
+        <table>
+            <tr>
+                <td>
+                    <ul>
+                        <li>Lévy</li>
+                        <li>Log-Cauchy</li>
+                        <li>Log-gamma</li>
+                        <li>Log-normal</li>
+                        <li>Mittag–Leffler</li>
+                        <li>Nakagami</li>
+                        <li>Wald</li>
+                        <li>Pareto</li>
+                        <li>Tipo III de Pearson</li>
+                        <li>Bi-exponencial</li>
+                    </ul>
+                </td>
+                <td>
+                    <ul>
+                        <li>Bi-Weibull</li>
+                        <li>Rice</li>
+                        <li>$T^2$ de Hotelling</li>
+                        <li>Rosin-Rammler</li>
+                        <li>Z de Fisher</li>
+                        <li>Behrens–Fisher</li>
+                        <li>Cauchy</li>
+                        <li>Chernoff</li>
+                        <li>Lévy</li>
+                        <li>Estable geométrica</li>
+                    </ul>
+                </td>
+                <td>
+                    <ul>
+                        <li>Fisher–Tippett</li>
+                        <li>Gumbel</li>
+                        <li>Holtsmark</li>
+                        <li>Landau</li>
+                        <li>Linnik</li>
+                        <li>Map-Airy</li>
+                        <li>Dirichlet</li>
+                        <li>Ewens</li>
+                        <li>Balding–Nichols</li>
+                        <li>Multivariante</li>
+                    </ul>
+                </td>
+                <td>
+                    <ul>
+                        <li>&hellip;</li>
+                    </ul>
+                </td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <h3>¿Y aplicaciones? Muchas, también</h3>
+        <table>
+            <tr>
+                <td>
+                    <ul>
+                        <li>Para describir el número de eventos que ocurren en un periodo de tiempo</li>
+                        <li>Para describir el número de intentos necesarios hasta conseguir el primer acierto</li>
+                        <li>Para predecir tiempos de espera en sistemas telefónicos</li>
+                        <li>Para estimar la esperanza de vida poblacional</li>
+                        <li>Para modelar procesos farmacocinéticos (relacionados con la acción de los medicamentos en el cuerpo)</li>
+                    </ul>
+                </td>
+                <td>
+                    <ul>
+                        <li>Para describir la distribución de tamaños de determinadas partículas</li>
+                        <li>Para análisis genético de poblaciones</li>
+                        <li>Para pronosticar fenómenos atmosféricos</li>
+                        <li>Para pronosticar movimientos de la bolsa de valores</li>
+                        <li>Para calcular los recursos necesarios en una epidemia</li>
+                        <li>...</li>
+                    </ul>
+                </td>
+            </tr>
+        </table>    
+    </section>    
+</section>
+
+<!-- Link -->
+<section>
+    <h3>Videos y referencias en internet</h3>
+    <ul>
+        <li><strong>Variables aleatorias discretas y continuas | Estadística UNED</strong>
+            <br><em>FísicayMates</em>, 
+            <a href="https://youtu.be/n0T_HcJ7oak">https://youtu.be/n0T_HcJ7oak</a>
+        </li>
+        <li><strong>Understanding Random Variables - Probability Distributions 1</strong>
+            <br><em>Dr Nic's Maths and Stats</em>, 
+            <a href="https://youtu.be/lHCpYeFvTs0">https://youtu.be/lHCpYeFvTs0</a>
+        </li>
+        <li><strong>The Galton Board</strong> (una visualización interesante de cómo aparece la distribución normal en experimentos aleatorios)
+            <br><em>PhysicsFun</em>, 
+            <a href="https://youtu.be/Vo9Esp1yaC8">https://youtu.be/Vo9Esp1yaC8</a>
+        </li>
+        <li><strong>[<em>Name of the distribution</em>]</strong>
+            <br><em>Wikipedia</em>, 
+            <a href="https://en.wikipedia.org/wiki/Name_of_the_distribution">https://en.wikipedia.org/wiki/Name_of_the_distribution</a>
+        </li>
+        <li><strong>Why “probability of 0” does not mean “impossible”</strong>
+            <br><em>3Blue1Brown</em>, 
+            <a href="https://youtu.be/ZA4JkHKZM50">https://youtu.be/ZA4JkHKZM50</a>
+        </li>
+    </ul>
 </section>
 
 <!-- Gráficos de Chart.js -->
