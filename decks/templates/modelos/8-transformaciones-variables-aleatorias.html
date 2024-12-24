@@ -1,0 +1,880 @@
+{% extends 'decks.html' %}
+
+{% load static %}
+
+<!-- Título -->
+{% block title %}8-transformaciones-variables-aleatorias{% endblock %}
+
+<!-- Referencia: https://www.overleaf.com/project/5e65c23ca1d751000167670a  -->
+
+<!-- Configuraciones específicas del <head> -->
+{% block head %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<!-- Agregar KaTex de reveal Revealjs -->
+<script src="plugin/math/math.js"></script>
+<script>
+  Reveal.initialize({ plugins: [ RevealMath.KaTeX ] });
+</script>
+{% endblock %}
+{% block content %}
+
+<!-- SECCIÓN 0 -->
+<section>
+    <h1 class="display-1">
+        Transformaciones de una variable aleatoria
+    </h1>
+</section>
+
+<!-- Portada y descripción -->
+<section>
+    <p>
+        Las transformaciones permiten determinar la función de densidad probabilística de una variable aleatoria $Y$ a 
+        partir del conocimiento de otra VA $X$, relacionadas por la <strong>función </strong> $Y = T(X) = g(X)$. 
+        Es común en situaciones donde el resultado de un proceso o la salida de un sistema depende de una entrada aleatoria.
+    </p>
+</section>
+
+<!-- Transformaciones de una variable aleatoria -->
+<section>
+    <section>
+        <h2>Transformaciones de una variable aleatoria</h2>
+    </section>
+
+    <!-- Diapositiva 1 -->
+    <section>
+        <h3>Transformaciones de una variable aleatoria I</h3>
+        <blockquote>
+            <p><strong>Problema a resolver</strong></p>
+            <p>
+                En ocasiones se desea transformar una variable aleatoria $X$ en una nueva variable aleatoria $Y$ mediante una transformación (o función)
+
+                \begin{equation}
+                Y = T(X)
+                \end{equation}
+
+                Las funciones de densidad $f_{X}(x)$ o acumulativa $F_{X}(x)$ son conocidas. 
+            </p>
+
+            <p><strong>El problema consiste en determinar las funciones</strong> $F_{Y}(y)$ y $f_{Y}(y)$.</p>
+        </blockquote>
+    </section>
+
+    <!-- Diapositiva 2 -->
+    <section>
+        <p>Figura (Falta)</p>
+    </section>
+
+    <!-- Diapositiva 3 -->
+    <section>
+        <h3>Tipos de transformaciones</h3>
+        <blockquote>
+            <p><em><strong>$X$ (la "entrada")</strong> puede ser discreta, continua o mixta.</em></p>
+            <p><em><strong>$T$ (la transformación)</strong> puede ser lineal, no lineal, segmentada, monotónica, no monotónica&hellip;</em></p>
+        </blockquote>
+    
+        <p>Hay muchas combinaciones pero se considerará tres casos:</p>
+        <ul>
+            <p><em><strong>(a)</strong> $X$ continua y $T$ continua y monotónica</em><p>
+            <p><em><strong>(b)</strong> $X$ continua y $T$ continua pero no monotónica</em></p>
+            <p><em><strong>(c)</strong> $X$ discreta y $T$ continua</em></p>
+        </ul>
+    </section>
+</section>
+
+<!--(a) Transformaciones monotónicas de una \va\ continua  -->
+<section>
+    <section>
+        <h2>(a) Transformaciones monotónicas de una VA continua</h2>
+    </section>
+
+    <!-- Diapositiva 1 -->
+    <section>
+        <p>Figura (Falta)</p>
+    </section>
+
+    <!-- Diapositiva 2 -->
+    <section>
+        <h3>Transformaciones monotónicas de una VA continua II</h3>
+        <blockquote>
+            Una transformación o función \( T \) es <em>monótonamente creciente</em> en 
+            un intervalo si \[ T(x_1) < T(x_2) \quad \text{para cualquier} 
+            \quad x_1 < x_2 \] 
+        </blockquote>
+        <p><strong>Transformación creciente</strong></p>
+        <p>
+            Supóngase que \( T \) es continua y diferenciable en todo valor de \( x \) para el que \( f_{X}(x) \neq 0 \) (es decir, 
+            donde \( X \) tiene <em>soporte</em>). Para un valor \( x_0 \) cualquiera en el intervalo se cumple que 
+            \[
+            y_0 = T(x_0) \qquad \text{y} \qquad x_0 = T^{-1}(y_0)
+            \]
+            donde \( T^{-1} \) representa el inverso de la transformación \( T \).
+        </p>
+    </section>
+
+    <!-- Diapositiva 3 -->
+    <section>
+        <h3>Transformaciones monotónicas de una va continua III</h3>
+        <p><strong>Premisa (el método CDF)</strong></p>
+        <blockquote>
+            La probabilidad del evento \( \{Y \leq y_0\} \) debe igualar la probabilidad 
+            del evento \( \{ X \leq x_0\} \) debido a la correspondencia entre \( X \) e \( Y \).
+        </blockquote>
+        <p>
+            Así entonces, debe cumplirse que:
+        </p>
+        \[
+            F_{Y}(y_0) = P\{Y \leq y_{0}\} = P\{X \leq x_0 \} = F_{X}(x_0)
+        \]
+        <p>
+            Y mediante la definición de la CDF a partir de la PDF:
+        </p>
+        \[
+            \int_{-\infty}^{y_0} f_{Y}(y) \, \mathsf{d}y = \int_{-\infty}^{x_0 = T^{-1}(y_0)} f_{X}(x) \, \mathsf{d}x
+        \]
+        <p>
+            Por lo que resta despejar para \( f_Y(y) \), que es la función de interés.
+        </p>
+    </section>
+
+    <!-- Diapositiva 4 -->
+    <section>
+        <h3>Regla de Leibniz I c</h3>
+        <p>
+            Si \( H(x,u) \) es continua en las variables \( x \) y \( u \), y además:
+        </p>
+        \[
+        G(u) = \int_{\alpha(u)}^{\beta(u)} H(x,u) \, \mathsf{d}x
+        \]
+        <p>
+            entonces, la derivada de la integral respecto al parámetro \( u \) es:
+        </p>
+        \[
+        \frac{\mathsf{d}G(u)}{\mathsf{d}u} = H\left[ \beta(u), u \right] \frac{\mathsf{d}\beta(u)}{\mathsf{d}u}  - H\left[ \alpha(u), u \right] \frac{\mathsf{d}\alpha(u)}{\mathsf{d}u} + \int_{\alpha(u)}^{\beta(u)} \frac{\partial H(x,u)}{\partial u} \, \mathsf{d}x
+        \]
+    </section>
+
+
+    <!-- Diapositiva 5 -->
+    <section>
+        <h3>Regla de Leibniz Un breve recordatorio</h3>
+        <p>
+            En nuestro escenario, y considerando que el límite inferior de \( f_X(x) \) es \( T^{-1}(y_a) \) y que es una constante (posiblemente \( -\infty \)), aplica que:
+        </p>
+            \[
+            \begin{aligned}
+            f_Y(y_0) &= f_X\left[ T^{-1}(y_0), y_0 \right] \frac{\mathsf{d}T^{-1}(y_0)}{\mathsf{d}y_0} \\
+            &- f_X\left[ T^{-1}(y_a), y_0 \right] \left( \frac{\mathsf{d}T^{-1}(y_a)}{\mathsf{d}y} = 0 \right) + \int_{T^{-1}(y_a)}^{T^{-1}(y_0)} \left( \frac{\partial f_X(x)}{\partial y} = 0 \right) \, \mathsf{d}x
+            \end{aligned}
+            \]
+        <p>
+            <small>Aquí, algunos términos se cancelan a 0 debido a que las derivadas parciales no dependen de \( y \).</small>
+        </p>
+    </section>
+
+    <!-- Diapositiva 6 -->
+    <section>
+        <h3>Transformación monotónica creciente I</h3>
+        <p>
+            Con base en la regla de Leibniz, evaluada anteriormente, se obtiene:
+        </p>
+        \[
+        f_{Y}(y_0) = f_{X}\left[ T^{-1}(y_0) \right] \frac{\mathsf{d}T^{-1}(y_0)}{\mathsf{d}y_0}
+        \]
+        <p>
+            Pero como la ecuación anterior aplica para cualquier \( y_0 \), se puede eliminar el subíndice y reescribir:
+        </p>
+        \[
+        \boxed{
+        f_{Y}(y) = f_{X}\left[ T^{-1}(y) \right] \frac{\mathsf{d}T^{-1}(y)}{\mathsf{d}y}
+        }
+        \]
+        <p>
+            Que es la función de densidad buscada de \( Y \), en términos de la transformación (inversa) aplicada a \( X \), para \( T \) monotónicamente <strong>creciente</strong>.
+        </p>
+    </section>
+
+    <!-- Diapositiva 7 -->
+    <section>
+        <p>Figura (Falta)</p>
+    </section>
+
+    <!-- Diapositiva 8 -->
+    <section>
+        <h3>Transformación monotónica decreciente II</h3>
+        <p><strong>Transformación decreciente</strong></p>
+        <blockquote>
+            Una transformación o función \( T \) es <em>monotónicamente decreciente</em> en un intervalo si 
+            \[ T(x_1) > T(x_2) \quad \text{para cualquier} \quad x_1 < x_2 \]
+        </blockquote>
+        <p>
+            Si se considera el caso de la transformación decreciente, se escribe:
+        </p>
+        \[
+        F_{Y}(y_0) = P\{ Y \leq y_0 \} = P\{ X \geq x_0 \} = 1 - F_{X}(x_0)
+        \]
+        <p>
+            Siguiendo el mismo razonamiento usado para obtener la ecuación $f_{X}\left[ T^{-1}(y) \right] \frac{\mathsf{d}T^{-1}(y)}{\mathsf{d}y}$, se obtendrá:
+        </p>
+        \[
+        \boxed{
+        f_{Y}(y) = -f_{X}\left( T^{-1}(y) \right) \frac{\mathsf{d}T^{-1}(y)}{\mathsf{d}y}
+        }
+        \]
+    </section>
+    
+    <!-- Diapositiva 9 -->
+    <section>
+        <h3>Teorema de transformación monotónica I</h3>
+        <p>
+            Dado que la pendiente de \( T^{-1}(y) \) es negativa pues la función es decreciente, se concluye que para cualquier tipo de transformación monotónica:
+        </p>
+        <blockquote>
+            <strong>Teorema de transformación monotónica</strong>  
+            \[
+            f_{Y}(y) = f_{X}\left( T^{-1}(y) \right) \left| \frac{\mathsf{d}T^{-1}(y)}{\mathsf{d}y} \right|
+            \]
+        </blockquote>
+        <p>
+            <strong>Recordatorio:</strong> Es importante notar que la "monotonicidad" se evalúa en la función \( g(X) \) (la transformación \( T(X) \)) y no tiene que ver con la función de densidad \( f_X(x) \), lo cual es un error de análisis común.
+        </p>
+    </section>
+
+    <!-- Diapositiva 10 -->
+    <section>
+        <h3>Teorema de transformación monotónica II</h3>
+        <blockquote>
+            <strong>Notación alternativa del teorema de transformación</strong>
+            <p>En ocasiones se utiliza la notación</p>
+            <p>\( Y = g(X) \)</p>
+            <p>para la transformación, y</p>
+            <p>\( X = h(Y) \)</p>
+            <p>como la transformación inversa. El teorema se enuncia entonces como:</p>    
+            <p>
+            \[
+            f_Y(y) = f_X\left( h(y) \right) \left\vert \frac{\mathsf{d}h(y)}{\mathsf{d}y} \right\vert
+            \]
+            </p>
+        </blockquote>
+    </section>
+
+    <!-- Diapositiva 11 -->
+    <section>
+        <h3>Ejemplo de la disipación de potencia en un resistor I</h3>
+        <p>
+            Sea \( I \) una variable aleatoria que denota la corriente en un resistor \( R \) de valor 1 ohmio. \( I \) tiene una distribución uniforme en el intervalo de 1 a 3 A, es decir:
+        </p>
+        \[
+        f_I(i) =
+        \begin{cases}
+            1/2, & 1 < i < 3 \\
+            0, & \text{en otra parte}
+        \end{cases}
+        \]
+        <blockquote>
+            ¿Cuál es el promedio de la corriente \( I \)? ¿Cuál es el promedio de la potencia disipada en \( R \), \( P = g(I) = I^2 R \)?
+        </blockquote>
+        <p>
+            Primero se hará el cálculo mediante \( E[g(I)] \) (como se hizo en una presentación anterior) y luego a través de la nueva función de densidad \( f_P(p) \).
+        </p>
+    </section>
+
+
+    <!-- Diapositiva 12 -->
+    <section>
+        <h3>Ejemplo de la disipación de potencia en un resistor II</h3>
+        <div class="row">
+            <div class="col-md-6">
+                <ul>
+                    \[
+                    \begin{aligned}
+                    E[I] & = \int_{-\infty}^{\infty} i \, f_{I}(i) \, \mathsf{d}i \\ 
+                        & = \int_{1}^{3} i \, \frac{1}{2} \, \mathsf{d}i \\
+                        & = 2 \, \text{A}
+                    \end{aligned}
+                    \]
+                    <p>Figura (Falta)</p>
+                </ul>
+            </div>
+            <div class="col-md-6">
+                <ul>
+                    \[
+                    \begin{aligned}
+                    E[P] & = \int_{-\infty}^{\infty} g(i) \, f_{I}(i) \, \mathsf{d}i \\ 
+                        & = \int_{1}^{3} i^2 \cdot 1 \, \frac{1}{2} \, \mathsf{d}i \\
+                        & = \frac{13}{3} \approx \boxed{4.33 \, \text{W}}
+                    \end{aligned}
+                    \]
+                    <p>Figura (Falta)</p>
+                </ul>
+            </div>
+        </div> 
+    </section>
+
+
+    <!-- Diapositiva 13 -->
+    <section>
+        <h3>Ejemplo de la disipación de potencia en un resistor III</h3>
+        <p>
+            Es posible obtener \( E[P] \) desde \( f_P(p) \) por medio de la transformación \( g(I) = P = I^2 R \), con \( h(P) = I = \sqrt{P/R} \), y con los límites \( 1 < i < 3 \) y \( 1 < p < 9 \). Aplicando el teorema:
+        </p>
+        \[
+        \begin{aligned}
+        f_P(p) & = f_I\left( h(p) \right) \left\vert h'(p) \right\vert \\
+            & = f_I\left( \sqrt{p/R} \right) \left\vert \frac{(p/R)^{-1/2}}{2} \right\vert \\
+            & = \frac{1}{4 \sqrt{p}} \quad \text{para} \quad 1 < p < 9
+        \end{aligned}
+        \]
+        <p>
+            Y su promedio es:
+        </p>
+        \[
+        \begin{aligned}
+        E[P] & = \int_{-\infty}^{\infty} p \, f_P(p) \, \mathsf{d}p = \int_{1}^{9} p \, \frac{1}{4 \sqrt{p}} \, \mathsf{d}p = \frac{1}{4} \int_{1}^{9} \sqrt{p} \, \mathsf{d}p \\
+            & = \frac{1}{4} \left. \frac{2 p^{3/2}}{3} \right\vert_{1}^{9} = \frac{13}{3} \approx \boxed{4.33 \, \text{W}}
+        \end{aligned}
+        \]
+    </section>
+
+
+     <!-- Diapositiva 14 -->
+     <section>
+        <p>Figura (Falta)</p>
+     </section>
+
+     <!-- Diapositiva 15 -->
+     <section>
+        <h3>Simulación de la potencia en un resistor I</h3>
+        <div class="row">
+          <div class="col-md-6">
+            <pre>
+              <code>
+                import numpy as np
+                from scipy import stats
+                
+                # Inicialización de vectores
+                N = 500
+                Irvs = [0]*N
+                P = [0]*N
+              </code>
+            </pre>
+          </div>
+          <div class="col-md-6">
+            <pre>
+              <code>
+                # Distribución de la corriente
+                I = stats.uniform(1,2)
+                
+                # Simulación
+                for i in range(N):
+                    Irvs[i] = I.rvs()
+                    P[i] = Irvs[i]**2
+              </code>
+            </pre>
+          </div>
+        </div>
+      </section>      
+
+     <!-- Diapositiva 16 -->
+     <section>
+       <p>Figura (Falta)</p>
+     </section> 
+
+     <!-- Diapositiva 17 -->
+     <section>
+       <h3>Ejemplo de la distribución uniforme I Transformaciones de una variable aleatoria</h3>
+       <blockquote>
+            Sea $X \sim \mathsf{unif}(0,1)$ (es decir, $f_X(x) = 1$ en $0 \leq x \leq 1$). Se define una nueva variable $Y = 2\sqrt{X}$. Encuentre $f_Y(y)$.
+       </blockquote>
+       <p>
+            La función $g(X) = 2\sqrt{X}$ es monotónica en $[0, 1]$ y tiene una inversa $h(y) = y^2/4$. 
+
+            Se aplica el teorema:
+
+            \[
+            \begin{aligned}
+            f_Y(y) & = f_X(h(y)) \left\vert h'(y) \right\vert = (1) \left\vert \frac{\mathsf{d}}{\mathsf{d}y}\left( \frac{y^2}{4} \right) \right\vert \\ 
+                & = \frac{2y}{4} 
+            \end{aligned}
+            \]
+            \[
+            \boxed{f_Y(y) = \frac{y}{2} \quad \text{en} \, y \in [0, 2]}
+            \]
+       </p>
+     </section>
+
+    <!-- Diapositiva 18 -->
+    <section>
+        <h3>Otro ejemplo de la disipación de potencia en un resistor I</h3>
+        <blockquote>
+            La variación en cierta fuente de corriente eléctrica \( X \) (en miliamperios) puede ser modelada por el PDF
+            \[
+            f_X(x) =
+            \begin{cases}
+                1.25 - 0.25 x, & 2 \leq x \leq 4 \\
+                0, & \text{en otros casos}
+            \end{cases}
+            \]
+            Si esta corriente pasa por un resistor de 220 ohmios, la potencia disipada es dada por la expresión \( Y = 220 X^2 \). ¿Cuál es la función de densidad de \( Y \)?
+        </blockquote>
+        <p>
+            La función \( y = g(x) = 220 x^2 \) es monotónicamente creciente en el rango de \( X \), \( \left[2, 4\right] \), y tiene una función inversa \( x = h(y) = g^{-1}(y) = \sqrt{y/220} \).
+        </p>
+    </section>
+
+
+     <!-- Diapositiva 19 -->
+     <section>
+        <h3>Otro ejemplo de la disipación de potencia en un resistor II</h3>
+       <p>
+        Aplicando el teorema de transformación, entonces,
+
+        \[
+        \begin{aligned}
+        f_Y(y)  & = f_X(h(y)) \vert h'(y) \vert \\
+                & = f_X \left( \sqrt{y/220} \right) \left\vert \frac{\mathsf{d}}{\mathsf{d}y} \sqrt{y/220} \right\vert \\
+                & = \left( 1.25 - 0.25 \sqrt{y/220} \right) \frac{1}{2\sqrt{220y}} \\
+                & = \frac{1}{2\sqrt{220y}} - \frac{1}{1760}
+        \end{aligned}
+        \]
+
+        Y por tanto,
+
+        \[
+        \boxed{
+        f_Y(y) = 
+        \begin{cases}
+        \frac{1}{2\sqrt{220y}} - \frac{1}{1760} & 880 \leq y \leq 3520 \\
+        0 & \text{en otra parte}
+        \end{cases}
+        }
+        \]
+
+       </p>
+     </section>
+
+     <!-- Diapositiva 20 -->
+     <section>
+       <p>Figura (Falta)</p>
+     </section>
+
+     <!-- Diapositiva 21 -->
+     <section>
+       <h3>Ejemplo de una variable aleatoria T I</h3>
+       <blockquote>
+        Hay una variable aleatoria $T$ distribuida uniformemente en el intervalo $[1,7]$. Sobre ella se aplica una transformación
+        \[
+        U = T^{2} - T - 6
+        \] 
+        <ul>
+            <p><i class="bi bi-1-circle-fill"></i> Encontrar \( f_{U}(u) \), la función de densidad probabilística de la variable aleatoria \( U \).</p>
+            <p></p><i class="bi bi-2-circle-fill"></i> Calcular \( P\{-4 < U \leq 14\} \).</p>
+        </ul>
+       </blockquote>
+    
+       
+       <p>
+        <strong>Parte 1</strong>: <em>Encontrar $f_{U}(u)$, la función de densidad probabilística de la variable aleatoria $U$.</em>
+
+        <p>La variable aleatoria $T$ dada es</p>
+
+        \[
+        f_T(t) =
+        \begin{cases}
+        \displaystyle\frac{1}{6} & 1 \leq t \leq 7 \\
+        0 & \text{en otra parte}
+        \end{cases}
+        \]
+
+       </p>
+     </section>
+
+    <!-- Diapositiva 22 -->
+    <section>
+        <h3>Ejemplo de una variable aleatoria T II</h3>
+        <p>
+            La transformación \( U = g(T) \) es monotónicamente creciente en el intervalo \([1,7]\), por tanto es posible utilizar la fórmula:
+        </p>
+        \[
+        f_U(u) = f_T(h(u)) \left\vert \frac{\mathsf{d}h(u)}{\mathsf{d}u} \right\vert
+        \]
+        <p>
+            donde \( h(u) \) es la función inversa.
+        </p>
+        <p>Se obtiene \( h(u) \) de la forma:</p>
+        \[
+        \begin{aligned}
+        u 	&= t^2 - t - 6 \\
+        0	&= t^2 - t - (u + 6) \\
+        t	&= \frac{1 \pm \sqrt{1 - 4(-u - 6)}}{2} \qquad \text{(fórmula general)} \\
+            &= \frac{1}{2} \left( 1 \pm \sqrt{4u + 25} \right)
+        \end{aligned}
+        \]
+    </section>
+
+    <!-- Diapositiva 23 -->
+    <section>
+        <h3>Ejemplo de una variable aleatoria T III</h3>
+        <p>
+            Se elige la solución positiva y queda:
+        </p>
+        \[
+        h(u) = \frac{1}{2} \left( 1 + \sqrt{4u + 25} \right)
+        \]
+        <p>
+            Ahora, para derivar la función inversa, se utiliza la regla de la cadena:
+        </p>
+        \[
+        \begin{aligned}
+        \frac{\mathsf{d}h(u)}{\mathsf{d}u} &= \frac{\mathsf{d}}{\mathsf{d}u} \left[ \frac{1}{2} \left( 1 + \sqrt{4u + 25} \right) \right] \\
+        &= \frac{1}{2} \cdot \frac{4}{2\sqrt{4u + 25}} = \frac{1}{\sqrt{4u + 25}}
+        \end{aligned}
+        \]
+    </section>
+
+    <!-- Diapositiva 24 -->
+    <section>
+        <h3>Ejemplo de una variable aleatoria T IV</h3>
+        <p>
+            Y entonces, se evalúa:
+        </p>
+        \[
+        f_U(u) = f_T(h(u)) \left\vert \frac{\mathsf{d}h(u)}{\mathsf{d}u} \right\vert = \frac{1}{6} \frac{1}{\sqrt{4u + 25}}
+        \]
+        <p>
+            Evaluando también los límites de \( T \) en la transformación \( g(T) \), la función de densidad buscada es:
+        </p>
+        \[
+        \boxed{
+        f_U(u) =
+        \begin{cases}
+        \displaystyle \frac{1}{6 \sqrt{4u + 25}}, & -6 \leq u \leq 36 \\
+        0, & \text{en otra parte}
+        \end{cases}
+        }
+        \]
+    </section>
+
+
+     <!-- Diapositiva 25 -->
+     <section>
+        <h3>Ejemplo de una variable aleatoria T V</h3>
+        <p>
+            <p><strong>Parte 2</strong>: <em>Calcular \(P\{-4 < U \leq 14\}\).</em></p>
+            <p>
+            La probabilidad \(P\{-4 < U \leq 14\}\) requiere la integración de \(f_U(u)\) en ese intervalo. Esta integral puede ser más o menos difícil de evaluar, pero es posible calcularla numéricamente con las calculadoras científicas comunes, resultando:
+            </p>
+            \[
+            P\{-4 < U \leq 14\} = \int_{-4}^{14} \frac{1}{6 \sqrt{4u + 25}} \, \mathsf{d}u = \boxed{0.5}
+            \]
+            <p>
+            En todo caso, la integral (a partir de una tabla de integrales) es:
+            </p>
+            \[
+            \int \frac{1}{6 \sqrt{4u + 25}} \, \mathsf{d}u = \frac{1}{12}\sqrt{4u + 25}
+            \]
+            <p>
+            y la evaluación en \( [-4, 14] \) da en efecto igual a 0.5.
+            </p>
+        </p>
+     </section>
+</section>
+
+<!--(b) Transformaciones no monotónicas de una \va\ continua-->
+<section>
+    <section>
+        <h2>(b) Transformaciones no monotónicas de una VA continua</h2>
+    </section>
+
+    <!-- Diapositiva 1 -->
+    <section>
+        <p>Figura (Falta)</p>
+    </section>
+
+    <!-- Diapositiva 2 -->
+    <section>
+        <h3>Transformaciones no monotónicas de una VA continua II</h3>
+        <p>
+            En general, puede ser que haya más de un intervalo de valores de \( X \) que correspondan al evento \( \{Y \leq y_0\} \). Por ejemplo, puede darse el caso que, para un dado \( y_0 \), el evento \( \{Y \leq y_0 \} \) corresponde al evento \( \{ X \leq x_{1}, x_{2} \leq X < x_{3} \} \).
+        </p>
+        <p><strong>Premisa:</strong></p>
+        <p>
+            La probabilidad del evento \( \{ Y \leq y_{0}\} \) iguala la probabilidad del evento \( \{ \text{valores de } x \text{ que dan } Y \leq y_{0}\} \), que se escribirá como \( \{x : Y \leq y_{0}\} \). En otras palabras:
+        </p>
+        \[
+        \begin{aligned}
+        F_{Y}(y_0) &= P\{Y \leq y_0\} \\
+        &= P\{x : Y \leq y_{0}\} = \int_{\{x : Y \leq y_0\}} f_{X}(x) \, \mathsf{d}x
+        \end{aligned}
+        \]
+    </section>
+
+    <!-- Diapositiva 3 -->
+    <section>
+        <h3>Transformaciones no monotónicas de una VA continua III</h3>
+        <p>
+            Se puede derivar formalmente el resultado anterior para obtener la densidad de \( Y \):
+        </p>
+        \[
+        f_{Y}(y_{0}) = \frac{\mathsf{d}}{\mathsf{d}y_{0}} \left( \int_{\{x : Y \leq y_{0}\}} f_{X}(x) \, \mathsf{d}x \right)
+        \]
+        <p>
+            Y la función de densidad está dada (sin demostración) por:
+        </p>
+        <blockquote>
+            <p><strong>Teorema de transformación no monotónica</strong></p>
+            \[
+            f_{Y}(y) = \sum_{n} \frac{f_{X}(x_{n})}{\left| \frac{\mathsf{d}}{\mathsf{d}x} \left. T(x) \right|_{x = x_{n}} \right|}
+            \]
+            <p>
+                Donde la suma incluye las raíces \( x_{n}, n = 1, 2, \ldots \), que son las soluciones reales de la ecuación \( y = T(x) \). Si \( y = T(x) \) no tiene raíces reales para un valor dado de \( y \), entonces \( f_{Y}(y) = 0 \).
+            </p>
+        </blockquote>
+    </section>
+
+    <!-- Diapositiva 4 -->
+    <section>
+        <h3>Ejemplo de la transformación de ley cuadrada I</h3>
+        <blockquote>
+            Hallar $f_{Y}(y)$ para la transformación de ley cuadrada $Y = T(X) = cX^{2}$, donde $c > 0 \in \mathbb{R}$.
+        </blockquote>
+        <p>
+            No hay más información sobre $X$ pero se asumirá que tiene soporte en todo $\mathbb{R}$ (o que al menos tiene valores positivos y negativos, y por tanto no es monotónica la transformación $Y = cX^{2}$). Por el tipo de transformación, el dominio de $Y$ es $y > 0$.
+        </p>
+    </section>
+
+    <!-- Diapositiva 5 -->
+    <section>
+        <p>Falta (Figura)</p>
+    </section>
+
+    <!-- Diapositiva 6 -->
+    <section>
+        <h3>Ejemplo de la transformación de ley cuadrada III</h3>
+        <p>
+            Para la solución se utilizarán dos métodos.
+        </p>
+        <p>
+            <strong>Método 1</strong>: <em>El método CDF</em> — El evento \( \{Y \leq y\} \) ocurre cuando \( \{-\sqrt{y/c} \leq x \leq \sqrt{y/c}\} = \{ x : Y \leq y\} \), con lo que:
+        </p>
+        \[
+        \begin{aligned}
+        F_{Y}(y) &= \int_{-\sqrt{y/c}}^{\sqrt{y/c}} f_{X}(x) \, \mathsf{d}x \\
+        f_{Y}(y) &= \frac{\mathsf{d}}{\mathsf{d}y} \left( \int_{-\sqrt{y/c}}^{\sqrt{y/c}} f_{X}(x) \, \mathsf{d}x \right) \qquad \text{CDF} \Rightarrow \text{PDF}
+        \end{aligned}
+        \]
+    </section>
+
+
+    <!-- Diapositiva 7 -->
+    <section>
+        <h3>Ejemplo de la transformación de ley cuadrada IV</h3>
+        <p>
+            Se aplica ahora la regla de Leibniz:
+        </p>
+        \[
+        \begin{aligned}
+            f_{Y}(y) &= f_{X}(\sqrt{y/c}) \left( \frac{1}{\sqrt{c}} \right) \left( \frac{1}{2\sqrt{y}} \right) \\ 
+                    &\quad - f_{X}(-\sqrt{y/c}) \left( -\frac{1}{\sqrt{c}} \right) \left( \frac{1}{2\sqrt{y}} \right)
+        \end{aligned}
+        \]
+        \[
+        \boxed{
+            f_{Y}(y) = \frac{f_{X}(\sqrt{y/c}) + f_{X}(-\sqrt{y/c})}{2\sqrt{yc}} \quad \text{para} \quad y > 0
+        }
+        \]
+    </section>
+
+
+    <!-- Diapositiva 8 -->
+    <section>
+        <h3>Ejemplo de la transformación de ley cuadrada V</h3>
+        <p>
+            <p><strong>Método 2</strong>: <em>Por el teorema de transformación</em> — Si se despeja \( X \) de la ecuación \( Y = cX^2 \), se encuentra:</p>
+
+            \[
+            \begin{aligned}
+                \frac{Y}{c} & = X^2 \\
+                X & = \pm \sqrt{\frac{Y}{c}}
+            \end{aligned}
+            \]
+
+            <p>De modo que las soluciones son \( x_1 = -\sqrt{\frac{y}{c}} \) y \( x_2 = \sqrt{\frac{y}{c}} \). Además, \( \frac{\mathsf{d}T(x)}{\mathsf{d}x} = 2xc, \)</p>
+
+            \[
+            \left. \frac{\mathsf{d}T(x)}{\mathsf{d}x} \right|_{x = x_1} = 2c\left[ -\sqrt{\frac{y}{c}} \right] = -2\sqrt{yc}
+            \]
+
+            \[
+            \left. \frac{\mathsf{d}T(x)}{\mathsf{d}x} \right|_{x = x_2} = 2c\left[ \sqrt{\frac{y}{c}} \right] = 2\sqrt{yc}
+            \]
+
+        </p>
+    </section>
+
+    <!-- Diapositiva 9 -->
+    <section>
+        <h3>Ejemplo de la transformación de ley cuadrada VI</h3>
+        <p>
+            Finalmente, se evalúa en la ecuación 
+        </p>
+        \[
+        f_{Y}(y) = \sum_{n}\frac{f_{X}(x_{n})}{\left| \frac{\mathsf{d}}{\mathsf{d}x}\left. T(x) \right|_{x = x_{n}} \right|}
+        \]
+        <p>
+            y se obtiene:
+        </p>
+        \[
+        \begin{aligned}
+            f_{Y}(y) &= \frac{f_{X}(-\sqrt{y/c})}{\lvert -2\sqrt{cy} \rvert} + \frac{f_{X}(\sqrt{y/c})}{\lvert 2\sqrt{yc} \rvert} \\
+            f_{Y}(y) &= \frac{f_{X}(-\sqrt{y/c}) + f_{X}(\sqrt{y/c})}{2\sqrt{yc}} \quad \text{para} \quad y \geq 0
+        \end{aligned}
+        \]
+        \[
+        \boxed{
+            f_{Y}(y) = \frac{f_{X}(-\sqrt{y/c}) + f_{X}(\sqrt{y/c})}{2\sqrt{yc}} \quad \text{para} \quad y \geq 0
+        }
+        \]
+        <p>confirmando el resultado.</p>
+    </section>
+
+    <!-- Diapositiva 11 -->
+    <section>
+        <h3>Ejemplo de la transformación cuadrática de una VA normal I</h3>
+        <blockquote>
+            Para la transformación \( Y = T(X) = X^2 \), encontrar \( f_Y(y) \) con \( X \sim \mathcal{N}(0,1) \).
+        </blockquote>
+        <p>
+            Utilizando el resultado de la ecuación \( f_{Y}(y) = \frac{f_{X}(-\sqrt{y/c}) + f_{X}(\sqrt{y/c})}{2\sqrt{yc}} \quad \text{para} \quad y \geq 0 \) con \( c = 1 \), y conociendo además que:
+        </p>
+        <p>
+            \( X \sim \mathcal{N}(0,1) \longrightarrow f_X(x) = \frac{1}{\sqrt{2\pi}} e^{-x^2/2} \),
+        </p>
+        <p>se obtiene:</p>
+        <p>
+            \( f_{Y}(y) = \frac{f_{X}(-\sqrt{y}) + f_{X}(\sqrt{y})}{2\sqrt{y}} = \frac{\frac{1}{\sqrt{2\pi}} e^{-(-\sqrt{y})^2/2} + \frac{1}{\sqrt{2\pi}} e^{-(\sqrt{y})^2/2}}{2\sqrt{y}} = \frac{1}{\sqrt{2\pi y}} e^{-y/2} \)
+        </p>
+    </section>
+
+
+    <!-- Diapositiva 12 -->
+    <section> 
+        <p>Figura (Falta) </p>
+    </section>
+
+    <!-- Diapositiva 13 -->
+    <section>
+        <p>Figura (Falta) </p>
+    </section>
+</section>
+
+<!-- (c) Transformaciones de una \va\ discreta -->
+<section>
+    <section>
+        <h2>(c) Transformaciones de una VA discreta</h2>
+    </section>
+
+    <!-- Diapositiva 1 -->
+    <section>
+        <h3>Transformación de una variable aleatoria discreta</h3>
+        <p>
+            Si $X$ es una variable aleatoria discreta mientras que $Y = T(X)$ es una transformación continua, el problema de encontrar la nueva función de densidad es más simple de resolver. Se puede escribir que,
+
+            \begin{equation}
+                f_{X}(x) = \sum_{n}P(x_{n})\delta(x - x_{n})
+            \end{equation}
+
+            \begin{equation}
+                F_{X}(x) = \sum_{n}P(x_{n})u(x - x_{n})
+            \end{equation}
+
+            donde la suma se aplica sobre todos los valores posibles $x_{n}, n = 1, 2, \ldots,$ de $X$.
+        </p>
+    </section>
+
+    <!-- Diapositiva 2 -->
+    <section>
+        <h3>Transformación de una variable aleatoria discreta I Monotónico o no monotónico</h3>
+        Si la transformación es monótona, hay una correspondencia una-a-una entre $X$ y $Y$ de modo que un conjunto $\{y_n\}$ corresponde al conjunto $\{x_n\}$ mediante la ecuación $y_n = T(x_n)$. La probabilidad $P(y_n)$ iguala $P(x_n)$. Así, 
+
+        \begin{equation}
+            f_{Y}(y) = \sum_{n}P(y_{n})\delta(y - y_{n}) = \sum_{n}P(x_{n})\delta(y - T(x_{n}))
+        \end{equation}
+
+        \begin{equation}
+            F_{Y}(y) = \sum_{n}P(y_{n})u(y - y_{n})  = \sum_{n}P(x_{n})u(y - T(x_{n}))
+        \end{equation}
+
+        donde $y_n = T(x_n), P(y_n) = P(x_n).$
+    </section>
+
+    <!-- Diapositiva 3 -->
+    <section>
+        <p>Figura (Falta)</p>
+    </section>
+
+    <!-- Diapositiva 4 -->
+    <section>
+        <h3>Transformación de una variable aleatoria discreta III Monotónico o no monotónico</h3>
+        <blockquote>Si $T$ no es monótona, el procedimiento anterior mantiene su validez con la excepción de que existe la posibilidad de que más de un valor $x_n$ corresponde a un valor $y_n$. En este caso, $P(y_n)$ igualará la suma de las probabilidades de los diversos $x_n$ para los que $y_n = T(x_n).$</blockquote>
+    </section>
+
+    <!-- Diapositiva 5 -->
+    <section>
+        <h3>Videos y referencias en internet</h3>
+        <ul>
+            <li>
+                <strong>Functions of a Random Variable Example Worked Out at a Whiteboard</strong><br>
+                <em>Rose-Hulman Online</em>, 
+                <a href="https://youtu.be/H00rv6jVwrI" target="_blank">https://youtu.be/H00rv6jVwrI</a>
+            </li>
+            <li>
+                <strong>Another Function of a Random Variable Example Worked Out at a Whiteboard</strong><br>
+                <em>Rose-Hulman Online</em>, 
+                <a href="https://youtu.be/P1d0DbOsRcw" target="_blank">https://youtu.be/P1d0DbOsRcw</a>
+            </li>
+        </ul>        
+    </section>
+</section>
+
+<!-- Gráficos de Chart.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+<script src="{% static 'js/p15.js' %}"></script>
+
+{% endblock %}
+
+{% block websocket %}
+{% if role == "presenter" %}
+<script>
+    const wsRouteTx = 'wss://' + window.location.host + '/ws/deck/slider/p4/';
+    const deckSocket = new WebSocket(wsRouteTx);
+
+    // Registrar la conexión abierta
+    deckSocket.onopen = function (event) {
+        console.log('Conexión WebSocket abierta exitosamente como presentador en ' + wsRouteTx);
+    };
+
+    Reveal.on('slidechanged', event => {
+        deckSocket.send(JSON.stringify({
+            'indexh': event.indexh,
+            'indexv': event.indexv
+        }));
+    });
+</script>
+{% else %}
+<script>
+    const wsRouteRx = 'wss://' + window.location.host + '/ws/deck/slider/p4/';
+    const deckSocket = new WebSocket(wsRouteRx);
+
+    // Registrar la conexión abierta
+    deckSocket.onopen = function (event) {
+        console.log('Conexión WebSocket abierta exitosamente como cliente en ' + wsRouteRx);
+    };
+
+    deckSocket.onmessage = function (event) {
+        const data = JSON.parse(event.data);
+        Reveal.slide(data.message.indexh, data.message.indexv);
+    };
+</script>
+{% endif %}
+{% endblock %}
