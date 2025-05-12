@@ -3,6 +3,15 @@ from django.shortcuts import get_object_or_404, render
 # Create your views here.
 
 
+def programming_project(request):
+    if request.user.is_staff:
+        role = "presenter"
+    else:
+        role = "viewer"
+    context = {"role": role}
+    return render(request, "programming_project.html", context)
+
+
 def p2(request, deck_id):
     if request.user.is_staff:
         role = "presenter"
@@ -28,11 +37,26 @@ def p15(request):
     else:
         role = "viewer"
     context = {"role": role}
-    return render(request, "modelos/15-caracteristicas-espectrales-procesos-estocasticos.html", context)
+    return render(
+        request,
+        "modelos/15-caracteristicas-espectrales-procesos-estocasticos.html",
+        context,
+    )
 
 
 def p18(request):
     return render(request, "modelos/18-markov-tiempo-continuo.html")
+
+
+def p19(request):
+    if request.user.is_staff:
+        role = "presenter"
+    else:
+        role = "viewer"
+    context = {"role": role}
+    return render(
+        request, "modelos/19-markov-tiempo-continuo-vector-estado-estable.html", context
+    )
 
 
 def decks(request):

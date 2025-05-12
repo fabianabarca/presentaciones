@@ -35,3 +35,7 @@ def example(request):
 
 def interactivity(request):
     return render(request, "interactivity.html")
+
+
+def elements(request):
+    return render(request, "elements.html")

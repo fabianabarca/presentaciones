@@ -1,0 +1,235 @@
+{% extends 'decks.html' %}
+
+{% load static %}
+
+<!-- Título -->
+{% block title %}Proyecto de programación MPSS{% endblock %}
+
+<!-- Referencia: https://www.overleaf.com/read/mpzrvppyvszr#9c9c90 -->
+
+<!-- Configuraciones específicas del <head> -->
+{% block head %}
+<script type="module">
+    import * as monaco from 'https://cdn.jsdelivr.net/npm/monaco-editor@0.52.2/+esm';
+
+    window.addEventListener('DOMContentLoaded', () => {
+        monaco.editor.create(document.getElementById('editor'), {
+            value: [
+                'import numpy as np',
+                'random_numbers = np.random.randn(1000)',
+                'print(random_numbers)'
+            ].join('\n\n'),
+            language: 'python'
+        });
+    });
+</script>
+<style>
+    #editor {
+        width: 100%;
+        height: 400px;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+
+<!-- SECCIÓN 0 -->
+<section>
+    <h1 class="display-1">
+        Proyecto de programación
+    </h1>
+    <h2>Guía práctica para su desarrollo</h2>
+    <div class="text-center mt-5">
+        <strong>IE0405 - Modelos Probabilísticos de Señales y Sistemas</strong>
+        <br>
+        <span>I - 2025</span>
+    </div>
+</section>
+
+<!-- Portada y descripción -->
+<section>
+    <h2>Objetivo</h2>
+    <blockquote>
+        Implementar una canalización de datos (<em>pipeline</em>) en tiempo real para procesamiento y análisis a partir de una fuente de datos externa, utilizando las herramientas computacionales de Python.
+    </blockquote>
+    <p>La documentación completa está en <a href="https://mpss-eie.github.io/proyecto/" target="_blank">GitHub</a>.</p>
+</section>
+
+<!-- Recopilación de datos -->
+<section>
+    <section>
+        <h1>Recopilación de datos</h1>
+    </section>
+
+    <!-- Tipos de recopilación -->
+    <section>
+        <h3>Tipos de recopilación</h3>
+        <dl>
+            <dt>Procesamiento por lotes (<em>batch processing</em>)</dt>
+            <dd>Generación de datos a partir de un modelo probabilístico.</dd>
+            <dt>Procesamiento en tiempo real (<em>real-time processing</em>)</dt>
+            <dd>Obtención de datos a partir de un experimento.</dd>
+            <dt>Procesamiento en tiempo casi real (<em>quasi real-time processing</em>)</dt>
+            <dd>Uso de datos disponibles en la web.</dd>
+        </dl>
+    </section>
+
+    <!-- Herramientas de recopilación -->
+    <section>
+        <h3>Datos desde fuentes externas con API</h3>
+        <pre><code class="language-python" data-trim data-noescape>
+            import requests
+            
+            url = "https://kalouk.xyz/api/datos"
+            params = {"grupo": 000}
+            response = requests.get(url, params=params)
+        
+            if response.status_code == 200:
+                data = json.loads(response.text)
+                print(data)       
+        </code></pre>
+        <iframe src="https://jupyterlite.github.io/demo/repl/index.html" width="100%" height="100%"></iframe>
+    </section>
+
+    <section>
+        <pre><code class="language-python" data-trim data-noescape>
+            import requests
+            params = {"grupo": int(group)}
+            response = requests.get(url, params=params)
+        
+            if response.status_code == 200:
+                data = json.loads(response.text)        
+        </code></pre>
+    </section>
+
+    <!-- Diapositiva 5 -->
+    <section>
+        <h5>Deducción de la densidad espectral de potencia | Definiciones preliminares</h5>
+    </section>
+</section>
+
+<!-- Almacenamiento de datos -->
+<section>
+    <section>
+        <h1>Almacenamiento de datos</h1>
+    </section>
+
+    <section>
+        <h3>Bases de datos relacionales</h3>
+    </section>
+</section>
+
+<!-- Análisis de datos -->
+<section>
+    <section>
+        <h1>Análisis de datos</h1>
+    </section>
+
+    <!-- Procesamiento y análisis descriptivo -->
+    <section>
+        <h3>Procesamiento y análisis descriptivo con Pandas</h3>
+    </section>
+
+    <!-- Visualización de datos -->
+    <section>
+        <h3>Visualización de datos con Matplotlib</h3>
+    </section>
+
+    <section>
+        <h3>Visualización de datos con Plotly</h3>
+    </section>
+
+    <!-- Modelos de probabilidad de los datos -->
+    <section>
+        <h3>Modelos de probabilidad de los datos</h3>
+    </section>
+
+    <!-- Momentos estadísticos -->
+    <section>
+        <h3>Momentos estadísticos</h3>
+    </section>
+</section>
+
+<!-- Desarrollo colaborativo -->
+<section>
+    <section>
+        <h1>Desarrollo colaborativo de software</h1>
+    </section>
+
+    <!-- Git y GitHub -->
+    <section>
+        <h3>Git y GitHub</h3>
+    </section>
+
+    <section data-background-iframe="https://microsoft.github.io/monaco-editor/playground.html?source=v0.52.2#example-creating-the-editor-hello-world" data-background-interactive>
+    </section>
+
+</section>
+
+<!-- Presentación de resultados -->
+<section>
+    <section>
+        <h1>Presentación de resultados</h1>
+    </section>
+
+    <!-- Documentación con MkDocs -->
+    <section>
+        <h3>Documentación con MkDocs</h3>
+    </section>
+</section>
+
+<!-- Instrucciones del proyecto -->
+<section>
+    <section>
+        <h1>Instrucciones del proyecto</h1>
+    </section>
+
+    <!-- Avance -->
+    <section>
+        <h3>Avance</h3>
+    </section>
+
+    <!-- Reporte -->
+    <section>
+        <h3>Reporte</h3>
+    </section>
+
+</section>
+
+{% endblock %}
+
+{% block websocket %}
+{% if role == "presenter" %}
+<script>
+    const wsRouteTx = 'wss://' + window.location.host + '/ws/deck/slider/p2/';
+    const deckSocket = new WebSocket(wsRouteTx);
+
+    // Registrar la conexión abierta
+    deckSocket.onopen = function (event) {
+        console.log('Conexión WebSocket abierta exitosamente como presentador en ' + wsRouteTx);
+    };
+
+    Reveal.on('slidechanged', event => {
+        deckSocket.send(JSON.stringify({
+            'indexh': event.indexh,
+            'indexv': event.indexv
+        }));
+    });
+</script>
+{% else %}
+<script>
+    const wsRouteRx = 'wss://' + window.location.host + '/ws/deck/slider/p2/';
+    const deckSocket = new WebSocket(wsRouteRx);
+
+    // Registrar la conexión abierta
+    deckSocket.onopen = function (event) {
+        console.log('Conexión WebSocket abierta exitosamente como cliente en ' + wsRouteRx);
+    };
+
+    deckSocket.onmessage = function (event) {
+        const data = JSON.parse(event.data);
+        Reveal.slide(data.message.indexh, data.message.indexv);
+    };
+</script>
+{% endif %}
+{% endblock %}

@@ -17,10 +17,10 @@ class DataView(APIView):
         if request.query_params.get("grupo"):
             try:
                 group = int(request.query_params.get("grupo"))
-                if group > 300 or (group < 100 and group != 0):
+                if group > 100 or group < 0:
                     return Response(
                         {
-                            "error": "El número del grupo debe ser un número entero entre 100 y 300."
+                            "error": "El número del grupo debe ser un número entero entre 01 y 99."
                         },
                         status=status.HTTP_400_BAD_REQUEST,
                     )
@@ -67,47 +67,33 @@ class DataView(APIView):
                 # Datos del proyecto
                 distributions = [
                     "burr12",
-                    "cauchy",
                     "chi2",
                     "expon",
                     "f",
                     "fisk",
                     "gamma",
-                    "gompertz",
-                    "johnsonsb",
-                    "johnsonsu",
                     "laplace",
-                    "levy",
-                    "logistic",
                     "lognorm",
                     "nakagami",
-                    "pareto",
                     "rayleigh",
                     "rice",
                     "t",
                     "uniform",
                 ]
                 params = {
-                    "burr12": (3, 2),
-                    "cauchy": (),
+                    "burr12": (3, 3),
                     "chi2": (4,),
                     "expon": (),
-                    "f": (5, 2),
-                    "fisk": (4,),
-                    "gamma": (3,),
-                    "gompertz": (1,),
-                    "johnsonsb": (0.5, 0.5),
-                    "johnsonsu": (0.5, 0.5),
+                    "f": (5, 5),
+                    "fisk": (3,),
+                    "gamma": (2,),
                     "laplace": (),
-                    "levy": (),
-                    "logistic": (),
-                    "lognorm": (1,),
-                    "nakagami": (3.24,),
-                    "pareto": (2),
+                    "lognorm": (2,),
+                    "nakagami": (2.12,),
                     "rayleigh": (),
-                    "rice": (2,),
-                    "t": (5,),
-                    "uniform": (),
+                    "rice": (3,),
+                    "t": (4,),
+                    "uniform": (2, 3),
                 }
 
                 random.seed(group)
@@ -118,6 +104,7 @@ class DataView(APIView):
                 random_state = group + int(timestamp.timestamp())
                 variable_1 = X.rvs(size=sample_size, random_state=random_state)
                 variable_2 = transform(variable_1)
+                variable_3 = transform(variable_2)
 
                 return Response(
                     {
@@ -126,6 +113,7 @@ class DataView(APIView):
                         "sample_size": sample_size,
                         "variable_1": variable_1,
                         "variable_2": variable_2,
+                        "variable_3": variable_3,
                     }
                 )
         else:
@@ -204,7 +192,7 @@ class ProcessView(APIView):
 
 
 def transform(x):
-    return np.power(x, 2) + 1
+    return np.power(x, 0.5) + 1
 
 
 def time_variation(timestamp, group):

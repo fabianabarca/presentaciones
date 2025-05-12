@@ -1,0 +1,718 @@
+{% extends 'decks.html' %}
+
+{% load static %}
+
+<!-- Título -->
+{% block title %}Características espectrales de los procesos aleatorios{% endblock %}
+
+<!-- Configuraciones específicas del <head> -->
+{% block head %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+{% endblock %}
+
+{% block content %}
+
+<!-- SECCIÓN 0 -->
+<section>
+    <h1 class="display-1">
+        Cadenas de Markov de tiempo continuo
+    </h1>
+    <h2>El vector de probabilidad de estado estable</h2>
+</section>
+
+<!-- Portada y descripción -->
+<section>
+    <h3>El vector de probabilidad de estado estable</h3>
+    <p>
+        Luego de suficientes transiciones de estados, la probabilidad de ocurrencia de un estado $i$, de entre los $\vert S \vert$ estados posibles, se estabiliza en un valor constante. A cada estado, por tanto, se le asigna una probabilidad de estado estable $\phi_i$.
+    </p>
+</section>
+
+<!-- Espectro de densidad de potencia y sus propiedades -->
+<section>
+    <section>
+        <h2>El vector de probabilidad de estado estable</h2>
+    </section>
+
+    <section>
+        <h3>El vector de probabilidad de estado estable</h3>
+        <blockquote>
+            Después de que el proceso de nacimiento y muerte evoluciona por algún tiempo, se llega a la estabilidad.
+        </blockquote>
+        <ul>
+            <li>Esto significa que el estado del proceso se vuelve menos y menos dependiente de su estado inicial $X_{0}$ en el tiempo 0.</li>
+            <li>El proceso seguirá cambiando estados pero habrá una probabilidad bien definida $\phi_{i}$ con la que el proceso $X_t$ estará en el estado $i$.</li>
+        </ul>
+
+        <p>IMAGEN AQUÍ</p>
+    </section>
+
+    <!-- Diapositiva 5 -->
+    <section>
+        <ul>
+            <li>En tiempo 0, el proceso de nacimiento y muerte empieza en un cierto estado $X_{0}$.</li>
+            <li>Sea $\rho_{i} = P(X_{0} = i)$ para todo $i \in S$.
+                <ul>
+                    <li>Caso especial: si se sabe que $X_{0}$ es algún estado específico $k$, entonces $\rho_{k} = 1$ y $\rho_{i} = 0$ para todo $i \neq k$.</li>
+                </ul>
+            </li>
+            <li>Un vector de probabilidad $\rho = (\rho_{0}, \rho_{1}, \rho_{2}, \ldots)$ en el espacio de estados $S$ satisface las siguientes dos condiciones:
+                <ol>
+                    <li>$0 \leq \rho_{i} \leq 1$ para todo $i \in S$</li>
+                    <li>$\displaystyle \sum_{i \in S} \rho_{i} = 1$</li>
+                </ol>
+            </li>
+        </ul>
+    </section>
+
+    <!-- Diapositiva 6 -->
+    <section>
+        <h3>Vector de estado estable</h3>
+        <blockquote>
+            No importando el vector de probabilidad inicial $\rho$ en tiempo 0,
+
+            \begin{equation}
+            P(X_{t} = i \mid \text{cualquier vector inicial $\rho$}) \rightarrow \phi_{i}
+            \end{equation}
+
+            conforme $t \rightarrow \infty$ para cada estado $i$. Esto significa que el proceso se estabiliza en los diferentes estados con probabilidades dadas por el vector $\phi = (\phi_{0}, \phi_{1}, \ldots, \phi_{N})$.
+        </blockquote>
+        <p class="small">$\phi$ es un vector de probabilidades que especifica la permanencia del proceso en los estados cuando la influencia del vector de probabilidad inicial $\rho$ se desvaneció en el tiempo por los efectos de la aleatoriedad.</p>
+    </section>
+
+    <!-- Diapositiva 7 -->
+    <section>
+        <h4>Condición para la existencia de $\phi$</h4>
+        <p>Hay, de hecho, procesos de nacimiento y muerte que no tienen o alcanzan un estado estable de probabilidades.</p>
+
+        <p>Pero supóngase que $\phi$ existe y se encontrará fórmulas que debe satisfacer.</p>
+
+        <ul>
+            <li>El tiempo de espera o de permanencia en el estado $i$ está exponencialmente distribuido con parámetro $\Omega_{i}$.</li>
+            <li>Sea $f_{i}(t) = \Omega_{i}e^{-\Omega_{i}t}$ para $t > 0$, la densidad para este tiempo de espera.</li>
+        </ul>
+    </section>
+
+    <!-- Diapositiva 8 -->
+    <section>
+        <ul>
+            <li>Por lo tanto, el proceso se moverá del estado $i$ en un intervalo de tiempo de longitud $\Delta t$ con probabilidad
+                \[
+                P(\text{moverse de $i$ en $[t,t+\Delta t]$} \mid \text{en estado $i$ al tiempo $t$}) = \\
+                P(\text{moverse de $i$ en $[0,\Delta t]$} \mid \text{en estado $i$ al tiempo 0}) = \\
+                \int_{0}^{\Delta t} f_{i}(t) ~\mathrm{d}t = \\
+                1 - e^{-\Omega_{i} \Delta t} = \\
+                1 - \left( 1 - \Omega_{i} \Delta t + \frac{(\Omega_{i}\Delta t)^2}{2!} - \cdots \right) \simeq \Omega_{i}\Delta t
+                \]
+                para un $\Delta t$ pequeño.
+                <p>La primera igualdad usa la propiedad de carencia de memoria de la distribución exponencial. La tercera igualdad es una integración directa. La penúltima igualdad usa la expansión en series de Taylor de la función exponencial, junto con una aproximación de primer orden $1 - (1 - \Omega_{i} \Delta t)$.</p>
+            </li>
+        </ul>
+    </section>
+
+    <!-- Diapositiva 9 -->
+    <section>
+        <ul>
+            <li>La probabilidad de que el proceso se moverá del estado $i$ durante el próximo $\Delta t$ es aproximadamente $\Omega_{i}\Delta t$ para $\Delta t \simeq 0$.
+                \[
+                P(\text{moverse de $i$ en $[t,t+\Delta t]$} \mid \text{en estado $i$ al tiempo $t$}) \simeq \Omega_{i}\Delta t
+                \]
+                donde $\Omega_{i}$ es el parámetro de permanencia. (Dado que $\Omega_{i}\Delta t$ es una probabilidad, $0 < \Omega_{i}\Delta t < 1$). </li>
+        </ul>
+    </section>
+
+    <!-- Diapositiva 8 -->
+    <section>
+        <h4>Varios procesos simultáneos</h4>
+        <p>Supóngase que hay un número grande de procesos cada uno moviéndose entre estados de acuerdo a los mismos parámetros $\Omega_{i}$ y probabilidades de transición $p_{i}, q_{i}$ para $i \in S$.</p>
+
+        <ul>
+            <li>Supóngase que $n_{i}$ de estos procesos están en el estado $i$. Entonces aproximadamente
+                \[
+                n_{i}\Omega_{i}\Delta t
+                \]
+                (una fracción) se moverán del estado $i$ durante el próximo $\Delta t$.
+            </li>
+
+            <li>¿Hacia dónde se moverán?
+                <ul>
+                    <li>Una fracción $p_{i}$ se moverá al estado $i+1$</li>
+                    <li>Otra fracción $q_{i}$ a $i-1$</li>
+                </ul>
+            </li>
+
+            <li>El número aproximado de procesos que se mueven del estado $i$ al estado $i-1$ en el tiempo $t$ durante el próximo $\Delta t$ es
+                \[
+                n_{i}~\Omega_{i}~\Delta t~q_{i}.
+                \]
+            </li>
+        </ul>
+    </section>
+
+    <!-- Diapositiva 9 -->
+    <section>
+        <ul>
+            <li>En estado estable, este número debe ser balanceado por un número equivalente de procesos moviéndose del estado $i-1$ al estado $i$. Entonces, el número de procesos moviéndose del estado $i-1$ al $i$ durante el próximo $\Delta t$ es
+                \[
+                n_{i-1}~\Omega_{i-1}~\Delta t~p_{i-1}.
+                \]
+                En el estado estable por tanto,
+                \[
+                n_{i}~\Omega_{i}~\Delta t~q_{i} \simeq n_{i-1}~\Omega_{i-1}~\Delta t~p_{i-1}.
+                \]
+                <p><strong>FIGURA 1</strong></p>
+            </li>
+        </ul>
+    </section>
+
+    <!-- Diapositiva 10 -->
+    <section>
+        <ul>
+            <li>Supóngase que hay un número grande $n$ de procesos. La probabilidad de que uno de ellos esté en el estado $i$ es $n_{i}/n = \phi_{i}$. Dividiendo la ecuación anterior por $n$ y cancelando $\Delta t$ implica que las probabilidades $\phi_{i}$ de estado estable satisfacen, para $i = 1, 2, \ldots$
+                \[
+                \boxed{\phi_{i}\Omega_{i}q_{i} = \phi_{i-1}\Omega_{i-1}p_{i-1}}
+                \]
+                <p><strong>FIGURA 2</strong></p>
+            </li>
+        </ul>
+    </section>
+
+    <!-- Diapositiva 9 -->
+    <section>
+        <h5>Deducción de la densidad espectral de potencia | Definiciones preliminares</h5>
+        <p>
+            En esta ecuación, $\vert X_{T}(\omega) \vert^2 / 2T$ es una densidad espectral de potencia porque de la integración sobre todo $\omega$ se obtiene la potencia.
+
+            \begin{equation}
+            P(T) = \frac{1}{2T}\int_{-T}^{T}x^2(t) ~\mathrm{d} t = \frac{1}{2\pi}\int_{-\infty}^{\infty}\frac{\vert X_{T}(\omega) \vert^2}{2T} ~\mathrm{d} \omega
+            \end{equation}
+        </p>
+        <p>
+            Sin embargo, no es todavía la función que necesitamos, por tres razones:
+        </p>
+        <ol>
+            <li>No representa la potencia de una función muestra completa</li>
+            <li>Es la potencia en una sola función muestra y no representa a todo el proceso</li>
+            <li>$P(T)$ es realmente una variable aleatoria (y no un valor) con respecto al proceso aleatorio (por la aleatoriedad de las funciones muestra)</li>
+        </ol>
+    </section>
+
+    <!-- Diapositiva 10 -->
+    <section>
+        <h5>Deducción de la densidad espectral de potencia | Definiciones preliminares</h5>
+        <p>
+            Por lo anterior, la estrategia para encontrar la potencia promedio de $X(t)$ (denotada como $P_{XX}$) es hacer $P_{XX} = E[P(\infty)]$
+
+            \begin{equation}
+            P_{XX} = \lim_{T \rightarrow \infty} \frac{1}{2T}\int_{-T}^{T}E[X^2(t)] ~\mathrm{d}t
+            \end{equation}
+
+            y además
+
+            \begin{equation}
+            P_{XX} = \frac{1}{2\pi}\int_{-\infty}^{\infty}\lim_{T \rightarrow \infty}\frac{E[\vert X_{T}(\omega)
+            \vert^2]}{2T} ~\mathrm{d}t
+            \end{equation}
+        </p>
+        <p>
+            De aquí surgen las dos importantes conclusiones siguientes.
+        </p>
+    </section>
+
+    <!-- Diapositiva 11 -->
+    <section>
+        <h3><span class="badge text-bg-primary">A</span> <br> Potencia promedio de un proceso estocástico</h3>
+        <blockquote>
+            <strong>La potencia promedio $P_{XX}$ de un proceso estocástico</strong>
+            <br>
+            La estrategia para encontrar la potencia promedio de $X(t)$ (denotada como $P_{XX}$) es hacer $P_{XX} = E[P(\infty)]$
+
+            \begin{equation}
+            P_{XX} = \lim_{T \rightarrow \infty} \frac{1}{2T}\int_{-T}^{T}E[X^2(t)] ~\mathrm{d}t = A\{E[X^2(t)]\}
+            \label{E:potencia_promedio}
+            \end{equation}
+
+        </blockquote>
+        <p>
+            <strong>Caso del proceso estacionario</strong>
+            Para un proceso que es a lo menos estacionario en sentido amplio $E[X^2(t)] = \overline{X^2}$, una
+            constante, con lo que $P_{XX} = \overline{X^2}$.
+        </p>
+    </section>
+
+    <!-- Diapositiva 12 -->
+    <section>
+        <h3><span class="badge text-bg-primary">B</span> <br> Densidad espectral de potencia de un proceso estocástico</h3>
+        <blockquote>
+            \begin{equation}
+            \mathcal{S}_{XX}(\omega) = \lim_{T \rightarrow \infty}\frac{E[\vert X_{T}(\omega) \vert^2]}{2T}
+            \label{E:densidad_espectral_potencia}
+            \end{equation}
+        </blockquote>
+        <p>
+            De aquí, $P_{XX}$ puede obtenerse con una integración en el dominio de la frecuencia como
+
+            \begin{equation}
+            P_{XX} = \frac{1}{2\pi}\int_{-\infty}^{\infty}\mathcal{S}_{XX}(\omega) ~\mathrm{d}t
+            \label{E:potencia_psd}
+            \end{equation}
+        </p>
+    </section>
+
+    <!-- Diapositiva 13 -->
+    <section>
+        <h3><span class="badge text-bg-success"><i class="bi bi-pencil-fill"></i></span> <br> Ejemplo de la potencia promedio de un proceso aleatorio</h3>
+        <blockquote>
+            Considere el proceso estocástico
+
+            \begin{equation}
+            X(t) = A\cos\left( \omega_{0}t + \Theta \right)
+            \end{equation}
+
+
+            donde $A$ y $\omega_{0}$ son constantes reales y $\Theta$ es una variable aleatoria uniformemente
+            distribuida en el intervalo $[0, \frac{\pi}{2}]$. ¿Cuál es la potencia promedio $P_{XX}$ en $X(t)$?
+
+        </blockquote>
+        <p>
+            La potencia promedio es el promedio temporal del valor cuadrático medio, que se calcula a continuación.
+
+            Recordar la identidad trigonométrica $$\cos^2(x)= \frac{1}{2} (1 + \cos(2x))$$
+        </p>
+    </section>
+
+    <!-- Diapositiva 14 -->
+    <section>
+        <h3>Ejemplo de la potencia promedio de un proceso aleatorio</h3>
+        <h5>Cálculo del valor cuadrático medio</h5>
+        <p>
+            \begin{equation*}
+            \begin{aligned}
+            E[X^2(t)] & = E[A^2 \cos^2 \left( \omega_{0}t + \Theta \right)] \\
+            & = E\left[ \frac{A^2}{2} + \frac{A^2}{2}\cos\left( 2\omega_{0}t + 2\Theta \right) \right] \\
+            & = \frac{A^2}{2} + \frac{A^2}{2}\int_{0}^{\frac{\pi}{2}}\frac{2}{\pi}\cos\left( 2\omega_{0}t + 2\theta
+            \right) ~\mathrm{d}\theta \\
+            & = \frac{A^2}{2} + \left( \frac{A^2}{2} \right)\left( \frac{2}{\pi} \right)\left. \frac{\sin(2\omega_{0}t +
+            2\theta)}{2} \right\vert_{0}^{\frac{\pi}{2}} \\
+            & = \frac{A^2}{2} + \frac{A^2}{\pi}\left\{ \frac{\sin(2\omega_{0}t + \pi)}{2} - \frac{\sin(2\omega_{0}t)}{2}
+            \right\} \\
+            & = \frac{A^2}{2} + \frac{A^2}{\pi}\left[ \frac{-2\sin(2\omega_{0}t)}{2} \right] \\
+            & = \frac{A^2}{2} - \frac{A^2}{\pi}\sin(2\omega_{0}t)
+            \end{aligned}
+            \end{equation*}
+        </p>
+    </section>
+
+    <!-- Diapositiva 15 -->
+    <section>
+        <h3>Ejemplo de la potencia promedio de un proceso aleatorio</h3>
+        <p>
+            El promedio temporal de la función anterior es:
+
+            \begin{equation*}
+            \begin{aligned}
+            A\left[ E[X^2(t)] \right] & = \lim_{T \rightarrow \infty}\frac{1}{2T}\int_{-T}^{T}\left[ \frac{A^2}{2} -
+            \frac{A^2}{\pi}\sin(2\omega_{0}t) \right] ~\mathrm{d}t \\
+            & = \lim_{T \rightarrow \infty}\frac{1}{2T}\left\{ \frac{A^2}{2}(2T) + \left. \left[
+            \frac{A^2}{\pi}\frac{\cos(2\omega_{0}t)}{2\omega_{0}} \right]\right\vert_{-T}^{T} \right\} \\
+            & = \lim_{T \rightarrow \infty} \left\lbrace \frac{1}{2T}\left( \frac{A^2}{2}2T \right) +
+            \frac{1}{2T}\frac{A^2}{2\omega_{0}\pi}\left[ \cos(2\omega_{0}T) - \cos(-2\omega_{0}T) \right] \right\rbrace
+            \end{aligned}
+            \end{equation*}
+        </p>
+        <blockquote>
+            \begin{equation*}
+            P_{XX} = \frac{A^2}{2}
+            \end{equation*}
+        </blockquote>
+        <p>
+            <i class="fa-solid fa-bolt"></i> Es equivalente a elevar al cuadrado el valor efectivo $V_{RMS} = A/\sqrt{2}$ de la onda.
+        </p>
+    </section>
+</section>
+<!-- Se termina tema 1 -->
+
+<!-- Propiedades de la densidad espectral de potencia -->
+<section>
+    <section>
+        <h2>Propiedades de la densidad espectral de potencia</h2>
+    </section>
+
+    <!-- Diapositiva 16 -->
+    <section>
+        <h3><span class="badge text-bg-success"><i class="bi bi-list-check"></i></span> <br> Propiedades de la densidad espectral de potencia</h3>
+        <ol>
+            <li>La densidad es siempre positiva
+                \begin{equation}
+                \mathcal{S}_{XX}(\omega) \geq 0
+                \label{E:psd_positiva}
+                \end{equation}</li>
+            <li>La densidad tiene simetría par para $X(t)$ real
+                \begin{equation}
+                \mathcal{S}_{XX}(-\omega) = \mathcal{S}_{XX}(\omega)
+                \label{E:psd_simetria_par}
+                \end{equation}</li>
+            <li>La densidad $\mathcal{S}_{XX}(\omega)$ es real.</li>
+            <li>La potencia promedio se puede obtener a partir de la densidad espectral de potencia
+                \begin{equation}
+                \frac{1}{2\pi}\int_{-\infty}^{\infty}\mathcal{S}_{XX}(\omega) ~\mathrm{d}t = A\{ E[X^2(t)] \} = P_{XX}
+                \end{equation}</li>
+        </ol>
+
+    </section>
+    <!-- Diapositiva 17 -->
+    <section>
+        <h3><span class="badge text-bg-success"><i class="bi bi-list-check"></i></span> <br> Propiedades de la densidad espectral de potencia</h3>
+        <ol start="5">
+            <li>
+                Aplican las propiedades de las ecuaciones diferenciales, donde $\displaystyle \dot{X} = \frac{d}{dt}X $
+                \begin{equation}
+                \mathcal{S}_{\dot{X}\dot{X}}(\omega) = \omega^2 \mathcal{S}_{XX} (\omega)
+                \label{E:psd_diferencial}
+                \end{equation}
+            </li>
+            <li>
+                El espectro de densidad de potencia y el promedio temporal de la autocorrelación forman un par de
+                transformada de Fourier.
+
+                \begin{equation}
+                \begin{aligned}
+                \frac{1}{2\pi}\int_{-\infty}^{\infty}\mathcal{S}_{XX}(\omega)e^{j\omega \tau} ~\mathrm{d}t & =
+                A[R_{XX}(t, t+\tau)] \\
+                \mathcal{S}_{XX}(\omega) & = \int_{-\infty}^{\infty}A[R_{XX}(t, t+\tau)]e^{-j\omega \tau} ~\mathrm{d}\tau
+                \label{E:psd_fourier}
+                \end{aligned}
+                \end{equation}
+            </li>
+        </ol>
+        <p>
+            En esta propiedad 6 existe el caso especial en el que $X(t)$ es al menos WSS.
+        </p>
+    </section>
+
+    <!-- Diapositiva 18 -->
+    <section>
+        <h3>Ecuaciones de Wiener-Khinchin</h3>
+        <h4>Relación entre el espectro de densidad de potencia y la correlación</h4>
+        <div class="card">
+            <div class="card-header">Teorema de Wiener-Khinchin</div>
+            <div class="card-body">
+                Para un proceso $X(t)$ estacionario en sentido amplio WSS donde $A[R_{XX}(t,t+\tau)] = R_{XX}(\tau)$, la relación entre el espectro de densidad de potencia y la correlación está dada por
+
+                \begin{equation}
+                \mathcal{S}_{XX}(\omega) = \int_{-\infty}^{\infty} R_{XX}(\tau) e^{-j\omega \tau} ~\mathrm{d}\tau
+                \label{E:psd_wk}
+                \end{equation}
+
+                \begin{equation}
+                R_{XX}(\tau) = \frac{1}{2\pi} \int_{-\infty}^{\infty} \mathcal{S}_{XX}(\omega)e^{j\omega \tau} ~\mathrm{d}t
+                \label{E:autocorrelacion_wk}
+                \end{equation}
+
+                que representan un par de la transformada de Fourier.
+            </div>
+        </div>
+    </section>
+
+    <!-- Diapositiva 19 -->
+    <section>
+        <h3><span class="badge text-bg-success"><i class="bi bi-pencil-fill"></i></span> <br> Ejemplo de la densidad espectral de potencia a partir de la función de autocorrelación</h3>
+        <blockquote>
+            ¿Cuál es el espectro de potencia para el proceso aleatorio $X(t)$ con la siguiente autocorrelación?
+
+            \begin{equation}
+            R_{XX}(\tau) = \left( \frac{A^2}{2}\right) \cos(\omega_{0}\tau)
+            \end{equation}
+        </blockquote>
+    </section>
+
+    <!-- Diapositiva 20 -->
+    <section>
+        <h3><span class="badge text-bg-success"><i class="bi bi-pencil-fill"></i></span> <br> Ejemplo de la densidad espectral de potencia a partir de la función de autocorrelación</h3>
+        <p class="fragment">
+            \begin{equation}
+            \begin{aligned}
+            R_{XX}(\tau) & = \left( \frac{A^2}{2}\right) \left( \frac{1}{2}\right) \left( e^{j\omega_{0}\tau} + e^{-j\omega_{0}\tau} \right) \\
+            & = \frac{A^2}{4}\left( e^{j\omega_{0}\tau} + e^{-j\omega_{0}\tau} \right) \\
+            \end{aligned}
+            \end{equation}
+        </p>
+        <p class="fragment">
+            \begin{equation}
+            \begin{aligned}
+            \mathcal{S}_{XX}(\omega) & = \mathcal{F}\{R_{XX}(\tau)\} \\
+            & = \frac{A^2}{4}\left[ 2\pi\delta(\omega - \omega_{0}) + 2\pi\delta(\omega + \omega_{0}) \right] \\
+            & = \frac{\pi A^2}{2}\left[ \delta(\omega - \omega_{0}) + \delta(\omega + \omega_{0}) \right]
+            \end{aligned}
+            \end{equation}
+        </p>
+        <p>
+            <!-- Agregar imagen -->
+        </p>
+    </section>
+
+    <!-- Diapositiva 21 -->
+    <section>
+        <h3>Ejemplo del rango audible del ser humano</h3>
+        <p>
+            <!-- Agregar imagen -->
+        </p>
+
+    </section>
+
+    <!-- Diapositiva 22 -->
+    <section>
+        <h3><span class="badge text-bg-success"><i class="bi bi-soundwave"></i></span> <br> Ejemplo del rango audible del ser humano</h3>
+        <p>
+            <strong>Nivel de presión de sonido</strong>
+            (<strong>SPL</strong>, <em>Sound Pressure Level</em>) es una medida relativa de la audición de un humano, dada por
+
+            \begin{equation*}
+            L_p = 10 \log \left( \frac{p^2}{p_{\mathsf{ref}}^2} \right)
+            \end{equation*}
+
+            donde
+
+        <ul>
+            <li>$p$ es el valor RMS de la presión de la onda acústica, en pascal (Pa)</li>
+            <li>$p_{\mathsf{ref}}$ es el valor de referencia de audición, establecido alrededor de 1000 Hz para una persona joven de audición</li>
+            <li>Cuando $SPL = L_p = 0$ dB, la intensidad del sonido es igual al sonido de referencia</li>
+        </ul>
+
+        </p>
+    </section>
+</section>
+<!-- Termina tema 2 -->
+
+<!-- Diapositiva 23 -->
+<section>
+    <section>
+        <h2>Algunas definiciones de ruido</h2>
+    </section>
+
+    <!-- Diapositiva 24 -->
+    <section>
+        <h3>Ruido blanco</h3>
+        <div class="card">
+            <div class="card-header">Ruido blanco</div>
+            <div class="card-body">
+                Una función muestra $n(t)$ de un proceso aleatorio $N(t)$ de ruido estacionario en sentido amplio, se llama <em>ruido blanco</em> si el espectro de densidad de potencia de $N(t)$ es una constante en todas las frecuencias.
+            </div>
+        </div>
+        <p>
+            Así, se define
+
+            \begin{equation}
+            \mathcal{S}_{NN}(\omega) = \frac{\mathcal{N}_{0}}{2}
+            \label{E:ruido_blanco}
+            \end{equation}
+
+            para ruido blanco, donde $\mathcal{N}_{0}$ es una constante positiva real.
+        </p>
+    </section>
+
+    <!-- Diapositiva 25 -->
+    <section>
+        <h3>Ejemplo de ruido blanco</h3>
+        <canvas id="ruido-blanco"></canvas>
+    </section>
+
+    <!-- Diapositiva 26 -->
+    <section>
+        <h3>Autocorrelación del ruido blanco</h3>
+        <p>
+            Por la transformación inversa de Fourier, la autocorrelación de $N(t)$ es
+
+            \begin{equation}
+            R_{NN}(\tau) = \left( \frac{\mathcal{N}_{0}}{2}\right)\delta(\tau)
+            \label{E:ruido_blanco_autocorrelacion}
+            \end{equation}
+
+            El ruido blanco deriva su nombre por analogía con la luz blanca, que contiene todas las frecuencias de luz visible en su espectro.
+        </p>
+        <p>
+            El ruido blanco <strong>no</strong> es realizable puesto que posee potencia promedio infinita:
+
+            \begin{equation*}
+            \frac{1}{2\pi}\int_{-\infty}^{\infty}\mathcal{S}_{NN}(\omega) ~\mathrm{d}t = \infty
+            \label{E:ruido_blanco_potencia}
+            \end{equation*}
+        </p>
+    </section>
+
+    <!-- Diapositiva 27 -->
+    <section>
+        <h3>Ruido térmico</h3>
+        <blockquote>
+            El ruido generado por la agitación térmica de electrones en cualquier conductor eléctrico tiene un espectro de potencia que es constante hasta muy altas frecuencias, y luego disminuye.
+        </blockquote>
+        <p>
+            Por ejemplo, una resistencia a temperatura $T$ (en kelvin) produce un tensión eléctrica de ruido a través de sus terminales en circuito abierto con un espectro de potencia:
+
+            \begin{equation}
+            \mathcal{S}_{NN}(\omega) = \frac{\mathcal{N}_0}{2} \frac{\alpha \vert \omega \vert/T}{e^{\alpha \vert
+            \omega\vert/T}-1}
+            \end{equation}
+
+            <!-- HACER: gráfica de esta ecuación -->
+
+            donde $\alpha = 7.64(10^{-12})$ kelvin-segundo es una constante. Las unidades de $\mathcal{S}_{NN}(\omega)$ son volt cuadrado por hertz. De acuerdo a la convención, se obtiene watt/hertz suponiendo la corriente por una resistencia de 1 $\Omega$.
+        </p>
+    </section>
+
+    <!-- Diapositiva 28 -->
+    <section>
+        <h3>Ruido térmico</h3>
+        <p>
+            <!-- Agregar imagen -->
+        </p>
+        <p>
+            <i class="bi bi-info-circle-fill"></i> A una temperatura de $T = 290^\circ$ K (usualmente llamada
+            temperatura ambiente, a $17^\circ$ C), tal función permanece arriba de $0.9 (\mathcal{N}_{0}/2)$ para frecuencias hasta de $10^{12}$ Hz, o 1000 GHz. Así, el ruido térmico tiene un espectro casi plano en aquellas frecuencias que son usadas en sistemas de radio, microondas u ondas
+            milimétricas.
+        </p>
+
+    </section>
+
+    <!-- Diapositiva 29 -->
+    <section>
+        <h3>Ruido blanco de banda limitada</h3>
+        <p>
+            El ruido que tiene un espectro de potencia constante y no nulo sobre una banda de frecuencia finita y cero fuera de ella, se llama ruido blanco de banda limitada. Así, un ruido descrito por el siguiente espectro de potencia constituye un ejemplo:
+
+            \begin{equation}
+            \mathcal{S}_{NN}(\omega) =
+            \begin{cases}
+            \displaystyle\frac{P\pi}{W} & \omega_{0}-(W/2) < \vert \omega \vert < \omega_{0} + (W/2) \\ 0 & \text{fuera de la banda} \end{cases} \end{equation} La transformación inversa da la autocorrelación correspondiente: \begin{equation} R_{NN}(\tau)=P\frac{\sin(W\tau)}{W\tau} \end{equation} La constante $P$ es la potencia del ruido. </p>
+    </section>
+
+    <!-- Diapositiva 30 -->
+    <section>
+        <h3>Ruido blanco de banda limitada</h3>
+        <p>
+            El ruido blanco de banda limitada puede también ser pasabanda como el descrito por el siguiente espectro de potencia y respectiva función de autocorrelación:
+
+            \begin{equation}
+            \mathcal{S}_{NN}(\omega) = \left\{ \begin{array}{cl}
+            \frac{P\pi}{W} & \omega_{0}-(W/2) < \vert \omega \vert < \omega_{0} + (W/2) \\ 0 & \text{fuera de la banda} \end{array} \right. \end{equation} \begin{equation} R_{NN}(\tau)=P\frac{\sin(W\tau/2)}{(W\tau/2)}\cos(\omega_{0}\tau) \end{equation} con $\omega_{0}$, $W$ constantes y $P$ la potencia en el ruido. Por analogía con luz de color con solamente una porción de las frecuencias de luz visible en su espectro, se define ruido de color como cualquier ruido que no es blanco. </p>
+    </section>
+
+    <section>
+        <h3>Ejemplos de ruido de color en audio</h3>
+        <div class="row text-center row-cols-md-3 g-4">
+            <div class="col">
+                <audio controls>
+                    <source src="{% static 'audio/brown_noise.ogg' %}" type="audio/ogg">
+                    Audio no soportado.
+                </audio>
+                <br>
+                Ruido Brown (rojo)
+            </div>
+            <div class="col">
+                <audio controls>
+                    <source src="{% static 'audio/pink_noise.ogg' %}" type="audio/ogg">
+                    Audio no soportado.
+                </audio>
+                <br>
+                Ruido rosado
+            </div>
+            <div class="col">
+                <audio controls>
+                    <source src="{% static 'audio/white_noise.ogg' %}" type="audio/ogg">
+                    Audio no soportado.
+                </audio>
+                <br>
+                Ruido blanco
+            </div>
+            <div class="col">
+                <audio controls>
+                    <source src="{% static 'audio/blue_noise.ogg' %}" type="audio/ogg">
+                    Audio no soportado.
+                </audio>
+                <br>
+                Ruido azul
+            </div>
+            <div class="col">
+                <audio controls>
+                    <source src="{% static 'audio/purple_noise.ogg' %}" type="audio/ogg">
+                    Audio no soportado.
+                </audio>
+                <br>
+                Ruido violeta
+            </div>
+        </div>
+    </section>
+
+    <!-- Diapositiva 31 -->
+    <section>
+        <h3>Espectro de potencia de una señal de ruido</h3>
+        <blockquote>
+            Un proceso $N(t)$ de ruido WSS tiene una autocorrelación dada por:
+
+            \begin{equation}
+            R_{NN}(\tau) = Pe^{-3\vert \tau \vert}
+            \end{equation}
+
+            donde $P$ es una constante. ¿Cuál es su espectro de potencia?
+        </blockquote>
+        <p>
+            \begin{equation}
+            \begin{aligned}
+            \mathcal{S}_{NN}(\omega) & = \int_{-\infty}^{\infty}Pe^{-3\vert \tau \vert}e^{-j\omega \tau} ~\mathrm{d}\tau \\
+            & = P\int_{0}^{\infty}e^{(-3 + j\omega)\tau} ~\mathrm{d}\tau + P\int_{-\infty}^{0}e^{(3-j\omega)\tau} ~\mathrm{d}\tau \\
+            & = \frac{P}{3 + j\omega} + \frac{P}{3 - j\omega} \\
+            & = \frac{6P}{9 + \omega^2}
+            \end{aligned}
+            \end{equation}
+        </p>
+    </section>
+</section>
+<section>
+    <h3>Videos y referencias en internet</h3>
+    <p>
+
+        <i class="bi bi-youtube"></i> <em>Jaime Altozano</em>, <a href="https://youtu.be/OE4gcdjFbmc">¿Cómo sabe Shazam qué canción está sonando?</a>
+    </p>
+</section>
+
+<!-- Gráficos de Chart.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+<script src="{% static 'js/p15.js' %}"></script>
+
+{% endblock %}
+
+{% block websocket %}
+{% if role == "presenter" %}
+<script>
+    const wsRouteTx = 'wss://' + window.location.host + '/ws/deck/slider/p15/';
+    const deckSocket = new WebSocket(wsRouteTx);
+
+    // Registrar la conexión abierta
+    deckSocket.onopen = function (event) {
+        console.log('Conexión WebSocket abierta exitosamente como presentador en ' + wsRouteTx);
+    };
+
+    Reveal.on('slidechanged', event => {
+        deckSocket.send(JSON.stringify({
+            'indexh': event.indexh,
+            'indexv': event.indexv
+        }));
+    });
+</script>
+{% else %}
+<script>
+    const wsRouteRx = 'wss://' + window.location.host + '/ws/deck/slider/p15/';
+    const deckSocket = new WebSocket(wsRouteRx);
+
+    // Registrar la conexión abierta
+    deckSocket.onopen = function (event) {
+        console.log('Conexión WebSocket abierta exitosamente como cliente en ' + wsRouteRx);
+    };
+
+    deckSocket.onmessage = function (event) {
+        const data = JSON.parse(event.data);
+        Reveal.slide(data.message.indexh, data.message.indexv);
+    };
+</script>
+{% endif %}
+{% endblock %}
